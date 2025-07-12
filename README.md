@@ -1,34 +1,59 @@
-# Quantum Learning
+# 🧠 Quantum Learning
 
-Quantum Learning é um projeto pessoal inspirado no Duolingo, com o objetivo de criar uma plataforma gamificada para o aprendizado de idiomas (inglês e português) e, futuramente, para o ensino de computação quântica. Esta é a primeira versão, focada em clonar as principais funcionalidades do Duolingo para o ensino de línguas.
+**Quantum Learning** é um projeto pessoal e open-source inspirado no Duolingo, com o objetivo de desenvolver uma plataforma web **gamificada e interativa** para o ensino de idiomas e, futuramente, **computação quântica**. A ideia central é tornar o aprendizado mais inclusivo, divertido e acessível para todos.
 
-## Objetivo
+---
 
-- Oferecer uma experiência de aprendizado divertida e interativa.
-- Adaptar o sistema para o ensino de computação quântica, incluindo teoria e prática.
+## 🎯 Visão Geral
 
-## Tecnologias Utilizadas
+O projeto tem duas fases principais:
+
+1. **Fase Atual:** Clonar as principais funcionalidades do Duolingo para o ensino de inglês e português.
+2. **Fase Futura:** Adaptar a plataforma para o ensino introdutório de computação quântica, com trilhas de aprendizado interativas nos seguintes tópicos:
+   - Álgebra linear básica
+   - Fundamentos da computação clássica
+   - Introdução à computação quântica
+
+---
+
+## 🚀 Objetivos
+
+- Criar uma experiência de aprendizado envolvente e motivadora baseada em microlições e recompensas.
+- Oferecer um sistema gratuito, open-source e acessível via navegador.
+- Democratizar o acesso ao conhecimento em computação quântica, especialmente em regiões com poucos recursos.
+
+---
+
+## 🧰 Tecnologias Utilizadas
 
 - **Next.js** 15
 - **React** 19
 - **TypeScript**
 - **TailwindCSS**
 - **Radix UI**
-- **Lucide React** (ícones)
+- **Lucide React**
 - **Class Variance Authority**
 - **clsx**
 - **tw-animate-css**
 
-> O backend, autenticação, sistema de doação e outras integrações ainda serão implementados.
+> O backend, autenticação, sistema de doações e integração com banco de dados ainda estão em desenvolvimento.
 
-## Idiomas Disponíveis
-- Inglês
-- Português
+---
 
-## Checklist de Etapas do Projeto
+## 🌐 Idiomas Disponíveis
 
+- 🇬🇧 Inglês  
+- 🇧🇷 Português
+
+---
+
+## ✅ Checklist de Etapas
+
+### Implementadas
 - [x] Setup
 - [x] Buttons
+
+### Em desenvolvimento / pendentes
 - [ ] Marketing Page
 - [ ] Authentication
 - [ ] Footer
@@ -51,56 +76,48 @@ Quantum Learning é um projeto pessoal inspirado no Duolingo, com o objetivo de 
 - [ ] Challenge Finish Screen
 - [ ] Challenge Practice
 - [ ] Shop (Sistema de Doação)
-- [ ] Stripe (Doação, não venda)
+- [ ] Stripe (para doações)
 - [ ] Details
 - [ ] Admin
 - [ ] Deployment
 
-## Descrição das Etapas
+---
 
-- **Setup:** Configuração inicial do projeto, dependências e estrutura de pastas.
-- **Buttons:** Criação dos componentes de botões reutilizáveis.
-- **Marketing Page:** Página inicial para apresentar o projeto.
-- **Authentication:** Sistema de autenticação de usuários (Google, email/senha, etc.).
-- **Footer:** Rodapé do site.
-- **Main Layout:** Estrutura principal da aplicação.
-- **Sidebar:** Menu lateral de navegação.
-- **Learn Page Wrappers:** Estrutura das páginas de aprendizado.
-- **Drizzle & Neon:** Integração com banco de dados.
-- **Courses Page:** Página de cursos disponíveis.
-- **User Progress:** Sistema de acompanhamento do progresso do usuário.
-- **Seed Script:** Scripts para popular o banco de dados.
-- **Schema:** Modelagem do banco de dados.
-- **Units:** Unidades de aprendizado.
-- **Lesson Button:** Botão para iniciar lições.
-- **Course Progress:** Barra de progresso dos cursos.
-- **Lesson Header:** Cabeçalho das lições.
-- **Exit Modal:** Modal de saída das lições.
-- **Challenge Cards:** Cartões de desafios.
-- **Challenge Footer:** Rodapé dos desafios.
-- **Challenge Actions:** Ações dentro dos desafios.
-- **Challenge Finish Screen:** Tela de conclusão dos desafios.
-- **Challenge Practice:** Modo de prática dos desafios.
-- **Shop:** Sistema de doação para apoiar o projeto.
-- **Stripe:** Integração para doações (não vendas).
-- **Details:** Página de detalhes dos cursos/desafios.
-- **Admin:** Painel administrativo (ainda não implementado).
-- **Deployment:** Publicação da aplicação (ex: Vercel).
+## 📚 Conteúdo Técnico (Fase Computação Quântica)
 
-## Como rodar o projeto
+O material será baseado em fontes de alta qualidade e de acesso livre, como:
+
+- [Introduction to Classical and Quantum Computing – Thomas Wong](https://www.thomaswong.net)
+- [Introdução à Computação e Informação Quântica – Norton G. de Almeida](https://a.co/d/97aiWpu)
+- [GIQSul Codebook](https://aprenda.quantumket.org)
+- [Pennylane Learning Paths](https://pennylane.ai/codebook/learning-paths)
+
+---
+
+## 📆 Plano de Execução (Resumo)
+
+| Mês | Atividades |
+|-----|------------|
+| 1 | Planejamento técnico e pedagógico; clonagem da versão base do Duolingo |
+| 2 | Desenvolvimento da plataforma (frontend/backend, autenticação) |
+| 3 | Módulo de Álgebra Linear – 10 microlições |
+| 4 | Módulo de Computação Clássica – 10 microlições |
+| 5 | Módulo de Computação Quântica – 10 microlições |
+| 6 | Testes finais, documentação e publicação da versão beta |
+
+---
+
+## 🔮 Futuro do Projeto
+
+- Tradução da plataforma para espanhol e outras línguas.
+- Integração com ferramentas como IBM Qiskit, Pennylane e QuTiP.
+- Desenvolvimento de versão mobile.
+- Sistema de certificação para usuários que concluírem os módulos.
+
+---
+
+## 🧪 Como Rodar o Projeto Localmente
 
 ```bash
 npm install
 npm run dev
-```
-
-Acesse localmente para ver o resultado.
-
-## Futuro
-
-- Adaptação para ensino de computação quântica (teoria e prática).
-- Expansão para outros idiomas e áreas do conhecimento.
-
----
-
-> Este projeto é gratuito e aberto para contribuições. Sinta-se à vontade para sugerir melhorias!
