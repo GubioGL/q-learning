@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quantum Learning
 
-## Getting Started
+Quantum Learning é um projeto pessoal inspirado no Duolingo, com o objetivo de criar uma plataforma gamificada para o aprendizado de idiomas (inglês e português) e, futuramente, para o ensino de computação quântica. Esta é a primeira versão, focada em clonar as principais funcionalidades do Duolingo para o ensino de línguas.
 
-First, run the development server:
+## Objetivo
+
+- Oferecer uma experiência de aprendizado divertida e interativa.
+- Adaptar o sistema para o ensino de computação quântica, incluindo teoria e prática.
+
+## Tecnologias Utilizadas
+
+- **Next.js** 15
+- **React** 19
+- **TypeScript**
+- **TailwindCSS**
+- **Radix UI**
+- **Lucide React** (ícones)
+- **Class Variance Authority**
+- **clsx**
+- **tw-animate-css**
+
+> O backend, autenticação, sistema de doação e outras integrações ainda serão implementados.
+
+## Idiomas Disponíveis
+- Inglês
+- Português
+
+## Checklist de Etapas do Projeto
+
+- [x] Setup
+- [x] Buttons
+- [ ] Marketing Page
+- [ ] Authentication
+- [ ] Footer
+- [ ] Main Layout
+- [ ] Sidebar
+- [ ] Learn Page Wrappers
+- [ ] Drizzle & Neon (Banco de Dados)
+- [ ] Courses Page
+- [ ] User Progress
+- [ ] Seed Script
+- [ ] Schema
+- [ ] Units
+- [ ] Lesson Button
+- [ ] Course Progress
+- [ ] Lesson Header
+- [ ] Exit Modal
+- [ ] Challenge Cards
+- [ ] Challenge Footer
+- [ ] Challenge Actions
+- [ ] Challenge Finish Screen
+- [ ] Challenge Practice
+- [ ] Shop (Sistema de Doação)
+- [ ] Stripe (Doação, não venda)
+- [ ] Details
+- [ ] Admin
+- [ ] Deployment
+
+## Descrição das Etapas
+
+- **Setup:** Configuração inicial do projeto, dependências e estrutura de pastas.
+- **Buttons:** Criação dos componentes de botões reutilizáveis.
+- **Marketing Page:** Página inicial para apresentar o projeto.
+- **Authentication:** Sistema de autenticação de usuários (Google, email/senha, etc.).
+- **Footer:** Rodapé do site.
+- **Main Layout:** Estrutura principal da aplicação.
+- **Sidebar:** Menu lateral de navegação.
+- **Learn Page Wrappers:** Estrutura das páginas de aprendizado.
+- **Drizzle & Neon:** Integração com banco de dados.
+- **Courses Page:** Página de cursos disponíveis.
+- **User Progress:** Sistema de acompanhamento do progresso do usuário.
+- **Seed Script:** Scripts para popular o banco de dados.
+- **Schema:** Modelagem do banco de dados.
+- **Units:** Unidades de aprendizado.
+- **Lesson Button:** Botão para iniciar lições.
+- **Course Progress:** Barra de progresso dos cursos.
+- **Lesson Header:** Cabeçalho das lições.
+- **Exit Modal:** Modal de saída das lições.
+- **Challenge Cards:** Cartões de desafios.
+- **Challenge Footer:** Rodapé dos desafios.
+- **Challenge Actions:** Ações dentro dos desafios.
+- **Challenge Finish Screen:** Tela de conclusão dos desafios.
+- **Challenge Practice:** Modo de prática dos desafios.
+- **Shop:** Sistema de doação para apoiar o projeto.
+- **Stripe:** Integração para doações (não vendas).
+- **Details:** Página de detalhes dos cursos/desafios.
+- **Admin:** Painel administrativo (ainda não implementado).
+- **Deployment:** Publicação da aplicação (ex: Vercel).
+
+## Como rodar o projeto
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse localmente para ver o resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Futuro
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Adaptação para ensino de computação quântica (teoria e prática).
+- Expansão para outros idiomas e áreas do conhecimento.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Este projeto é gratuito e aberto para contribuições. Sinta-se à vontade para sugerir melhorias!
