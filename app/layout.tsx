@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistnunito.variable} ${geistnunito.variable} antialiased`}
+        className={`${geistnunito.variable} ${geistnunito.variable} `}
       >
         {children}
       </body>

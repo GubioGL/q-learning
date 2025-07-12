@@ -1,30 +1,30 @@
 # 🧠 Quantum Learning
 
-**Quantum Learning** é um projeto pessoal e open-source inspirado no Duolingo, com o objetivo de desenvolver uma plataforma web **gamificada e interativa** para o ensino de idiomas e, futuramente, **computação quântica**. A ideia central é tornar o aprendizado mais inclusivo, divertido e acessível para todos.
+**Quantum Learning** is a personal and open-source project inspired by Duolingo, aiming to develop a **gamified and interactive** web platform for language learning and, in the future, **quantum computing**. The central idea is to make learning more inclusive, fun, and accessible for everyone.
 
 ---
 
-## 🎯 Visão Geral
+## 🎯 Overview
 
-O projeto tem duas fases principais:
+The project has two main phases:
 
-1. **Fase Atual:** Clonar as principais funcionalidades do Duolingo para o ensino de inglês e português.
-2. **Fase Futura:** Adaptar a plataforma para o ensino introdutório de computação quântica, com trilhas de aprendizado interativas nos seguintes tópicos:
-   - Álgebra linear básica
-   - Fundamentos da computação clássica
-   - Introdução à computação quântica
-
----
-
-## 🚀 Objetivos
-
-- Criar uma experiência de aprendizado envolvente e motivadora baseada em microlições e recompensas.
-- Oferecer um sistema gratuito, open-source e acessível via navegador.
-- Democratizar o acesso ao conhecimento em computação quântica, especialmente em regiões com poucos recursos.
+1. **Current Phase:** Clone the main features of Duolingo for teaching English and Portuguese.
+2. **Future Phase:** Adapt the platform for introductory quantum computing education, with interactive learning paths on the following topics:
+   - Basic linear algebra
+   - Fundamentals of classical computing
+   - Introduction to quantum computing
 
 ---
 
-## 🧰 Tecnologias Utilizadas
+## 🚀 Goals
+
+- Create an engaging and motivating learning experience based on micro-lessons and rewards.
+- Offer a free, open-source system accessible via web browser.
+- Democratize access to quantum computing knowledge, especially in under-resourced regions.
+
+---
+
+## 🧰 Technologies Used
 
 - **Next.js** 15
 - **React** 19
@@ -36,31 +36,31 @@ O projeto tem duas fases principais:
 - **clsx**
 - **tw-animate-css**
 
-> O backend, autenticação, sistema de doações e integração com banco de dados ainda estão em desenvolvimento.
+> Backend, authentication, donation system, and database integration are still under development.
 
 ---
 
-## 🌐 Idiomas Disponíveis
+## 🌐 Available Languages
 
-- 🇬🇧 Inglês  
-- 🇧🇷 Português
+- 🇬🇧 English  
+- 🇧🇷 Portuguese
 
 ---
 
-## ✅ Checklist de Etapas
+## ✅ Step Checklist
 
-### Implementadas
+### Implemented
 - [x] Setup
 - [x] Buttons
 
-### Em desenvolvimento / pendentes
+### In Development / Pending
 - [ ] Marketing Page
 - [ ] Authentication
 - [ ] Footer
 - [ ] Main Layout
 - [ ] Sidebar
 - [ ] Learn Page Wrappers
-- [ ] Drizzle & Neon (Banco de Dados)
+- [ ] Drizzle & Neon (Database)
 - [ ] Courses Page
 - [ ] User Progress
 - [ ] Seed Script
@@ -75,17 +75,17 @@ O projeto tem duas fases principais:
 - [ ] Challenge Actions
 - [ ] Challenge Finish Screen
 - [ ] Challenge Practice
-- [ ] Shop (Sistema de Doação)
-- [ ] Stripe (para doações)
+- [ ] Shop (Donation System)
+- [ ] Stripe (for donations)
 - [ ] Details
 - [ ] Admin
 - [ ] Deployment
 
 ---
 
-## 📚 Conteúdo Técnico (Fase Computação Quântica)
+## 📚 Technical Content (Quantum Computing Phase)
 
-O material será baseado em fontes de alta qualidade e de acesso livre, como:
+The material will be based on high-quality and freely accessible sources, such as:
 
 - [Introduction to Classical and Quantum Computing – Thomas Wong](https://www.thomaswong.net)
 - [Introdução à Computação e Informação Quântica – Norton G. de Almeida](https://a.co/d/97aiWpu)
@@ -94,30 +94,31 @@ O material será baseado em fontes de alta qualidade e de acesso livre, como:
 
 ---
 
-## 📆 Plano de Execução (Resumo)
+## 📆 Execution Plan (Summary)
 
-| Mês | Atividades |
-|-----|------------|
-| 1 | Planejamento técnico e pedagógico; clonagem da versão base do Duolingo |
-| 2 | Desenvolvimento da plataforma (frontend/backend, autenticação) |
-| 3 | Módulo de Álgebra Linear – 10 microlições |
-| 4 | Módulo de Computação Clássica – 10 microlições |
-| 5 | Módulo de Computação Quântica – 10 microlições |
-| 6 | Testes finais, documentação e publicação da versão beta |
-
----
-
-## 🔮 Futuro do Projeto
-
-- Tradução da plataforma para espanhol e outras línguas.
-- Integração com ferramentas como IBM Qiskit, Pennylane e QuTiP.
-- Desenvolvimento de versão mobile.
-- Sistema de certificação para usuários que concluírem os módulos.
+| Month | Activities |
+|-------|------------|
+| 1 | Technical and pedagogical planning; cloning the base version of Duolingo |
+| 2 | Platform development (frontend/backend, authentication) |
+| 3 | Linear Algebra Module – 10 micro-lessons |
+| 4 | Classical Computing Module – 10 micro-lessons |
+| 5 | Quantum Computing Module – 10 micro-lessons |
+| 6 | Final tests, documentation, and beta release |
 
 ---
 
-## 🧪 Como Rodar o Projeto Localmente
+## 🔮 Project Future
+
+- Platform translation to Spanish and other languages.
+- Integration with tools like IBM Qiskit, Pennylane, and QuTiP.
+- Mobile version development.
+- Certification system for users who complete the modules.
+
+---
+
+## 🧪 How to Run the Project Locally
 
 ```bash
 npm install
 npm run dev
+```
