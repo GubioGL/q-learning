@@ -1,3 +1,7 @@
+![Cat Icon](q-learning/png%20cat%20icon.png)
+<img src="q-learning/png cat icon.png" alt="Cat Icon" width="200" />
+
+
 # 🧠 Quantum Learning
 
 **Quantum Learning** is a personal and open-source project inspired by Duolingo, aiming to develop a **gamified and interactive** web platform for language learning and, in the future, **quantum computing**. The central idea is to make learning more inclusive, fun, and accessible for everyone.
