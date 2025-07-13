@@ -1,5 +1,4 @@
-![Cat Icon](caticonpng.png)
-<img src="caticonpng.png" alt="Cat Icon" width="200" />
+<img src="caticonpng.png" alt="Cat Icon" width="400" />
 
 
 # 🧠 Quantum Learning
