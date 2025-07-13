@@ -10,7 +10,7 @@ export default function Home() {
             Path of Quantum Learning
           </span>
         </p>
-        <Button variant="loginbutton" size="default">
+        <Button>
           Login
         </Button>
       </div>
