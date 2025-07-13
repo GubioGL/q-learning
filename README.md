@@ -1,4 +1,4 @@
-![Cat Icon](q-learning/caticonpng.png)
+![Cat Icon](caticonpng.png)
 <img src="q-learning/caticonpng.png" alt="Cat Icon" width="200" />
 
 
