@@ -1,4 +1,4 @@
-<img src="caticonpng.png" alt="Cat Icon" width="400" />
+<img src="cat.png" alt="Cat Icon" width="400" />
 
 
 # 🧠 Quantum Learning
