@@ -50,11 +50,11 @@ The project has two main phases:
 ## ✅ Step Checklist
 
 ### Implemented
-- [x] Setup
-- [x] Buttons
+- [x] Setup ✅
+- [x] Buttons✅
+- [x] Marketing Page✅
 
 ### In Development / Pending
-- [ ] Marketing Page
 - [ ] Authentication
 - [ ] Footer
 - [ ] Main Layout
