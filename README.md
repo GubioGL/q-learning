@@ -1,5 +1,5 @@
-![Cat Icon](q-learning/png%20cat%20icon.png)
-<img src="q-learning/png cat icon.png" alt="Cat Icon" width="200" />
+![Cat Icon](q-learning/caticonpng.png)
+<img src="q-learning/caticonpng.png" alt="Cat Icon" width="200" />
 
 
 # 🧠 Quantum Learning
