@@ -56,9 +56,9 @@ The project has two main phases:
 - [x] Setup ✅
 - [x] Buttons✅
 - [x] Marketing Page✅
+- [x] Authentication✅
 
 ### In Development / Pending
-- [ ] Authentication
 - [ ] Footer
 - [ ] Main Layout
 - [ ] Sidebar
