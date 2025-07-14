@@ -1,3 +1,6 @@
+<img src="cat.png" alt="Cat Icon" width="400" />
+
+
 # 🧠 Quantum Learning
 
 **Quantum Learning** is a personal and open-source project inspired by Duolingo, aiming to develop a **gamified and interactive** web platform for language learning and, in the future, **quantum computing**. The central idea is to make learning more inclusive, fun, and accessible for everyone.
@@ -50,11 +53,11 @@ The project has two main phases:
 ## ✅ Step Checklist
 
 ### Implemented
-- [x] Setup
-- [x] Buttons
+- [x] Setup ✅
+- [x] Buttons✅
+- [x] Marketing Page✅
 
 ### In Development / Pending
-- [ ] Marketing Page
 - [ ] Authentication
 - [ ] Footer
 - [ ] Main Layout
