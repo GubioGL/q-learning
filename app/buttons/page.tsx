@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 
-
 const ButtonsPage = () => {
     return (
         <div className="fonte-cursiva p-4 space-y-4 flex flex-col max-w-[200px]">

@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
+import {ClerkProvider} from '@clerk/nextjs'
 import { Nunito } from "next/font/google";
 import "./globals.css";
 
-
-const geistnunito = Nunito({
-  variable: "--font-nunito",
-  subsets: ["latin"],
-});
-
+const geistnunito = Nunito({  subsets: ["latin"]});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,12 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistnunito.variable} ${geistnunito.variable} `}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={geistnunito.className}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
