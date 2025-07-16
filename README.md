@@ -57,10 +57,10 @@ The project has two main phases:
 - [x] Buttons✅
 - [x] Marketing Page✅
 - [x] Authentication✅
+- [X] Footer✅
+- [X] Main Layout✅
 
 ### In Development / Pending
-- [ ] Footer
-- [ ] Main Layout
 - [ ] Sidebar
 - [ ] Learn Page Wrappers
 - [ ] Drizzle & Neon (Database)
