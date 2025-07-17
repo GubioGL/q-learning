@@ -59,9 +59,9 @@ The project has two main phases:
 - [x] Authentication✅
 - [X] Footer✅
 - [X] Main Layout✅
+- [X] Sidebar✅
 
 ### In Development / Pending
-- [ ] Sidebar
 - [ ] Learn Page Wrappers
 - [ ] Drizzle & Neon (Database)
 - [ ] Courses Page

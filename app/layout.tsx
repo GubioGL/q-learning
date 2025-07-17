@@ -16,12 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={geistnunito.className}>
+    <html suppressHydrationWarning>
+      <body className={geistnunito.className}>
+        <ClerkProvider>
           {children}
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

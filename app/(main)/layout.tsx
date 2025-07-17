@@ -3,6 +3,7 @@
 import { Footer } from "@/app/(marketing)/footer";
 import { MainHeader } from "@/app/(main)/header";
 import React, { useState, useEffect } from "react";
+import { SidebarContent } from "@/components/ui/SidebarContent";
 
 type Props = {
     children: React.ReactNode;
@@ -26,8 +27,8 @@ const MainLayout = ({ children }: Props) => {
         <>
         <div className="main-layout">
             {/* Coluna da Esquerda - Configurações (apenas em desktop) */}
-            <aside className="sidebar-left">
-                <h2>Configurações</h2>
+            <aside className="sidebar-left" style={{ width: "280px" }}>
+                <SidebarContent />
             </aside>
 
             {/* Coluna Central - Conteúdo Principal */}
