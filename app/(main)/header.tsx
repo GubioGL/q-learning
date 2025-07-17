@@ -3,37 +3,35 @@ import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Sidebar } from "@/components/ui/sidebar";
 
+/**
+ * Cabeçalho principal da área autenticada.
+ * Exibe menu lateral, status do usuário e indicadores de gamificação.
+ */
 export const MainHeader = () => {
-    console.log("MainHeader renderizado"); // Debug
-
     return (
         <div className="status-header">
             <div className="status-container">
                 {/* Menu Hambúrguer com Sidebar */}
                 <Sheet>
                     <SheetTrigger asChild>
-                        <button className="menu-icon">
+                        <button className="menu-icon" aria-label="Abrir menu de navegação" type="button">
                             <Menu size={24} color="#ffffff" />
                         </button>
                     </SheetTrigger>
                     <Sidebar />
                 </Sheet>
-                {/* Chama */}
-                <div className="status-icon" style={{color: '#cccccc'}}>
+                {/* Indicadores de gamificação */}
+                <div className="status-icon" style={{color: '#cccccc'}} aria-label="Streak atual">
                     <span>0</span>
-                    <div>🔥</div>
+                    <div role="img" aria-label="Fogo">🔥</div>
                 </div>
-                
-                {/* Diamante */}
-                <div className="status-icon" style={{color: '#ffc107'}}>
+                <div className="status-icon" style={{color: '#ffc107'}} aria-label="Diamantes">
                     <span>17</span>
-                    <div>💎</div>
+                    <div role="img" aria-label="Diamante">💎</div>
                 </div>
-                
-                {/* Raio */}
-                <div className="status-icon" style={{color: '#9c27b0'}}>
+                <div className="status-icon" style={{color: '#9c27b0'}} aria-label="Energia">
                     <span>5</span>
-                    <div>⚡</div>
+                    <div role="img" aria-label="Raio">⚡</div>
                 </div>
             </div>
         </div>

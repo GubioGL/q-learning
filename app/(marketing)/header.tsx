@@ -1,6 +1,9 @@
 import Image from "next/image"
 import { SignInButton, SignedOut, SignedIn, UserButton } from "@clerk/nextjs";
 
+/**
+ * Cabeçalho da área de marketing, com logo e autenticação.
+ */
 export const Header = () => {
     return (
         <header className="px-4 h-20 w-full border-b-2 border-slate-200">
@@ -14,7 +17,7 @@ export const Header = () => {
                     <SignedOut>
                         {/* Fazer login */}
                         <SignInButton forceRedirectUrl="/">
-                            <button className="bg-transparent text-orange-500 border-0 border-transparent hover:bg-slate-100 rounded-full p-4 space-y-4 flex flex-col max-w-[200px] sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer transition-colors">
+                            <button className="bg-transparent text-orange-500 border-0 border-transparent hover:bg-slate-100 rounded-full p-4 space-y-4 flex flex-col max-w-[200px] sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer transition-colors" aria-label="Entrar">
                                 Sign In
                             </button>
                         </SignInButton>
@@ -22,7 +25,7 @@ export const Header = () => {
                     {/* Caso esteja logado */}
                     <SignedIn>
                         {/* Fazer logout */}
-                        <UserButton />
+                        <UserButton afterSignOutUrl="/" />
                     </SignedIn>
                 </div>
             </div>

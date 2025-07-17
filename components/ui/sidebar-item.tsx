@@ -1,18 +1,19 @@
 "use client"
-// Adiciona um botão usando o componente Button
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-type Props = {
+interface SidebarItemProps {
     label: string;
     iconSrc: string;
     href: string;
 }
 
-export const SidebarItem = ({ label, iconSrc, href }: Props) => {
+/**
+ * Item de navegação lateral com acessibilidade.
+ */
+export const SidebarItem = ({ label, iconSrc, href }: SidebarItemProps) => {
     return (
-
-        <a href={href} className="flex items-center ">
+        <a href={href} className="flex items-center " aria-label={label} tabIndex={0}>
             <Button variant="sidebar" className="flex items-center gap-6 w-full justify-start">
                 <Image src={iconSrc} alt={label} width={40} height={40} />
                 <span>{label}</span>

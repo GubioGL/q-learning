@@ -1,11 +1,14 @@
 import { Header } from "./header";
 import { Footer } from "./footer";
 
-type Props = {
+interface MarketingLayoutProps {
     children: React.ReactNode;
 }
 
-const MarketingLayout = ({ children }: Props) => {
+/**
+ * Layout da área de marketing, com header, main e footer.
+ */
+const MarketingLayout = ({ children }: MarketingLayoutProps) => {
     return (
         <div className="min-h-screen flex flex-col">
             <Header />  
