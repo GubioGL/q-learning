@@ -60,9 +60,9 @@ The project has two main phases:
 - [X] Footer✅
 - [X] Main Layout✅
 - [X] Sidebar✅
+- [X] Learn Page Wrappers✅
 
 ### In Development / Pending
-- [ ] Learn Page Wrappers
 - [ ] Drizzle & Neon (Database)
 - [ ] Courses Page
 - [ ] User Progress

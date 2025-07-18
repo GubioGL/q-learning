@@ -2,6 +2,7 @@ import React from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Sidebar } from "@/components/ui/sidebar";
+import UserProgress from "@/components/ui/user-progress";
 
 /**
  * Cabeçalho principal da área autenticada.
@@ -21,18 +22,11 @@ export const MainHeader = () => {
                     <Sidebar />
                 </Sheet>
                 {/* Indicadores de gamificação */}
-                <div className="status-icon" style={{color: '#cccccc'}} aria-label="Streak atual">
-                    <span>0</span>
-                    <div role="img" aria-label="Fogo">🔥</div>
-                </div>
-                <div className="status-icon" style={{color: '#ffc107'}} aria-label="Diamantes">
-                    <span>17</span>
-                    <div role="img" aria-label="Diamante">💎</div>
-                </div>
-                <div className="status-icon" style={{color: '#9c27b0'}} aria-label="Energia">
-                    <span>5</span>
-                    <div role="img" aria-label="Raio">⚡</div>
-                </div>
+                <UserProgress 
+                dayStreak={7}
+                Qtokens={7}
+                energy={7}
+                />
             </div>
         </div>
     )

@@ -34,7 +34,7 @@ export const SidebarContent = () => {
         <span className="font-extrabold text-purple-700 tracking-wide pl-4">Quantum Learning</span>
       </div>
       <div className="pl-4 pr-4 space-y-4">
-        <SidebarItem label="Jornada" iconSrc="/jornada.png" href="/jornada" />
+        <SidebarItem label="Jornada" iconSrc="/jornada.png" href="/learn" />
         <SidebarItem label="Metas" iconSrc="/metas.png" href="/metas" />
         <SidebarItem label="Classificação" iconSrc="/classificaçao.png" href="/leaderboard" />
         <SidebarItem label="Loja" iconSrc="/loja.png" href="/loja" />
