@@ -64,12 +64,10 @@ function Button({
   variant,
   size,
   asChild = false,
-  font,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
-    font?: "default"
   }) {
   const Comp = asChild ? Slot : "button"
 

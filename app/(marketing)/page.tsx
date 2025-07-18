@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ClerkLoaded, SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { ClerkLoaded, SignedIn, SignedOut, SignInButton, SignUpButton} from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
