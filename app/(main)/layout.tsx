@@ -7,6 +7,7 @@ import { SidebarContent } from "@/components/ui/SidebarContent";
 import UserProgress from "@/components/ui/user-progress";
 import UserGoals from "@/components/ui/user-goals";
 import { GoalsProvider, useGoals } from "@/lib/contexts/GoalsContext";
+import { CourseProvider } from "@/lib/contexts/CourseContext";
 
 interface MainLayoutProps {
     children: React.ReactNode;
@@ -81,7 +82,9 @@ const MainLayoutContent = ({ children }: MainLayoutProps) => {
 const MainLayout = ({ children }: MainLayoutProps) => {
     return (
         <GoalsProvider>
-            <MainLayoutContent>{children}</MainLayoutContent>
+            <CourseProvider>
+                <MainLayoutContent>{children}</MainLayoutContent>
+            </CourseProvider>
         </GoalsProvider>
     );
 };
