@@ -62,9 +62,10 @@ The project has two main phases:
 - [X] Sidebar✅
 - [X] Learn Page Wrappers✅
 - [X] Drizzle & Neon (Database)✅
+- [X] Courses Page✅
 
 ### In Development / Pending
-- [ ] Courses Page
+
 - [ ] User Progress
 - [ ] Seed Script
 - [ ] Schema
