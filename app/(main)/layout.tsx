@@ -30,6 +30,11 @@ const MainLayoutContent = ({ children }: MainLayoutProps) => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
+  // Debug: log das metas quando mudarem
+  useEffect(() => {
+    console.log('Metas atualizadas no layout:', userGoals);
+  }, [userGoals]);
+
   return (
     <div className="flex h-screen">
       <aside className="sidebar-esquerda">
@@ -49,9 +54,9 @@ const MainLayoutContent = ({ children }: MainLayoutProps) => {
 
       <aside className="sidebar-direita">
         <UserProgress 
-          dayStreak={1}
-          Qtokens={20}
-          energy={3}
+          dayStreak={userGoals.streak}
+          Qtokens={userGoals.tokens}
+          energy={userGoals.energy }
         />
 
         <UserGoals 

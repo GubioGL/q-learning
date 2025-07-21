@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGoals } from '@/lib/contexts/GoalsContext';
+import UserProfile from '@/components/ui/user-profile';
+import { useUser } from '@clerk/nextjs';
 
 /**
  * Página de configuração de metas do usuário.
@@ -14,6 +16,14 @@ const MetasPage = () => {
     const [dailyActivities, setDailyActivities] = useState(userGoals.dailyActivities || 3);
     const [showWarning, setShowWarning] = useState(false);
     const [selectedMode, setSelectedMode] = useState('');
+    const [isSaving, setIsSaving] = useState(false);
+    const [saveMessage, setSaveMessage] = useState('');
+    const [saveMessageType, setSaveMessageType] = useState<'success' | 'error'>('success');
+
+    // Sincronizar estado local com contexto quando userGoals mudar
+    useEffect(() => {
+        setDailyActivities(userGoals.dailyActivities || 3);
+    }, [userGoals.dailyActivities]);
 
     // Modos de recomendação
     const recommendationModes = [
@@ -26,6 +36,11 @@ const MetasPage = () => {
     // Calcular XP baseado nas atividades (cada atividade = 10 XP)
     const dailyXP = dailyActivities * 10;
     const weeklyXP = dailyXP * 7; // Semana = 7 dias
+
+    // Simular um ID de usuário (em produção, isso viria de autenticação)
+    // Obtendo o user_id do usuário autenticado via Clerk
+    const { user } = useUser();
+    const userId = user?.id;
 
     const handleActivityChange = (value: number) => {
         setDailyActivities(value);
@@ -43,34 +58,68 @@ const MetasPage = () => {
         setShowWarning(false);
     };
 
-    const handleSave = () => {
-        const updatedGoals = {
-            ...userGoals,
-            dailyActivities,
-            dailyXP: 0, // Será calculado automaticamente
-            dailyXPTarget: dailyXP,
-            dailyLessons: 0,
-            dailyLessonsTarget: dailyActivities, // Uma lição por atividade
-            weeklyXP: 0,
-            weeklyXPTarget: weeklyXP,
-            weeklyLessons: 0,
-            weeklyLessonsTarget: dailyActivities * 7,
-            completedActivities: 0,
-            totalActivities: 0
-        };
+    const handleSaveGoals = async () => {
+        setIsSaving(true);
+        setSaveMessage('');
         
-        updateUserGoals(updatedGoals);
-        console.log('Metas salvas:', updatedGoals);
+        try {
+            const updatedGoals = {
+                dailyXPTarget: dailyActivities * 10,
+                dailyLessonsTarget: dailyActivities,
+                weeklyXPTarget: dailyActivities * 10 * 7,
+                weeklyLessonsTarget: dailyActivities * 7,
+            };
+
+            updateUserGoals(updatedGoals);
+            
+            setSaveMessage('Metas salvas com sucesso! As alterações foram aplicadas.');
+            setSaveMessageType('success');
+            
+            console.log('Metas salvas:', updatedGoals);
+            
+            // Limpar mensagem após 3 segundos
+            setTimeout(() => {
+                setSaveMessage('');
+            }, 3000);
+            
+        } catch (error) {
+            setSaveMessage('Erro ao salvar metas. Tente novamente.');
+            setSaveMessageType('error');
+            console.error('Erro ao salvar metas:', error);
+        } finally {
+            setIsSaving(false);
+        }
     };
 
     return (
         <div className="space-y-8">
+ 
             <div>
                 <h1 className="text-2xl font-bold mb-4 text-white">Configurar Metas</h1>
+                {/* Seção de Perfil do Usuário */}
+                <UserProfile 
+                        userId={userId}
+                        initialUserName="User"
+                        onProfileUpdate={(userData) => {
+                            console.log('Perfil atualizado:', userData);
+                        }}
+                    />
+
                 <p className="text-[#6a7282] mb-6">
                     Defina quantas atividades diárias você quer fazer. Cada atividade vale 10 XP.
                 </p>
             </div>
+
+            {/* Mensagem de feedback */}
+            {saveMessage && (
+                <div className={`p-4 rounded-lg border ${
+                    saveMessageType === 'success'
+                        ? 'bg-green-500/20 border-green-500/50 text-green-300'
+                        : 'bg-red-500/20 border-red-500/50 text-red-300'
+                }`}>
+                    {saveMessage}
+                </div>
+            )}
 
             {/* Recomendações de Modo */}
             <div className="bg-[#1a1a1a] rounded-lg p-6 border border-[#333]">
@@ -129,27 +178,35 @@ const MetasPage = () => {
                     )}
 
                     <div className="bg-[#2a2a2a] rounded-lg p-4">
-                        <div className="text-white font-medium mb-2">Resumo das suas metas:</div>
-                        <div className="space-y-2 text-sm text-[#6a7282]">
-                            <div>• Atividades diárias: {dailyActivities}</div>
-                            <div>• XP diário: {dailyXP} XP</div>
-                            <div>• XP semanal: {weeklyXP} XP</div>
-                            <div>• Lições diárias: {dailyActivities}</div>
-                            <div>• Lições semanais: {dailyActivities * 7}</div>
+                        <div className="text-white font-medium mb-2">Resumo das suas metas alvo:</div>
+                            <div className="space-y-2 text-sm text-[#6a7282]">
+                                <div>• XP diário alvo: {userGoals.dailyXPTarget} XP</div>
+                                <div>• Lições diárias alvo: {userGoals.dailyLessonsTarget}</div>
+                                <div>• XP semanal alvo: {userGoals.weeklyXPTarget} XP</div>
+                                <div>• Lições semanais alvo: {userGoals.weeklyLessonsTarget}</div>
                         </div>
                     </div>
                 </div>
             </div>
+            
 
             {/* Botão Salvar */}
             <div className="flex justify-end">
                 <button 
-                    className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-medium py-3 px-6 rounded-lg transition-colors"
-                    onClick={handleSave}
+                    className={
+                        'font-medium py-3 px-6 rounded-lg transition-colors ' +
+                        (isSaving
+                            ? 'bg-[#4c1d95] text-[#9ca3af] cursor-not-allowed'
+                            : 'bg-[#7c3aed] hover:bg-[#6d28d9] text-white')
+                    }
+                    onClick={handleSaveGoals}
+                    disabled={isSaving}
                 >
-                    Salvar Configurações
+                    {isSaving ? 'Salvando...' : 'Salvar Configurações'}
                 </button>
             </div>
+
+            
         </div>
     );
 };

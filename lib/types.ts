@@ -46,6 +46,11 @@ export interface UserGoals {
   // Progresso geral
   completedActivities: number;
   totalActivities: number;
+
+  // Gamificação
+  streak?: number;
+  tokens?: number;
+  energy?: number;
 }
 
 // Tipos para API responses
