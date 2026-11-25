@@ -9,13 +9,14 @@
 
 ## 🎯 Overview
 
-The project has two main phases:
+A gamified, Duolingo-style platform for **introductory quantum computing**, organized in three learning paths:
 
-1. **Current Phase:** Clone the main features of Duolingo for teaching English and Portuguese.
-2. **Future Phase:** Adapt the platform for introductory quantum computing education, with interactive learning paths on the following topics:
-   - Basic linear algebra
-   - Fundamentals of classical computing
-   - Introduction to quantum computing
+- Basic linear algebra
+- Fundamentals of classical computing
+- Introduction to quantum computing
+
+Each lesson has short interactive challenges plus a theory page; the companion book in [`livro/`](livro/) goes deeper.
+See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the step-by-step plan.
 
 ---
 
@@ -87,14 +88,27 @@ The project has two main phases:
 
 ---
 
-## 📚 Technical Content (Quantum Computing Phase)
+## 📚 References & Credits
 
-The material will be based on high-quality and freely accessible sources, such as:
+This project stands on the work of others. Lesson text and exercises are original, written with these sources as reference:
 
-- [Introduction to Classical and Quantum Computing – Thomas Wong](https://www.thomaswong.net)
-- [Introdução à Computação e Informação Quântica – Norton G. de Almeida](https://a.co/d/97aiWpu)
+**Main content reference**
+- Thomas G. Wong, *Introduction to Classical and Quantum Computing* (Rooted Grove, 2022) — [thomaswong.net](https://www.thomaswong.net). Lessons follow its chapters 1–3; no text is reproduced.
+
+**Content and exercises**
+- [PennyLane Codebook — Foundations of Quantum Computing](https://pennylane.ai/codebook/learning-paths/foundations-of-quantum-computing) (Xanadu)
+- [Quantum-Codebooks — Xanadu Codebook notebooks](https://github.com/MonitSharma/Quantum-Codebooks/tree/main/Xanadu%20Quantum%20Codebook/Introduction) (Monit Sharma)
+- Norton G. de Almeida, *Introdução à Computação e Informação Quântica* — [link](https://a.co/d/97aiWpu)
 - [GIQSul Codebook](https://aprenda.quantumket.org)
-- [Pennylane Learning Paths](https://pennylane.ai/codebook/learning-paths)
+
+**Platform and design inspiration**
+- [Code With Antonio — Duolingo clone workshop](https://www.codewithantonio.com/workshops/duolingo-clone) and [repository](https://github.com/code-with-antonio/nextjs-duolingo-clone)
+- [Coddy.tech](https://coddy.tech/pt) and its [Python course docs](https://coddy.tech/docs/pt/python)
+- [Duolingo](https://www.duolingo.com)
+
+**Authorship**
+- The first part of the project (platform base, layout, courses, database) was built by hand by **Gubio Gomes de Lima**.
+- The second part is being developed with automation help from **[Claude Code](https://claude.com/claude-code)** (Anthropic), under Gubio's direction and review.
 
 ---
 
@@ -124,5 +138,7 @@ The material will be based on high-quality and freely accessible sources, such a
 
 ```bash
 npm install
+cp .env.example .env.local   # fill in Neon and Clerk keys
+npm run db:push              # create tables
 npm run dev
 ```

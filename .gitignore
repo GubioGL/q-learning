@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# latex build
+livro/*.aux
+livro/*.log
+livro/*.toc
+livro/*.out
+livro/*.bbl
+livro/*.blg
+livro/*.pdf
+
+!.env.example

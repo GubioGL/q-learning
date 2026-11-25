@@ -33,9 +33,6 @@ const MetasPage = () => {
         { id: 'super', name: 'Super Empolgado', activities: 15, description: 'Mais de 10 atividades por dia' }
     ];
 
-    // Calcular XP baseado nas atividades (cada atividade = 10 XP)
-    const dailyXP = dailyActivities * 10;
-    const weeklyXP = dailyXP * 7; // Semana = 7 dias
 
     // Simular um ID de usuário (em produção, isso viria de autenticação)
     // Obtendo o user_id do usuário autenticado via Clerk
@@ -98,7 +95,7 @@ const MetasPage = () => {
                 <h1 className="text-2xl font-bold mb-4 text-white">Configurar Metas</h1>
                 {/* Seção de Perfil do Usuário */}
                 <UserProfile 
-                        userId={userId}
+                        userId={userId ?? ""}
                         initialUserName="User"
                         onProfileUpdate={(userData) => {
                             console.log('Perfil atualizado:', userData);
