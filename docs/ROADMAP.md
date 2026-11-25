@@ -22,13 +22,14 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
 - [x] `.env.example` com as variáveis necessárias.
 - [x] README com referências e créditos.
 
-## Etapa 1 — Site online com 1 lição de demonstração
+## Etapa 1 — Site online com 1 lição de demonstração ✅ (2026-11-25)
 
-- [ ] Criar projeto no Neon e app no Clerk; preencher `.env.local`.
-- [ ] `npm run db:push` + seed dos cursos.
-- [ ] Página `/lesson/[id]`: desafios de múltipla escolha, corações, barra de progresso, tela final.
-- [ ] Uma lição real: "O que é um bit?" (Wong cap. 1).
-- [ ] Deploy na Vercel conectado ao GitHub (deploy a cada push) + variáveis de ambiente.
+- [x] Neon + Clerk do projeto Vercel existente; `vercel env pull` gera o `.env.local`.
+- [x] Tabelas criadas (`drizzle-kit push`) e seed dos cursos nos bancos de dev e produção.
+- [x] Página `/lesson/[id]`: múltipla escolha, corações, barra de progresso, tela final.
+- [x] Lição real: "O que é um bit?" (`content/lessons/bits.ts`, Wong cap. 1).
+- [x] Deploy na Vercel ligado ao GitHub (cada push no `main` publica).
+- [x] Segurança: Next 15.5.29, Clerk 6.39.9, drizzle-orm 0.45.4.
 
 ## Etapa 2 — Motor de lições
 
