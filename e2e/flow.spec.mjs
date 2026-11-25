@@ -169,3 +169,18 @@ test("works when the browser blocks storage", async ({ page }) => {
   await expect(page.getByText("O navegador não deixou salvar as metas.")).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+test("saving does not overwrite what another tab stored", async ({ page }) => {
+  await page.goto("/pt/metas");
+  const save = page.getByRole("button", { name: "Salvar Configurações" });
+  await save.click(); // the page has loaded its own copy of the progress
+  await expect(page.getByText("Metas salvas com sucesso!")).toBeVisible();
+  // same-tab writes fire no storage event, like an event missed from another tab
+  await page.evaluate(() => localStorage.setItem("ql_progress", JSON.stringify({ done: { "level:bits": new Date().toISOString() }, goal: 4 })));
+  await page.getByLabel("Quantas atividades diárias você quer fazer?").fill("7");
+  await save.click();
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("ql_progress")).goal)).toBe(7);
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("ql_progress")));
+  expect(Object.keys(saved.done)).toEqual(["level:bits"]);
+  await expect(page.locator(".sidebar-direita").getByLabel("10 XP no total")).toBeVisible();
+});

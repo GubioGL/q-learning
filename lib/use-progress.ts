@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { EMPTY_PROGRESS, complete, mergeProgress, parseProgress, type Progress } from "./progress-data";
+import { EMPTY_PROGRESS, complete, importInto, parseProgress, type Progress } from "./progress-data";
 
 const STORAGE_KEY = "ql_progress";
 
@@ -9,31 +9,49 @@ type Snapshot = { ready: boolean; progress: Progress };
 const SERVER_SNAPSHOT: Snapshot = { ready: false, progress: EMPTY_PROGRESS };
 
 let snapshot: Snapshot = SERVER_SNAPSHOT;
+let hasUnsaved = false; // the browser refused the last save, so memory is ahead of storage
 const listeners = new Set<() => void>();
 
-function read(): Progress {
+// null when the browser blocks storage.
+function read(): Progress | null {
     try {
-        return parseProgress(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null")) ?? EMPTY_PROGRESS;
+        const text = localStorage.getItem(STORAGE_KEY);
+        try {
+            return parseProgress(JSON.parse(text ?? "null")) ?? EMPTY_PROGRESS;
+        } catch {
+            return EMPTY_PROGRESS; // corrupted
+        }
     } catch {
-        return EMPTY_PROGRESS; // storage blocked or corrupted
+        return null;
     }
 }
 
 function getSnapshot(): Snapshot {
-    if (!snapshot.ready) snapshot = { ready: true, progress: read() };
+    if (!snapshot.ready) snapshot = { ready: true, progress: read() ?? EMPTY_PROGRESS };
     return snapshot;
 }
 
-const emit = () => listeners.forEach((l) => l());
+// Another tab may have saved without this one hearing about it: always build on what is stored.
+function latest(): Progress {
+    const { progress } = getSnapshot();
+    return hasUnsaved ? progress : read() ?? progress;
+}
+
+function publish(progress: Progress) {
+    snapshot = { ready: true, progress };
+    listeners.forEach((l) => l());
+}
 
 function onStorage(e: StorageEvent) {
     if (e.key !== STORAGE_KEY && e.key !== null) return; // null: another tab cleared everything
-    snapshot = { ready: true, progress: read() };
-    emit();
+    publish(latest());
 }
 
 function subscribe(listener: () => void) {
-    if (listeners.size === 0) window.addEventListener("storage", onStorage);
+    if (listeners.size === 0) {
+        snapshot = { ready: true, progress: latest() };
+        window.addEventListener("storage", onStorage);
+    }
     listeners.add(listener);
     return () => {
         listeners.delete(listener);
@@ -43,13 +61,14 @@ function subscribe(listener: () => void) {
 
 // Returns false when the browser refused to save; the progress still counts until the tab closes.
 function save(progress: Progress): boolean {
-    snapshot = { ready: true, progress };
-    emit();
+    publish(progress);
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        hasUnsaved = false;
         void navigator.storage?.persist?.().catch(() => false); // ask the browser not to evict it
         return true;
     } catch {
+        hasUnsaved = true;
         return false;
     }
 }
@@ -57,23 +76,24 @@ function save(progress: Progress): boolean {
 export const useProgress = () => useSyncExternalStore(subscribe, getSnapshot, () => SERVER_SNAPSHOT);
 
 export function markDone(key: string): { isNew: boolean; saved: boolean } {
-    const before = getSnapshot().progress;
+    const before = latest();
     const after = complete(before, key, new Date());
-    return after === before ? { isNew: false, saved: true } : { isNew: true, saved: save(after) };
+    if (after !== before) return { isNew: true, saved: save(after) };
+    publish(before); // another tab may have finished it
+    return { isNew: false, saved: true };
 }
 
-export const saveGoal = (goal: number) => save({ ...getSnapshot().progress, goal });
+export const saveGoal = (goal: number) => save({ ...latest(), goal });
 
-export const exportProgress = () => JSON.stringify(getSnapshot().progress);
+export const exportProgress = () => JSON.stringify(latest());
 
 export function importProgress(text: string): boolean {
-    let imported: Progress | null = null;
     try {
-        imported = parseProgress(JSON.parse(text));
+        const merged = importInto(latest(), JSON.parse(text));
+        return merged !== null && save(merged);
     } catch {
-        return false;
+        return false; // not JSON
     }
-    return imported !== null && save(mergeProgress(getSnapshot().progress, imported));
 }
 
 export const useDone = () => new Set(Object.keys(useProgress().progress.done));

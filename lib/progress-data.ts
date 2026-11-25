@@ -20,10 +20,13 @@ export function parseProgress(raw: unknown): Progress | null {
     return { done: Object.fromEntries(entries), goal: parseDailyGoal(data.goal) ?? DEFAULT_DAILY_GOAL };
 }
 
-export function mergeProgress(mine: Progress, imported: Progress): Progress {
+// Adds an exported file to the current progress; null when it is not a progress file.
+export function importInto(mine: Progress, raw: unknown): Progress | null {
+    const imported = parseProgress(raw);
+    if (!imported) return null;
     const done = { ...mine.done };
     for (const [key, at] of Object.entries(imported.done)) {
         if (!done[key] || Date.parse(at) < Date.parse(done[key])) done[key] = at;
     }
-    return { done, goal: imported.goal };
+    return { done, goal: parseDailyGoal((raw as { goal?: unknown }).goal) ?? mine.goal };
 }
