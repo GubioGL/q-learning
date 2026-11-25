@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="240" viewBox="0 0 590 240" >
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <line class="l" x1="50" y1="200" x2="550" y2="200"/>
+  <rect class="b" x="80" y="104.0" width="60" height="96.0" rx="6"/>
+  <text class="v" x="110" y="94.0">0.6</text>
+  <text class="s" x="110" y="226">α</text>
+  <rect class="b" x="200" y="72.0" width="60" height="128.0" rx="6"/>
+  <text class="v" x="230" y="62.0">0.8</text>
+  <text class="s" x="230" y="226">β</text>
+  <rect class="b" x="320" y="142.4" width="60" height="57.6" rx="6"/>
+  <text class="v" x="350" y="132.4">0.36</text>
+  <text class="s" x="350" y="226">|α|²</text>
+  <rect class="b" x="440" y="97.6" width="60" height="102.4" rx="6"/>
+  <text class="v" x="470" y="87.6">0.64</text>
+  <text class="s" x="470" y="226">|β|²</text>
+</svg>

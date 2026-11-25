@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="190" viewBox="0 0 540 190" >
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <text class="s" x="155" y="16">product: |+⟩|+⟩</text>
+  <text class="v" x="110" y="42">b=0</text>
+  <text class="v" x="200" y="42">b=1</text>
+  <text class="v" x="36" y="86">a=0</text>
+  <text class="v" x="36" y="146">a=1</text>
+  <rect class="b" x="65" y="55" width="86" height="56" rx="8"/>
+  <text class="t" x="108" y="89">½</text>
+  <rect class="b" x="155" y="55" width="86" height="56" rx="8"/>
+  <text class="t" x="198" y="89">½</text>
+  <rect class="b" x="65" y="115" width="86" height="56" rx="8"/>
+  <text class="t" x="108" y="149">½</text>
+  <rect class="b" x="155" y="115" width="86" height="56" rx="8"/>
+  <text class="t" x="198" y="149">½</text>
+  <text class="s" x="430" y="16">entangled: Φ⁺</text>
+  <text class="v" x="385" y="42">b=0</text>
+  <text class="v" x="475" y="42">b=1</text>
+  <text class="v" x="311" y="86">a=0</text>
+  <text class="v" x="311" y="146">a=1</text>
+  <rect class="b" x="340" y="55" width="86" height="56" rx="8"/>
+  <text class="t" x="383" y="89">1/√2</text>
+  <rect class="b" x="430" y="55" width="86" height="56" rx="8" opacity=".35"/>
+  <text class="t" x="473" y="89">0</text>
+  <rect class="b" x="340" y="115" width="86" height="56" rx="8" opacity=".35"/>
+  <text class="t" x="383" y="149">0</text>
+  <rect class="b" x="430" y="115" width="86" height="56" rx="8"/>
+  <text class="t" x="473" y="149">1/√2</text>
+</svg>

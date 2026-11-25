@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="650" height="242" viewBox="0 0 650 242" >
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <text class="t" x="44" y="46">|ψ⟩</text>
+  <text class="t" x="44" y="110">Alice</text>
+  <text class="t" x="44" y="174">Bob</text>
+  <line class="l" x1="72" y1="40" x2="590" y2="40"/>
+  <line class="l" x1="72" y1="104" x2="590" y2="104"/>
+  <line class="l" x1="72" y1="168" x2="590" y2="168"/>
+  <rect class="b" x="97" y="83" width="46" height="42" rx="8"/>
+  <text class="t" x="120" y="110">H</text>
+  <line class="p" x1="190" y1="104" x2="190" y2="184"/>
+  <circle class="f" cx="190" cy="104" r="7"/>
+  <circle class="b" cx="190" cy="168" r="16"/>
+  <line class="p" x1="174" y1="168" x2="206" y2="168"/>
+  <line class="p" x1="190" y1="152" x2="190" y2="184"/>
+  <line class="p" x1="260" y1="40" x2="260" y2="120"/>
+  <circle class="f" cx="260" cy="40" r="7"/>
+  <circle class="b" cx="260" cy="104" r="16"/>
+  <line class="p" x1="244" y1="104" x2="276" y2="104"/>
+  <line class="p" x1="260" y1="88" x2="260" y2="120"/>
+  <rect class="b" x="307" y="19" width="46" height="42" rx="8"/>
+  <text class="t" x="330" y="46">H</text>
+  <rect class="b" x="377" y="19" width="46" height="42" rx="8"/>
+  <path class="p" d="M386 50 A14 14 0 0 1 414 50" stroke-width="2"/>
+  <line class="p" x1="400" y1="50" x2="411" y2="29"/>
+  <rect class="b" x="377" y="83" width="46" height="42" rx="8"/>
+  <path class="p" d="M386 114 A14 14 0 0 1 414 114" stroke-width="2"/>
+  <line class="p" x1="400" y1="114" x2="411" y2="93"/>
+  <line class="l" x1="468" y1="104" x2="468" y2="147"/>
+  <line class="l" x1="472" y1="104" x2="472" y2="147"/>
+  <circle class="f" cx="470" cy="104" r="6"/>
+  <rect class="b" x="447" y="147" width="46" height="42" rx="8"/>
+  <text class="t" x="470" y="174">X</text>
+  <line class="l" x1="538" y1="40" x2="538" y2="147"/>
+  <line class="l" x1="542" y1="40" x2="542" y2="147"/>
+  <circle class="f" cx="540" cy="40" r="6"/>
+  <rect class="b" x="517" y="147" width="46" height="42" rx="8"/>
+  <text class="t" x="540" y="174">Z</text>
+  <text class="v" x="620" y="46">m₁</text>
+  <text class="v" x="620" y="110">m₂</text>
+  <text class="v" x="620" y="174">|ψ⟩</text>
+  <text class="s" x="155.0" y="234">pair</text>
+  <text class="s" x="330" y="234">Bell measurement</text>
+  <text class="s" x="505.0" y="234">correction</text>
+</svg>

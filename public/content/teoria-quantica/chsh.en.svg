@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="260" viewBox="0 0 500 260" >
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <rect class="b" x="190" y="15" width="120" height="50" rx="8"/>
+  <text class="t" x="250" y="46">referee</text>
+  <rect class="b" x="30" y="130" width="120" height="54" rx="8"/>
+  <text class="t" x="90" y="163">Alice</text>
+  <rect class="b" x="350" y="130" width="120" height="54" rx="8"/>
+  <text class="t" x="410" y="163">Bob</text>
+  <line class="p" x1="205" y1="70" x2="125" y2="124"/><polyline class="p" points="136.9,122.3 125.0,124.0 131.0,113.6" style="stroke-dasharray:none"/>
+  <line class="p" x1="295" y1="70" x2="375" y2="124"/><polyline class="p" points="369.0,113.6 375.0,124.0 363.1,122.3" style="stroke-dasharray:none"/>
+  <text class="v" x="146" y="94">x</text>
+  <text class="v" x="354" y="94">y</text>
+  <line class="p" x1="90" y1="190" x2="90" y2="225"/><polyline class="p" points="95.2,214.2 90.0,225.0 84.8,214.2" style="stroke-dasharray:none"/>
+  <line class="p" x1="410" y1="190" x2="410" y2="225"/><polyline class="p" points="415.2,214.2 410.0,225.0 404.8,214.2" style="stroke-dasharray:none"/>
+  <text class="v" x="90" y="248">a</text>
+  <text class="v" x="410" y="248">b</text>
+  <line class="d" x1="155" y1="157" x2="345" y2="157"/>
+  <text class="s" x="250" y="148">entangled pair</text>
+  <text class="t" x="250" y="235">they win if a⊕b = xy</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="610" height="150" viewBox="0 0 610 150" >
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <rect class="b" x="20" y="40" width="80" height="70" rx="8"/>
+  <text class="t" x="60" y="83">A</text>
+  <line class="p" x1="108" y1="75" x2="152" y2="75"/><polyline class="p" points="141.2,69.8 152.0,75.0 141.2,80.2" style="stroke-dasharray:none"/>
+  <rect class="b" x="160" y="40" width="80" height="70" rx="8"/>
+  <text class="t" x="200" y="83">65</text>
+  <line class="p" x1="248" y1="75" x2="292" y2="75"/><polyline class="p" points="281.2,69.8 292.0,75.0 281.2,80.2" style="stroke-dasharray:none"/>
+  <rect class="b" x="300" y="50" width="34" height="50" rx="6"/>
+  <text class="t" x="317" y="81">0</text>
+  <rect class="b" x="336" y="50" width="34" height="50" rx="6"/>
+  <text class="t" x="353" y="81">1</text>
+  <rect class="b" x="372" y="50" width="34" height="50" rx="6"/>
+  <text class="t" x="389" y="81">0</text>
+  <rect class="b" x="408" y="50" width="34" height="50" rx="6"/>
+  <text class="t" x="425" y="81">0</text>
+  <rect class="b" x="444" y="50" width="34" height="50" rx="6"/>
+  <text class="t" x="461" y="81">0</text>
+  <rect class="b" x="480" y="50" width="34" height="50" rx="6"/>
+  <text class="t" x="497" y="81">0</text>
+  <rect class="b" x="516" y="50" width="34" height="50" rx="6"/>
+  <text class="t" x="533" y="81">0</text>
+  <rect class="b" x="552" y="50" width="34" height="50" rx="6"/>
+  <text class="t" x="569" y="81">1</text>
+  <text class="s" x="60" y="135">character</text>
+  <text class="s" x="200" y="135">ASCII</text>
+  <text class="s" x="444" y="135">8 bits (64 + 1)</text>
+</svg>
