@@ -1,17 +1,15 @@
-import React from "react";
+"use client";
+
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Sidebar } from "@/components/ui/sidebar";
 import UserProgress from "@/components/ui/user-progress";
-import { useGoals } from "@/lib/contexts/GoalsContext";
 
 /**
  * Cabeçalho principal da área autenticada.
  * Exibe menu lateral, status do usuário e indicadores de gamificação.
  */
-export const MainHeader = () => {
-    const { userGoals } = useGoals();
-
+export const MainHeader = ({ dayStreak, xp }: { dayStreak: number; xp: number }) => {
     return (
         <div className="status-header">
             <div className="status-container">
@@ -24,14 +22,7 @@ export const MainHeader = () => {
                     </SheetTrigger>
                     <Sidebar />
                 </Sheet>
-                {/* Indicadores de gamificação */}
-                {/* Agora os dados vêm do contexto de metas do usuário */}
-
-
-                <UserProgress 
-                    dayStreak={userGoals.streak}
-                    energy={userGoals.energy }
-                />
+                <UserProgress dayStreak={dayStreak} xp={xp} />
             </div>
         </div>
     )

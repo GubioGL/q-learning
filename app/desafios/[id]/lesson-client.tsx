@@ -17,11 +17,14 @@ export default function LessonClient({ lesson, recommendHref, recommendTitle }: 
     const [state, setState] = useState(initialState);
     const [started, setStarted] = useState(false);
     const [saveError, setSaveError] = useState<string | null>(null);
+    const [earnedXp, setEarnedXp] = useState(false);
     const finished = isFinished(state, lesson);
 
     useEffect(() => {
         if (!finished) return;
-        completeLevel(lesson.id).catch((e) => setSaveError(e instanceof Error ? e.message : "Não foi possível salvar."));
+        completeLevel(lesson.id)
+            .then((isNew) => setEarnedXp((earned) => earned || isNew)) // the effect runs twice in dev
+            .catch((e) => setSaveError(e instanceof Error ? e.message : "Não foi possível salvar."));
     }, [finished, lesson.id]);
 
     if (isOutOfHearts(state) && state.status === "idle") {
@@ -39,8 +42,9 @@ export default function LessonClient({ lesson, recommendHref, recommendTitle }: 
         return (
             <EndScreen
                 title="Lição concluída! 🎉"
-                text={`Você acertou ${state.correct} de ${lesson.challenges.length} e ganhou ${lesson.xp} XP.`}
+                text={`Você acertou ${state.correct} de ${lesson.challenges.length}.`}
             >
+                <p aria-live="polite" className="h-7 text-lg font-bold text-yellow-400">{earnedXp && `+${lesson.xp} XP`}</p>
                 <Link href={EXIT_HREF}><Button variant="buttonGre" size="lg">Continuar</Button></Link>
                 {saveError && <p role="alert" className="text-red-400">{saveError}</p>}
             </EndScreen>

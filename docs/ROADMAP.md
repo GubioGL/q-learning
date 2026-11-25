@@ -47,10 +47,13 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
 - [x] Primeira skill escrita: "Bits e números binários"; 2 níveis de desafio.
 - [x] Testes: unitários (`npm test`) e E2E do fluxo completo (`npm run test:e2e`).
 
-## Etapa 3 — Gamificação (sem login)
+## Etapa 3 — Gamificação (sem login) ✅ (2026-11-25)
 
-- [ ] XP, streak e metas calculados a partir das conclusões (painel da direita hoje é estático).
-- [ ] Editor de código melhor (CodeMirror) se o `textarea` incomodar.
+- [x] XP, streak e metas diárias/semanais calculados das conclusões (`lib/stats.ts`; dia e semana no fuso de São Paulo).
+- [x] Meta diária salva por visitante (`user_progress.dailyActivities`), sem precisar de login.
+- [x] Repetir um item concluído não dá XP; o cabeçalho com menu aparece em toda tela sem barras laterais.
+- [x] Removida a API `/api/user-profile` (sem autenticação) e o contexto de metas no cliente.
+- Editor de código: o `textarea` fica; CodeMirror só se incomodar.
 
 ## Etapas 4–6 — Conteúdo (por módulo: ~10 skills de curso + níveis de desafio)
 

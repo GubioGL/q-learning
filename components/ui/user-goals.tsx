@@ -1,18 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
+import type { getStats } from '@/db/progress';
+import { DAYS_PER_WEEK, XP_PER_ACTIVITY } from '@/lib/stats';
 
 interface UserGoalsProps {
-  dailyActivities?: number;
-  dailyXP?: number;
-  dailyXPTarget?: number;
-  dailyLessons?: number;
-  dailyLessonsTarget?: number;
-  weeklyXP?: number;
-  weeklyXPTarget?: number;
-  weeklyLessons?: number;
-  weeklyLessonsTarget?: number;
-  showGeneralProgress?: boolean;
-  totalActivities?: number;
-  completedActivities?: number;
+  stats: Awaited<ReturnType<typeof getStats>>;
+  dailyGoal: number;
 }
 
 const ProgressBar: React.FC<{ percentage: number; color: string }> = ({ percentage, color }) => (
@@ -31,7 +24,7 @@ const GoalSection: React.FC<{
   <div className="bg-[#1a1a1a] rounded-lg p-4 border border-[#333]">
     <div className="flex justify-between items-center mb-4">
       <h3 className="text-white font-semibold text-lg">{title}</h3>
-      <button className="text-blue-500 text-sm hover:underline">Ver</button>
+      <Link href="/metas" className="text-blue-500 text-sm hover:underline">Ver</Link>
     </div>
     <div className="space-y-4">
       {children}
@@ -55,42 +48,30 @@ const GoalItem: React.FC<{
   </div>
 );
 
-const UserGoals: React.FC<UserGoalsProps> = ({
-  dailyActivities = 3,
-  dailyXP = 0,
-  dailyXPTarget = 30,
-  dailyLessons = 0,
-  dailyLessonsTarget = 3,
-  weeklyXP = 0,
-  weeklyXPTarget = 210,
-  weeklyLessons = 0,
-  weeklyLessonsTarget = 21,
-  showGeneralProgress = false,
-  totalActivities = 100,
-  completedActivities = 10
-}) => {
-  const pct = (value: number, target: number) => (target > 0 ? (value / target) * 100 : 0);
-  const dailyXPPercentage = pct(dailyXP, dailyXPTarget);
-  const dailyLessonsPercentage = pct(dailyLessons, dailyLessonsTarget);
-  const weeklyXPPercentage = pct(weeklyXP, weeklyXPTarget);
-  const weeklyLessonsPercentage = pct(weeklyLessons, weeklyLessonsTarget);
-  const courseProgressPercentage = pct(completedActivities, totalActivities);
+const pct = (value: number, target: number) => (target > 0 ? (value / target) * 100 : 0);
+
+const UserGoals: React.FC<UserGoalsProps> = ({ stats, dailyGoal }) => {
+  const { today, week, completed, total } = stats;
+  const dailyXPTarget = dailyGoal * XP_PER_ACTIVITY;
+  const weeklyTarget = dailyGoal * DAYS_PER_WEEK;
+  const weeklyXPTarget = dailyXPTarget * DAYS_PER_WEEK;
+  const totalPercentage = pct(completed, total);
 
   return (
     <div className="flex flex-col gap-4 p-4">
       <GoalSection title="Metas Diárias">
         <GoalItem
-          label={`${dailyActivities} atividades por dia`}
-          current={dailyLessons}
-          target={dailyLessonsTarget}
-          percentage={dailyLessonsPercentage}
+          label={`${dailyGoal} atividade(s) por dia`}
+          current={today.activities}
+          target={dailyGoal}
+          percentage={pct(today.activities, dailyGoal)}
           color="bg-[#00e676]"
         />
         <GoalItem
           label={`Ganhar ${dailyXPTarget} XP`}
-          current={dailyXP}
+          current={today.xp}
           target={dailyXPTarget}
-          percentage={dailyXPPercentage}
+          percentage={pct(today.xp, dailyXPTarget)}
           color="bg-[#00e676]"
         />
       </GoalSection>
@@ -98,42 +79,40 @@ const UserGoals: React.FC<UserGoalsProps> = ({
       <GoalSection title="Metas Semanais">
         <GoalItem
           label={`Ganhar ${weeklyXPTarget} XP`}
-          current={weeklyXP}
+          current={week.xp}
           target={weeklyXPTarget}
-          percentage={weeklyXPPercentage}
+          percentage={pct(week.xp, weeklyXPTarget)}
           color="bg-[#FFD700]"
         />
         <GoalItem
-          label={`Completar ${weeklyLessonsTarget} lições`}
-          current={weeklyLessons}
-          target={weeklyLessonsTarget}
-          percentage={weeklyLessonsPercentage}
+          label={`Fazer ${weeklyTarget} atividades`}
+          current={week.activities}
+          target={weeklyTarget}
+          percentage={pct(week.activities, weeklyTarget)}
           color="bg-[#FFD700]"
         />
       </GoalSection>
 
-      {showGeneralProgress && (
         <div className="bg-[#1a1a1a] rounded-lg p-4 border border-[#333]">
-          <h3 className="text-white font-semibold text-lg mb-4">Progresso do Curso</h3>
+          <h3 className="text-white font-semibold text-lg mb-4">Progresso Geral</h3>
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-white text-sm">Atividades Completadas</span>
-              <span className="text-white text-sm">{completedActivities}/{totalActivities}</span>
+              <span className="text-white text-sm">Atividades feitas</span>
+              <span className="text-white text-sm">{completed}/{total}</span>
             </div>
             <div className="w-full bg-gray-600 rounded-full h-3">
               <div 
                 className="bg-[#7c3aed] h-3 rounded-full transition-all duration-300"
-                style={{ width: `${Math.min(courseProgressPercentage, 100)}%` }}
+                style={{ width: `${Math.min(totalPercentage, 100)}%` }}
               />
             </div>
             <div className="text-center">
               <span className="text-[#7c3aed] font-bold text-lg">
-                {Math.round(courseProgressPercentage)}%
+                {Math.round(totalPercentage)}%
               </span>
             </div>
           </div>
         </div>
-      )}
     </div>
   );
 };
