@@ -184,3 +184,16 @@ test("saving does not overwrite what another tab stored", async ({ page }) => {
   expect(Object.keys(saved.done)).toEqual(["level:bits"]);
   await expect(page.locator(".sidebar-direita").getByLabel("10 XP no total")).toBeVisible();
 });
+
+test("a skill page scrolls inside its own area, down to the last button", async ({ page }) => {
+  for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 740 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/pt/cursos/basico/bits");
+    await expect(page.locator(".katex").first()).toBeVisible();
+    // the document itself must not scroll: below the first screen it would be blank
+    expect(await page.evaluate(() => document.documentElement.scrollHeight - innerHeight)).toBeLessThanOrEqual(0);
+    await page.mouse.move(viewport.width / 2, 400);
+    await page.mouse.wheel(0, 20_000);
+    await expect(page.getByRole("button", { name: "Concluir skill" })).toBeInViewport();
+  }
+});
