@@ -35,24 +35,19 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the step-by-step plan and [`content
 
 ## 🧰 Technologies Used
 
-- **Next.js** 15
-- **React** 19
-- **TypeScript**
-- **TailwindCSS**
-- **Radix UI**
-- **Lucide React**
-- **Class Variance Authority**
-- **clsx**
-- **tw-animate-css**
+- **Next.js** 15, **React** 19, **TypeScript** (every page is static)
+- **Tailwind CSS**, **Radix UI**, **Lucide React**
+- **KaTeX** for math and **Pyodide** to run Python in the browser
 
-> Backend, authentication, donation system, and database integration are still under development.
+> No account and no database: progress is saved in the visitor's browser and can be exported to a file.
 
 ---
 
 ## 🌐 Available Languages
 
-- 🇬🇧 English  
-- 🇧🇷 Portuguese
+- 🇧🇷 Portuguese (original)
+- 🇬🇧 English
+- 🇪🇸 Spanish
 
 ---
 
@@ -67,7 +62,7 @@ Done and next steps are tracked in [`docs/ROADMAP.md`](docs/ROADMAP.md).
 This project stands on the work of others. Lesson text and exercises are original, written with these sources as reference:
 
 **Main content reference**
-- Thomas G. Wong, *Introduction to Classical and Quantum Computing* (Rooted Grove, 2022) — [thomaswong.net](https://www.thomaswong.net). Lessons follow its chapters 1–3; no text is reproduced.
+- Thomas G. Wong, *Introduction to Classical and Quantum Computing* (Rooted Grove, 2022) — [thomaswong.net](https://www.thomaswong.net). Lessons follow its chapters 1–4 and 6; no text is reproduced.
 
 **Content and exercises**
 - [PennyLane Codebook — Foundations of Quantum Computing](https://pennylane.ai/codebook/learning-paths/foundations-of-quantum-computing) (Xanadu)
@@ -101,7 +96,7 @@ This project stands on the work of others. Lesson text and exercises are origina
 
 ## 🔮 Project Future
 
-- Platform translation to Spanish and other languages.
+- Native-speaker review of the English and Spanish translations.
 - Integration with tools like IBM Qiskit, Pennylane, and QuTiP.
 - Mobile version development.
 - Certification system for users who complete the modules.
@@ -112,10 +107,14 @@ This project stands on the work of others. Lesson text and exercises are origina
 
 ```bash
 npm install
-cp .env.example .env.local   # fill in Neon and Clerk keys
-npm run db:push              # create tables
 npm run dev
 
-npm test                     # unit tests
+npm test                     # unit and content tests
 npm run test:e2e             # browser flow (app running; CHROME_PATH=/usr/bin/google-chrome to use local Chrome)
 ```
+
+---
+
+## 🤝 Contributing and License
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). Code is under the [MIT License](LICENSE); lessons, illustrations and the book are under [CC BY-SA 4.0](LICENSE-CONTENT.md).

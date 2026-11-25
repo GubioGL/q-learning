@@ -1,6 +1,6 @@
 # Conteúdo — como escrever cursos e desafios
 
-O site tem duas partes, e todo o conteúdo fica nesta pasta (o banco guarda só o progresso).
+O site tem duas partes, e todo o conteúdo fica nesta pasta (o progresso fica no navegador de quem estuda).
 
 | Parte | O que é | Onde fica |
 |-------|---------|-----------|
@@ -61,6 +61,15 @@ A skill é concluída quando todos os exercícios estão resolvidos. Isso libera
 1. Crie `levels/<id>.ts` seguindo `levels/bits.ts`: `course` e `skill` indicam a skill recomendada quando o aluno perde todos os corações.
 2. Adicione o nível em `levels/index.ts` na posição certa da trilha (do mais básico ao mais avançado).
    Cada nível só abre depois que o anterior foi concluído. Toda skill precisa de um nível, na mesma ordem dos cursos (o teste confere).
+
+## Traduções
+
+O português é o original; o que não tem tradução aparece em português, com um aviso.
+
+- Skill: `skills/<curso>/<skill>.en.md` e `.es.md`, com os mesmos exercícios (`id`, tipo e ordem), fórmulas e imagens.
+- Nível: `levels/en/<id>.ts` e `levels/es/<id>.ts`, com as perguntas e opções na mesma ordem, mais uma linha no `index.ts` da pasta. A resposta certa vem do original.
+- Títulos e resumos dos cursos: `courses-text.ts`.
+- Ilustração com texto: `arquivo.en.svg` e `arquivo.es.svg` ao lado da original.
 
 ## Conferir
 

@@ -7,9 +7,9 @@ import { xpByKey } from "@/content/catalog";
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-dvh overflow-hidden">
-      <div className="sidebar-esquerda">
+      <header className="sidebar-esquerda">
         <SidebarContent />
-      </div>
+      </header>
 
       <div className="flex-1 min-w-0 ml-[0px] lg:ml-[260px] mr-[0px] lg:mr-[300px] h-dvh overflow-y-auto text-gray-400 bg-[#1a1a1a] flex flex-col oculta-scrollbar">
         <div className="flex-1 p-4 sm:p-8">

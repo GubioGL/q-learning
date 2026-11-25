@@ -5,15 +5,17 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
 
 ## Decisões fixadas
 
-- Stack: Next.js 15 + React 19 + Tailwind 4 + Clerk (login) + Drizzle + Neon (Postgres).
-- Hospedagem: Vercel (Hobby, grátis, uso não comercial) + Neon (grátis).
+- Stack: Next.js 15 + React 19 + Tailwind 4; páginas 100% estáticas em `/pt`, `/en` e `/es`.
+- **Sem conta e sem banco:** o progresso fica no `localStorage` (`lib/use-progress.ts`), com exportar/importar na
+  página de Metas. É o mais barato e rápido. Limites: não há ranking confiável, e limpar o navegador apaga o progresso
+  (o Safari pode apagar após 7 dias sem visita). O código com Clerk + Neon está no git até `13227cf`.
+- Hospedagem: Vercel (Hobby, grátis, uso não comercial). Deploys antigos são apagados depois de cada deploy conferido.
 - Duas áreas: **Cursos** (codebook estilo PennyLane: texto, ilustração e exercícios em Python,
   número ou texto, skills em sequência) e **Desafios** (estilo Duolingo: trilha única de níveis,
   do básico ao avançado; errar tudo recomenda a skill do curso).
-- Conteúdo em arquivos no repositório (`content/`, guia em `content/README.md`); o banco guarda só
-  o progresso (tabela `completions`).
-- Sem login até o conteúdo ficar pronto: progresso anônimo por cookie; o Clerk volta na Etapa 7.
-- Loja e Classificação ocultas até a Etapa 7.
+- Conteúdo em arquivos no repositório (`content/`, guia em `content/README.md`).
+- Loja oculta até haver um meio de doação; Classificação oculta enquanto não houver contas.
+- Licenças: MIT (código) e CC BY-SA 4.0 (conteúdo e livro).
 - Referência principal de conteúdo: Thomas G. Wong, *Introduction to Classical and Quantum
   Computing* (caps. 1–3). O livro é "All rights reserved": **escrevemos texto e exercícios
   próprios** e citamos o capítulo/seção; nada de copiar trechos.
@@ -70,13 +72,21 @@ Formato em `content/README.md`. Cada skill tem um nível na trilha de Desafios e
 - [x] `lib/content.test.ts` confere exercícios, fórmulas, imagens e níveis a cada `npm test`.
 - [x] Livro: `Aprofundamento.tex`, uma subseção por skill.
 
-## Etapa 7 — Beta
+## Etapa 7 — Beta ✅ (2026-11-25)
 
-- [ ] Religar o login (Clerk) e migrar o progresso anônimo para a conta (só quando o conteúdo estiver pronto).
-- [ ] Reativar Classificação (ranking) e Loja (doações); conquistas.
-- [ ] i18n: en / pt / es.
-- [ ] Revisão de acessibilidade e mobile; documentação de contribuição.
-- [ ] Publicação da 1ª versão beta e divulgação.
+- [x] Site inteiro sem login: progresso no navegador, exportar/importar, dia e semana no fuso do visitante.
+- [x] Conquistas (`/conquistas`): primeira atividade, sequências, XP, cursos e trilha.
+- [x] i18n: interface, 25 skills, 25 níveis e ilustrações em pt / en / es.
+- [x] Acessibilidade (axe, WCAG 2.1 AA, sem violações) e celular (360 px, sem rolagem lateral).
+- [x] Licenças e `CONTRIBUTING.md`.
+- [x] Publicação da 1ª versão beta.
+- [ ] Divulgação.
+
+## Depois do beta
+
+- [ ] Revisão das traduções por falantes nativos.
+- [ ] Loja (doações), quando houver chave Pix ou link.
+- [ ] Classificação, só se o projeto voltar a ter contas.
 
 ## Ferramentas (economia de tokens)
 

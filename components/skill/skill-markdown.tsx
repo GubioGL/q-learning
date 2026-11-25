@@ -17,6 +17,10 @@ const components: Components = {
     // eslint-disable-next-line @next/next/no-img-element -- content images are small local SVG/PNG
     img: ({ src, alt }) => <img src={typeof src === "string" ? src : undefined} alt={alt ?? ""} className="mx-auto my-6 max-w-full" />,
     code: ({ children }) => <code className="rounded bg-gray-800 px-1.5 py-0.5 font-mono text-[0.9em] text-purple-200">{children}</code>,
+    // Wide equations scroll sideways, so the keyboard must reach them.
+    span: ({ className, style, children, ...rest }) => (
+        <span className={className} style={style} aria-hidden={rest["aria-hidden"]} tabIndex={className === "katex-display" ? 0 : undefined}>{children}</span>
+    ),
     pre: ({ node, children }) => {
         const code = node?.children[0];
         if (code?.type === "element") {
