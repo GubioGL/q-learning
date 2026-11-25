@@ -12,7 +12,7 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
   do básico ao avançado; errar tudo recomenda a skill do curso).
 - Conteúdo em arquivos no repositório (`content/`, guia em `content/README.md`); o banco guarda só
   o progresso (tabela `completions`).
-- Login opcional por enquanto: progresso anônimo por cookie; o Clerk volta na Etapa 3.
+- Sem login até o conteúdo ficar pronto: progresso anônimo por cookie; o Clerk volta na Etapa 7.
 - Loja e Classificação ocultas até a Etapa 7.
 - Referência principal de conteúdo: Thomas G. Wong, *Introduction to Classical and Quantum
   Computing* (caps. 1–3). O livro é "All rights reserved": **escrevemos texto e exercícios
@@ -47,9 +47,8 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
 - [x] Primeira skill escrita: "Bits e números binários"; 2 níveis de desafio.
 - [x] Testes: unitários (`npm test`) e E2E do fluxo completo (`npm run test:e2e`).
 
-## Etapa 3 — Conta e gamificação
+## Etapa 3 — Gamificação (sem login)
 
-- [ ] Religar o login (Clerk) nas áreas de estudo e migrar o progresso anônimo para a conta.
 - [ ] XP, streak e metas calculados a partir das conclusões (painel da direita hoje é estático).
 - [ ] Editor de código melhor (CodeMirror) se o `textarea` incomodar.
 
@@ -67,6 +66,7 @@ O livro (`livro/`) cresce em paralelo: cada skill ganha uma seção de aprofunda
 
 ## Etapa 7 — Beta
 
+- [ ] Religar o login (Clerk) e migrar o progresso anônimo para a conta (só quando o conteúdo estiver pronto).
 - [ ] Reativar Classificação (ranking) e Loja (doações); conquistas.
 - [ ] i18n: en / pt / es.
 - [ ] Revisão de acessibilidade e mobile; documentação de contribuição.
