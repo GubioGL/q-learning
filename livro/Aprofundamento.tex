@@ -1,0 +1,172 @@
+\newpage
+\section{Aprofundamento das skills.}
+Cada subseção complementa uma skill do site Quantum Learning com um resultado demonstrado ou um passo além do curso. A referência de estrutura é T. G. Wong, \textit{Introduction to Classical and Quantum Computing}; o texto é original.
+
+% ---------- Fundamentos Básicos ----------
+\subsection{Bits e números binários.}
+Todo inteiro $N$ com $0 \le N < 2^n$ tem uma única representação com $n$ bits. Existem $2^n$ sequências e $2^n$ inteiros nesse intervalo, então basta mostrar que sequências diferentes dão números diferentes. Se $b$ e $b'$ diferem e $k$ é a posição mais alta em que diferem, as posições abaixo de $k$ contribuem com no máximo
+\begin{equation}
+    \sum_{j=0}^{k-1} 2^j = 2^k - 1 < 2^k,
+\end{equation}
+o que não compensa a diferença $2^k$. Logo os números são distintos. Em consequência, para representar $M$ possibilidades são necessários $\lceil \log_2 M \rceil$ bits.
+
+\subsection{Portas lógicas clássicas.}
+Toda função $f:\{0,1\}^n \to \{0,1\}$ pode ser escrita com NOT, AND e OR. Para cada entrada $a$ com $f(a)=1$, forme o produto $m_a(x)$ das variáveis, negando $x_i$ quando $a_i = 0$. Esse produto vale $1$ apenas em $x=a$, e portanto
+\begin{equation}
+    f(x) = \sum_{a:\,f(a)=1} m_a(x),
+\end{equation}
+em que a soma é o OR. É a forma normal disjuntiva. Como NOT, AND e OR se constroem com NAND, a NAND é universal.
+
+\subsection{Codificando informação com ASCII.}
+A UTF-8 estende o ASCII sem ambiguidade. Um byte que começa com $0$ é um caractere ASCII; um caractere longo começa com um byte $110\ldots$, $1110\ldots$ ou $11110\ldots$, que indica 2, 3 ou 4 bytes, e todos os bytes seguintes começam com $10$. Como nenhum byte inicial começa com $10$, um leitor que entra no meio do texto encontra o início do próximo caractere. Um caractere de 2 bytes tem $5 + 6 = 11$ bits livres.
+
+\subsection{Portas reversíveis.}
+Apagar informação tem um custo físico mínimo. Pelo princípio de Landauer, apagar um bit num ambiente à temperatura $T$ dissipa pelo menos
+\begin{equation}
+    E = k_B T \ln 2,
+\end{equation}
+cerca de $2{,}9\times 10^{-21}\,$J a $300\,$K. Uma computação reversível não apaga bits e, em princípio, escapa desse limite. Para qualquer $f$, a função $(x, y) \mapsto (x, y \oplus f(x))$ é reversível, pois é a própria inversa: $y \oplus f(x) \oplus f(x) = y$. É essa forma que os oráculos quânticos usam.
+
+\subsection{O qubit e a superposição.}
+Um qubit tem dois graus de liberdade reais. As amplitudes $\alpha$ e $\beta$ somam quatro números reais; a normalização retira um, e a fase global, outro. Escolhendo a fase de modo que $\alpha \ge 0$,
+\begin{equation}
+    \ket{\psi} = \cos\frac{\theta}{2}\ket{0} + e^{i\phi}\sin\frac{\theta}{2}\ket{1}, \qquad 0\le\theta\le\pi,\; 0\le\phi<2\pi.
+\end{equation}
+
+\subsection{Medida quântica.}
+As coordenadas do estado acima na esfera de Bloch são valores esperados das matrizes de Pauli:
+\begin{equation}
+    x = \Braket{\psi}{X}{\psi} = \sin\theta\cos\phi, \quad y = \Braket{\psi}{Y}{\psi} = \sin\theta\sin\phi, \quad z = \Braket{\psi}{Z}{\psi} = \cos\theta.
+\end{equation}
+Vale $x^2+y^2+z^2=1$ e $P(0) = (1+z)/2$. Com $N$ repetições, a estimativa de $p = P(0)$ tem desvio padrão $\sqrt{p(1-p)/N}$: para reduzir o erro à metade, é preciso quadruplicar o número de medidas.
+
+\subsection{Portas de 1 qubit.}
+Como $X^2 = I$, a série da exponencial se separa em potências pares e ímpares, e o mesmo vale para $Y$ e $Z$. As rotações são
+\begin{equation}
+    R_x(\theta) = e^{-i\theta X/2} = \cos\frac{\theta}{2}\, I - i\sin\frac{\theta}{2}\, X.
+\end{equation}
+Em particular, $R_x(\pi) = -iX$: a porta X é um giro de $\pi$ em torno do eixo $x$, a menos de fase global. Toda porta de 1 qubit se escreve como $e^{i\delta}R_z(a)R_y(b)R_z(c)$.
+
+\subsection{Introdução a circuitos quânticos.}
+A identidade $HZH = X$ se verifica por multiplicação direta:
+\begin{equation}
+    HZH = \frac12 \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = X,
+\end{equation}
+em que usamos $ZH = \frac{1}{\sqrt2}\begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}$. Trocando Z por um giro $R_z(\phi)$ entre as duas portas H, obtemos $P(0) = \cos^2(\phi/2)$: a fase, invisível na medida direta, vira probabilidade. É o interferômetro mais simples.
+
+% ---------- Álgebra Linear ----------
+\subsection{Vetores coluna e linha.}
+O conjugado transposto de um produto inverte a ordem, $(AB)^\dagger = B^\dagger A^\dagger$. De fato,
+\begin{equation}
+    \left[(AB)^\dagger\right]_{ij} = \Big(\sum_k A_{jk}B_{ki}\Big)^* = \sum_k (B^\dagger)_{ik}(A^\dagger)_{kj}.
+\end{equation}
+Para um ket transformado, $\ket{\psi'} = U\ket{\psi}$ implica $\bra{\psi'} = \bra{\psi}U^\dagger$.
+
+\subsection{Produto interno e ortonormalidade.}
+Vale a desigualdade de Cauchy--Schwarz, $|\braket{\phi}{\psi}|^2 \le \braket{\phi}{\phi}\braket{\psi}{\psi}$. Para estados normalizados, tome $\ket{\chi} = \ket{\psi} - \braket{\phi}{\psi}\ket{\phi}$. Então
+\begin{equation}
+    0 \le \braket{\chi}{\chi} = 1 - |\braket{\phi}{\psi}|^2.
+\end{equation}
+Isso garante que $|\braket{\phi}{\psi}|^2$ pode ser interpretado como probabilidade.
+
+\subsection{Projeções e mudança de base.}
+Dada uma lista de vetores linearmente independentes, o processo de Gram--Schmidt produz uma base ortonormal subtraindo projeções:
+\begin{equation}
+    \ket{u_k} = \ket{v_k} - \sum_{j<k} \ket{e_j}\braket{e_j}{v_k}, \qquad \ket{e_k} = \frac{\ket{u_k}}{\sqrt{\braket{u_k}{u_k}}}.
+\end{equation}
+A matriz que muda da base $\{\ket{e_j}\}$ para $\{\ket{f_i}\}$ tem elementos $\braket{f_i}{e_j}$ e é unitária.
+
+\subsection{Portas quânticas como matrizes unitárias.}
+Toda matriz que preserva a norma de todos os vetores é unitária. Seja $M = U^\dagger U - I$, que é hermitiana. Se $\Braket{\psi}{M}{\psi}=0$ para todo $\ket{\psi}$, em particular isso vale para os autovetores de $M$, e então todos os seus autovalores são nulos. Como $M$ é diagonalizável, $M=0$. Portanto a unitariedade é consequência de exigir linearidade e probabilidade total igual a 1.
+
+\subsection{Produto externo e completude.}
+Um operador fica determinado por seus elementos de matriz. Inserindo a completude dos dois lados,
+\begin{equation}
+    A = \Big(\sum_i \ketbra{e_i}{e_i}\Big) A \Big(\sum_j \ketbra{e_j}{e_j}\Big) = \sum_{ij} \Braket{e_i}{A}{e_j}\,\ketbra{e_i}{e_j}.
+\end{equation}
+O traço independe da base e vale $\Tr(\ketbra{\psi}{\phi}) = \braket{\phi}{\psi}$.
+
+\subsection{Circuitos quânticos e unitariedade.}
+Autovetores de uma unitária com autovalores distintos são ortogonais. Se $U\ket{v}=\lambda\ket{v}$ e $U\ket{w}=\mu\ket{w}$, com $|\lambda|=|\mu|=1$, então
+\begin{equation}
+    \braket{v}{w} = \Braket{v}{U^\dagger U}{w} = \lambda^*\mu\,\braket{v}{w}.
+\end{equation}
+Se $\lambda\ne\mu$, então $\lambda^*\mu \neq 1$ e $\braket{v}{w}=0$. Assim, toda unitária se escreve como $\sum_k e^{i\theta_k}\ketbra{v_k}{v_k}$.
+
+% ---------- Computação Quântica ----------
+\subsection{Produto tensorial.}
+A regra $(A\otimes B)(C\otimes D) = AC\otimes BD$ mostra que portas em qubits diferentes comutam:
+\begin{equation}
+    (A\otimes I)(I\otimes B) = A\otimes B = (I\otimes B)(A\otimes I).
+\end{equation}
+Para $n$ qubits, aplicar H em todos leva $\ket{0\cdots0}$ à superposição uniforme $2^{-n/2}\sum_x \ket{x}$, ponto de partida de muitos algoritmos.
+
+\subsection{Medindo vários qubits.}
+A medida do primeiro qubit é descrita pelos projetores $\Pi_m = \ketbra{m}{m}\otimes I$:
+\begin{equation}
+    P(m) = \Braket{\psi}{\Pi_m}{\psi}, \qquad \ket{\psi_m} = \frac{\Pi_m\ket{\psi}}{\sqrt{P(m)}}.
+\end{equation}
+Como os $\Pi_m$ e os projetores do segundo qubit comutam, a distribuição conjunta não depende da ordem das medidas.
+
+\subsection{Estados emaranhados e estados produto.}
+Organize as amplitudes na matriz $C = (c_{ij})$. O estado é produto se e só se $C$ tem posto 1, isto é, $\det C = 0$ para dois qubits. Pela decomposição em valores singulares existem bases em que
+\begin{equation}
+    \ket{\psi} = s_1\ket{e_1}\ket{f_1} + s_2\ket{e_2}\ket{f_2}, \qquad s_1^2+s_2^2=1,
+\end{equation}
+a decomposição de Schmidt. Como portas locais multiplicam $C$ por unitárias, elas não alteram $s_1$ e $s_2$. A concorrência vale $2|\det C| = 2 s_1 s_2$.
+
+\subsection{Portas de 2 qubits: CNOT e Toffoli.}
+Na base X, a CNOT troca os papéis de controle e alvo:
+\begin{equation}
+    \text{CNOT}\ket{+}\ket{-} = \frac{1}{\sqrt2}\big(\ket{0}\ket{-} - \ket{1}\ket{-}\big) = \ket{-}\ket{-}.
+\end{equation}
+O alvo está num autovetor de X com autovalor $-1$, e o sinal passa para o controle. Esse efeito, o \textit{phase kickback}, é o mecanismo dos algoritmos de Deutsch--Jozsa, Bernstein--Vazirani e da estimação de fase.
+
+\subsection{Teorema da não-clonagem.}
+Copiar com perfeição permitiria distinguir estados não ortogonais, e por isso viola a unitariedade. Cópias imperfeitas, porém, existem: a melhor copiadora universal de um qubit para dois (Bu\v{z}ek e Hillery) produz cópias com fidelidade
+\begin{equation}
+    F = \frac56,
+\end{equation}
+igual para todos os estados de entrada.
+
+\subsection{Conjuntos universais de portas.}
+A porta T não pertence ao grupo de Clifford porque não leva matrizes de Pauli em matrizes de Pauli:
+\begin{equation}
+    T X T^\dagger = \frac{X + Y}{\sqrt2}.
+\end{equation}
+Já $S X S^\dagger = Y$ e $H X H = Z$. O teorema de Gottesman--Knill se apoia nisso: um circuito de Clifford é simulado acompanhando apenas $n$ produtos de Pauli que estabilizam o estado.
+
+% ---------- Teoria Quântica ----------
+\subsection{Estados de Bell.}
+Cada qubit de um par de Bell, visto isoladamente, está no estado maximamente misto. Com $\rho = \ketbra{\Phi^+}{\Phi^+}$, o traço parcial sobre o segundo qubit dá
+\begin{equation}
+    \rho_1 = \Tr_2\,\rho = \frac12\big(\ketbra{0}{0} + \ketbra{1}{1}\big) = \frac{I}{2}.
+\end{equation}
+O par como um todo é conhecido por completo, e cada parte é totalmente aleatória: isso não tem análogo clássico.
+
+\subsection{Desigualdade CHSH.}
+Sejam $A_x$ e $B_y$ observáveis com autovalores $\pm1$, os de Alice comutando com os de Bob, e
+\begin{equation}
+    \mathcal{S} = A_0B_0 + A_0B_1 + A_1B_0 - A_1B_1.
+\end{equation}
+Usando $A_x^2=B_y^2=I$, obtemos $\mathcal{S}^2 = 4I - [A_0,A_1][B_0,B_1]$. Cada comutador tem norma no máximo 2, então $\mathcal{S}^2 \le 8$ e $|\langle\mathcal{S}\rangle|\le 2\sqrt2$, o limite de Tsirelson. No caso clássico os comutadores são nulos e resta $|S|\le2$. A probabilidade de vitória no jogo é $\frac12 + \frac{S}{8}$.
+
+\subsection{Codificação superdensa.}
+O emaranhamento compartilhado é indispensável. Pelo teorema de Holevo, $n$ qubits enviados sem emaranhamento prévio transmitem no máximo $n$ bits. Com um par $\ket{\Phi^+}$, os quatro estados $(\sigma\otimes I)\ket{\Phi^+}$, com $\sigma\in\{I,X,Z,ZX\}$, são ortogonais, pois
+\begin{equation}
+    \Braket{\Phi^+}{\sigma^\dagger\tau\otimes I}{\Phi^+} = \frac12\Tr(\sigma^\dagger\tau).
+\end{equation}
+
+\subsection{Teletransporte quântico.}
+A identidade central se obtém expandindo os dois primeiros qubits na base de Bell:
+\begin{equation}
+    \ket{\psi}\ket{\Phi^+} = \frac12\Big[\ket{\Phi^+}\ket{\psi} + \ket{\Phi^-}Z\ket{\psi} + \ket{\Psi^+}X\ket{\psi} + \ket{\Psi^-}XZ\ket{\psi}\Big].
+\end{equation}
+Antes de receber os bits, o estado de Bob é a média dos quatro casos, $\frac14\sum_\sigma \sigma\ketbra{\psi}{\psi}\sigma^\dagger = I/2$, que não depende de $\ket{\psi}$: nenhuma informação chega sem o canal clássico.
+
+\subsection{Distribuição de chaves: BB84.}
+Seja $Q$ a taxa de erro medida nos bits peneirados. Com correção de erros e amplificação de privacidade ideais, a fração de chave secreta por bit peneirado é
+\begin{equation}
+    r = 1 - 2h(Q), \qquad h(Q) = -Q\log_2 Q - (1-Q)\log_2(1-Q).
+\end{equation}
+A taxa $r$ se anula em $Q \approx 11\%$. O ataque de interceptar e reenviar causa $Q=25\%$, bem acima do limite, e o protocolo é abortado.

@@ -1,0 +1,83 @@
+Um mesmo vetor pode ser descrito por eixos diferentes. Em computação quântica, escolher os eixos é escolher **qual medida fazer**.
+
+## A amplitude é uma projeção
+
+Numa base ortonormal $\{\ket{a}, \ket{b}\}$, todo estado se escreve
+
+$$
+\ket{\psi} = \alpha\ket{a} + \beta\ket{b}, \qquad \alpha = \braket{a|\psi}, \quad \beta = \braket{b|\psi}.
+$$
+
+Para ver por quê, multiplique por $\bra{a}$ pela esquerda: $\braket{a|\psi} = \alpha\braket{a|a} + \beta\braket{a|b} = \alpha$. O produto interno **projeta** o estado na direção escolhida.
+
+![Projeção de um estado na direção de +](/content/algebra-linear/projecao.svg)
+
+Assim, a regra de Born ganha uma forma que vale em qualquer base:
+
+$$
+P(a) = |\braket{a|\psi}|^2.
+$$
+
+Para $\ket{\psi} = 0{,}6\ket{0} + 0{,}8\ket{1}$, qual é a probabilidade de obter $\ket{+}$ numa medida na base $\{\ket{+}, \ket{-}\}$?
+
+```exercise:number
+id: projecoes-mais
+answer: 0.98
+tolerance: 0.001
+```
+
+E a de obter $\ket{-}$?
+
+```exercise:number
+id: projecoes-menos
+answer: 0.02
+tolerance: 0.001
+```
+
+## Três bases importantes
+
+$$
+\begin{array}{c|c}
+\text{base } Z & \ket{0},\ \ket{1} \\ \hline
+\text{base } X & \ket{+},\ \ket{-} \\ \hline
+\text{base } Y & \ket{i} = \tfrac{1}{\sqrt2}(\ket{0} + i\ket{1}),\ \ket{-i} = \tfrac{1}{\sqrt2}(\ket{0} - i\ket{1})
+\end{array}
+$$
+
+Cada uma corresponde a um eixo da esfera de Bloch. Um estado que é certo numa delas é 50/50 nas outras duas.
+
+Um qubit está em $\ket{i}$. Qual é a probabilidade de obter $\ket{+}$ numa medida na base X?
+
+```exercise:number
+id: projecoes-i
+answer: 0.5
+tolerance: 0.001
+```
+
+## Medindo em outra base na prática
+
+O hardware costuma medir só na base Z. Para medir na base X, aplicamos H **antes** da medida: como $H\ket{+} = \ket{0}$ e $H\ket{-} = \ket{1}$, o resultado $0$ significa $\ket{+}$ e o $1$ significa $\ket{-}$.
+
+## Em Python
+
+Escreva uma função que recebe um estado e uma base (lista de vetores ortonormais) e devolve a lista de probabilidades.
+
+```exercise:python
+id: projecoes-codigo
+---
+r = 2**-0.5
+BASE_Z = [[1, 0], [0, 1]]
+BASE_X = [[r, r], [r, -r]]
+BASE_Y = [[r, r * 1j], [r, -r * 1j]]
+
+def probabilidades(estado, base):
+    return [0 for vetor in base]
+---
+perto = lambda u, v: len(u) == len(v) and all(abs(a - b) < 1e-9 for a, b in zip(u, v))
+assert perto(probabilidades([0.6, 0.8], BASE_Z), [0.36, 0.64])
+assert perto(probabilidades([0.6, 0.8], BASE_X), [0.98, 0.02])
+assert perto(probabilidades([r, r * 1j], BASE_Y), [1, 0])
+assert perto(probabilidades([r, r * 1j], BASE_X), [0.5, 0.5])
+```
+
+> Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

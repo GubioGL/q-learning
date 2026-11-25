@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="330" height="285" viewBox="0 0 330 285" role="img" aria-label="Os vetores |0⟩, |1⟩ e |+⟩ no plano">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <line class="l" x1="60" y1="240" x2="270" y2="240"/><polyline class="l" points="259.2,234.8 270.0,240.0 259.2,245.2" style="stroke-dasharray:none"/>
+  <line class="l" x1="60" y1="240" x2="60" y2="30"/><polyline class="l" points="54.8,40.8 60.0,30.0 65.2,40.8" style="stroke-dasharray:none"/>
+  <line class="p" x1="60" y1="240" x2="240.0" y2="240.0"/><polyline class="p" points="229.2,234.8 240.0,240.0 229.2,245.2" style="stroke-dasharray:none"/>
+  <line class="p" x1="60" y1="240" x2="60.0" y2="60.0"/><polyline class="p" points="54.8,70.8 60.0,60.0 65.2,70.8" style="stroke-dasharray:none"/>
+  <line class="p" x1="60" y1="240" x2="187.3" y2="112.7"/><polyline class="p" points="175.9,116.7 187.3,112.7 183.3,124.1" style="stroke-dasharray:none"/>
+  <text class="s" x="240" y="268">|0⟩ = (1, 0)</text>
+  <text class="s" x="112" y="50">|1⟩ = (0, 1)</text>
+  <text class="s" x="230" y="100">|+⟩ = (1, 1)/√2</text>
+</svg>

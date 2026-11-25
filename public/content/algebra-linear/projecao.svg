@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="330" height="285" viewBox="0 0 330 285" role="img" aria-label="Projeção do estado ψ na direção de |+⟩; o comprimento é o produto interno">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <line class="l" x1="60" y1="240" x2="270" y2="240"/><polyline class="l" points="259.2,234.8 270.0,240.0 259.2,245.2" style="stroke-dasharray:none"/>
+  <line class="l" x1="60" y1="240" x2="60" y2="30"/><polyline class="l" points="54.8,40.8 60.0,30.0 65.2,40.8" style="stroke-dasharray:none"/>
+  <line class="l" x1="60" y1="240" x2="215.6" y2="84.4"/><polyline class="l" points="204.2,88.4 215.6,84.4 211.6,95.8" style="stroke-dasharray:none"/>
+  <line class="p" x1="60" y1="240" x2="168.0" y2="96.0"/><polyline class="p" points="157.3,101.5 168.0,96.0 165.7,107.8" style="stroke-dasharray:none"/>
+  <line class="d" x1="168.0" y1="96.0" x2="186.0" y2="114.0"/>
+  <circle class="g" cx="186.0" cy="114.0" r="6"/>
+  <text class="t" x="154" y="84">|ψ⟩</text>
+  <text class="t" x="246" y="82">|+⟩</text>
+  <text class="v" x="238" y="136">⟨+|ψ⟩</text>
+  <text class="s" x="255" y="268">|0⟩</text>
+  <text class="s" x="34" y="48">|1⟩</text>
+</svg>

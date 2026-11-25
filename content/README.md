@@ -60,12 +60,12 @@ A skill é concluída quando todos os exercícios estão resolvidos. Isso libera
 
 1. Crie `levels/<id>.ts` seguindo `levels/bits.ts`: `course` e `skill` indicam a skill recomendada quando o aluno perde todos os corações.
 2. Adicione o nível em `levels/index.ts` na posição certa da trilha (do mais básico ao mais avançado).
-   Cada nível só abre depois que o anterior foi concluído.
+   Cada nível só abre depois que o anterior foi concluído. Toda skill precisa de um nível, na mesma ordem dos cursos (o teste confere).
 
 ## Conferir
 
 ```bash
-npm test                 # formato dos exercícios e regras de desbloqueio
+npm test                 # exercícios, fórmulas, imagens, níveis e regras de desbloqueio
 npm run build && npm start
 CHROME_PATH=/usr/bin/google-chrome npm run test:e2e   # fluxo completo no navegador
 ```

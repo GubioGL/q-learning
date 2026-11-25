@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="610" height="150" viewBox="0 0 610 150" role="img" aria-label="Portas NOT, AND e OR com suas entradas e saídas">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <rect class="b" x="65" y="40" width="80" height="70" rx="8"/>
+  <text class="t" x="105" y="81">NOT</text>
+  <text class="v" x="26" y="81">A</text>
+  <line class="l" x1="38" y1="75" x2="65" y2="75"/>
+  <line class="l" x1="145" y1="75" x2="165" y2="75"/>
+  <text class="v" x="185" y="81">Ā</text>
+  <rect class="b" x="265" y="40" width="80" height="70" rx="8"/>
+  <text class="t" x="305" y="81">AND</text>
+  <text class="v" x="226" y="64">A</text>
+  <line class="l" x1="238" y1="58" x2="265" y2="58"/>
+  <text class="v" x="226" y="98">B</text>
+  <line class="l" x1="238" y1="92" x2="265" y2="92"/>
+  <line class="l" x1="345" y1="75" x2="365" y2="75"/>
+  <text class="v" x="385" y="81">AB</text>
+  <rect class="b" x="465" y="40" width="80" height="70" rx="8"/>
+  <text class="t" x="505" y="81">OR</text>
+  <text class="v" x="426" y="64">A</text>
+  <line class="l" x1="438" y1="58" x2="465" y2="58"/>
+  <text class="v" x="426" y="98">B</text>
+  <line class="l" x1="438" y1="92" x2="465" y2="92"/>
+  <line class="l" x1="545" y1="75" x2="565" y2="75"/>
+  <text class="v" x="585" y="81">A+B</text>
+</svg>

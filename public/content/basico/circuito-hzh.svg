@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="88" viewBox="0 0 440 88" role="img" aria-label="Circuito: |0⟩, portas H, Z, H e medida">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <text class="t" x="44" y="46">|0⟩</text>
+  <line class="l" x1="72" y1="40" x2="380" y2="40"/>
+  <rect class="b" x="97" y="19" width="46" height="42" rx="8"/>
+  <text class="t" x="120" y="46">H</text>
+  <rect class="b" x="167" y="19" width="46" height="42" rx="8"/>
+  <text class="t" x="190" y="46">Z</text>
+  <rect class="b" x="237" y="19" width="46" height="42" rx="8"/>
+  <text class="t" x="260" y="46">H</text>
+  <rect class="b" x="307" y="19" width="46" height="42" rx="8"/>
+  <path class="p" d="M316 50 A14 14 0 0 1 344 50" stroke-width="2"/>
+  <line class="p" x1="330" y1="50" x2="341" y2="29"/>
+</svg>

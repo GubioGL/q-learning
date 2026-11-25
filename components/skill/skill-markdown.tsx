@@ -10,7 +10,8 @@ const components: Components = {
     h3: ({ children }) => <h3 className="mt-6 mb-2 text-xl font-semibold text-gray-100">{children}</h3>,
     p: ({ children }) => <p className="my-4 text-lg leading-relaxed text-gray-300">{children}</p>,
     ul: ({ children }) => <ul className="my-4 list-disc space-y-1 pl-6 text-lg text-gray-300">{children}</ul>,
-    ol: ({ children }) => <ol className="my-4 list-decimal space-y-1 pl-6 text-lg text-gray-300">{children}</ol>,
+    ol: ({ start, children }) => <ol start={start} className="my-4 list-decimal space-y-1 pl-6 text-lg text-gray-300">{children}</ol>,
+    a: ({ href, children }) => <a href={href} target="_blank" rel="noreferrer" className="text-purple-300 underline">{children}</a>,
     strong: ({ children }) => <strong className="text-gray-100">{children}</strong>,
     blockquote: ({ children }) => <blockquote className="my-6 border-l-4 border-purple-500 pl-4 text-gray-400">{children}</blockquote>,
     // eslint-disable-next-line @next/next/no-img-element -- content images are small local SVG/PNG

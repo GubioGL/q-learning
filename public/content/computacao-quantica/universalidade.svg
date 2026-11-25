@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="135" viewBox="0 0 640 135" role="img" aria-label="As portas de Clifford mais a porta T formam um conjunto universal">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <rect class="b" x="20" y="30" width="230" height="80" rx="8"/>
+  <text class="t" x="135" y="64">H, S, CNOT</text>
+  <text class="s" x="135" y="92">Clifford: simulável</text>
+  <text class="t" x="280" y="78">+</text>
+  <rect class="b" x="310" y="30" width="80" height="80" rx="8"/>
+  <text class="t" x="350" y="78">T</text>
+  <line class="p" x1="400" y1="70" x2="452" y2="70"/><polyline class="p" points="441.2,64.8 452.0,70.0 441.2,75.2" style="stroke-dasharray:none"/>
+  <rect class="b" x="460" y="30" width="160" height="80" rx="8"/>
+  <text class="t" x="540" y="77">universal</text>
+</svg>

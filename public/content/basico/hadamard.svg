@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="170" viewBox="0 0 360 170" role="img" aria-label="A porta H leva |0⟩ a |+⟩ e |1⟩ a |−⟩, e vice-versa">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <rect class="b" x="20" y="20" width="80" height="56" rx="8"/>
+  <text class="t" x="60" y="54">|0⟩</text>
+  <rect class="b" x="260" y="20" width="80" height="56" rx="8"/>
+  <text class="t" x="300" y="54">|+⟩</text>
+  <line class="p" x1="108" y1="38" x2="252" y2="38"/><polyline class="p" points="241.2,32.8 252.0,38.0 241.2,43.2" style="stroke-dasharray:none"/>
+  <line class="p" x1="252" y1="60" x2="108" y2="60"/><polyline class="p" points="118.8,65.2 108.0,60.0 118.8,54.8" style="stroke-dasharray:none"/>
+  <text class="v" x="180" y="32">H</text>
+  <rect class="b" x="20" y="100" width="80" height="56" rx="8"/>
+  <text class="t" x="60" y="134">|1⟩</text>
+  <rect class="b" x="260" y="100" width="80" height="56" rx="8"/>
+  <text class="t" x="300" y="134">|−⟩</text>
+  <line class="p" x1="108" y1="118" x2="252" y2="118"/><polyline class="p" points="241.2,112.8 252.0,118.0 241.2,123.2" style="stroke-dasharray:none"/>
+  <line class="p" x1="252" y1="140" x2="108" y2="140"/><polyline class="p" points="118.8,145.2 108.0,140.0 118.8,134.8" style="stroke-dasharray:none"/>
+  <text class="v" x="180" y="112">H</text>
+</svg>

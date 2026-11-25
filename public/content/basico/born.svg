@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="240" viewBox="0 0 350 240" role="img" aria-label="Probabilidades P(0) igual a 0,25 e P(1) igual a 0,75">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <line class="l" x1="50" y1="200" x2="310" y2="200"/>
+  <rect class="b" x="80" y="160.0" width="60" height="40.0" rx="6"/>
+  <text class="v" x="110" y="150.0">0,25</text>
+  <text class="s" x="110" y="226">P(0)</text>
+  <rect class="b" x="200" y="80.0" width="60" height="120.0" rx="6"/>
+  <text class="v" x="230" y="70.0">0,75</text>
+  <text class="s" x="230" y="226">P(1)</text>
+</svg>

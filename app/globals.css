@@ -256,3 +256,10 @@ html, body {
 
 
 
+
+/* Wide equations scroll on their own instead of stretching the page on phones. */
+.katex-display {
+  color: #d1d5db;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

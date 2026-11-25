@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="340" viewBox="0 0 340 340" role="img" aria-label="Esfera de Bloch: |0⟩ no polo norte, |1⟩ no polo sul, |+⟩ e |−⟩ no equador, e um estado ψ com ângulo θ">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}</style>
+  <circle class="p" cx="170" cy="170" r="110"/>
+  <ellipse class="d" cx="170" cy="170" rx="110" ry="34"/>
+  <line class="d" x1="170" y1="60" x2="170" y2="280"/>
+  <line class="d" x1="60" y1="170" x2="280" y2="170"/>
+  <line class="d" x1="208" y1="138" x2="132" y2="202"/>
+  <text class="t" x="170" y="48">|0⟩</text>
+  <text class="t" x="170" y="306">|1⟩</text>
+  <text class="t" x="120" y="224">|+⟩</text>
+  <text class="t" x="226" y="132">|−⟩</text>
+  <text class="v" x="306" y="176">y</text>
+  <text class="v" x="184" y="80">z</text>
+  <text class="v" x="148" y="208">x</text>
+  <line class="p" x1="170" y1="170" x2="226" y2="94"/><polyline class="p" points="215.4,99.6 226.0,94.0 223.8,105.8" style="stroke-dasharray:none"/>
+  <text class="t" x="246" y="88">|ψ⟩</text>
+  <path class="l" d="M170 130 A40 40 0 0 1 194 138"/>
+  <text class="s" x="186" y="122">θ</text>
+</svg>

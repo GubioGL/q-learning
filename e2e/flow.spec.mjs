@@ -62,7 +62,8 @@ test("courses -> skill -> challenges flow", async ({ page }) => {
   await expect(panel.getByLabel("10 XP no total")).toBeVisible(); // without a page reload
   await expect(panel.getByLabel("Sequência de 1 dia(s)")).toBeVisible();
   await page.goto("/cursos/basico/portas-logicas");
-  await expect(page.getByText("Esta skill ainda está sendo escrita")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Universalidade" })).toBeVisible();
+  await expect(page.locator(".katex-error")).toHaveCount(0);
 
   await page.goto("/desafios");
   await expect(page.getByRole("link", { name: /O que é um bit\? \(disponível\)/ })).toBeVisible();

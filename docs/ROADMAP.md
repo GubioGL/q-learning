@@ -55,17 +55,20 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
 - [x] Removida a API `/api/user-profile` (sem autenticação) e o contexto de metas no cliente.
 - Editor de código: o `textarea` fica; CodeMirror só se incomodar.
 
-## Etapas 4–6 — Conteúdo (por módulo: ~10 skills de curso + níveis de desafio)
+## Etapas 4–6 — Conteúdo ✅ (2026-11-25)
 
-Formato em `content/README.md`. Cada skill nova ganha pelo menos um nível na trilha de Desafios.
+Formato em `content/README.md`. Cada skill tem um nível na trilha de Desafios e uma seção em `livro/Aprofundamento.tex`.
 
-| Etapa | Módulo | Base no Wong | Apoio |
-|-------|--------|--------------|-------|
-| 4 | Fundamentos Básicos (clássica → qubit) | cap. 1 (e início do 2) | — |
-| 5 | Álgebra Linear | cap. 3 (e partes do cap. 2) | PennyLane Codebook I.1–I.3 |
-| 6 | Computação Quântica / Teoria Quântica | caps. 2–4 | PennyLane Codebook "Introduction" |
+| Etapa | Módulo | Base no Wong | Skills |
+|-------|--------|--------------|--------|
+| 4 | Fundamentos Básicos (clássica → qubit) | caps. 1–2 | 8 |
+| 5 | Álgebra Linear | cap. 3 | 6 |
+| 6 | Computação Quântica e Teoria Quântica | caps. 4 e 6 | 6 + 5 |
 
-O livro (`livro/`) cresce em paralelo: cada skill ganha uma seção de aprofundamento.
+- [x] 25 skills com texto, KaTeX, ilustrações e exercícios (25 em Python), todas originais.
+- [x] 25 níveis de desafio, na ordem dos cursos.
+- [x] `lib/content.test.ts` confere exercícios, fórmulas, imagens e níveis a cada `npm test`.
+- [x] Livro: `Aprofundamento.tex`, uma subseção por skill.
 
 ## Etapa 7 — Beta
 
