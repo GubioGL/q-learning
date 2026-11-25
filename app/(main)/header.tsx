@@ -30,7 +30,6 @@ export const MainHeader = () => {
 
                 <UserProgress 
                     dayStreak={userGoals.streak}
-                    Qtokens={userGoals.tokens }
                     energy={userGoals.energy }
                 />
             </div>

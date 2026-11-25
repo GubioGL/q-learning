@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['images.clerk.dev'],
   },
+  // skill pages read content/skills/**/*.md at request time
+  outputFileTracingIncludes: {
+    '/cursos/**': ['./content/skills/**/*.md'],
+  },
 };
 
 export default nextConfig;

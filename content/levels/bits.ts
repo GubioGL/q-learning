@@ -7,6 +7,8 @@ const bits: Lesson = {
     intro:
         "Um bit é a menor unidade de informação: ele vale 0 ou 1. Com vários bits escrevemos números em binário, onde cada posição vale uma potência de 2 (…, 4, 2, 1).",
     source: "Baseado em T. G. Wong, Introduction to Classical and Quantum Computing, cap. 1",
+    course: "basico",
+    skill: "bits",
     xp: 10,
     challenges: [
         {

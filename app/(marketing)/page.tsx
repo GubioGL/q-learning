@@ -37,7 +37,7 @@ export default function Home() {
             
           </SignedOut>
           <SignedIn>
-            <Link href="/learn">
+            <Link href="/cursos">
               <Button variant="buttonRox">Continue to the learning platform</Button>
             </Link>
           </SignedIn>

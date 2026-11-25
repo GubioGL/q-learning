@@ -7,8 +7,13 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
 
 - Stack: Next.js 15 + React 19 + Tailwind 4 + Clerk (login) + Drizzle + Neon (Postgres).
 - Hospedagem: Vercel (Hobby, grátis, uso não comercial) + Neon (grátis).
-- Conteúdo das lições em arquivos no repositório (`content/`), versionado e fácil de traduzir;
-  o banco guarda só usuários e progresso.
+- Duas áreas: **Cursos** (codebook estilo PennyLane: texto, ilustração e exercícios em Python,
+  número ou texto, skills em sequência) e **Desafios** (estilo Duolingo: trilha única de níveis,
+  do básico ao avançado; errar tudo recomenda a skill do curso).
+- Conteúdo em arquivos no repositório (`content/`, guia em `content/README.md`); o banco guarda só
+  o progresso (tabela `completions`).
+- Login opcional por enquanto: progresso anônimo por cookie; o Clerk volta na Etapa 3.
+- Loja e Classificação ocultas até a Etapa 7.
 - Referência principal de conteúdo: Thomas G. Wong, *Introduction to Classical and Quantum
   Computing* (caps. 1–3). O livro é "All rights reserved": **escrevemos texto e exercícios
   próprios** e citamos o capítulo/seção; nada de copiar trechos.
@@ -31,32 +36,38 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
 - [x] Deploy na Vercel ligado ao GitHub (cada push no `main` publica).
 - [x] Segurança: Next 15.5.29, Clerk 6.39.9, drizzle-orm 0.45.4.
 
-## Etapa 2 — Motor de lições
+## Etapa 2 — Reestruturação: Cursos + Desafios ✅ (2026-11-25)
 
-- [ ] Tipos de desafio: múltipla escolha, completar lacuna, verdadeiro/falso, resposta numérica,
-      montar circuito simples / escolher matriz.
-- [ ] Matemática com KaTeX (kets, matrizes).
-- [ ] XP, streak, energia e metas gravados no banco ao terminar a lição.
-- [ ] Testes: unitários do motor + E2E (Playwright) do fluxo "abrir lição → terminar".
+- [x] Menu: Cursos, Desafios, Metas (Loja e Classificação ocultas; Qtokens fora da tela).
+- [x] `/cursos`: cursos com progresso 0–100%.
+- [x] `/cursos/[curso]`: trilha de skills; cada skill libera a próxima.
+- [x] `/cursos/[curso]/[skill]`: Markdown + KaTeX + ilustrações + exercícios (número, texto, Python via Pyodide em Web Worker).
+- [x] `/desafios`: trilha única por curso, níveis travados em sequência; perder os corações recomenda a skill.
+- [x] Progresso no banco (`completions`), validado no servidor; anônimo por cookie enquanto o login está desligado.
+- [x] Primeira skill escrita: "Bits e números binários"; 2 níveis de desafio.
+- [x] Testes: unitários (`npm test`) e E2E do fluxo completo (`npm run test:e2e`).
 
-## Etapa 3 — Página de teoria (estilo coddy.tech/docs)
+## Etapa 3 — Conta e gamificação
 
-- [ ] `/docs/[modulo]/[lição]` em MDX: explicação curta + exemplos + link para o capítulo do livro.
-- [ ] Cada lição prática aponta para sua página de teoria.
+- [ ] Religar o login (Clerk) nas áreas de estudo e migrar o progresso anônimo para a conta.
+- [ ] XP, streak e metas calculados a partir das conclusões (painel da direita hoje é estático).
+- [ ] Editor de código melhor (CodeMirror) se o `textarea` incomodar.
 
-## Etapas 4–6 — Conteúdo (10 microlições por módulo; meta estendida 30–60)
+## Etapas 4–6 — Conteúdo (por módulo: ~10 skills de curso + níveis de desafio)
+
+Formato em `content/README.md`. Cada skill nova ganha pelo menos um nível na trilha de Desafios.
 
 | Etapa | Módulo | Base no Wong | Apoio |
 |-------|--------|--------------|-------|
-| 4 | Fundamentos de Computação Clássica | cap. 1 | — |
-| 5 | Álgebra Linear Básica | cap. 3 (e partes do cap. 2) | PennyLane Codebook I.1–I.3 |
-| 6 | Introdução à Computação Quântica (1 qubit) | cap. 2 | PennyLane Codebook "Introduction" |
+| 4 | Fundamentos Básicos (clássica → qubit) | cap. 1 (e início do 2) | — |
+| 5 | Álgebra Linear | cap. 3 (e partes do cap. 2) | PennyLane Codebook I.1–I.3 |
+| 6 | Computação Quântica / Teoria Quântica | caps. 2–4 | PennyLane Codebook "Introduction" |
 
-O livro (`livro/`) cresce em paralelo: cada lição ganha uma seção de aprofundamento.
+O livro (`livro/`) cresce em paralelo: cada skill ganha uma seção de aprofundamento.
 
 ## Etapa 7 — Beta
 
-- [ ] Gamificação: ranking, loja (doações), conquistas.
+- [ ] Reativar Classificação (ranking) e Loja (doações); conquistas.
 - [ ] i18n: en / pt / es.
 - [ ] Revisão de acessibilidade e mobile; documentação de contribuição.
 - [ ] Publicação da 1ª versão beta e divulgação.

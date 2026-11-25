@@ -1,36 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { completeLevel } from "@/app/actions/progress";
 import {
     check, initialState, isFinished, isOutOfHearts, next, progress, select, type Lesson,
 } from "@/lib/lesson";
 
-const EXIT_HREF = "/learn";
+const EXIT_HREF = "/desafios";
 
-export default function LessonClient({ lesson }: { lesson: Lesson }) {
+type Props = { lesson: Lesson; recommendHref: string; recommendTitle: string };
+
+export default function LessonClient({ lesson, recommendHref, recommendTitle }: Props) {
     const [state, setState] = useState(initialState);
     const [started, setStarted] = useState(false);
+    const [saveError, setSaveError] = useState<string | null>(null);
+    const finished = isFinished(state, lesson);
+
+    useEffect(() => {
+        if (!finished) return;
+        completeLevel(lesson.id).catch((e) => setSaveError(e instanceof Error ? e.message : "Não foi possível salvar."));
+    }, [finished, lesson.id]);
 
     if (isOutOfHearts(state) && state.status === "idle") {
         return (
-            <EndScreen title="Sem corações!" text="Revise a explicação e tente de novo.">
-                <Button variant="buttonBlu" size="lg" onClick={() => { setState(initialState()); setStarted(false); }}>
+            <EndScreen title="Sem corações!" text={`Recomendamos revisar a skill "${recommendTitle}" no curso antes de tentar de novo.`}>
+                <Link href={recommendHref}><Button variant="buttonRox" size="lg">Estudar a skill</Button></Link>
+                <Button variant="buttonBluO" size="lg" onClick={() => { setState(initialState()); setStarted(false); }}>
                     Tentar de novo
                 </Button>
             </EndScreen>
         );
     }
 
-    if (isFinished(state, lesson)) {
+    if (finished) {
         return (
             <EndScreen
                 title="Lição concluída! 🎉"
                 text={`Você acertou ${state.correct} de ${lesson.challenges.length} e ganhou ${lesson.xp} XP.`}
             >
                 <Link href={EXIT_HREF}><Button variant="buttonGre" size="lg">Continuar</Button></Link>
+                {saveError && <p role="alert" className="text-red-400">{saveError}</p>}
             </EndScreen>
         );
     }

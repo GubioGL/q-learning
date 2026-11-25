@@ -15,10 +15,10 @@ export const SidebarContent = () => {
         <span className="font-extrabold text-purple-700 tracking-tight pl-4 text-lg leading-tight">Quantum Learning</span>
       </div>
       <div className="space-y-2">
-        <SidebarItem label="Jornada" iconSrc="/jornada.png" href="/learn" />
+        <SidebarItem label="Cursos" iconSrc="/jornada.png" href="/cursos" />
+        <SidebarItem label="Desafios" iconSrc="/quantum-bit.png" href="/desafios" />
         <SidebarItem label="Metas" iconSrc="/metas.png" href="/metas" />
-        <SidebarItem label="Classificação" iconSrc="/classificaçao.png" href="/leaderboard" />
-        <SidebarItem label="Loja" iconSrc="/loja.png" href="/loja" />
+        {/* Classificação e Loja ficam ocultas por enquanto (ver docs/ROADMAP.md) */}
         {/* Botão de Login Personalizado */}
         <Button variant="sidebar" className="flex items-center gap-4 w-full justify-start px-1 py-5 h-16 rounded-lg">
           <div className="w-10 h-10 flex items-center justify-center">

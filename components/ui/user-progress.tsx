@@ -2,13 +2,11 @@ import React from 'react';
 
 interface UserProgressProps {
     dayStreak?: number;
-    Qtokens?: number;
     energy?: number;
 }
 
 const UserProgress: React.FC<UserProgressProps> = ({
     dayStreak = 0,
-    Qtokens = 0,
     energy = 0
 }) => {
     return (
@@ -21,14 +19,6 @@ const UserProgress: React.FC<UserProgressProps> = ({
                     {dayStreak}
                 </span>
                 <div className="text-[#ffa500] text-xl">⚡</div>
-            </div>
-
-            {/* Tokens */}
-            <div className="flex items-center gap-2">
-                <span className="text-[#FFD700] font-bold text-lg">
-                    {Qtokens}
-                </span>
-                <div className="text-[#FFD700] text-xl">🪙</div>
             </div>
 
             {/* Energia */}

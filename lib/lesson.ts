@@ -12,6 +12,8 @@ export type Lesson = {
     title: string;
     intro: string;
     source: string; // reference shown to the learner
+    course: string; // course id, for grouping the trail
+    skill: string; // skill to recommend when the learner fails
     xp: number;
     challenges: Challenge[];
 };

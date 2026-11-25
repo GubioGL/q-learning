@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 150" role="img" aria-label="Bits 1 0 1 com pesos 4, 2 e 1; soma 5">
+  <style>
+    .box{fill:#1f2937;stroke:#a78bfa;stroke-width:3}
+    .bit{fill:#f3f4f6;font:700 40px sans-serif;text-anchor:middle}
+    .w{fill:#a78bfa;font:600 18px sans-serif;text-anchor:middle}
+    .sum{fill:#d1d5db;font:600 18px sans-serif;text-anchor:middle}
+  </style>
+  <rect class="box" x="30" y="40" width="80" height="70" rx="12"/>
+  <rect class="box" x="140" y="40" width="80" height="70" rx="12"/>
+  <rect class="box" x="250" y="40" width="80" height="70" rx="12"/>
+  <text class="w" x="70" y="28">2² = 4</text>
+  <text class="w" x="180" y="28">2¹ = 2</text>
+  <text class="w" x="290" y="28">2⁰ = 1</text>
+  <text class="bit" x="70" y="90">1</text>
+  <text class="bit" x="180" y="90">0</text>
+  <text class="bit" x="290" y="90">1</text>
+  <text class="sum" x="180" y="140">4 + 0 + 1 = 5</text>
+</svg>

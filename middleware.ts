@@ -1,5 +1,7 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 
+// Sign-in is optional for now (anonymous progress, see db/progress.ts). To require it, use
+// createRouteMatcher(['/cursos(.*)', '/desafios(.*)', '/metas(.*)']) and auth.protect().
 export default clerkMiddleware();
 
 export const config = {

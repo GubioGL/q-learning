@@ -7,6 +7,8 @@ const lesson: Lesson = {
     title: "t",
     intro: "",
     source: "",
+    course: "c",
+    skill: "s",
     xp: 10,
     challenges: [
         { question: "q1", options: ["a", "b"], answer: 1, explanation: "" },

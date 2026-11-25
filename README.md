@@ -15,8 +15,13 @@ A gamified, Duolingo-style platform for **introductory quantum computing**, orga
 - Fundamentals of classical computing
 - Introduction to quantum computing
 
-Each lesson has short interactive challenges plus a theory page; the companion book in [`livro/`](livro/) goes deeper.
-See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the step-by-step plan.
+The platform has two parts:
+
+- **Courses** — a codebook in the style of the PennyLane Codebook: each skill is a page with text, math, illustrations and short exercises answered with Python (run in the browser), a number or text. Skills unlock in order.
+- **Challenges** — the Duolingo-style part: a single trail of levels from basic to advanced, with hearts. Each level unlocks the next; running out of hearts points you to the matching course skill.
+
+The companion book in [`livro/`](livro/) goes deeper into the theory.
+See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the step-by-step plan and [`content/README.md`](content/README.md) to write lessons.
 
 ---
 
@@ -51,40 +56,9 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the step-by-step plan.
 
 ---
 
-## ✅ Step Checklist
+## ✅ Progress
 
-### Implemented
-- [x] Setup ✅
-- [x] Buttons✅
-- [x] Marketing Page✅
-- [x] Authentication✅
-- [X] Footer✅
-- [X] Main Layout✅
-- [X] Sidebar✅
-- [X] Learn Page Wrappers✅
-- [X] Drizzle & Neon (Database)✅
-- [X] Courses Page✅
-
-### In Development / Pending
-
-- [ ] User Progress
-- [ ] Seed Script
-- [ ] Schema
-- [ ] Units
-- [ ] Lesson Button
-- [ ] Course Progress
-- [ ] Lesson Header
-- [ ] Exit Modal
-- [ ] Challenge Cards
-- [ ] Challenge Footer
-- [ ] Challenge Actions
-- [ ] Challenge Finish Screen
-- [ ] Challenge Practice
-- [ ] Shop (Donation System)
-- [ ] Stripe (for donations)
-- [ ] Details
-- [ ] Admin
-- [ ] Deployment
+Done and next steps are tracked in [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ---
 
@@ -141,4 +115,7 @@ npm install
 cp .env.example .env.local   # fill in Neon and Clerk keys
 npm run db:push              # create tables
 npm run dev
+
+npm test                     # unit tests
+npm run test:e2e             # browser flow (app running; CHROME_PATH=/usr/bin/google-chrome to use local Chrome)
 ```

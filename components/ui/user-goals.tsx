@@ -69,11 +69,12 @@ const UserGoals: React.FC<UserGoalsProps> = ({
   totalActivities = 100,
   completedActivities = 10
 }) => {
-  const dailyXPPercentage = (dailyXP / dailyXPTarget) * 100;
-  const dailyLessonsPercentage = (dailyLessons / dailyLessonsTarget) * 100;
-  const weeklyXPPercentage = (weeklyXP / weeklyXPTarget) * 100;
-  const weeklyLessonsPercentage = (weeklyLessons / weeklyLessonsTarget) * 100;
-  const courseProgressPercentage = (completedActivities / totalActivities) * 100;
+  const pct = (value: number, target: number) => (target > 0 ? (value / target) * 100 : 0);
+  const dailyXPPercentage = pct(dailyXP, dailyXPTarget);
+  const dailyLessonsPercentage = pct(dailyLessons, dailyLessonsTarget);
+  const weeklyXPPercentage = pct(weeklyXP, weeklyXPTarget);
+  const weeklyLessonsPercentage = pct(weeklyLessons, weeklyLessonsTarget);
+  const courseProgressPercentage = pct(completedActivities, totalActivities);
 
   return (
     <div className="flex flex-col gap-4 p-4">

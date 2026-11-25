@@ -1,4 +1,4 @@
-import { integer, pgTable, serial, text } from "drizzle-orm/pg-core";
+import { integer, pgTable, primaryKey, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 export const cursos = pgTable("cursos", {
@@ -53,3 +53,9 @@ export const userProgressRelations = relations(userProgress, ({ one }) => ({
         references: [cursos.id],
     }),
 }));
+// What each user finished: skills (courses) and levels (challenge trail). Content itself lives in content/.
+export const completions = pgTable("completions", {
+    userId: text("user_id").notNull(),
+    key: text("key").notNull(), // "skill:<course>/<skill>" or "level:<level>" (lib/progress.ts)
+    completedAt: timestamp("completed_at").notNull().defaultNow(),
+}, (t) => [primaryKey({ columns: [t.userId, t.key] })]);
