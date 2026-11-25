@@ -1,10 +1,13 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
-import type { getStats } from '@/db/progress';
+import { useLocale, useT } from '@/lib/i18n/context';
+import type { SiteStats } from '@/lib/site-stats';
 import { DAYS_PER_WEEK, XP_PER_ACTIVITY } from '@/lib/stats';
 
 interface UserGoalsProps {
-  stats: Awaited<ReturnType<typeof getStats>>;
+  stats: SiteStats;
   dailyGoal: number;
 }
 
@@ -20,17 +23,21 @@ const ProgressBar: React.FC<{ percentage: number; color: string }> = ({ percenta
 const GoalSection: React.FC<{
   title: string;
   children: React.ReactNode;
-}> = ({ title, children }) => (
+}> = ({ title, children }) => {
+  const locale = useLocale();
+  const { panel } = useT();
+  return (
   <div className="bg-[#1a1a1a] rounded-lg p-4 border border-[#333]">
     <div className="flex justify-between items-center mb-4">
-      <h3 className="text-white font-semibold text-lg">{title}</h3>
-      <Link href="/metas" className="text-blue-500 text-sm hover:underline">Ver</Link>
+      <h2 className="text-white font-semibold text-lg">{title}</h2>
+      <Link href={`/${locale}/metas`} aria-label={`${panel.view}: ${title}`} className="text-blue-400 text-sm hover:underline">{panel.view}</Link>
     </div>
     <div className="space-y-4">
       {children}
     </div>
   </div>
-);
+  );
+};
 
 const GoalItem: React.FC<{
   label: string;
@@ -51,6 +58,7 @@ const GoalItem: React.FC<{
 const pct = (value: number, target: number) => (target > 0 ? (value / target) * 100 : 0);
 
 const UserGoals: React.FC<UserGoalsProps> = ({ stats, dailyGoal }) => {
+  const { panel } = useT();
   const { today, week, completed, total } = stats;
   const dailyXPTarget = dailyGoal * XP_PER_ACTIVITY;
   const weeklyTarget = dailyGoal * DAYS_PER_WEEK;
@@ -59,16 +67,16 @@ const UserGoals: React.FC<UserGoalsProps> = ({ stats, dailyGoal }) => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <GoalSection title="Metas Diárias">
+      <GoalSection title={panel.daily}>
         <GoalItem
-          label={`${dailyGoal} atividade(s) por dia`}
+          label={panel.perDay(dailyGoal)}
           current={today.activities}
           target={dailyGoal}
           percentage={pct(today.activities, dailyGoal)}
           color="bg-[#00e676]"
         />
         <GoalItem
-          label={`Ganhar ${dailyXPTarget} XP`}
+          label={panel.earn(dailyXPTarget)}
           current={today.xp}
           target={dailyXPTarget}
           percentage={pct(today.xp, dailyXPTarget)}
@@ -76,16 +84,16 @@ const UserGoals: React.FC<UserGoalsProps> = ({ stats, dailyGoal }) => {
         />
       </GoalSection>
 
-      <GoalSection title="Metas Semanais">
+      <GoalSection title={panel.weekly}>
         <GoalItem
-          label={`Ganhar ${weeklyXPTarget} XP`}
+          label={panel.earn(weeklyXPTarget)}
           current={week.xp}
           target={weeklyXPTarget}
           percentage={pct(week.xp, weeklyXPTarget)}
           color="bg-[#FFD700]"
         />
         <GoalItem
-          label={`Fazer ${weeklyTarget} atividades`}
+          label={panel.doActivities(weeklyTarget)}
           current={week.activities}
           target={weeklyTarget}
           percentage={pct(week.activities, weeklyTarget)}
@@ -94,10 +102,10 @@ const UserGoals: React.FC<UserGoalsProps> = ({ stats, dailyGoal }) => {
       </GoalSection>
 
         <div className="bg-[#1a1a1a] rounded-lg p-4 border border-[#333]">
-          <h3 className="text-white font-semibold text-lg mb-4">Progresso Geral</h3>
+          <h2 className="text-white font-semibold text-lg mb-4">{panel.overall}</h2>
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-white text-sm">Atividades feitas</span>
+              <span className="text-white text-sm">{panel.completed}</span>
               <span className="text-white text-sm">{completed}/{total}</span>
             </div>
             <div className="w-full bg-gray-600 rounded-full h-3">
@@ -107,7 +115,7 @@ const UserGoals: React.FC<UserGoalsProps> = ({ stats, dailyGoal }) => {
               />
             </div>
             <div className="text-center">
-              <span className="text-[#7c3aed] font-bold text-lg">
+              <span className="text-[#a78bfa] font-bold text-lg">
                 {Math.round(totalPercentage)}%
               </span>
             </div>

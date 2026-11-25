@@ -1,3 +1,6 @@
+import type { Locale } from "@/lib/i18n/locales";
+import { courseTexts } from "./courses-text";
+
 // Course catalogue. Each skill's text lives in content/skills/<course>/<skill>.md (see content/README.md).
 
 export type SkillMeta = { id: string; title: string };
@@ -7,7 +10,7 @@ export type Course = {
     title: string;
     summary: string;
     image: string;
-    level: "Iniciante" | "Intermediário" | "Avançado";
+    level: "beginner" | "intermediate" | "advanced";
     skills: SkillMeta[];
 };
 
@@ -17,7 +20,7 @@ export const courses: Course[] = [
         title: "Fundamentos Básicos",
         summary: "Bits, lógica binária e os primeiros passos até o qubit. Para quem está começando.",
         image: "/introduçao.png",
-        level: "Iniciante",
+        level: "beginner",
         skills: [
             { id: "bits", title: "Bits e números binários" },
             { id: "portas-logicas", title: "Portas lógicas clássicas (AND, OR, NOT)" },
@@ -34,7 +37,7 @@ export const courses: Course[] = [
         title: "Álgebra Linear",
         summary: "A matemática da computação quântica: vetores, matrizes, produto interno e unitárias.",
         image: "/introduçao.png",
-        level: "Intermediário",
+        level: "intermediate",
         skills: [
             { id: "vetores", title: "Vetores coluna e linha" },
             { id: "produto-interno", title: "Produto interno e ortonormalidade" },
@@ -49,7 +52,7 @@ export const courses: Course[] = [
         title: "Computação Quântica",
         summary: "Sistemas de vários qubits, emaranhamento e portas de dois qubits.",
         image: "/quantum-computing.png",
-        level: "Avançado",
+        level: "advanced",
         skills: [
             { id: "produto-tensorial", title: "Produto tensorial" },
             { id: "medida-multiplos", title: "Medindo vários qubits" },
@@ -64,7 +67,7 @@ export const courses: Course[] = [
         title: "Teoria Quântica",
         summary: "Protocolos fundamentais: Bell, codificação superdensa, teletransporte e BB84.",
         image: "/quantum.png",
-        level: "Avançado",
+        level: "advanced",
         skills: [
             { id: "bell", title: "Estados de Bell" },
             { id: "chsh", title: "Desigualdade CHSH" },
@@ -75,4 +78,13 @@ export const courses: Course[] = [
     },
 ];
 
-export const findCourse = (id: string) => courses.find((c) => c.id === id);
+export function getCourses(locale: Locale): Course[] {
+    return courses.map((course) => {
+        const text = courseTexts[locale]?.[course.id];
+        if (!text) return course;
+        const skills = course.skills.map((s) => ({ ...s, title: text.skills[s.id] ?? s.title }));
+        return { ...course, title: text.title, summary: text.summary, skills };
+    });
+}
+
+export const findCourse = (id: string, locale: Locale) => getCourses(locale).find((c) => c.id === id);

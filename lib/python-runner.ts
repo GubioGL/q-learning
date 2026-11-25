@@ -2,6 +2,8 @@
 
 export type RunResult = { ok: boolean; output: string; error?: string };
 
+export const TIMEOUT_ERROR = "timeout";
+
 const FIRST_RUN_TIMEOUT_MS = 60_000; // includes downloading Pyodide (~10 MB)
 const RUN_TIMEOUT_MS = 10_000;
 
@@ -28,7 +30,7 @@ export function runPython(code: string, test: string): Promise<RunResult> {
             worker = null;
             isReady = false;
             w.removeEventListener("message", onMessage);
-            resolve({ ok: false, output: "", error: "Tempo esgotado: seu código demorou demais (laço infinito?)." });
+            resolve({ ok: false, output: "", error: TIMEOUT_ERROR });
         }, isReady ? RUN_TIMEOUT_MS : FIRST_RUN_TIMEOUT_MS);
         function onMessage(e: MessageEvent) {
             if (e.data.type !== "result" || e.data.id !== id) return;

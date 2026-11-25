@@ -1,4 +1,7 @@
-import type { Lesson } from "@/lib/lesson";
+import type { Locale } from "@/lib/i18n/locales";
+import type { Lesson, LevelText } from "@/lib/lesson";
+import en from "./en";
+import es from "./es";
 import bits from "./bits";
 import portasLogicas from "./portas-logicas";
 import ascii from "./ascii";
@@ -54,4 +57,19 @@ export const levels: Lesson[] = [
     bb84,
 ];
 
-export const findLevel = (id: string) => levels.find((l) => l.id === id);
+const TEXTS: Partial<Record<Locale, Record<string, LevelText>>> = { en, es };
+
+// Levels in the visitor's language; what is not translated yet stays in Portuguese.
+export function getLevels(locale: Locale): Lesson[] {
+    return levels.map((level) => {
+        const text = TEXTS[locale]?.[level.id];
+        if (!text) return level;
+        return {
+            ...level,
+            ...text,
+            challenges: level.challenges.map((c, i) => ({ ...c, ...text.challenges[i] })),
+        };
+    });
+}
+
+export const findLevel = (id: string, locale: Locale) => getLevels(locale).find((l) => l.id === id);

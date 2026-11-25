@@ -18,6 +18,9 @@ export type Lesson = {
     challenges: Challenge[];
 };
 
+// Translation of a level: same challenges and options, in the same order as the Portuguese one.
+export type LevelText = Pick<Lesson, "title" | "intro" | "source"> & { challenges: Omit<Challenge, "answer">[] };
+
 export type Status = "idle" | "correct" | "wrong";
 
 export type LessonState = {

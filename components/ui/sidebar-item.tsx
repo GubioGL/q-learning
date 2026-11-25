@@ -1,6 +1,8 @@
 "use client"
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 interface SidebarItemProps {
     label: string;
@@ -12,12 +14,13 @@ interface SidebarItemProps {
  * Item de navegação lateral com acessibilidade.
  */
 export const SidebarItem = ({ label, iconSrc, href }: SidebarItemProps) => {
+    const isCurrent = usePathname().startsWith(href);
     return (
-        <a href={href} className="flex items-center " aria-label={label} tabIndex={0}>
-            <Button variant="sidebar" className="flex items-center gap-4 w-full justify-start px-1 py-5 h-16 rounded-lg">
-                <Image src={iconSrc} alt={label} width={40} height={40} />
+        <Button asChild variant="sidebar" className="flex items-center gap-4 w-full justify-start px-1 py-5 h-16 rounded-lg text-gray-300 aria-[current]:text-purple-300">
+            <Link href={href} aria-current={isCurrent ? "page" : undefined}>
+                <Image src={iconSrc} alt="" width={40} height={40} />
                 <span>{label}</span>
-            </Button>
-        </a>
+            </Link>
+        </Button>
     );
 }

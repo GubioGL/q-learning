@@ -1,39 +1,31 @@
-import { SidebarItem } from "@/components/ui/sidebar-item";
+"use client";
+
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { UserButton } from "@clerk/nextjs";
+import { LocaleSwitch } from "@/components/ui/locale-switch";
+import { SidebarItem } from "@/components/ui/sidebar-item";
+import { useLocale, useT } from "@/lib/i18n/context";
 
 /**
- * Conteúdo do menu lateral, incluindo navegação e login do usuário.
+ * Conteúdo do menu lateral: navegação e idioma.
  */
 export const SidebarContent = () => {
+  const locale = useLocale();
+  const { nav } = useT();
 
   return (
     <>
-      <div className="text-purple-700 font-extrabold flex items-center pt-4 pl- mb-6">
-        <Image src="/Logoket.png" alt="Quantum Learning" width={40} height={40} />
-        <span className="font-extrabold text-purple-700 tracking-tight pl-4 text-lg leading-tight">Quantum Learning</span>
+      <div className="text-purple-400 font-extrabold flex items-center pt-4 mb-6">
+        <Image src="/Logoket.png" alt="" width={40} height={40} />
+        <span className="font-extrabold tracking-tight pl-4 text-lg leading-tight">Quantum Learning</span>
       </div>
-      <div className="space-y-2">
-        <SidebarItem label="Cursos" iconSrc="/jornada.png" href="/cursos" />
-        <SidebarItem label="Desafios" iconSrc="/quantum-bit.png" href="/desafios" />
-        <SidebarItem label="Metas" iconSrc="/metas.png" href="/metas" />
+      <nav aria-label={nav.label} className="space-y-2 mb-6">
+        <SidebarItem label={nav.courses} iconSrc="/jornada.png" href={`/${locale}/cursos`} />
+        <SidebarItem label={nav.challenges} iconSrc="/quantum-bit.png" href={`/${locale}/desafios`} />
+        <SidebarItem label={nav.goals} iconSrc="/metas.png" href={`/${locale}/metas`} />
+        <SidebarItem label={nav.achievements} iconSrc="/classificaçao.png" href={`/${locale}/conquistas`} />
         {/* Classificação e Loja ficam ocultas por enquanto (ver docs/ROADMAP.md) */}
-        {/* Botão de Login Personalizado */}
-        <Button variant="sidebar" className="flex items-center gap-4 w-full justify-start px-1 py-5 h-16 rounded-lg">
-          <div className="w-10 h-10 flex items-center justify-center">
-            <UserButton 
-              appearance={{
-                elements: {
-                  userButtonBox: "w-10 h-10",
-                  userButtonTrigger: "w-10 h-10 rounded-full"
-                }
-              }}
-            />
-          </div>
-          <span>Login/Logout</span>
-        </Button>
-      </div>
+      </nav>
+      <LocaleSwitch />
     </>
   );
-}; 
+};
