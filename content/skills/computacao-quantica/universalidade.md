@@ -52,6 +52,8 @@ A porta S equivale a um múltiplo de T. Cada porta diagonal `[1, e^{i k π/4}]` 
 
 ```exercise:python
 id: universal-codigo
+input: circuito | str | letras Z, S e T; pode ser vazio | "TSTZT"
+output: t_count_minimo | int | menor número de portas T | 1
 ---
 K = {"Z": 4, "S": 2, "T": 1}
 
@@ -59,11 +61,20 @@ def t_count_minimo(circuito):
     # some os k; a paridade diz se sobra uma T
     return circuito.count("T")
 ---
-assert t_count_minimo("") == 0
-assert t_count_minimo("T") == 1
-assert t_count_minimo("TT") == 0
-assert t_count_minimo("TSTZT") == 1
-assert t_count_minimo("SZS") == 0
+>>> t_count_minimo("TT")
+0
+---
+>>> t_count_minimo("T")
+1
+>>> t_count_minimo("")
+0
+---
+>>> t_count_minimo("TSTZT")
+1
+>>> t_count_minimo("SZS")
+0
+>>> t_count_minimo("TTTT")
+0
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

@@ -64,6 +64,9 @@ Write a function that takes a state and a basis (a list of orthonormal vectors) 
 
 ```exercise:python
 id: projecoes-codigo
+input: state | list | list with the 2 amplitudes [alpha, beta] | [0.6, 0.8]
+input: basis | list | list of orthonormal vectors, each with 2 numbers | BASIS_X
+output: probabilities | list | one probability per basis vector, in the same order | [0.98, 0.02]
 ---
 r = 2**-0.5
 BASIS_Z = [[1, 0], [0, 1]]
@@ -73,11 +76,18 @@ BASIS_Y = [[r, r * 1j], [r, -r * 1j]]
 def probabilities(state, basis):
     return [0 for vector in basis]
 ---
-close = lambda u, v: len(u) == len(v) and all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-assert close(probabilities([0.6, 0.8], BASIS_Z), [0.36, 0.64])
-assert close(probabilities([0.6, 0.8], BASIS_X), [0.98, 0.02])
-assert close(probabilities([r, r * 1j], BASIS_Y), [1, 0])
-assert close(probabilities([r, r * 1j], BASIS_X), [0.5, 0.5])
+>>> probabilities([0.6, 0.8], BASIS_X)
+[0.98, 0.02]
+---
+>>> probabilities([0.6, 0.8], BASIS_Z)
+[0.36, 0.64]
+>>> probabilities([r, r * 1j], BASIS_X)
+[0.5, 0.5]
+---
+>>> probabilities([r, r * 1j], BASIS_Y)
+[1, 0]
+>>> probabilities([1, 0], BASIS_Y)
+[0.5, 0.5]
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 3.

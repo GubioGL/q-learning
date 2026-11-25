@@ -69,15 +69,24 @@ No estado $\ket{\Phi^+}$, medir um qubit determina o resultado do outro, por mai
 
 ```exercise:python
 id: emaranhamento-codigo
+input: c00, c01, c10, c11 | float / complex | as 4 amplitudes do estado, normalizadas | 0.6, 0, 0, 0.8
+output: concorrencia | float | a concorrência, entre 0 e 1 | 0.96
 ---
 def concorrencia(c00, c01, c10, c11):
     return 0
 ---
-r = 2**-0.5
-assert abs(concorrencia(r, 0, 0, r) - 1) < 1e-9
-assert abs(concorrencia(0.5, 0.5, 0.5, 0.5)) < 1e-9
-assert abs(concorrencia(0.6, 0, 0, 0.8j) - 0.96) < 1e-9
-assert abs(concorrencia(0.5, 0.5, 0.5, -0.5) - 1) < 1e-9
+>>> concorrencia(0.6, 0, 0, 0.8)
+0.96
+---
+>>> concorrencia(2**-0.5, 0, 0, 2**-0.5)
+1
+>>> concorrencia(0.5, 0.5, 0.5, 0.5)
+0
+---
+>>> concorrencia(0.6, 0, 0, 0.8j)
+0.96
+>>> concorrencia(0.5, 0.5, 0.5, -0.5)
+1
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

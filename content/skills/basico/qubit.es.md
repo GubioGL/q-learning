@@ -61,15 +61,25 @@ Los números complejos ya existen en Python: `1j` es $i$, y `abs(z)` es el módu
 
 ```exercise:python
 id: qubit-normalizar
+input: alfa, beta | int / float / complex | amplitudes reales o complejas, no ambas cero | 3, 4
+output: normalizar | tuple | las dos amplitudes divididas entre la norma | (0.6, 0.8)
 ---
 def normalizar(alfa, beta):
     # divide las dos amplitudes entre la norma del estado
     return (alfa, beta)
 ---
-assert abs(normalizar(3, 4)[0] - 0.6) < 1e-9
-assert abs(normalizar(3, 4)[1] - 0.8) < 1e-9
-assert abs(sum(abs(x)**2 for x in normalizar(1 + 1j, 2)) - 1) < 1e-9
-assert abs(normalizar(1, 1j)[1] - 1j / 2**0.5) < 1e-9
+>>> normalizar(3, 4)
+(0.6, 0.8)
+---
+>>> normalizar(0, 5)
+(0, 1)
+>>> normalizar(1, 1)
+(2**-0.5, 2**-0.5)
+---
+>>> normalizar(1, 1j)
+(2**-0.5, 1j * 2**-0.5)
+>>> sum(abs(x)**2 for x in normalizar(1 + 1j, 2))
+1
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 2.

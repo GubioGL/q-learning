@@ -71,18 +71,27 @@ Write a function that tests whether a $2\times 2$ matrix (a list of rows) is uni
 
 ```exercise:python
 id: unitarias-codigo
+input: U | list | list of 2 rows, each row with 2 numbers | [[0, 1], [1, 0]]
+output: is_unitary | bool | True if U is unitary, otherwise False | True
 ---
 def is_unitary(U):
     # check that the matrix U†U is the identity
     return True
 ---
-r = 2**-0.5
-assert is_unitary([[r, r], [r, -r]])
-assert is_unitary([[0, -1j], [1j, 0]])
-assert is_unitary([[1, 0], [0, 1j]])
-assert not is_unitary([[1, 1], [0, 1]])
-assert not is_unitary([[1, 1], [1, -1]])
-assert not is_unitary([[0.6, 0.8], [0.6, 0.8]])
+>>> is_unitary([[1, 1], [0, 1]])
+False
+---
+>>> is_unitary([[0, -1j], [1j, 0]])
+True
+>>> is_unitary([[1, 1], [1, -1]])
+False
+---
+>>> is_unitary([[2**-0.5, 2**-0.5], [2**-0.5, -2**-0.5]])
+True
+>>> is_unitary([[1, 0], [0, 1j]])
+True
+>>> is_unitary([[0.6, 0.8], [0.6, 0.8]])
+False
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 3.

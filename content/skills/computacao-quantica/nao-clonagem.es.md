@@ -70,16 +70,26 @@ La **fidelidad** entre lo que produce la CNOT y la copia ideal es $F = |\braket{
 
 ```exercise:python
 id: clonagem-codigo
+input: alfa, beta | float | amplitudes reales con alfa² + beta² = 1 | 1, 0
+output: fidelidad | float | la fidelidad, entre 0 y 1 | 1.0
 ---
 def fidelidad(alfa, beta):
     obtenido = [alfa, 0, 0, beta]
     ideal = [0, 0, 0, 0]  # corrige: las 4 amplitudes de la copia perfecta
     return sum(a * b for a, b in zip(ideal, obtenido)) ** 2
 ---
-assert abs(fidelidad(1, 0) - 1) < 1e-9
-assert abs(fidelidad(0, 1) - 1) < 1e-9
-assert abs(fidelidad(2**-0.5, 2**-0.5) - 0.5) < 1e-9
-assert abs(fidelidad(0.6, 0.8) - 0.529984) < 1e-9
+>>> fidelidad(1, 0)
+1
+---
+>>> fidelidad(2**-0.5, 2**-0.5)
+0.5
+>>> fidelidad(0, 1)
+1
+---
+>>> fidelidad(0.6, 0.8)
+0.529984
+>>> fidelidad(0.8, -0.6)
+0.087616
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

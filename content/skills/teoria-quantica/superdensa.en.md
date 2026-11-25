@@ -56,6 +56,8 @@ Write Alice's side: given the bits, apply X and/or Z to the **first** qubit of t
 
 ```exercise:python
 id: superdensa-codigo
+input: b1, b2 | int | 0 or 1 | 1, 0
+output: encode | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [2**-0.5, 0, 0, -2**-0.5]
 ---
 r = 2**-0.5
 PAIR = [r, 0, 0, r]  # order 00, 01, 10, 11
@@ -78,10 +80,18 @@ def decode(e):
     i = max(range(4), key=lambda k: abs(e[k]))
     return (i // 2, i % 2)
 ---
-assert decode(encode(0, 0)) == (0, 0)
-assert decode(encode(0, 1)) == (0, 1)
-assert decode(encode(1, 0)) == (1, 0)
-assert decode(encode(1, 1)) == (1, 1)
+>>> decode(encode(1, 0))
+(1, 0)
+---
+>>> decode(encode(0, 0))
+(0, 0)
+>>> decode(encode(0, 1))
+(0, 1)
+---
+>>> decode(encode(1, 1))
+(1, 1)
+>>> encode(0, 1)
+[0, 2**-0.5, 2**-0.5, 0]
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 6.

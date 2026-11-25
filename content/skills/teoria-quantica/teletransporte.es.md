@@ -68,18 +68,25 @@ Escribe la corrección de Bob. `estado` es el par de amplitudes que le quedó.
 
 ```exercise:python
 id: teletransporte-codigo
+input: estado | tuple | par (a, b) con las 2 amplitudes de Bob | (0.8, 0.6)
+input: m1, m2 | int | bits enviados por Alice, 0 o 1 | 0, 1
+output: corregir | tuple | par de amplitudes corregido | (0.6, 0.8)
 ---
 def corregir(estado, m1, m2):
     a, b = estado
     # X si m2 = 1, luego Z si m1 = 1
     return (a, b)
 ---
-cerca = lambda u, v: all(abs(x - y) < 1e-9 for x, y in zip(u, v))
-alfa, beta = 0.6, 0.8j
-assert cerca(corregir((alfa, beta), 0, 0), (alfa, beta))
-assert cerca(corregir((beta, alfa), 0, 1), (alfa, beta))
-assert cerca(corregir((alfa, -beta), 1, 0), (alfa, beta))
-assert cerca(corregir((-beta, alfa), 1, 1), (alfa, beta))
+>>> corregir((0.8, 0.6), 0, 1)
+(0.6, 0.8)
+---
+>>> corregir((0.6, 0.8), 0, 0)
+(0.6, 0.8)
+>>> corregir((0.6, -0.8j), 1, 0)
+(0.6, 0.8j)
+---
+>>> corregir((-0.8j, 0.6), 1, 1)
+(0.6, 0.8j)
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 6.

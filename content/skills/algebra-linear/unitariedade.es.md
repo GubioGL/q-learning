@@ -68,6 +68,8 @@ Escribe una función que reciba una lista de matrices $2\times 2$ en el orden de
 
 ```exercise:python
 id: unitariedade-circuito
+input: puertas | list | lista de matrices 2x2 en el orden del dibujo; puede estar vacía | [H, Z, H]
+output: matriz_del_circuito | list | lista de 2 filas, cada fila con 2 números | [[0, 1], [1, 0]]
 ---
 r = 2**-0.5
 I = [[1, 0], [0, 1]]
@@ -84,11 +86,18 @@ def matriz_del_circuito(puertas):
     # la puerta aplicada después multiplica por la izquierda
     return total
 ---
-cerca = lambda A, B: all(abs(A[i][j] - B[i][j]) < 1e-9 for i in range(2) for j in range(2))
-assert cerca(matriz_del_circuito([]), I)
-assert cerca(matriz_del_circuito([H, Z, H]), X)
-assert cerca(matriz_del_circuito([S, S]), Z)
-assert cerca(matriz_del_circuito([X, S]), [[0, 1], [1j, 0]])
+>>> matriz_del_circuito([H, Z, H])
+[[0, 1], [1, 0]]
+---
+>>> matriz_del_circuito([])
+[[1, 0], [0, 1]]
+>>> matriz_del_circuito([S, S])
+[[1, 0], [0, -1]]
+---
+>>> matriz_del_circuito([X, S])
+[[0, 1], [1j, 0]]
+>>> matriz_del_circuito([S, X])
+[[0, 1j], [1, 0]]
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

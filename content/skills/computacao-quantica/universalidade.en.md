@@ -52,6 +52,8 @@ The S gate is a multiple of T. Each diagonal gate `[1, e^{i k π/4}]` can be des
 
 ```exercise:python
 id: universal-codigo
+input: circuit | str | letters Z, S and T; may be empty | "TSTZT"
+output: min_t_count | int | smallest number of T gates | 1
 ---
 K = {"Z": 4, "S": 2, "T": 1}
 
@@ -59,11 +61,20 @@ def min_t_count(circuit):
     # add the k values; parity tells whether one T is left
     return circuit.count("T")
 ---
-assert min_t_count("") == 0
-assert min_t_count("T") == 1
-assert min_t_count("TT") == 0
-assert min_t_count("TSTZT") == 1
-assert min_t_count("SZS") == 0
+>>> min_t_count("TT")
+0
+---
+>>> min_t_count("T")
+1
+>>> min_t_count("")
+0
+---
+>>> min_t_count("TSTZT")
+1
+>>> min_t_count("SZS")
+0
+>>> min_t_count("TTTT")
+0
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 4.

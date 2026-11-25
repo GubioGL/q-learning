@@ -55,15 +55,25 @@ answer: OI
 
 ```exercise:python
 id: ascii-texto-para-bits
+input: text | str | ASCII text of any length, even empty | "A"
+output: text_to_bits | str | 8 characters "0" or "1" per letter, no spaces | "01000001"
 ---
 def text_to_bits(text):
     # join the 8 bits of each character
     return ""
 ---
-assert text_to_bits("A") == "01000001"
-assert text_to_bits("OI") == "0100111101001001"
-assert len(text_to_bits("qubit")) == 40
-assert text_to_bits("") == ""
+>>> text_to_bits("A")
+"01000001"
+---
+>>> text_to_bits("OI")
+"0100111101001001"
+---
+>>> text_to_bits("")
+""
+>>> len(text_to_bits("qubit"))
+40
+>>> text_to_bits(" a")
+"0010000001100001"
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 1.

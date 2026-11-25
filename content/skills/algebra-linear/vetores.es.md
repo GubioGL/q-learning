@@ -63,14 +63,24 @@ Escribe `bra`, que recibe un ket (lista de números complejos) y devuelve la lis
 
 ```exercise:python
 id: vetores-bra-codigo
+input: ket | list | lista de números reales o complejos, de cualquier tamaño | [0.6, 0.8j]
+output: bra | list | lista del mismo tamaño, con los conjugados | [0.6, -0.8j]
 ---
 def bra(ket):
     return ket
 ---
-assert bra([1, 0]) == [1, 0]
-assert bra([0.6, 0.8j]) == [0.6, -0.8j]
-assert bra([1 + 2j, 3 - 1j]) == [1 - 2j, 3 + 1j]
-assert bra(bra([1j, 2])) == [1j, 2]
+>>> bra([0.6, 0.8j])
+[0.6, -0.8j]
+---
+>>> bra([1 + 2j, 3 - 1j])
+[1 - 2j, 3 + 1j]
+>>> bra([1, 0])
+[1, 0]
+---
+>>> bra(bra([1j, 2]))
+[1j, 2]
+>>> bra([1j, -1j, 0, 5])
+[-1j, 1j, 0, 5]
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

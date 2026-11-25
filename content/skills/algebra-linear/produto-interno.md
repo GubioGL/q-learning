@@ -61,15 +61,25 @@ Cuidado com o conjugado: $\begin{pmatrix}1 & -i\end{pmatrix}\begin{pmatrix}1 \\ 
 
 ```exercise:python
 id: interno-codigo
+input: phi, psi | list | duas listas do mesmo tamanho, com números reais ou complexos | [1j, 0], [1, 0]
+output: produto_interno | complex / float | o número <phi|psi> | -1j
 ---
 def produto_interno(phi, psi):
     # <phi|psi>: conjugue as componentes de phi
     return 0
 ---
-assert produto_interno([1, 0], [0, 1]) == 0
-assert produto_interno([1j, 0], [1, 0]) == -1j
-assert produto_interno([1, 1j], [1, -1j]) == 0
-assert abs(produto_interno([0.6, 0.8j], [0.6, 0.8j]) - 1) < 1e-9
+>>> produto_interno([1j, 0], [1, 0])
+-1j
+---
+>>> produto_interno([1, 0], [0, 1])
+0
+>>> produto_interno([0.6, 0.8j], [0.6, 0.8j])
+1
+---
+>>> produto_interno([1, 1j], [1, -1j])
+0
+>>> produto_interno([1, 2, 3], [1, 1, 1j])
+3 + 3j
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

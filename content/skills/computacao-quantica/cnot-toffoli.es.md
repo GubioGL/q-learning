@@ -74,6 +74,9 @@ Escribe la CNOT (control a la izquierda) actuando sobre una lista de 4 amplitude
 
 ```exercise:python
 id: cnot-codigo
+input: e | list | lista con las 4 amplitudes, en el orden 00, 01, 10, 11 | [1, 2, 3, 4]
+output: cnot | list | las 4 amplitudes después de la CNOT, en el mismo orden | [1, 2, 4, 3]
+output: par_entrelazado | list | lista con las 4 amplitudes, en el orden 00, 01, 10, 11 | [2**-0.5, 0, 0, 2**-0.5]
 ---
 r = 2**-0.5
 
@@ -86,10 +89,16 @@ def cnot(e):
 def par_entrelazado():
     return [1, 0, 0, 0]
 ---
-cerca = lambda u, v: all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-assert cnot([1, 2, 3, 4]) == [1, 2, 4, 3]
-assert cnot(cnot([1, 2, 3, 4])) == [1, 2, 3, 4]
-assert cerca(par_entrelazado(), [r, 0, 0, r])
+>>> cnot([1, 2, 3, 4])
+[1, 2, 4, 3]
+---
+>>> cnot(cnot([1, 2, 3, 4]))
+[1, 2, 3, 4]
+>>> cnot([0, 0, 1, 0])
+[0, 0, 0, 1]
+---
+>>> par_entrelazado()
+[2**-0.5, 0, 0, 2**-0.5]
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

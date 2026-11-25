@@ -53,23 +53,25 @@ Write a function that takes the 4 amplitudes, in the order $00, 01, 10, 11$, and
 
 ```exercise:python
 id: multiplos-codigo
+input: state | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [0.5, 0.5, 0, 2**-0.5]
+input: result | int | result of measuring the first qubit: 0 or 1 | 1
+output: measure_first | tuple | (probability, list with the 4 amplitudes after the measurement) | (0.5, [0, 0, 0, 1])
 ---
 def measure_first(state, result):
     probability = 0
     after = list(state)
     return probability, after
 ---
-close = lambda u, v: all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-r = 2**-0.5
-p, e = measure_first([0.5, 0.5, 0, r], 0)
-assert abs(p - 0.5) < 1e-9
-assert close(e, [r, r, 0, 0])
-p, e = measure_first([0.5, 0.5, 0, r], 1)
-assert abs(p - 0.5) < 1e-9
-assert close(e, [0, 0, 0, 1])
-p, e = measure_first([0.6, 0, 0, 0.8j], 1)
-assert abs(p - 0.64) < 1e-9
-assert close(e, [0, 0, 0, 1j])
+>>> measure_first([0.5, 0.5, 0, 2**-0.5], 1)
+(0.5, [0, 0, 0, 1])
+---
+>>> measure_first([0.5, 0.5, 0, 2**-0.5], 0)
+(0.5, [2**-0.5, 2**-0.5, 0, 0])
+---
+>>> measure_first([0.6, 0, 0, 0.8j], 1)
+(0.64, [0, 0, 0, 1j])
+>>> measure_first([0.6, 0, 0, 0.8j], 0)
+(0.36, [1, 0, 0, 0])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 4.

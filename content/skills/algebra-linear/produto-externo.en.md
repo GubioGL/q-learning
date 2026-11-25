@@ -77,15 +77,25 @@ Write the outer product $\ket{\psi}\bra{\phi}$, returning a list of rows.
 
 ```exercise:python
 id: externo-codigo
+input: psi, phi | list | two lists of real or complex numbers | [1, 2], [3, 4]
+output: outer_product | list | list of rows; element (i, j) = psi[i] · phi[j]* | [[3, 4], [6, 8]]
 ---
 def outer_product(psi, phi):
     # element (i, j) = psi[i] * conjugate of phi[j]
     return []
 ---
-assert outer_product([1, 0], [0, 1]) == [[0, 1], [0, 0]]
-assert outer_product([1, 2], [3, 4]) == [[3, 4], [6, 8]]
-assert outer_product([1, 0], [1j, 0]) == [[-1j, 0], [0, 0]]
-assert outer_product([1, 1j], [1, 1j]) == [[1, -1j], [1j, 1]]
+>>> outer_product([1, 2], [3, 4])
+[[3, 4], [6, 8]]
+---
+>>> outer_product([1, 0], [0, 1])
+[[0, 1], [0, 0]]
+>>> outer_product([1, 0], [1j, 0])
+[[-1j, 0], [0, 0]]
+---
+>>> outer_product([1, 1j], [1, 1j])
+[[1, -1j], [1j, 1]]
+>>> outer_product([1, 2, 3], [1j, 1])
+[[-1j, 1], [-2j, 2], [-3j, 3]]
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 3.

@@ -64,14 +64,24 @@ Write the tensor product of two vectors of any size.
 
 ```exercise:python
 id: tensorial-codigo
+input: u, v | list | two lists of numbers, of any size | [1, 2], [3, 4]
+output: tensor | list | list with len(u) · len(v) numbers | [3, 4, 6, 8]
 ---
 def tensor(u, v):
     return []
 ---
-assert tensor([1, 0], [0, 1]) == [0, 1, 0, 0]
-assert tensor([1, 2], [3, 4]) == [3, 4, 6, 8]
-assert tensor([0, 1], tensor([1, 0], [0, 1])) == [0, 0, 0, 0, 0, 1, 0, 0]
-assert len(tensor([1] * 4, [1] * 8)) == 32
+>>> tensor([1, 2], [3, 4])
+[3, 4, 6, 8]
+---
+>>> tensor([1, 0], [0, 1])
+[0, 1, 0, 0]
+>>> tensor([1, 2, 3], [1, 1j])
+[1, 1j, 2, 2j, 3, 3j]
+---
+>>> tensor([0, 1], tensor([1, 0], [0, 1]))
+[0, 0, 0, 0, 0, 1, 0, 0]
+>>> len(tensor([1] * 4, [1] * 8))
+32
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 4.

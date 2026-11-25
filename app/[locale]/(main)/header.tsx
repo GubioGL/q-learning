@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu } from "lucide-react";
+import { LocaleSwitch } from "@/components/ui/locale-switch";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Sidebar } from "@/components/ui/sidebar";
 import UserProgress from "@/components/ui/user-progress";
@@ -28,6 +29,7 @@ export const MainHeader = ({ xpByKey }: { xpByKey: Record<string, number> }) => 
                     <Sidebar />
                 </Sheet>
                 <UserProgress dayStreak={stats.streak} xp={stats.xp} />
+                <LocaleSwitch />
             </div>
         </header>
     )

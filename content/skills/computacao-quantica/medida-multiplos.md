@@ -53,23 +53,25 @@ Escreva uma função que recebe as 4 amplitudes, na ordem $00, 01, 10, 11$, e o 
 
 ```exercise:python
 id: multiplos-codigo
+input: estado | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [0.5, 0.5, 0, 2**-0.5]
+input: resultado | int | resultado da medida do primeiro qubit: 0 ou 1 | 1
+output: medir_primeiro | tuple | (probabilidade, lista com as 4 amplitudes depois da medida) | (0.5, [0, 0, 0, 1])
 ---
 def medir_primeiro(estado, resultado):
     probabilidade = 0
     depois = list(estado)
     return probabilidade, depois
 ---
-perto = lambda u, v: all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-r = 2**-0.5
-p, e = medir_primeiro([0.5, 0.5, 0, r], 0)
-assert abs(p - 0.5) < 1e-9
-assert perto(e, [r, r, 0, 0])
-p, e = medir_primeiro([0.5, 0.5, 0, r], 1)
-assert abs(p - 0.5) < 1e-9
-assert perto(e, [0, 0, 0, 1])
-p, e = medir_primeiro([0.6, 0, 0, 0.8j], 1)
-assert abs(p - 0.64) < 1e-9
-assert perto(e, [0, 0, 0, 1j])
+>>> medir_primeiro([0.5, 0.5, 0, 2**-0.5], 1)
+(0.5, [0, 0, 0, 1])
+---
+>>> medir_primeiro([0.5, 0.5, 0, 2**-0.5], 0)
+(0.5, [2**-0.5, 2**-0.5, 0, 0])
+---
+>>> medir_primeiro([0.6, 0, 0, 0.8j], 1)
+(0.64, [0, 0, 0, 1j])
+>>> medir_primeiro([0.6, 0, 0, 0.8j], 0)
+(0.36, [1, 0, 0, 0])
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

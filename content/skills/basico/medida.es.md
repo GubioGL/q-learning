@@ -79,15 +79,27 @@ Escribe una función que simule una medición. Recibe las amplitudes y un númer
 
 ```exercise:python
 id: medida-simular
+input: alfa, beta | float / complex | amplitudes ya normalizadas | 0.6, 0.8
+input: u | float | número sorteado, 0 <= u < 1 | 0.37
+output: medir | int | resultado de la medición: 0 o 1 | 1
 ---
 def medir(alfa, beta, u):
     return 0
 ---
-assert medir(1, 0, 0.999) == 0
-assert medir(0, 1, 0.0) == 1
-assert medir(0.6, 0.8, 0.35) == 0
-assert medir(0.6, 0.8, 0.37) == 1
-assert medir(0.6j, 0.8, 0.35) == 0
+>>> medir(0.6, 0.8, 0.37)
+1
+---
+>>> medir(0.6, 0.8, 0.35)
+0
+>>> medir(0, 1, 0.0)
+1
+---
+>>> medir(0.6j, 0.8, 0.35)
+0
+>>> medir(1, 0, 0.999)
+0
+>>> medir(0.8, -0.6, 0.65)
+1
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 2.

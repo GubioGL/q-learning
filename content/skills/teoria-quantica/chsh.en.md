@@ -78,6 +78,8 @@ Compute the average winning probability for given angles (in radians). `A` and `
 
 ```exercise:python
 id: chsh-codigo
+input: A, B | list | two angles in radians: [for 0, for 1] | [0, 0], [0, 0]
+output: win_probability | float | average winning probability, between 0 and 1 | 0.75
 ---
 from math import cos, pi
 
@@ -89,10 +91,16 @@ def win_probability(A, B):
             # add the probability of winning in this case
     return total / 4
 ---
-assert abs(win_probability([0, pi / 4], [pi / 8, -pi / 8]) - cos(pi / 8) ** 2) < 1e-9
-assert abs(win_probability([0, 0], [0, 0]) - 0.75) < 1e-9
-assert abs(win_probability([0, pi / 2], [0, 0]) - 0.75) < 1e-9
-assert abs(win_probability([pi / 2, 0], [0, 0]) - 0.25) < 1e-9
+>>> win_probability([0, 0], [0, 0])
+0.75
+---
+>>> win_probability([0, pi / 4], [pi / 8, -pi / 8])
+cos(pi / 8) ** 2
+---
+>>> win_probability([0, pi / 2], [0, 0])
+0.75
+>>> win_probability([pi / 2, 0], [0, 0])
+0.25
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 6.

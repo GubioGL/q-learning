@@ -68,6 +68,8 @@ Write a function that takes a list of $2\times 2$ matrices in drawing order and 
 
 ```exercise:python
 id: unitariedade-circuito
+input: gates | list | list of 2x2 matrices in drawing order; may be empty | [H, Z, H]
+output: circuit_matrix | list | list of 2 rows, each row with 2 numbers | [[0, 1], [1, 0]]
 ---
 r = 2**-0.5
 I = [[1, 0], [0, 1]]
@@ -84,11 +86,18 @@ def circuit_matrix(gates):
     # the gate applied later multiplies from the left
     return total
 ---
-close = lambda A, B: all(abs(A[i][j] - B[i][j]) < 1e-9 for i in range(2) for j in range(2))
-assert close(circuit_matrix([]), I)
-assert close(circuit_matrix([H, Z, H]), X)
-assert close(circuit_matrix([S, S]), Z)
-assert close(circuit_matrix([X, S]), [[0, 1], [1j, 0]])
+>>> circuit_matrix([H, Z, H])
+[[0, 1], [1, 0]]
+---
+>>> circuit_matrix([])
+[[1, 0], [0, 1]]
+>>> circuit_matrix([S, S])
+[[1, 0], [0, -1]]
+---
+>>> circuit_matrix([X, S])
+[[0, 1], [1j, 0]]
+>>> circuit_matrix([S, X])
+[[0, 1j], [1, 0]]
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 3.

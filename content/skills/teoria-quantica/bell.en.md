@@ -73,6 +73,8 @@ Write a function that takes the bits `(a, b)` and returns the 4 amplitudes of th
 
 ```exercise:python
 id: bell-codigo
+input: a, b | int | 0 or 1 | 1, 0
+output: bell_state | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [2**-0.5, 0, 0, -2**-0.5]
 ---
 r = 2**-0.5
 
@@ -81,11 +83,16 @@ def bell_state(a, b):
     # H on the first: (|0> + (-1)^a |1>) / sqrt(2); then CNOT
     return state
 ---
-close = lambda u, v: all(abs(x - y) < 1e-9 for x, y in zip(u, v))
-assert close(bell_state(0, 0), [r, 0, 0, r])
-assert close(bell_state(1, 0), [r, 0, 0, -r])
-assert close(bell_state(0, 1), [0, r, r, 0])
-assert close(bell_state(1, 1), [0, r, -r, 0])
+>>> bell_state(0, 0)
+[2**-0.5, 0, 0, 2**-0.5]
+---
+>>> bell_state(1, 0)
+[2**-0.5, 0, 0, -2**-0.5]
+---
+>>> bell_state(0, 1)
+[0, 2**-0.5, 2**-0.5, 0]
+>>> bell_state(1, 1)
+[0, 2**-0.5, -2**-0.5, 0]
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 6.

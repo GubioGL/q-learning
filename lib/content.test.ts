@@ -34,7 +34,11 @@ function checkSkill(file: string) {
 // Same exercises, in the same order; only words may change.
 const shape = ({ exercises, ...rest }: ReturnType<typeof checkSkill>) => ({
     ...rest,
-    exercises: exercises.map((e) => (e.kind === "number" ? e : { id: e.id, kind: e.kind })),
+    exercises: exercises.map((e) => {
+        if (e.kind === "number") return e;
+        if (e.kind === "text") return { id: e.id, kind: e.kind };
+        return { id: e.id, kind: e.kind, inputs: e.inputs.length, outputs: e.outputs.length, tests: e.tests.map((t) => t.length) };
+    }),
 });
 
 for (const { course, id, file } of skills) {

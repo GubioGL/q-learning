@@ -61,6 +61,8 @@ Write a function that runs a 1-qubit circuit. It takes a string of gates in draw
 
 ```exercise:python
 id: circuitos-simulador
+input: circuit | str | letters X, Z and H in drawing order; may be empty | "HZH"
+output: prob_1 | float | probability of measuring 1, between 0 and 1 | 1.0
 ---
 r = 2**-0.5
 GATES = {
@@ -74,11 +76,20 @@ def prob_1(circuit):
     # apply each gate: new[i] = sum_j U[i][j] * state[j]
     return abs(state[1]) ** 2
 ---
-assert abs(prob_1("") - 0) < 1e-9
-assert abs(prob_1("X") - 1) < 1e-9
-assert abs(prob_1("H") - 0.5) < 1e-9
-assert abs(prob_1("HZH") - 1) < 1e-9
-assert abs(prob_1("XHXH") - 1) < 1e-9
+>>> prob_1("X")
+1
+---
+>>> prob_1("H")
+0.5
+>>> prob_1("")
+0
+---
+>>> prob_1("HZH")
+1
+>>> prob_1("XHXH")
+1
+>>> prob_1("HXH")
+0
 ```
 
 To build circuits without programming, try the free simulator [Quirk](https://algassert.com/quirk), which runs in the browser.

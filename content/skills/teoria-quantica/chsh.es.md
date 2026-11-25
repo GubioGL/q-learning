@@ -78,6 +78,8 @@ Calcula la probabilidad media de victoria para ángulos dados (en radianes). `A`
 
 ```exercise:python
 id: chsh-codigo
+input: A, B | list | dos ángulos en radianes: [para 0, para 1] | [0, 0], [0, 0]
+output: prob_victoria | float | probabilidad media de victoria, entre 0 y 1 | 0.75
 ---
 from math import cos, pi
 
@@ -89,10 +91,16 @@ def prob_victoria(A, B):
             # suma la probabilidad de ganar en este caso
     return total / 4
 ---
-assert abs(prob_victoria([0, pi / 4], [pi / 8, -pi / 8]) - cos(pi / 8) ** 2) < 1e-9
-assert abs(prob_victoria([0, 0], [0, 0]) - 0.75) < 1e-9
-assert abs(prob_victoria([0, pi / 2], [0, 0]) - 0.75) < 1e-9
-assert abs(prob_victoria([pi / 2, 0], [0, 0]) - 0.25) < 1e-9
+>>> prob_victoria([0, 0], [0, 0])
+0.75
+---
+>>> prob_victoria([0, pi / 4], [pi / 8, -pi / 8])
+cos(pi / 8) ** 2
+---
+>>> prob_victoria([0, pi / 2], [0, 0])
+0.75
+>>> prob_victoria([pi / 2, 0], [0, 0])
+0.25
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 6.

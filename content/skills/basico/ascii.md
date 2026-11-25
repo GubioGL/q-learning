@@ -55,15 +55,25 @@ Com 128 códigos não cabem "ç", "ã" nem emojis. O padrão atual, o **Unicode*
 
 ```exercise:python
 id: ascii-texto-para-bits
+input: texto | str | texto ASCII de qualquer tamanho, até vazio | "A"
+output: texto_para_bits | str | 8 caracteres "0" ou "1" por letra, sem espaços | "01000001"
 ---
 def texto_para_bits(texto):
     # junte os 8 bits de cada caractere
     return ""
 ---
-assert texto_para_bits("A") == "01000001"
-assert texto_para_bits("OI") == "0100111101001001"
-assert len(texto_para_bits("qubit")) == 40
-assert texto_para_bits("") == ""
+>>> texto_para_bits("A")
+"01000001"
+---
+>>> texto_para_bits("OI")
+"0100111101001001"
+---
+>>> texto_para_bits("")
+""
+>>> len(texto_para_bits("qubit"))
+40
+>>> texto_para_bits(" a")
+"0010000001100001"
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 1.

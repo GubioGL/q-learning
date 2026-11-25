@@ -56,6 +56,8 @@ Escreva o lado de Alice: dados os bits, aplique X e/ou Z no **primeiro** qubit d
 
 ```exercise:python
 id: superdensa-codigo
+input: b1, b2 | int | 0 ou 1 | 1, 0
+output: codificar | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [2**-0.5, 0, 0, -2**-0.5]
 ---
 r = 2**-0.5
 PAR = [r, 0, 0, r]  # ordem 00, 01, 10, 11
@@ -78,10 +80,18 @@ def decodificar(e):
     i = max(range(4), key=lambda k: abs(e[k]))
     return (i // 2, i % 2)
 ---
-assert decodificar(codificar(0, 0)) == (0, 0)
-assert decodificar(codificar(0, 1)) == (0, 1)
-assert decodificar(codificar(1, 0)) == (1, 0)
-assert decodificar(codificar(1, 1)) == (1, 1)
+>>> decodificar(codificar(1, 0))
+(1, 0)
+---
+>>> decodificar(codificar(0, 0))
+(0, 0)
+>>> decodificar(codificar(0, 1))
+(0, 1)
+---
+>>> decodificar(codificar(1, 1))
+(1, 1)
+>>> codificar(0, 1)
+[0, 2**-0.5, 2**-0.5, 0]
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 6.

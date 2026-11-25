@@ -40,19 +40,34 @@ answer: 1001 | 0b1001
 ```
 ````
 
-Python (roda no navegador com Pyodide). Três partes separadas por `---`: id, código inicial, testes.
-Cada linha de teste roda separada, e a que falhar aparece para o aluno:
+Python (roda no navegador com Pyodide). As partes são separadas por `---`: cabeçalho, código inicial e **exatamente 3 testes**.
+
+- `input:` e `output:` (um por linha, pelo menos um de cada): `nome | tipo | formato exato | exemplo` (o exemplo é opcional).
+- Cada teste tem uma ou mais chamadas `>>> expressão`, com o resultado esperado na linha seguinte.
+- O **teste 1** aparece para o aluno (chamada e saída); os testes 2 e 3 ficam ocultos. Só conclui quem passa nos três.
+- Números são comparados com tolerância de 1e-9, e listas e tuplas com os mesmos itens são iguais.
 
 ````md
 ```exercise:python
 id: bits-para-decimal
+input: bits | str | texto só com "0" e "1" | "101"
+output: binario_para_decimal | int | o valor decimal | 5
 ---
 def binario_para_decimal(bits):
     return 0
 ---
-assert binario_para_decimal("101") == 5
+>>> binario_para_decimal("101")
+5
+---
+>>> binario_para_decimal("1101")
+13
+---
+>>> binario_para_decimal("0")
+0
 ```
 ````
+
+"Oculto" vale para a tela: como o site é estático, quem abrir o código-fonte consegue ver os testes.
 
 A skill é concluída quando todos os exercícios estão resolvidos. Isso libera a próxima skill do curso.
 

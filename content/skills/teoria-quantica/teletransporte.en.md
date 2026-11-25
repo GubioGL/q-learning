@@ -68,18 +68,25 @@ Write Bob's correction. `state` is the pair of amplitudes he is left with.
 
 ```exercise:python
 id: teletransporte-codigo
+input: state | tuple | pair (a, b) with Bob's 2 amplitudes | (0.8, 0.6)
+input: m1, m2 | int | bits sent by Alice, 0 or 1 | 0, 1
+output: correct | tuple | corrected pair of amplitudes | (0.6, 0.8)
 ---
 def correct(state, m1, m2):
     a, b = state
     # X if m2 = 1, then Z if m1 = 1
     return (a, b)
 ---
-close = lambda u, v: all(abs(x - y) < 1e-9 for x, y in zip(u, v))
-alpha, beta = 0.6, 0.8j
-assert close(correct((alpha, beta), 0, 0), (alpha, beta))
-assert close(correct((beta, alpha), 0, 1), (alpha, beta))
-assert close(correct((alpha, -beta), 1, 0), (alpha, beta))
-assert close(correct((-beta, alpha), 1, 1), (alpha, beta))
+>>> correct((0.8, 0.6), 0, 1)
+(0.6, 0.8)
+---
+>>> correct((0.6, 0.8), 0, 0)
+(0.6, 0.8)
+>>> correct((0.6, -0.8j), 1, 0)
+(0.6, 0.8j)
+---
+>>> correct((-0.8j, 0.6), 1, 1)
+(0.6, 0.8j)
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 6.

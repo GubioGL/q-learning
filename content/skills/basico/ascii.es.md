@@ -55,15 +55,25 @@ En 128 códigos no caben "ñ", "ã" ni los emojis. El estándar actual, **Unicod
 
 ```exercise:python
 id: ascii-texto-para-bits
+input: texto | str | texto ASCII de cualquier longitud, incluso vacío | "A"
+output: texto_a_bits | str | 8 caracteres "0" o "1" por letra, sin espacios | "01000001"
 ---
 def texto_a_bits(texto):
     # junta los 8 bits de cada carácter
     return ""
 ---
-assert texto_a_bits("A") == "01000001"
-assert texto_a_bits("OI") == "0100111101001001"
-assert len(texto_a_bits("qubit")) == 40
-assert texto_a_bits("") == ""
+>>> texto_a_bits("A")
+"01000001"
+---
+>>> texto_a_bits("OI")
+"0100111101001001"
+---
+>>> texto_a_bits("")
+""
+>>> len(texto_a_bits("qubit"))
+40
+>>> texto_a_bits(" a")
+"0010000001100001"
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 1.

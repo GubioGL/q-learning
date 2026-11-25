@@ -48,12 +48,26 @@ test("courses -> skill -> challenges flow", async ({ page }) => {
   await page.locator("#bits-nove").fill("1001"); await page.locator("#bits-nove").press("Enter");
   const run = page.getByRole("button", { name: /Executar e testar/ });
   await run.click();
-  await expect(page.getByText(/Teste falhou: assert binario_para_decimal\("101"\) == 5/)).toBeVisible({ timeout: 90_000 });
+  const tests = page.getByRole("region", { name: "Testes" }).getByRole("listitem");
+  await expect(page.getByText("Reprovou: 1, 2 e 3")).toBeVisible({ timeout: 90_000 });
+  await expect(tests.nth(0)).toContainText('binario_para_decimal("101")');
+  await expect(tests.nth(0)).toContainText("Sua saída: 0");
+  await expect(tests.nth(1)).toContainText("Oculto");
+  await expect(tests.nth(1)).not.toContainText("1101");
+  // only the example is right: the hidden tests must catch it
+  await page.locator("#bits-para-decimal").fill("def binario_para_decimal(bits):\n    return 5\n");
+  await run.click();
+  await expect(page.getByText("Passou: 1", { exact: false })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText("Reprovou: 2 e 3")).toBeVisible();
+  await expect(page.getByText("Faltam 1 exercício(s)")).toBeVisible();
+  await page.locator("#bits-para-decimal").fill("def binario_para_decimal(bits)\n    return 5\n");
+  await run.click();
+  await expect(page.getByText(/Seu código não rodou: SyntaxError/)).toBeVisible({ timeout: 30_000 });
   await shot(page, "3-python-falhou");
   await page.locator("#bits-para-decimal").fill(
     'def binario_para_decimal(bits):\n    total = 0\n    for k, b in enumerate(reversed(bits)):\n        total += int(b) * 2**k\n    print("ok", total)\n    return total\n');
   await run.click();
-  await expect(page.getByText("Todos os testes passaram!")).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText("Passou nos testes 1, 2 e 3.")).toBeVisible({ timeout: 30_000 });
   await expect(page.getByText("Tudo certo!")).toBeVisible();
   await shot(page, "4-skill-pronta");
   await concluir.click();
@@ -136,7 +150,11 @@ test("courses -> skill -> challenges flow", async ({ page }) => {
   await expect(goal).toHaveValue("5");
 
   // same progress in the other languages
-  await page.getByRole("link", { name: "English" }).first().click();
+  const english = panel.getByRole("link", { name: "English" });
+  const box = await english.boundingBox();
+  expect(box.y).toBeLessThan(60); // top right corner
+  expect(box.x).toBeGreaterThan(1280 - 300);
+  await english.click();
   await expect(page).toHaveURL(/\/en\/metas$/);
   await expect(page.getByRole("heading", { name: "Set Your Goals" })).toBeVisible();
   await expect(panel.getByLabel("20 XP in total")).toBeVisible();

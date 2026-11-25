@@ -58,6 +58,8 @@ Escreva as funções `NOT`, `AND` e `OR` usando **apenas** `nand`.
 
 ```exercise:python
 id: portas-nand-universal
+input: a, b | int | cada um é 0 ou 1 (NOT recebe só a) | 1
+output: NOT, AND, OR | int | 0 ou 1 | 1
 ---
 def nand(a, b):
     return 1 - a * b
@@ -71,9 +73,16 @@ def AND(a, b):
 def OR(a, b):
     return 0  # dica: De Morgan
 ---
-assert [NOT(a) for a in (0, 1)] == [1, 0]
-assert [AND(a, b) for a in (0, 1) for b in (0, 1)] == [0, 0, 0, 1]
-assert [OR(a, b) for a in (0, 1) for b in (0, 1)] == [0, 1, 1, 1]
+>>> AND(1, 1)
+1
+---
+>>> [NOT(0), NOT(1)]
+[1, 0]
+>>> [AND(0, 0), AND(0, 1), AND(1, 0)]
+[0, 0, 0]
+---
+>>> [OR(0, 0), OR(0, 1), OR(1, 0), OR(1, 1)]
+[0, 1, 1, 1]
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 1.

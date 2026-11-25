@@ -64,6 +64,9 @@ Escribe una función que reciba un estado y una base (lista de vectores ortonorm
 
 ```exercise:python
 id: projecoes-codigo
+input: estado | list | lista con las 2 amplitudes [alfa, beta] | [0.6, 0.8]
+input: base | list | lista de vectores ortonormales, cada uno con 2 números | BASE_X
+output: probabilidades | list | una probabilidad por vector de la base, en el mismo orden | [0.98, 0.02]
 ---
 r = 2**-0.5
 BASE_Z = [[1, 0], [0, 1]]
@@ -73,11 +76,18 @@ BASE_Y = [[r, r * 1j], [r, -r * 1j]]
 def probabilidades(estado, base):
     return [0 for vector in base]
 ---
-cerca = lambda u, v: len(u) == len(v) and all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-assert cerca(probabilidades([0.6, 0.8], BASE_Z), [0.36, 0.64])
-assert cerca(probabilidades([0.6, 0.8], BASE_X), [0.98, 0.02])
-assert cerca(probabilidades([r, r * 1j], BASE_Y), [1, 0])
-assert cerca(probabilidades([r, r * 1j], BASE_X), [0.5, 0.5])
+>>> probabilidades([0.6, 0.8], BASE_X)
+[0.98, 0.02]
+---
+>>> probabilidades([0.6, 0.8], BASE_Z)
+[0.36, 0.64]
+>>> probabilidades([r, r * 1j], BASE_X)
+[0.5, 0.5]
+---
+>>> probabilidades([r, r * 1j], BASE_Y)
+[1, 0]
+>>> probabilidades([1, 0], BASE_Y)
+[0.5, 0.5]
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

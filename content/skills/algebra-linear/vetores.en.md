@@ -63,14 +63,24 @@ Write `bra`, which takes a ket (a list of complex numbers) and returns the conju
 
 ```exercise:python
 id: vetores-bra-codigo
+input: ket | list | list of real or complex numbers, of any size | [0.6, 0.8j]
+output: bra | list | list of the same size, with the conjugates | [0.6, -0.8j]
 ---
 def bra(ket):
     return ket
 ---
-assert bra([1, 0]) == [1, 0]
-assert bra([0.6, 0.8j]) == [0.6, -0.8j]
-assert bra([1 + 2j, 3 - 1j]) == [1 - 2j, 3 + 1j]
-assert bra(bra([1j, 2])) == [1j, 2]
+>>> bra([0.6, 0.8j])
+[0.6, -0.8j]
+---
+>>> bra([1 + 2j, 3 - 1j])
+[1 - 2j, 3 + 1j]
+>>> bra([1, 0])
+[1, 0]
+---
+>>> bra(bra([1j, 2]))
+[1j, 2]
+>>> bra([1j, -1j, 0, 5])
+[-1j, 1j, 0, 5]
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 3.

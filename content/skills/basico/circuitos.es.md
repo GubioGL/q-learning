@@ -61,6 +61,8 @@ Escribe una función que ejecute un circuito de 1 qubit. Recibe una cadena de pu
 
 ```exercise:python
 id: circuitos-simulador
+input: circuito | str | letras X, Z y H en el orden del dibujo; puede estar vacío | "HZH"
+output: prob_1 | float | probabilidad de medir 1, entre 0 y 1 | 1.0
 ---
 r = 2**-0.5
 PUERTAS = {
@@ -74,11 +76,20 @@ def prob_1(circuito):
     # aplica cada puerta: nuevo[i] = suma_j U[i][j] * estado[j]
     return abs(estado[1]) ** 2
 ---
-assert abs(prob_1("") - 0) < 1e-9
-assert abs(prob_1("X") - 1) < 1e-9
-assert abs(prob_1("H") - 0.5) < 1e-9
-assert abs(prob_1("HZH") - 1) < 1e-9
-assert abs(prob_1("XHXH") - 1) < 1e-9
+>>> prob_1("X")
+1
+---
+>>> prob_1("H")
+0.5
+>>> prob_1("")
+0
+---
+>>> prob_1("HZH")
+1
+>>> prob_1("XHXH")
+1
+>>> prob_1("HXH")
+0
 ```
 
 Para montar circuitos sin programar, prueba el simulador gratuito [Quirk](https://algassert.com/quirk), que funciona en el navegador.

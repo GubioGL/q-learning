@@ -83,6 +83,8 @@ Representa un estado como un par `(alfa, beta)` y escribe las puertas `X`, `Z` y
 
 ```exercise:python
 id: porta1q-codigo
+input: alfa, beta | float / complex | amplitud, número real o complejo | 0.6, 0.8
+output: X, Z, H | tuple | par (alfa, beta) después de la puerta | (0.8, 0.6)
 ---
 def X(alfa, beta):
     return (alfa, beta)
@@ -93,12 +95,20 @@ def Z(alfa, beta):
 def H(alfa, beta):
     return (alfa, beta)
 ---
-cerca = lambda u, v: all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-assert cerca(X(0.6, 0.8), (0.8, 0.6))
-assert cerca(Z(0.6, 0.8), (0.6, -0.8))
-assert cerca(H(1, 0), (2**-0.5, 2**-0.5))
-assert cerca(H(*H(0.6, 0.8j)), (0.6, 0.8j))
-assert cerca(H(*Z(*H(0.6, 0.8))), X(0.6, 0.8))
+>>> X(0.6, 0.8)
+(0.8, 0.6)
+---
+>>> Z(0.6, 0.8)
+(0.6, -0.8)
+>>> X(1, 0)
+(0, 1)
+---
+>>> H(1, 0)
+(2**-0.5, 2**-0.5)
+>>> H(0, 1)
+(2**-0.5, -2**-0.5)
+>>> H(*Z(*H(0.6, 0.8)))
+(0.8, 0.6)
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 2.

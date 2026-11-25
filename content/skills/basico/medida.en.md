@@ -79,15 +79,27 @@ Write a function that simulates a measurement. It takes the amplitudes and a ran
 
 ```exercise:python
 id: medida-simular
+input: alpha, beta | float / complex | amplitudes, already normalized | 0.6, 0.8
+input: u | float | random number, 0 <= u < 1 | 0.37
+output: measure | int | measurement result: 0 or 1 | 1
 ---
 def measure(alpha, beta, u):
     return 0
 ---
-assert measure(1, 0, 0.999) == 0
-assert measure(0, 1, 0.0) == 1
-assert measure(0.6, 0.8, 0.35) == 0
-assert measure(0.6, 0.8, 0.37) == 1
-assert measure(0.6j, 0.8, 0.35) == 0
+>>> measure(0.6, 0.8, 0.37)
+1
+---
+>>> measure(0.6, 0.8, 0.35)
+0
+>>> measure(0, 1, 0.0)
+1
+---
+>>> measure(0.6j, 0.8, 0.35)
+0
+>>> measure(1, 0, 0.999)
+0
+>>> measure(0.8, -0.6, 0.65)
+1
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 2.

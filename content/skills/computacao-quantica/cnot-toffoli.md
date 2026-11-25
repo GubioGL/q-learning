@@ -74,6 +74,9 @@ Escreva a CNOT (controle à esquerda) agindo numa lista de 4 amplitudes e use-a 
 
 ```exercise:python
 id: cnot-codigo
+input: e | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [1, 2, 3, 4]
+output: cnot | list | as 4 amplitudes depois da CNOT, na mesma ordem | [1, 2, 4, 3]
+output: par_emaranhado | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [2**-0.5, 0, 0, 2**-0.5]
 ---
 r = 2**-0.5
 
@@ -86,10 +89,16 @@ def cnot(e):
 def par_emaranhado():
     return [1, 0, 0, 0]
 ---
-perto = lambda u, v: all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-assert cnot([1, 2, 3, 4]) == [1, 2, 4, 3]
-assert cnot(cnot([1, 2, 3, 4])) == [1, 2, 3, 4]
-assert perto(par_emaranhado(), [r, 0, 0, r])
+>>> cnot([1, 2, 3, 4])
+[1, 2, 4, 3]
+---
+>>> cnot(cnot([1, 2, 3, 4]))
+[1, 2, 3, 4]
+>>> cnot([0, 0, 1, 0])
+[0, 0, 0, 1]
+---
+>>> par_emaranhado()
+[2**-0.5, 0, 0, 2**-0.5]
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

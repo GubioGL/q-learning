@@ -56,6 +56,9 @@ Escreva a Toffoli e use-a para construir o AND.
 
 ```exercise:python
 id: reversiveis-toffoli
+input: a, b, c | int | cada um é 0 ou 1 (AND recebe só a e b) | 1
+output: toffoli | tuple | três bits (a, b, c) depois da porta | (1, 1, 1)
+output: AND | int | 0 ou 1 | 1
 ---
 def toffoli(a, b, c):
     return (a, b, c)  # corrija a terceira saída
@@ -63,11 +66,20 @@ def toffoli(a, b, c):
 def AND(a, b):
     return 0  # use toffoli
 ---
-assert toffoli(1, 1, 0) == (1, 1, 1)
-assert toffoli(1, 1, 1) == (1, 1, 0)
-assert toffoli(1, 0, 1) == (1, 0, 1)
-assert [AND(a, b) for a in (0, 1) for b in (0, 1)] == [0, 0, 0, 1]
-assert all(toffoli(*toffoli(a, b, c)) == (a, b, c) for a in (0, 1) for b in (0, 1) for c in (0, 1))
+>>> toffoli(1, 1, 0)
+(1, 1, 1)
+---
+>>> toffoli(1, 1, 1)
+(1, 1, 0)
+>>> toffoli(1, 0, 1)
+(1, 0, 1)
+>>> toffoli(*toffoli(1, 1, 0))
+(1, 1, 0)
+---
+>>> [AND(0, 0), AND(0, 1), AND(1, 0), AND(1, 1)]
+[0, 0, 0, 1]
+>>> toffoli(0, 1, 1)
+(0, 1, 1)
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 1.

@@ -77,15 +77,25 @@ Escreva o produto externo $\ket{\psi}\bra{\phi}$, devolvendo uma lista de linhas
 
 ```exercise:python
 id: externo-codigo
+input: psi, phi | list | duas listas de números reais ou complexos | [1, 2], [3, 4]
+output: produto_externo | list | lista de linhas; elemento (i, j) = psi[i] · phi[j]* | [[3, 4], [6, 8]]
 ---
 def produto_externo(psi, phi):
     # elemento (i, j) = psi[i] * conjugado de phi[j]
     return []
 ---
-assert produto_externo([1, 0], [0, 1]) == [[0, 1], [0, 0]]
-assert produto_externo([1, 2], [3, 4]) == [[3, 4], [6, 8]]
-assert produto_externo([1, 0], [1j, 0]) == [[-1j, 0], [0, 0]]
-assert produto_externo([1, 1j], [1, 1j]) == [[1, -1j], [1j, 1]]
+>>> produto_externo([1, 2], [3, 4])
+[[3, 4], [6, 8]]
+---
+>>> produto_externo([1, 0], [0, 1])
+[[0, 1], [0, 0]]
+>>> produto_externo([1, 0], [1j, 0])
+[[-1j, 0], [0, 0]]
+---
+>>> produto_externo([1, 1j], [1, 1j])
+[[1, -1j], [1j, 1]]
+>>> produto_externo([1, 2, 3], [1j, 1])
+[[-1j, 1], [-2j, 2], [-3j, 3]]
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

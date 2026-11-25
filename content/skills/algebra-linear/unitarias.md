@@ -71,18 +71,27 @@ Escreva uma função que testa se uma matriz $2\times 2$ (lista de linhas) é un
 
 ```exercise:python
 id: unitarias-codigo
+input: U | list | lista de 2 linhas, cada linha com 2 números | [[0, 1], [1, 0]]
+output: eh_unitaria | bool | True se U é unitária, senão False | True
 ---
 def eh_unitaria(U):
     # verifique se a matriz U†U é a identidade
     return True
 ---
-r = 2**-0.5
-assert eh_unitaria([[r, r], [r, -r]])
-assert eh_unitaria([[0, -1j], [1j, 0]])
-assert eh_unitaria([[1, 0], [0, 1j]])
-assert not eh_unitaria([[1, 1], [0, 1]])
-assert not eh_unitaria([[1, 1], [1, -1]])
-assert not eh_unitaria([[0.6, 0.8], [0.6, 0.8]])
+>>> eh_unitaria([[1, 1], [0, 1]])
+False
+---
+>>> eh_unitaria([[0, -1j], [1j, 0]])
+True
+>>> eh_unitaria([[1, 1], [1, -1]])
+False
+---
+>>> eh_unitaria([[2**-0.5, 2**-0.5], [2**-0.5, -2**-0.5]])
+True
+>>> eh_unitaria([[1, 0], [0, 1j]])
+True
+>>> eh_unitaria([[0.6, 0.8], [0.6, 0.8]])
+False
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

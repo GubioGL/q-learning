@@ -73,6 +73,8 @@ Escreva uma função que recebe os bits `(a, b)` e devolve as 4 amplitudes do es
 
 ```exercise:python
 id: bell-codigo
+input: a, b | int | 0 ou 1 | 1, 0
+output: estado_de_bell | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [2**-0.5, 0, 0, -2**-0.5]
 ---
 r = 2**-0.5
 
@@ -81,11 +83,16 @@ def estado_de_bell(a, b):
     # H no primeiro: (|0> + (-1)^a |1>) / raiz de 2; depois CNOT
     return estado
 ---
-perto = lambda u, v: all(abs(x - y) < 1e-9 for x, y in zip(u, v))
-assert perto(estado_de_bell(0, 0), [r, 0, 0, r])
-assert perto(estado_de_bell(1, 0), [r, 0, 0, -r])
-assert perto(estado_de_bell(0, 1), [0, r, r, 0])
-assert perto(estado_de_bell(1, 1), [0, r, -r, 0])
+>>> estado_de_bell(0, 0)
+[2**-0.5, 0, 0, 2**-0.5]
+---
+>>> estado_de_bell(1, 0)
+[2**-0.5, 0, 0, -2**-0.5]
+---
+>>> estado_de_bell(0, 1)
+[0, 2**-0.5, 2**-0.5, 0]
+>>> estado_de_bell(1, 1)
+[0, 2**-0.5, -2**-0.5, 0]
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 6.

@@ -1,5 +1,6 @@
 "use client";
 
+import { LocaleSwitch } from "@/components/ui/locale-switch";
 import UserGoals from "@/components/ui/user-goals";
 import UserProgress from "@/components/ui/user-progress";
 import { useT } from "@/lib/i18n/context";
@@ -12,6 +13,7 @@ export function ProgressPanel({ xpByKey }: { xpByKey: Record<string, number> }) 
     const stats = siteStats(progress, xpByKey, new Date());
     return (
         <aside className="sidebar-direita" aria-label={panel.label}>
+            <div className="mb-2 flex justify-end"><LocaleSwitch /></div>
             <UserProgress dayStreak={stats.streak} xp={stats.xp} />
             <UserGoals stats={stats} dailyGoal={progress.goal} />
         </aside>

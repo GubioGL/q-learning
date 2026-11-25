@@ -83,6 +83,8 @@ Represent a state as a pair `(alpha, beta)` and write the gates `X`, `Z` and `H`
 
 ```exercise:python
 id: porta1q-codigo
+input: alpha, beta | float / complex | amplitude, a real or complex number | 0.6, 0.8
+output: X, Z, H | tuple | pair (alpha, beta) after the gate | (0.8, 0.6)
 ---
 def X(alpha, beta):
     return (alpha, beta)
@@ -93,12 +95,20 @@ def Z(alpha, beta):
 def H(alpha, beta):
     return (alpha, beta)
 ---
-close = lambda u, v: all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-assert close(X(0.6, 0.8), (0.8, 0.6))
-assert close(Z(0.6, 0.8), (0.6, -0.8))
-assert close(H(1, 0), (2**-0.5, 2**-0.5))
-assert close(H(*H(0.6, 0.8j)), (0.6, 0.8j))
-assert close(H(*Z(*H(0.6, 0.8))), X(0.6, 0.8))
+>>> X(0.6, 0.8)
+(0.8, 0.6)
+---
+>>> Z(0.6, 0.8)
+(0.6, -0.8)
+>>> X(1, 0)
+(0, 1)
+---
+>>> H(1, 0)
+(2**-0.5, 2**-0.5)
+>>> H(0, 1)
+(2**-0.5, -2**-0.5)
+>>> H(*Z(*H(0.6, 0.8)))
+(0.8, 0.6)
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 2.

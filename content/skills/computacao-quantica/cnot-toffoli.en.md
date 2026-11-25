@@ -74,6 +74,9 @@ Write the CNOT (control on the left) acting on a list of 4 amplitudes and use it
 
 ```exercise:python
 id: cnot-codigo
+input: e | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [1, 2, 3, 4]
+output: cnot | list | the 4 amplitudes after the CNOT, in the same order | [1, 2, 4, 3]
+output: entangled_pair | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [2**-0.5, 0, 0, 2**-0.5]
 ---
 r = 2**-0.5
 
@@ -86,10 +89,16 @@ def cnot(e):
 def entangled_pair():
     return [1, 0, 0, 0]
 ---
-close = lambda u, v: all(abs(a - b) < 1e-9 for a, b in zip(u, v))
-assert cnot([1, 2, 3, 4]) == [1, 2, 4, 3]
-assert cnot(cnot([1, 2, 3, 4])) == [1, 2, 3, 4]
-assert close(entangled_pair(), [r, 0, 0, r])
+>>> cnot([1, 2, 3, 4])
+[1, 2, 4, 3]
+---
+>>> cnot(cnot([1, 2, 3, 4]))
+[1, 2, 3, 4]
+>>> cnot([0, 0, 1, 0])
+[0, 0, 0, 1]
+---
+>>> entangled_pair()
+[2**-0.5, 0, 0, 2**-0.5]
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 4.

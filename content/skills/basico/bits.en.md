@@ -49,16 +49,26 @@ In Python, `int("101", 2)` converts binary to decimal. But let us write the conv
 
 ```exercise:python
 id: bits-para-decimal
+input: bits | str | text with only "0" and "1", at least 1 character | "101"
+output: binary_to_decimal | int | the decimal value | 5
 ---
 def binary_to_decimal(bits):
     total = 0
     # loop over the bits and add b_k * 2**k
     return total
 ---
-assert binary_to_decimal("0") == 0
-assert binary_to_decimal("101") == 5
-assert binary_to_decimal("1101") == 13
-assert binary_to_decimal("11111111") == 255
+>>> binary_to_decimal("101")
+5
+---
+>>> binary_to_decimal("1101")
+13
+>>> binary_to_decimal("0")
+0
+---
+>>> binary_to_decimal("11111111")
+255
+>>> binary_to_decimal("100000")
+32
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 1.
