@@ -107,8 +107,8 @@ This project stands on the work of others. Lesson text and exercises are origina
 - [Duolingo](https://www.duolingo.com)
 
 **Authorship**
-- The first part of the project (platform base, layout, courses, database) was built by hand by **Gubio Gomes de Lima**.
-- The second part is being developed with automation help from **[Claude Code](https://claude.com/claude-code)** (Anthropic), under Gubio's direction and review.
+- Created and maintained by **Gubio Gomes de Lima**, who wrote the first version by hand and ran and reviewed every later change.
+- [Claude](https://claude.com/claude-code) (Anthropic) helped with development as a contributor.
 
 ---
 
