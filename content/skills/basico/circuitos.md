@@ -57,23 +57,24 @@ answer: 1
 
 ## Em Python: seu primeiro simulador
 
-Escreva uma função que roda um circuito de 1 qubit. Ela recebe uma string de portas na ordem do desenho, começa em $\ket{0}$ e devolve $P(1)$.
+Escreva uma função que roda um circuito de 1 qubit. Ela recebe uma string de portas na ordem do desenho, começa em $\ket{0}$ e devolve $P(1)$. Para aplicar uma matriz a um vetor, use `@`: `U @ estado`.
 
 ```exercise:python
 id: circuitos-simulador
 input: circuito | str | letras X, Z e H na ordem do desenho; pode ser vazio | "HZH"
 output: prob_1 | float | probabilidade de medir 1, entre 0 e 1 | 1.0
 ---
-r = 2**-0.5
+import numpy as np
+
 PORTAS = {
-    "X": [[0, 1], [1, 0]],
-    "Z": [[1, 0], [0, -1]],
-    "H": [[r, r], [r, -r]],
+    "X": np.array([[0, 1], [1, 0]]),
+    "Z": np.array([[1, 0], [0, -1]]),
+    "H": np.array([[1, 1], [1, -1]]) / np.sqrt(2),
 }
 
 def prob_1(circuito):
-    estado = [1, 0]
-    # aplique cada porta: novo[i] = soma_j U[i][j] * estado[j]
+    estado = np.array([1, 0])
+    # aplique cada porta do circuito ao estado
     return abs(estado[1]) ** 2
 ---
 >>> prob_1("X")

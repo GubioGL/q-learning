@@ -49,29 +49,31 @@ Repare: antes da medida, o segundo qubit tinha probabilidade $\tfrac14 + \tfrac1
 
 ## Em Python
 
-Escreva uma função que recebe as 4 amplitudes, na ordem $00, 01, 10, 11$, e o resultado da medida do primeiro qubit. Ela devolve o par `(probabilidade, estado_depois)`. Os testes só usam resultados com probabilidade maior que zero.
+Escreva uma função que recebe o vetor com as 4 amplitudes, na ordem $00, 01, 10, 11$, e o resultado da medida do primeiro qubit. Ela devolve o par `(probabilidade, estado_depois)`, em que o segundo é um vetor. Os testes só usam resultados com probabilidade maior que zero.
 
 ```exercise:python
 id: multiplos-codigo
-input: estado | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [0.5, 0.5, 0, 2**-0.5]
+input: estado | np.ndarray | vetor com as 4 amplitudes, na ordem 00, 01, 10, 11, formato (4,) | np.array([0.5, 0.5, 0, 2**-0.5])
 input: resultado | int | resultado da medida do primeiro qubit: 0 ou 1 | 1
-output: medir_primeiro | tuple | (probabilidade, lista com as 4 amplitudes depois da medida) | (0.5, [0, 0, 0, 1])
+output: medir_primeiro | tuple | (probabilidade, vetor com as 4 amplitudes depois da medida) | (0.5, np.array([0, 0, 0, 1]))
 ---
+import numpy as np
+
 def medir_primeiro(estado, resultado):
     probabilidade = 0
-    depois = list(estado)
+    depois = estado.copy()
     return probabilidade, depois
 ---
->>> medir_primeiro([0.5, 0.5, 0, 2**-0.5], 1)
-(0.5, [0, 0, 0, 1])
+>>> medir_primeiro(np.array([0.5, 0.5, 0, 2**-0.5]), 1)
+(0.5, np.array([0, 0, 0, 1]))
 ---
->>> medir_primeiro([0.5, 0.5, 0, 2**-0.5], 0)
-(0.5, [2**-0.5, 2**-0.5, 0, 0])
+>>> medir_primeiro(np.array([0.5, 0.5, 0, 2**-0.5]), 0)
+(0.5, np.array([2**-0.5, 2**-0.5, 0, 0]))
 ---
->>> medir_primeiro([0.6, 0, 0, 0.8j], 1)
-(0.64, [0, 0, 0, 1j])
->>> medir_primeiro([0.6, 0, 0, 0.8j], 0)
-(0.36, [1, 0, 0, 0])
+>>> medir_primeiro(np.array([0.6, 0, 0, 0.8j]), 1)
+(0.64, np.array([0, 0, 0, 1j]))
+>>> medir_primeiro(np.array([0.6, 0, 0, 0.8j]), 0)
+(0.36, np.array([1, 0, 0, 0]))
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

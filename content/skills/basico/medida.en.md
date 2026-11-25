@@ -75,30 +75,32 @@ tolerance: 0.001
 
 ## In Python
 
-Write a function that simulates a measurement. It takes the amplitudes and a random number `u` between 0 and 1, and returns the result: $0$ if `u` is smaller than $P(0)$, otherwise $1$.
+Write a function that simulates a measurement. It takes the state and a random number `u` between 0 and 1, and returns the result: $0$ if `u` is smaller than $P(0)$, otherwise $1$. The amplitude of $\ket{0}$ is `state[0]`.
 
 ```exercise:python
 id: medida-simular
-input: alpha, beta | float / complex | amplitudes, already normalized | 0.6, 0.8
+input: state | np.ndarray | normalized vector with the 2 amplitudes [alpha, beta], shape (2,) | np.array([0.6, 0.8])
 input: u | float | random number, 0 <= u < 1 | 0.37
 output: measure | int | measurement result: 0 or 1 | 1
 ---
-def measure(alpha, beta, u):
+import numpy as np
+
+def measure(state, u):
     return 0
 ---
->>> measure(0.6, 0.8, 0.37)
+>>> measure(np.array([0.6, 0.8]), 0.37)
 1
 ---
->>> measure(0.6, 0.8, 0.35)
+>>> measure(np.array([0.6, 0.8]), 0.35)
 0
->>> measure(0, 1, 0.0)
+>>> measure(np.array([0, 1]), 0.0)
 1
 ---
->>> measure(0.6j, 0.8, 0.35)
+>>> measure(np.array([0.6j, 0.8]), 0.35)
 0
->>> measure(1, 0, 0.999)
+>>> measure(np.array([1, 0]), 0.999)
 0
->>> measure(0.8, -0.6, 0.65)
+>>> measure(np.array([0.8, -0.6]), 0.65)
 1
 ```
 

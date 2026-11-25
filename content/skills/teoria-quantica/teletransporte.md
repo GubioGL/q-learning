@@ -64,29 +64,33 @@ Compare com a codificação superdensa: lá, 1 qubit mais um par emaranhado vale
 
 ## Em Python
 
-Escreva a correção de Bob. `estado` é o par de amplitudes que ficou com ele.
+Escreva a correção de Bob. `estado` é o vetor com as 2 amplitudes que ficou com ele.
 
 ```exercise:python
 id: teletransporte-codigo
-input: estado | tuple | par (a, b) com as 2 amplitudes de Bob | (0.8, 0.6)
+input: estado | np.ndarray | vetor com as 2 amplitudes de Bob, formato (2,) | np.array([0.8, 0.6])
 input: m1, m2 | int | bits enviados por Alice, 0 ou 1 | 0, 1
-output: corrigir | tuple | par de amplitudes corrigido | (0.6, 0.8)
+output: corrigir | np.ndarray | vetor corrigido, formato (2,) | np.array([0.6, 0.8])
 ---
+import numpy as np
+
+X = np.array([[0, 1], [1, 0]])
+Z = np.array([[1, 0], [0, -1]])
+
 def corrigir(estado, m1, m2):
-    a, b = estado
     # X se m2 = 1, depois Z se m1 = 1
-    return (a, b)
+    return estado
 ---
->>> corrigir((0.8, 0.6), 0, 1)
-(0.6, 0.8)
+>>> corrigir(np.array([0.8, 0.6]), 0, 1)
+np.array([0.6, 0.8])
 ---
->>> corrigir((0.6, 0.8), 0, 0)
-(0.6, 0.8)
->>> corrigir((0.6, -0.8j), 1, 0)
-(0.6, 0.8j)
+>>> corrigir(np.array([0.6, 0.8]), 0, 0)
+np.array([0.6, 0.8])
+>>> corrigir(np.array([0.6, -0.8j]), 1, 0)
+np.array([0.6, 0.8j])
 ---
->>> corrigir((-0.8j, 0.6), 1, 1)
-(0.6, 0.8j)
+>>> corrigir(np.array([-0.8j, 0.6]), 1, 1)
+np.array([0.6, 0.8j])
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 6.

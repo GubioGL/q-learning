@@ -67,30 +67,32 @@ answer: no
 
 ## In Python
 
-Write a function that tests whether a $2\times 2$ matrix (a list of rows) is unitary, with a tolerance of $10^{-9}$.
+Write a function that tests whether a $2\times 2$ NumPy matrix is unitary, with a tolerance of $10^{-9}$. Useful: `U.conj().T` (conjugate transpose), `@` (matrix product) and `np.allclose`.
 
 ```exercise:python
 id: unitarias-codigo
-input: U | list | list of 2 rows, each row with 2 numbers | [[0, 1], [1, 0]]
+input: U | np.ndarray | 2x2 matrix, shape (2, 2) | np.array([[0, 1], [1, 0]])
 output: is_unitary | bool | True if U is unitary, otherwise False | True
 ---
+import numpy as np
+
 def is_unitary(U):
     # check that the matrix U†U is the identity
     return True
 ---
->>> is_unitary([[1, 1], [0, 1]])
+>>> is_unitary(np.array([[1, 1], [0, 1]]))
 False
 ---
->>> is_unitary([[0, -1j], [1j, 0]])
+>>> is_unitary(np.array([[0, -1j], [1j, 0]]))
 True
->>> is_unitary([[1, 1], [1, -1]])
+>>> is_unitary(np.array([[1, 1], [1, -1]]))
 False
 ---
->>> is_unitary([[2**-0.5, 2**-0.5], [2**-0.5, -2**-0.5]])
+>>> is_unitary(np.array([[1, 1], [1, -1]]) / np.sqrt(2))
 True
->>> is_unitary([[1, 0], [0, 1j]])
+>>> is_unitary(np.array([[1, 0], [0, 1j]]))
 True
->>> is_unitary([[0.6, 0.8], [0.6, 0.8]])
+>>> is_unitary(np.array([[0.6, 0.8], [0.6, 0.8]]))
 False
 ```
 

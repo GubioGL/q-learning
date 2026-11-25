@@ -64,40 +64,37 @@ answer: 3
 
 ## In Python
 
-Write a function that takes a list of $2\times 2$ matrices in drawing order and returns the matrix of the whole circuit.
+Write a function that takes a list of $2\times 2$ matrices in drawing order and returns the matrix of the whole circuit. NumPy's matrix product is `@`.
 
 ```exercise:python
 id: unitariedade-circuito
-input: gates | list | list of 2x2 matrices in drawing order; may be empty | [H, Z, H]
-output: circuit_matrix | list | list of 2 rows, each row with 2 numbers | [[0, 1], [1, 0]]
+input: gates | list[np.ndarray] | list of (2, 2) matrices in drawing order; may be empty | [H, Z, H]
+output: circuit_matrix | np.ndarray | 2x2 matrix, shape (2, 2) | np.array([[0, 1], [1, 0]])
 ---
-r = 2**-0.5
-I = [[1, 0], [0, 1]]
-X = [[0, 1], [1, 0]]
-Z = [[1, 0], [0, -1]]
-S = [[1, 0], [0, 1j]]
-H = [[r, r], [r, -r]]
+import numpy as np
 
-def times(A, B):
-    return [[sum(A[i][k] * B[k][j] for k in range(2)) for j in range(2)] for i in range(2)]
+X = np.array([[0, 1], [1, 0]])
+Z = np.array([[1, 0], [0, -1]])
+S = np.array([[1, 0], [0, 1j]])
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
 
 def circuit_matrix(gates):
-    total = I
+    total = np.eye(2)
     # the gate applied later multiplies from the left
     return total
 ---
 >>> circuit_matrix([H, Z, H])
-[[0, 1], [1, 0]]
+np.array([[0, 1], [1, 0]])
 ---
 >>> circuit_matrix([])
-[[1, 0], [0, 1]]
+np.array([[1, 0], [0, 1]])
 >>> circuit_matrix([S, S])
-[[1, 0], [0, -1]]
+np.array([[1, 0], [0, -1]])
 ---
 >>> circuit_matrix([X, S])
-[[0, 1], [1j, 0]]
+np.array([[0, 1], [1j, 0]])
 >>> circuit_matrix([S, X])
-[[0, 1j], [1, 0]]
+np.array([[0, 1j], [1, 0]])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 3.

@@ -57,29 +57,31 @@ A qubit in superposition is **not** a classical bit whose value we do not know. 
 
 ## In Python
 
-Complex numbers already exist in Python: `1j` is $i$, and `abs(z)` is the modulus. Write a function that takes any amplitudes (not both zero) and returns the normalized pair.
+A state is a **vector**, so we use NumPy's `array`: `np.array([3, 4j])`, where `4j` is $4i$. Operations apply to every component at once: `state / 2`, `np.abs(state)`, `np.sum(state)`. Write a function that takes a nonzero vector and returns the normalized state.
 
 ```exercise:python
 id: qubit-normalizar
-input: alpha, beta | int / float / complex | real or complex amplitudes, not both zero | 3, 4
-output: normalize | tuple | both amplitudes divided by the norm | (0.6, 0.8)
+input: state | np.ndarray | nonzero vector with 2 real or complex amplitudes, shape (2,) | np.array([3, 4])
+output: normalize | np.ndarray | normalized vector with the 2 amplitudes [alpha, beta], shape (2,) | np.array([0.6, 0.8])
 ---
-def normalize(alpha, beta):
-    # divide both amplitudes by the norm of the state
-    return (alpha, beta)
+import numpy as np
+
+def normalize(state):
+    # divide the vector by its norm
+    return state
 ---
->>> normalize(3, 4)
-(0.6, 0.8)
+>>> normalize(np.array([3, 4]))
+np.array([0.6, 0.8])
 ---
->>> normalize(0, 5)
-(0, 1)
->>> normalize(1, 1)
-(2**-0.5, 2**-0.5)
+>>> normalize(np.array([0, 5]))
+np.array([0, 1])
+>>> normalize(np.array([1, 1]))
+np.array([2**-0.5, 2**-0.5])
 ---
->>> normalize(1, 1j)
-(2**-0.5, 1j * 2**-0.5)
->>> sum(abs(x)**2 for x in normalize(1 + 1j, 2))
-1
+>>> normalize(np.array([1, 1j]))
+np.array([2**-0.5, 1j * 2**-0.5])
+>>> normalize(np.array([3j, -4]))
+np.array([0.6j, -0.8])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 2.

@@ -60,34 +60,37 @@ O hardware costuma medir só na base Z. Para medir na base X, aplicamos H **ante
 
 ## Em Python
 
-Escreva uma função que recebe um estado e uma base (lista de vetores ortonormais) e devolve a lista de probabilidades.
+Escreva uma função que recebe um estado e uma base (matriz em que cada **linha** é um vetor da base) e devolve o vetor de probabilidades.
 
 ```exercise:python
 id: projecoes-codigo
-input: estado | list | lista com as 2 amplitudes [alfa, beta] | [0.6, 0.8]
-input: base | list | lista de vetores ortonormais, cada um com 2 números | BASE_X
-output: probabilidades | list | uma probabilidade por vetor da base, na mesma ordem | [0.98, 0.02]
+input: estado | np.ndarray | vetor normalizado com as 2 amplitudes [alfa, beta], formato (2,) | np.array([0.6, 0.8])
+input: base | np.ndarray | matriz (2, 2); cada linha é um vetor da base | BASE_X
+output: probabilidades | np.ndarray | uma probabilidade por vetor da base, formato (2,) | np.array([0.98, 0.02])
 ---
-r = 2**-0.5
-BASE_Z = [[1, 0], [0, 1]]
-BASE_X = [[r, r], [r, -r]]
-BASE_Y = [[r, r * 1j], [r, -r * 1j]]
+import numpy as np
+
+r = 1 / np.sqrt(2)
+BASE_Z = np.array([[1, 0], [0, 1]])
+BASE_X = np.array([[r, r], [r, -r]])
+BASE_Y = np.array([[r, r * 1j], [r, -r * 1j]])
 
 def probabilidades(estado, base):
-    return [0 for vetor in base]
+    # uma probabilidade para cada linha da base
+    return np.zeros(2)
 ---
->>> probabilidades([0.6, 0.8], BASE_X)
-[0.98, 0.02]
+>>> probabilidades(np.array([0.6, 0.8]), BASE_X)
+np.array([0.98, 0.02])
 ---
->>> probabilidades([0.6, 0.8], BASE_Z)
-[0.36, 0.64]
->>> probabilidades([r, r * 1j], BASE_X)
-[0.5, 0.5]
+>>> probabilidades(np.array([0.6, 0.8]), BASE_Z)
+np.array([0.36, 0.64])
+>>> probabilidades(np.array([2**-0.5, 1j * 2**-0.5]), BASE_X)
+np.array([0.5, 0.5])
 ---
->>> probabilidades([r, r * 1j], BASE_Y)
-[1, 0]
->>> probabilidades([1, 0], BASE_Y)
-[0.5, 0.5]
+>>> probabilidades(np.array([2**-0.5, 1j * 2**-0.5]), BASE_Y)
+np.array([1, 0])
+>>> probabilidades(np.array([1, 0]), BASE_Y)
+np.array([0.5, 0.5])
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

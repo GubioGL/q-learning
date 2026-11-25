@@ -57,23 +57,24 @@ answer: 1
 
 ## In Python: your first simulator
 
-Write a function that runs a 1-qubit circuit. It takes a string of gates in drawing order, starts in $\ket{0}$ and returns $P(1)$.
+Write a function that runs a 1-qubit circuit. It takes a string of gates in drawing order, starts in $\ket{0}$ and returns $P(1)$. To apply a matrix to a vector, use `@`: `U @ state`.
 
 ```exercise:python
 id: circuitos-simulador
 input: circuit | str | letters X, Z and H in drawing order; may be empty | "HZH"
 output: prob_1 | float | probability of measuring 1, between 0 and 1 | 1.0
 ---
-r = 2**-0.5
+import numpy as np
+
 GATES = {
-    "X": [[0, 1], [1, 0]],
-    "Z": [[1, 0], [0, -1]],
-    "H": [[r, r], [r, -r]],
+    "X": np.array([[0, 1], [1, 0]]),
+    "Z": np.array([[1, 0], [0, -1]]),
+    "H": np.array([[1, 1], [1, -1]]) / np.sqrt(2),
 }
 
 def prob_1(circuit):
-    state = [1, 0]
-    # apply each gate: new[i] = sum_j U[i][j] * state[j]
+    state = np.array([1, 0])
+    # apply each gate of the circuit to the state
     return abs(state[1]) ** 2
 ---
 >>> prob_1("X")

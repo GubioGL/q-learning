@@ -60,34 +60,37 @@ El hardware suele medir solo en la base Z. Para medir en la base X, aplicamos H 
 
 ## En Python
 
-Escribe una función que reciba un estado y una base (lista de vectores ortonormales) y devuelva la lista de probabilidades.
+Escribe una función que reciba un estado y una base (matriz en la que cada **fila** es un vector de la base) y devuelva el vector de probabilidades.
 
 ```exercise:python
 id: projecoes-codigo
-input: estado | list | lista con las 2 amplitudes [alfa, beta] | [0.6, 0.8]
-input: base | list | lista de vectores ortonormales, cada uno con 2 números | BASE_X
-output: probabilidades | list | una probabilidad por vector de la base, en el mismo orden | [0.98, 0.02]
+input: estado | np.ndarray | vector normalizado con las 2 amplitudes [alfa, beta], forma (2,) | np.array([0.6, 0.8])
+input: base | np.ndarray | matriz (2, 2); cada fila es un vector de la base | BASE_X
+output: probabilidades | np.ndarray | una probabilidad por vector de la base, forma (2,) | np.array([0.98, 0.02])
 ---
-r = 2**-0.5
-BASE_Z = [[1, 0], [0, 1]]
-BASE_X = [[r, r], [r, -r]]
-BASE_Y = [[r, r * 1j], [r, -r * 1j]]
+import numpy as np
+
+r = 1 / np.sqrt(2)
+BASE_Z = np.array([[1, 0], [0, 1]])
+BASE_X = np.array([[r, r], [r, -r]])
+BASE_Y = np.array([[r, r * 1j], [r, -r * 1j]])
 
 def probabilidades(estado, base):
-    return [0 for vector in base]
+    # una probabilidad para cada fila de la base
+    return np.zeros(2)
 ---
->>> probabilidades([0.6, 0.8], BASE_X)
-[0.98, 0.02]
+>>> probabilidades(np.array([0.6, 0.8]), BASE_X)
+np.array([0.98, 0.02])
 ---
->>> probabilidades([0.6, 0.8], BASE_Z)
-[0.36, 0.64]
->>> probabilidades([r, r * 1j], BASE_X)
-[0.5, 0.5]
+>>> probabilidades(np.array([0.6, 0.8]), BASE_Z)
+np.array([0.36, 0.64])
+>>> probabilidades(np.array([2**-0.5, 1j * 2**-0.5]), BASE_X)
+np.array([0.5, 0.5])
 ---
->>> probabilidades([r, r * 1j], BASE_Y)
-[1, 0]
->>> probabilidades([1, 0], BASE_Y)
-[0.5, 0.5]
+>>> probabilidades(np.array([2**-0.5, 1j * 2**-0.5]), BASE_Y)
+np.array([1, 0])
+>>> probabilidades(np.array([1, 0]), BASE_Y)
+np.array([0.5, 0.5])
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

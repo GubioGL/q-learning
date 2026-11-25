@@ -52,32 +52,30 @@ Se um espião captura só o qubit de Alice em trânsito, não descobre nada: soz
 
 ## Em Python
 
-Escreva o lado de Alice: dados os bits, aplique X e/ou Z no **primeiro** qubit do par.
+Escreva o lado de Alice: dados os bits, aplique X e/ou Z no **primeiro** qubit do par. As matrizes $4\times 4$ já estão prontas com `np.kron`.
 
 ```exercise:python
 id: superdensa-codigo
 input: b1, b2 | int | 0 ou 1 | 1, 0
-output: codificar | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [2**-0.5, 0, 0, -2**-0.5]
+output: codificar | np.ndarray | vetor com as 4 amplitudes, na ordem 00, 01, 10, 11, formato (4,) | np.array([2**-0.5, 0, 0, -2**-0.5])
 ---
-r = 2**-0.5
-PAR = [r, 0, 0, r]  # ordem 00, 01, 10, 11
+import numpy as np
 
-def x_no_primeiro(e):
-    return [e[2], e[3], e[0], e[1]]
-
-def z_no_primeiro(e):
-    return [e[0], e[1], -e[2], -e[3]]
+I = np.eye(2)
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
+X_NO_PRIMEIRO = np.kron(np.array([[0, 1], [1, 0]]), I)
+Z_NO_PRIMEIRO = np.kron(np.array([[1, 0], [0, -1]]), I)
+CNOT = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]])
+PAR = np.array([1, 0, 0, 1]) / np.sqrt(2)  # ordem 00, 01, 10, 11
 
 def codificar(b1, b2):
-    estado = PAR
+    estado = PAR.copy()
     # b2 = 1 pede X; b1 = 1 pede Z (X primeiro)
     return estado
 
-def decodificar(e):
+def decodificar(estado):
     # Bob: CNOT, depois H no primeiro; devolve o resultado mais provável
-    e = [e[0], e[1], e[3], e[2]]
-    e = [r * (e[0] + e[2]), r * (e[1] + e[3]), r * (e[0] - e[2]), r * (e[1] - e[3])]
-    i = max(range(4), key=lambda k: abs(e[k]))
+    i = int(np.argmax(np.abs(np.kron(H, I) @ CNOT @ estado)))
     return (i // 2, i % 2)
 ---
 >>> decodificar(codificar(1, 0))
@@ -91,7 +89,7 @@ def decodificar(e):
 >>> decodificar(codificar(1, 1))
 (1, 1)
 >>> codificar(0, 1)
-[0, 2**-0.5, 2**-0.5, 0]
+np.array([0, 2**-0.5, 2**-0.5, 0])
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 6.

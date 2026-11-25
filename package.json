@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:pages": "NEXT_PUBLIC_BASE_PATH=/q-learning next build",
-    "start": "next start",
+    "start": "python3 -m http.server 3000 -d dist",
     "lint": "next lint",
     "test": "tsx --test lib/*.test.ts",
     "test:e2e": "playwright test"

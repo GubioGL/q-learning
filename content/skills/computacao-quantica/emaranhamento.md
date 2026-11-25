@@ -67,25 +67,30 @@ No estado $\ket{\Phi^+}$, medir um qubit determina o resultado do outro, por mai
 
 ## Em Python
 
+Escreva a concorrência de um estado de 2 qubits, dado como vetor `np.array([c00, c01, c10, c11])`.
+
 ```exercise:python
 id: emaranhamento-codigo
-input: c00, c01, c10, c11 | float / complex | as 4 amplitudes do estado, normalizadas | 0.6, 0, 0, 0.8
+input: estado | np.ndarray | vetor com as 4 amplitudes, na ordem 00, 01, 10, 11, formato (4,) | np.array([0.6, 0, 0, 0.8])
 output: concorrencia | float | a concorrência, entre 0 e 1 | 0.96
 ---
-def concorrencia(c00, c01, c10, c11):
+import numpy as np
+
+def concorrencia(estado):
+    c00, c01, c10, c11 = estado
     return 0
 ---
->>> concorrencia(0.6, 0, 0, 0.8)
+>>> concorrencia(np.array([0.6, 0, 0, 0.8]))
 0.96
 ---
->>> concorrencia(2**-0.5, 0, 0, 2**-0.5)
+>>> concorrencia(np.array([2**-0.5, 0, 0, 2**-0.5]))
 1
->>> concorrencia(0.5, 0.5, 0.5, 0.5)
+>>> concorrencia(np.array([0.5, 0.5, 0.5, 0.5]))
 0
 ---
->>> concorrencia(0.6, 0, 0, 0.8j)
+>>> concorrencia(np.array([0.6, 0, 0, 0.8j]))
 0.96
->>> concorrencia(0.5, 0.5, 0.5, -0.5)
+>>> concorrencia(np.array([0.5, 0.5, 0.5, -0.5]))
 1
 ```
 

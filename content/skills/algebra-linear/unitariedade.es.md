@@ -64,40 +64,37 @@ answer: 3
 
 ## En Python
 
-Escribe una función que reciba una lista de matrices $2\times 2$ en el orden del dibujo y devuelva la matriz del circuito entero.
+Escribe una función que reciba una lista de matrices $2\times 2$ en el orden del dibujo y devuelva la matriz del circuito entero. El producto de matrices de NumPy es `@`.
 
 ```exercise:python
 id: unitariedade-circuito
-input: puertas | list | lista de matrices 2x2 en el orden del dibujo; puede estar vacía | [H, Z, H]
-output: matriz_del_circuito | list | lista de 2 filas, cada fila con 2 números | [[0, 1], [1, 0]]
+input: puertas | list[np.ndarray] | lista de matrices (2, 2) en el orden del dibujo; puede estar vacía | [H, Z, H]
+output: matriz_del_circuito | np.ndarray | matriz 2x2, forma (2, 2) | np.array([[0, 1], [1, 0]])
 ---
-r = 2**-0.5
-I = [[1, 0], [0, 1]]
-X = [[0, 1], [1, 0]]
-Z = [[1, 0], [0, -1]]
-S = [[1, 0], [0, 1j]]
-H = [[r, r], [r, -r]]
+import numpy as np
 
-def por(A, B):
-    return [[sum(A[i][k] * B[k][j] for k in range(2)) for j in range(2)] for i in range(2)]
+X = np.array([[0, 1], [1, 0]])
+Z = np.array([[1, 0], [0, -1]])
+S = np.array([[1, 0], [0, 1j]])
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
 
 def matriz_del_circuito(puertas):
-    total = I
+    total = np.eye(2)
     # la puerta aplicada después multiplica por la izquierda
     return total
 ---
 >>> matriz_del_circuito([H, Z, H])
-[[0, 1], [1, 0]]
+np.array([[0, 1], [1, 0]])
 ---
 >>> matriz_del_circuito([])
-[[1, 0], [0, 1]]
+np.array([[1, 0], [0, 1]])
 >>> matriz_del_circuito([S, S])
-[[1, 0], [0, -1]]
+np.array([[1, 0], [0, -1]])
 ---
 >>> matriz_del_circuito([X, S])
-[[0, 1], [1j, 0]]
+np.array([[0, 1], [1j, 0]])
 >>> matriz_del_circuito([S, X])
-[[0, 1j], [1, 0]]
+np.array([[0, 1j], [1, 0]])
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

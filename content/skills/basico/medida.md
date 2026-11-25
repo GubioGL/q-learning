@@ -75,30 +75,32 @@ tolerance: 0.001
 
 ## Em Python
 
-Escreva uma função que simula uma medida. Ela recebe as amplitudes e um número aleatório `u` entre 0 e 1, e devolve o resultado: $0$ se `u` for menor que $P(0)$, senão $1$.
+Escreva uma função que simula uma medida. Ela recebe o estado e um número aleatório `u` entre 0 e 1, e devolve o resultado: $0$ se `u` for menor que $P(0)$, senão $1$. A amplitude de $\ket{0}$ é `estado[0]`.
 
 ```exercise:python
 id: medida-simular
-input: alfa, beta | float / complex | amplitudes já normalizadas | 0.6, 0.8
+input: estado | np.ndarray | vetor normalizado com as 2 amplitudes [alfa, beta], formato (2,) | np.array([0.6, 0.8])
 input: u | float | número sorteado, 0 <= u < 1 | 0.37
 output: medir | int | resultado da medida: 0 ou 1 | 1
 ---
-def medir(alfa, beta, u):
+import numpy as np
+
+def medir(estado, u):
     return 0
 ---
->>> medir(0.6, 0.8, 0.37)
+>>> medir(np.array([0.6, 0.8]), 0.37)
 1
 ---
->>> medir(0.6, 0.8, 0.35)
+>>> medir(np.array([0.6, 0.8]), 0.35)
 0
->>> medir(0, 1, 0.0)
+>>> medir(np.array([0, 1]), 0.0)
 1
 ---
->>> medir(0.6j, 0.8, 0.35)
+>>> medir(np.array([0.6j, 0.8]), 0.35)
 0
->>> medir(1, 0, 0.999)
+>>> medir(np.array([1, 0]), 0.999)
 0
->>> medir(0.8, -0.6, 0.65)
+>>> medir(np.array([0.8, -0.6]), 0.65)
 1
 ```
 

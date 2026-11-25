@@ -67,25 +67,30 @@ In the state $\ket{\Phi^+}$, measuring one qubit determines the result of the ot
 
 ## In Python
 
+Write the concurrence of a 2-qubit state, given as a vector `np.array([c00, c01, c10, c11])`.
+
 ```exercise:python
 id: emaranhamento-codigo
-input: c00, c01, c10, c11 | float / complex | the 4 amplitudes of the state, normalized | 0.6, 0, 0, 0.8
+input: state | np.ndarray | vector with the 4 amplitudes, in the order 00, 01, 10, 11, shape (4,) | np.array([0.6, 0, 0, 0.8])
 output: concurrence | float | the concurrence, between 0 and 1 | 0.96
 ---
-def concurrence(c00, c01, c10, c11):
+import numpy as np
+
+def concurrence(state):
+    c00, c01, c10, c11 = state
     return 0
 ---
->>> concurrence(0.6, 0, 0, 0.8)
+>>> concurrence(np.array([0.6, 0, 0, 0.8]))
 0.96
 ---
->>> concurrence(2**-0.5, 0, 0, 2**-0.5)
+>>> concurrence(np.array([2**-0.5, 0, 0, 2**-0.5]))
 1
->>> concurrence(0.5, 0.5, 0.5, 0.5)
+>>> concurrence(np.array([0.5, 0.5, 0.5, 0.5]))
 0
 ---
->>> concurrence(0.6, 0, 0, 0.8j)
+>>> concurrence(np.array([0.6, 0, 0, 0.8j]))
 0.96
->>> concurrence(0.5, 0.5, 0.5, -0.5)
+>>> concurrence(np.array([0.5, 0.5, 0.5, -0.5]))
 1
 ```
 

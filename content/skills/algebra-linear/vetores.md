@@ -59,28 +59,30 @@ answer: -0.8i | -0,8i | -0.8 i | -0,8 i
 
 ## Em Python
 
-Escreva `bra`, que recebe um ket (lista de números complexos) e devolve a lista conjugada. Todo número em Python tem o método `.conjugate()`.
+Escreva `bra`, que recebe um ket (vetor do NumPy) e devolve o vetor com as componentes conjugadas. Arrays têm o método `.conj()`, que listas comuns do Python não têm.
 
 ```exercise:python
 id: vetores-bra-codigo
-input: ket | list | lista de números reais ou complexos, de qualquer tamanho | [0.6, 0.8j]
-output: bra | list | lista do mesmo tamanho, com os conjugados | [0.6, -0.8j]
+input: ket | np.ndarray | vetor de números reais ou complexos, formato (n,) | np.array([0.6, 0.8j])
+output: bra | np.ndarray | vetor do mesmo formato, com os conjugados | np.array([0.6, -0.8j])
 ---
+import numpy as np
+
 def bra(ket):
     return ket
 ---
->>> bra([0.6, 0.8j])
-[0.6, -0.8j]
+>>> bra(np.array([0.6, 0.8j]))
+np.array([0.6, -0.8j])
 ---
->>> bra([1 + 2j, 3 - 1j])
-[1 - 2j, 3 + 1j]
->>> bra([1, 0])
-[1, 0]
+>>> bra(np.array([1 + 2j, 3 - 1j]))
+np.array([1 - 2j, 3 + 1j])
+>>> bra(np.array([1, 0]))
+np.array([1, 0])
 ---
->>> bra(bra([1j, 2]))
-[1j, 2]
->>> bra([1j, -1j, 0, 5])
-[-1j, 1j, 0, 5]
+>>> bra(bra(np.array([1j, 2])))
+np.array([1j, 2])
+>>> bra(np.array([1j, -1j, 0, 5]))
+np.array([-1j, 1j, 0, 5])
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

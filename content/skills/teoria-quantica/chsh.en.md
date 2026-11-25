@@ -74,32 +74,32 @@ Experiments confirm the violation, including those of 2015, which closed the mai
 
 ## In Python
 
-Compute the average winning probability for given angles (in radians). `A` and `B` are lists with the two angles of each player.
+Compute the average winning probability for given angles (in radians). `A` and `B` are vectors with the two angles of each player.
 
 ```exercise:python
 id: chsh-codigo
-input: A, B | list | two angles in radians: [for 0, for 1] | [0, 0], [0, 0]
+input: A, B | np.ndarray | two angles in radians [for 0, for 1], shape (2,) | np.array([0, 0]), np.array([0, 0])
 output: win_probability | float | average winning probability, between 0 and 1 | 0.75
 ---
-from math import cos, pi
+import numpy as np
 
 def win_probability(A, B):
     total = 0
     for x in (0, 1):
         for y in (0, 1):
-            equal = cos(A[x] - B[y]) ** 2
+            equal = np.cos(A[x] - B[y]) ** 2
             # add the probability of winning in this case
     return total / 4
 ---
->>> win_probability([0, 0], [0, 0])
+>>> win_probability(np.array([0, 0]), np.array([0, 0]))
 0.75
 ---
->>> win_probability([0, pi / 4], [pi / 8, -pi / 8])
-cos(pi / 8) ** 2
+>>> win_probability(np.array([0, np.pi / 4]), np.array([np.pi / 8, -np.pi / 8]))
+np.cos(np.pi / 8) ** 2
 ---
->>> win_probability([0, pi / 2], [0, 0])
+>>> win_probability(np.array([0, np.pi / 2]), np.array([0, 0]))
 0.75
->>> win_probability([pi / 2, 0], [0, 0])
+>>> win_probability(np.array([np.pi / 2, 0]), np.array([0, 0]))
 0.25
 ```
 

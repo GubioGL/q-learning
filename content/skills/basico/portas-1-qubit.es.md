@@ -79,36 +79,41 @@ answer: 4
 
 ## En Python
 
-Representa un estado como un par `(alfa, beta)` y escribe las puertas `X`, `Z` y `H`.
+Representa un estado como un vector `np.array([alfa, beta])` y escribe las puertas `X`, `Z` y `H`. Cada una recibe un vector y devuelve **otro** vector, sin cambiar el original.
 
 ```exercise:python
 id: porta1q-codigo
-input: alfa, beta | float / complex | amplitud, número real o complejo | 0.6, 0.8
-output: X, Z, H | tuple | par (alfa, beta) después de la puerta | (0.8, 0.6)
+input: estado | np.ndarray | vector con las 2 amplitudes [alfa, beta], forma (2,) | np.array([0.6, 0.8])
+output: X, Z, H | np.ndarray | vector después de la puerta, forma (2,) | np.array([0.8, 0.6])
 ---
-def X(alfa, beta):
-    return (alfa, beta)
+import numpy as np
 
-def Z(alfa, beta):
-    return (alfa, beta)
+def X(estado):
+    alfa, beta = estado
+    return np.array([alfa, beta])
 
-def H(alfa, beta):
-    return (alfa, beta)
+def Z(estado):
+    alfa, beta = estado
+    return np.array([alfa, beta])
+
+def H(estado):
+    alfa, beta = estado
+    return np.array([alfa, beta])
 ---
->>> X(0.6, 0.8)
-(0.8, 0.6)
+>>> X(np.array([0.6, 0.8]))
+np.array([0.8, 0.6])
 ---
->>> Z(0.6, 0.8)
-(0.6, -0.8)
->>> X(1, 0)
-(0, 1)
+>>> Z(np.array([0.6, 0.8]))
+np.array([0.6, -0.8])
+>>> X(np.array([1, 0j]))
+np.array([0, 1])
 ---
->>> H(1, 0)
-(2**-0.5, 2**-0.5)
->>> H(0, 1)
-(2**-0.5, -2**-0.5)
->>> H(*Z(*H(0.6, 0.8)))
-(0.8, 0.6)
+>>> H(np.array([1, 0]))
+np.array([2**-0.5, 2**-0.5])
+>>> H(np.array([0, 1]))
+np.array([2**-0.5, -2**-0.5])
+>>> H(Z(H(np.array([0.6, 0.8]))))
+np.array([0.8, 0.6])
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 2.

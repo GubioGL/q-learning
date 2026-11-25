@@ -69,30 +69,34 @@ answer: 1
 
 ## In Python
 
-Write a function that takes the bits `(a, b)` and returns the 4 amplitudes of the Bell state prepared from $\ket{ab}$.
+Write a function that takes the bits `a` and `b` and returns the vector with the 4 amplitudes of the Bell state prepared from $\ket{ab}$.
 
 ```exercise:python
 id: bell-codigo
 input: a, b | int | 0 or 1 | 1, 0
-output: bell_state | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [2**-0.5, 0, 0, -2**-0.5]
+output: bell_state | np.ndarray | vector with the 4 amplitudes, in the order 00, 01, 10, 11, shape (4,) | np.array([2**-0.5, 0, 0, -2**-0.5])
 ---
-r = 2**-0.5
+import numpy as np
+
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
+CNOT = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]])
 
 def bell_state(a, b):
-    state = [0, 0, 0, 0]
-    # H on the first: (|0> + (-1)^a |1>) / sqrt(2); then CNOT
+    state = np.zeros(4)
+    state[2 * a + b] = 1  # |ab>
+    # apply H to the first qubit and then the CNOT
     return state
 ---
 >>> bell_state(0, 0)
-[2**-0.5, 0, 0, 2**-0.5]
+np.array([2**-0.5, 0, 0, 2**-0.5])
 ---
 >>> bell_state(1, 0)
-[2**-0.5, 0, 0, -2**-0.5]
+np.array([2**-0.5, 0, 0, -2**-0.5])
 ---
 >>> bell_state(0, 1)
-[0, 2**-0.5, 2**-0.5, 0]
+np.array([0, 2**-0.5, 2**-0.5, 0])
 >>> bell_state(1, 1)
-[0, 2**-0.5, -2**-0.5, 0]
+np.array([0, 2**-0.5, -2**-0.5, 0])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 6.

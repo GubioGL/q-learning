@@ -70,35 +70,36 @@ answer: 2
 
 ## Em Python
 
-Escreva a CNOT (controle à esquerda) agindo numa lista de 4 amplitudes e use-a para montar o par emaranhado a partir de $\ket{00}$.
+Escreva a CNOT (controle à esquerda) agindo num vetor de 4 amplitudes e use-a para montar o par emaranhado a partir de $\ket{00}$.
 
 ```exercise:python
 id: cnot-codigo
-input: e | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [1, 2, 3, 4]
-output: cnot | list | as 4 amplitudes depois da CNOT, na mesma ordem | [1, 2, 4, 3]
-output: par_emaranhado | list | lista com as 4 amplitudes, na ordem 00, 01, 10, 11 | [2**-0.5, 0, 0, 2**-0.5]
+input: estado | np.ndarray | vetor com as 4 amplitudes, na ordem 00, 01, 10, 11, formato (4,) | np.array([1, 2, 3, 4])
+output: cnot | np.ndarray | as 4 amplitudes depois da CNOT, formato (4,) | np.array([1, 2, 4, 3])
+output: par_emaranhado | np.ndarray | vetor com as 4 amplitudes, na ordem 00, 01, 10, 11, formato (4,) | np.array([2**-0.5, 0, 0, 2**-0.5])
 ---
-r = 2**-0.5
+import numpy as np
 
-def h_no_primeiro(e):
-    return [r * (e[0] + e[2]), r * (e[1] + e[3]), r * (e[0] - e[2]), r * (e[1] - e[3])]
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
+H_NO_PRIMEIRO = np.kron(H, np.eye(2))  # matriz 4x4
 
-def cnot(e):
-    return list(e)
+def cnot(estado):
+    return estado.copy()
 
 def par_emaranhado():
-    return [1, 0, 0, 0]
+    estado = np.array([1, 0, 0, 0])
+    return estado
 ---
->>> cnot([1, 2, 3, 4])
-[1, 2, 4, 3]
+>>> cnot(np.array([1, 2, 3, 4]))
+np.array([1, 2, 4, 3])
 ---
->>> cnot(cnot([1, 2, 3, 4]))
-[1, 2, 3, 4]
->>> cnot([0, 0, 1, 0])
-[0, 0, 0, 1]
+>>> cnot(cnot(np.array([1, 2, 3, 4])))
+np.array([1, 2, 3, 4])
+>>> cnot(np.array([0, 0, 1, 0]))
+np.array([0, 0, 0, 1])
 ---
 >>> par_emaranhado()
-[2**-0.5, 0, 0, 2**-0.5]
+np.array([2**-0.5, 0, 0, 2**-0.5])
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

@@ -74,32 +74,32 @@ Experimentos confirmam a violação, inclusive os de 2015, que fecharam de uma v
 
 ## Em Python
 
-Calcule a probabilidade média de vitória para ângulos (em radianos) dados. `A` e `B` são listas com os dois ângulos de cada jogador.
+Calcule a probabilidade média de vitória para ângulos (em radianos) dados. `A` e `B` são vetores com os dois ângulos de cada jogador.
 
 ```exercise:python
 id: chsh-codigo
-input: A, B | list | dois ângulos em radianos: [para 0, para 1] | [0, 0], [0, 0]
+input: A, B | np.ndarray | dois ângulos em radianos [para 0, para 1], formato (2,) | np.array([0, 0]), np.array([0, 0])
 output: prob_vitoria | float | probabilidade média de vitória, entre 0 e 1 | 0.75
 ---
-from math import cos, pi
+import numpy as np
 
 def prob_vitoria(A, B):
     total = 0
     for x in (0, 1):
         for y in (0, 1):
-            iguais = cos(A[x] - B[y]) ** 2
+            iguais = np.cos(A[x] - B[y]) ** 2
             # some a probabilidade de ganhar neste caso
     return total / 4
 ---
->>> prob_vitoria([0, 0], [0, 0])
+>>> prob_vitoria(np.array([0, 0]), np.array([0, 0]))
 0.75
 ---
->>> prob_vitoria([0, pi / 4], [pi / 8, -pi / 8])
-cos(pi / 8) ** 2
+>>> prob_vitoria(np.array([0, np.pi / 4]), np.array([np.pi / 8, -np.pi / 8]))
+np.cos(np.pi / 8) ** 2
 ---
->>> prob_vitoria([0, pi / 2], [0, 0])
+>>> prob_vitoria(np.array([0, np.pi / 2]), np.array([0, 0]))
 0.75
->>> prob_vitoria([pi / 2, 0], [0, 0])
+>>> prob_vitoria(np.array([np.pi / 2, 0]), np.array([0, 0]))
 0.25
 ```
 

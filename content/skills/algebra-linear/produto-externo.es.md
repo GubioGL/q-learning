@@ -73,29 +73,31 @@ tolerance: 0.001
 
 ## En Python
 
-Escribe el producto externo $\ket{\psi}\bra{\phi}$, devolviendo una lista de filas.
+Escribe el producto externo $\ket{\psi}\bra{\phi}$ de dos vectores, devolviendo una matriz de NumPy. No olvides el conjugado en $\phi$.
 
 ```exercise:python
 id: externo-codigo
-input: psi, phi | list | dos listas de números reales o complejos | [1, 2], [3, 4]
-output: producto_externo | list | lista de filas; elemento (i, j) = psi[i] · phi[j]* | [[3, 4], [6, 8]]
+input: psi, phi | np.ndarray | dos vectores de forma (n,), reales o complejos | np.array([1, 2]), np.array([3, 4])
+output: producto_externo | np.ndarray | matriz (n, n); elemento (i, j) = psi[i] · phi[j]* | np.array([[3, 4], [6, 8]])
 ---
+import numpy as np
+
 def producto_externo(psi, phi):
     # elemento (i, j) = psi[i] * conjugado de phi[j]
-    return []
+    return np.zeros((len(psi), len(phi)))
 ---
->>> producto_externo([1, 2], [3, 4])
-[[3, 4], [6, 8]]
+>>> producto_externo(np.array([1, 2]), np.array([3, 4]))
+np.array([[3, 4], [6, 8]])
 ---
->>> producto_externo([1, 0], [0, 1])
-[[0, 1], [0, 0]]
->>> producto_externo([1, 0], [1j, 0])
-[[-1j, 0], [0, 0]]
+>>> producto_externo(np.array([1, 0]), np.array([0, 1]))
+np.array([[0, 1], [0, 0]])
+>>> producto_externo(np.array([1, 0]), np.array([1j, 0]))
+np.array([[-1j, 0], [0, 0]])
 ---
->>> producto_externo([1, 1j], [1, 1j])
-[[1, -1j], [1j, 1]]
->>> producto_externo([1, 2, 3], [1j, 1])
-[[-1j, 1], [-2j, 2], [-3j, 3]]
+>>> producto_externo(np.array([1, 1j]), np.array([1, 1j]))
+np.array([[1, -1j], [1j, 1]])
+>>> producto_externo(np.array([1, 2, 3]), np.array([1j, 1, 0]))
+np.array([[-1j, 1, 0], [-2j, 2, 0], [-3j, 3, 0]])
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

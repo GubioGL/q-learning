@@ -70,35 +70,36 @@ answer: 2
 
 ## In Python
 
-Write the CNOT (control on the left) acting on a list of 4 amplitudes and use it to build the entangled pair from $\ket{00}$.
+Write the CNOT (control on the left) acting on a vector of 4 amplitudes and use it to build the entangled pair from $\ket{00}$.
 
 ```exercise:python
 id: cnot-codigo
-input: e | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [1, 2, 3, 4]
-output: cnot | list | the 4 amplitudes after the CNOT, in the same order | [1, 2, 4, 3]
-output: entangled_pair | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [2**-0.5, 0, 0, 2**-0.5]
+input: state | np.ndarray | vector with the 4 amplitudes, in the order 00, 01, 10, 11, shape (4,) | np.array([1, 2, 3, 4])
+output: cnot | np.ndarray | the 4 amplitudes after the CNOT, shape (4,) | np.array([1, 2, 4, 3])
+output: entangled_pair | np.ndarray | vector with the 4 amplitudes, in the order 00, 01, 10, 11, shape (4,) | np.array([2**-0.5, 0, 0, 2**-0.5])
 ---
-r = 2**-0.5
+import numpy as np
 
-def h_on_first(e):
-    return [r * (e[0] + e[2]), r * (e[1] + e[3]), r * (e[0] - e[2]), r * (e[1] - e[3])]
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
+H_ON_FIRST = np.kron(H, np.eye(2))  # 4x4 matrix
 
-def cnot(e):
-    return list(e)
+def cnot(state):
+    return state.copy()
 
 def entangled_pair():
-    return [1, 0, 0, 0]
+    state = np.array([1, 0, 0, 0])
+    return state
 ---
->>> cnot([1, 2, 3, 4])
-[1, 2, 4, 3]
+>>> cnot(np.array([1, 2, 3, 4]))
+np.array([1, 2, 4, 3])
 ---
->>> cnot(cnot([1, 2, 3, 4]))
-[1, 2, 3, 4]
->>> cnot([0, 0, 1, 0])
-[0, 0, 0, 1]
+>>> cnot(cnot(np.array([1, 2, 3, 4])))
+np.array([1, 2, 3, 4])
+>>> cnot(np.array([0, 0, 1, 0]))
+np.array([0, 0, 0, 1])
 ---
 >>> entangled_pair()
-[2**-0.5, 0, 0, 2**-0.5]
+np.array([2**-0.5, 0, 0, 2**-0.5])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 4.

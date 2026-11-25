@@ -45,7 +45,8 @@ Python (roda no navegador com Pyodide). As partes são separadas por `---`: cabe
 - `input:` e `output:` (um por linha, pelo menos um de cada): `nome | tipo | formato exato | exemplo` (o exemplo é opcional).
 - Cada teste tem uma ou mais chamadas `>>> expressão`, com o resultado esperado na linha seguinte.
 - O **teste 1** aparece para o aluno (chamada e saída); os testes 2 e 3 ficam ocultos. Só conclui quem passa nos três.
-- Números são comparados com tolerância de 1e-9, e listas e tuplas com os mesmos itens são iguais.
+- Estados, vetores e matrizes são `np.array` (o NumPy já vem carregado; ponha `import numpy as np` no código inicial e diga o formato, como `(2,)` ou `(2, 2)`).
+- Números são comparados com tolerância de 1e-9, e arrays, listas e tuplas com os mesmos itens são iguais.
 
 ````md
 ```exercise:python
@@ -90,6 +91,6 @@ O português é o original; o que não tem tradução aparece em português, com
 
 ```bash
 npm test                 # exercícios, fórmulas, imagens, níveis e regras de desbloqueio
-npm run build && npm start
+npm run build && npm start             # http://localhost:3000/q-learning/
 CHROME_PATH=/usr/bin/google-chrome npm run test:e2e   # fluxo completo no navegador
 ```

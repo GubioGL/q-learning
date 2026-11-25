@@ -79,36 +79,41 @@ answer: 4
 
 ## In Python
 
-Represent a state as a pair `(alpha, beta)` and write the gates `X`, `Z` and `H`.
+Represent a state as a vector `np.array([alpha, beta])` and write the gates `X`, `Z` and `H`. Each one takes a vector and returns **another** vector, without changing the original.
 
 ```exercise:python
 id: porta1q-codigo
-input: alpha, beta | float / complex | amplitude, a real or complex number | 0.6, 0.8
-output: X, Z, H | tuple | pair (alpha, beta) after the gate | (0.8, 0.6)
+input: state | np.ndarray | vector with the 2 amplitudes [alpha, beta], shape (2,) | np.array([0.6, 0.8])
+output: X, Z, H | np.ndarray | vector after the gate, shape (2,) | np.array([0.8, 0.6])
 ---
-def X(alpha, beta):
-    return (alpha, beta)
+import numpy as np
 
-def Z(alpha, beta):
-    return (alpha, beta)
+def X(state):
+    alpha, beta = state
+    return np.array([alpha, beta])
 
-def H(alpha, beta):
-    return (alpha, beta)
+def Z(state):
+    alpha, beta = state
+    return np.array([alpha, beta])
+
+def H(state):
+    alpha, beta = state
+    return np.array([alpha, beta])
 ---
->>> X(0.6, 0.8)
-(0.8, 0.6)
+>>> X(np.array([0.6, 0.8]))
+np.array([0.8, 0.6])
 ---
->>> Z(0.6, 0.8)
-(0.6, -0.8)
->>> X(1, 0)
-(0, 1)
+>>> Z(np.array([0.6, 0.8]))
+np.array([0.6, -0.8])
+>>> X(np.array([1, 0j]))
+np.array([0, 1])
 ---
->>> H(1, 0)
-(2**-0.5, 2**-0.5)
->>> H(0, 1)
-(2**-0.5, -2**-0.5)
->>> H(*Z(*H(0.6, 0.8)))
-(0.8, 0.6)
+>>> H(np.array([1, 0]))
+np.array([2**-0.5, 2**-0.5])
+>>> H(np.array([0, 1]))
+np.array([2**-0.5, -2**-0.5])
+>>> H(Z(H(np.array([0.6, 0.8]))))
+np.array([0.8, 0.6])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 2.

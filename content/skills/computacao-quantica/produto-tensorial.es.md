@@ -60,27 +60,29 @@ answer: 11
 
 ## En Python
 
-Escribe el producto tensorial de dos vectores de cualquier tamaño.
+Escribe el producto tensorial de dos vectores de cualquier tamaño. Inténtalo primero con bucles; luego compáralo con `np.kron`, que lo hace en NumPy.
 
 ```exercise:python
 id: tensorial-codigo
-input: u, v | list | dos listas de números, de cualquier tamaño | [1, 2], [3, 4]
-output: tensor | list | lista con len(u) · len(v) números | [3, 4, 6, 8]
+input: u, v | np.ndarray | dos vectores, formas (n,) y (m,) | np.array([1, 2]), np.array([3, 4])
+output: tensor | np.ndarray | vector de forma (n·m,) | np.array([3, 4, 6, 8])
 ---
+import numpy as np
+
 def tensor(u, v):
-    return []
+    return np.zeros(len(u) * len(v))
 ---
->>> tensor([1, 2], [3, 4])
-[3, 4, 6, 8]
+>>> tensor(np.array([1, 2]), np.array([3, 4]))
+np.array([3, 4, 6, 8])
 ---
->>> tensor([1, 0], [0, 1])
-[0, 1, 0, 0]
->>> tensor([1, 2, 3], [1, 1j])
-[1, 1j, 2, 2j, 3, 3j]
+>>> tensor(np.array([1, 0]), np.array([0, 1]))
+np.array([0, 1, 0, 0])
+>>> tensor(np.array([1, 2, 3]), np.array([1, 1j]))
+np.array([1, 1j, 2, 2j, 3, 3j])
 ---
->>> tensor([0, 1], tensor([1, 0], [0, 1]))
-[0, 0, 0, 0, 0, 1, 0, 0]
->>> len(tensor([1] * 4, [1] * 8))
+>>> tensor(np.array([0, 1]), tensor(np.array([1, 0]), np.array([0, 1])))
+np.array([0, 0, 0, 0, 0, 1, 0, 0])
+>>> len(tensor(np.ones(4), np.ones(8)))
 32
 ```
 

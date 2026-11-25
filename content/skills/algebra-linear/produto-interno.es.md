@@ -59,26 +59,30 @@ Cuidado con el conjugado: $\begin{pmatrix}1 & -i\end{pmatrix}\begin{pmatrix}1 \\
 
 ## En Python
 
+Escribe el producto interno de dos vectores de NumPy. Recuerda que `a * b` multiplica componente a componente y `np.sum` lo suma todo.
+
 ```exercise:python
 id: interno-codigo
-input: phi, psi | list | dos listas del mismo tamaño, con números reales o complejos | [1j, 0], [1, 0]
+input: phi, psi | np.ndarray | dos vectores de la misma forma (n,), reales o complejos | np.array([1j, 0]), np.array([1, 0])
 output: producto_interno | complex / float | el número <phi|psi> | -1j
 ---
+import numpy as np
+
 def producto_interno(phi, psi):
     # <phi|psi>: conjuga las componentes de phi
     return 0
 ---
->>> producto_interno([1j, 0], [1, 0])
+>>> producto_interno(np.array([1j, 0]), np.array([1, 0]))
 -1j
 ---
->>> producto_interno([1, 0], [0, 1])
+>>> producto_interno(np.array([1, 0]), np.array([0, 1]))
 0
->>> producto_interno([0.6, 0.8j], [0.6, 0.8j])
+>>> producto_interno(np.array([0.6, 0.8j]), np.array([0.6, 0.8j]))
 1
 ---
->>> producto_interno([1, 1j], [1, -1j])
+>>> producto_interno(np.array([1, 1j]), np.array([1, -1j]))
 0
->>> producto_interno([1, 2, 3], [1, 1, 1j])
+>>> producto_interno(np.array([1, 2, 3]), np.array([1, 1, 1j]))
 3 + 3j
 ```
 

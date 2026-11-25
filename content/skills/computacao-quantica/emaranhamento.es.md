@@ -67,25 +67,30 @@ En el estado $\ket{\Phi^+}$, medir un qubit determina el resultado del otro, por
 
 ## En Python
 
+Escribe la concurrencia de un estado de 2 qubits, dado como vector `np.array([c00, c01, c10, c11])`.
+
 ```exercise:python
 id: emaranhamento-codigo
-input: c00, c01, c10, c11 | float / complex | las 4 amplitudes del estado, normalizadas | 0.6, 0, 0, 0.8
+input: estado | np.ndarray | vector con las 4 amplitudes, en el orden 00, 01, 10, 11, forma (4,) | np.array([0.6, 0, 0, 0.8])
 output: concurrencia | float | la concurrencia, entre 0 y 1 | 0.96
 ---
-def concurrencia(c00, c01, c10, c11):
+import numpy as np
+
+def concurrencia(estado):
+    c00, c01, c10, c11 = estado
     return 0
 ---
->>> concurrencia(0.6, 0, 0, 0.8)
+>>> concurrencia(np.array([0.6, 0, 0, 0.8]))
 0.96
 ---
->>> concurrencia(2**-0.5, 0, 0, 2**-0.5)
+>>> concurrencia(np.array([2**-0.5, 0, 0, 2**-0.5]))
 1
->>> concurrencia(0.5, 0.5, 0.5, 0.5)
+>>> concurrencia(np.array([0.5, 0.5, 0.5, 0.5]))
 0
 ---
->>> concurrencia(0.6, 0, 0, 0.8j)
+>>> concurrencia(np.array([0.6, 0, 0, 0.8j]))
 0.96
->>> concurrencia(0.5, 0.5, 0.5, -0.5)
+>>> concurrencia(np.array([0.5, 0.5, 0.5, -0.5]))
 1
 ```
 

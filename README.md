@@ -9,7 +9,7 @@
 
 ## 🎯 Overview
 
-Online at [gubiogl.github.io/q-learning](https://gubiogl.github.io/q-learning/) and [q-learning-quantumggl.vercel.app](https://q-learning-quantumggl.vercel.app).
+Online at [gubiogl.github.io/q-learning](https://gubiogl.github.io/q-learning/).
 
 A gamified, Duolingo-style platform for **introductory quantum computing**, organized in three learning paths:
 
@@ -39,7 +39,7 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the step-by-step plan and [`content
 
 - **Next.js** 15, **React** 19, **TypeScript** (every page is static)
 - **Tailwind CSS**, **Radix UI**, **Lucide React**
-- **KaTeX** for math and **Pyodide** to run Python in the browser
+- **KaTeX** for math and **Pyodide** to run Python and NumPy in the browser
 
 > No account and no database: progress is saved in the visitor's browser and can be exported to a file.
 
@@ -109,7 +109,7 @@ This project stands on the work of others. Lesson text and exercises are origina
 
 ```bash
 npm install
-npm run dev
+npm run dev                  # http://localhost:3000/q-learning/pt
 
 npm test                     # unit and content tests
 npm run test:e2e             # browser flow (app running; CHROME_PATH=/usr/bin/google-chrome to use local Chrome)

@@ -9,7 +9,7 @@ export type RunResult = { output: string; tests: TestResult[]; error?: string };
 
 export const TIMEOUT_ERROR = "timeout";
 
-const FIRST_RUN_TIMEOUT_MS = 60_000; // includes downloading Pyodide (~10 MB)
+const FIRST_RUN_TIMEOUT_MS = 60_000; // includes downloading Pyodide (~10 MB) and NumPy
 const RUN_TIMEOUT_MS = 10_000;
 
 let worker: Worker | null = null;

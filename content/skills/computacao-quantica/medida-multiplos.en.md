@@ -49,29 +49,31 @@ Notice: before the measurement, the second qubit had probability $\tfrac14 + \tf
 
 ## In Python
 
-Write a function that takes the 4 amplitudes, in the order $00, 01, 10, 11$, and the result of measuring the first qubit. It returns the pair `(probability, state_after)`. The tests only use results with probability greater than zero.
+Write a function that takes the vector with the 4 amplitudes, in the order $00, 01, 10, 11$, and the result of measuring the first qubit. It returns the pair `(probability, state_after)`, where the second is a vector. The tests only use results with probability greater than zero.
 
 ```exercise:python
 id: multiplos-codigo
-input: state | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [0.5, 0.5, 0, 2**-0.5]
+input: state | np.ndarray | vector with the 4 amplitudes, in the order 00, 01, 10, 11, shape (4,) | np.array([0.5, 0.5, 0, 2**-0.5])
 input: result | int | result of measuring the first qubit: 0 or 1 | 1
-output: measure_first | tuple | (probability, list with the 4 amplitudes after the measurement) | (0.5, [0, 0, 0, 1])
+output: measure_first | tuple | (probability, vector with the 4 amplitudes after the measurement) | (0.5, np.array([0, 0, 0, 1]))
 ---
+import numpy as np
+
 def measure_first(state, result):
     probability = 0
-    after = list(state)
+    after = state.copy()
     return probability, after
 ---
->>> measure_first([0.5, 0.5, 0, 2**-0.5], 1)
-(0.5, [0, 0, 0, 1])
+>>> measure_first(np.array([0.5, 0.5, 0, 2**-0.5]), 1)
+(0.5, np.array([0, 0, 0, 1]))
 ---
->>> measure_first([0.5, 0.5, 0, 2**-0.5], 0)
-(0.5, [2**-0.5, 2**-0.5, 0, 0])
+>>> measure_first(np.array([0.5, 0.5, 0, 2**-0.5]), 0)
+(0.5, np.array([2**-0.5, 2**-0.5, 0, 0]))
 ---
->>> measure_first([0.6, 0, 0, 0.8j], 1)
-(0.64, [0, 0, 0, 1j])
->>> measure_first([0.6, 0, 0, 0.8j], 0)
-(0.36, [1, 0, 0, 0])
+>>> measure_first(np.array([0.6, 0, 0, 0.8j]), 1)
+(0.64, np.array([0, 0, 0, 1j]))
+>>> measure_first(np.array([0.6, 0, 0, 0.8j]), 0)
+(0.36, np.array([1, 0, 0, 0]))
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 4.

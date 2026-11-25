@@ -67,30 +67,32 @@ answer: no
 
 ## En Python
 
-Escribe una función que compruebe si una matriz $2\times 2$ (lista de filas) es unitaria, con tolerancia de $10^{-9}$.
+Escribe una función que compruebe si una matriz $2\times 2$ de NumPy es unitaria, con tolerancia de $10^{-9}$. Útiles: `U.conj().T` (conjugado transpuesto), `@` (producto de matrices) y `np.allclose`.
 
 ```exercise:python
 id: unitarias-codigo
-input: U | list | lista de 2 filas, cada fila con 2 números | [[0, 1], [1, 0]]
+input: U | np.ndarray | matriz 2x2, forma (2, 2) | np.array([[0, 1], [1, 0]])
 output: es_unitaria | bool | True si U es unitaria, si no False | True
 ---
+import numpy as np
+
 def es_unitaria(U):
     # comprueba si la matriz U†U es la identidad
     return True
 ---
->>> es_unitaria([[1, 1], [0, 1]])
+>>> es_unitaria(np.array([[1, 1], [0, 1]]))
 False
 ---
->>> es_unitaria([[0, -1j], [1j, 0]])
+>>> es_unitaria(np.array([[0, -1j], [1j, 0]]))
 True
->>> es_unitaria([[1, 1], [1, -1]])
+>>> es_unitaria(np.array([[1, 1], [1, -1]]))
 False
 ---
->>> es_unitaria([[2**-0.5, 2**-0.5], [2**-0.5, -2**-0.5]])
+>>> es_unitaria(np.array([[1, 1], [1, -1]]) / np.sqrt(2))
 True
->>> es_unitaria([[1, 0], [0, 1j]])
+>>> es_unitaria(np.array([[1, 0], [0, 1j]]))
 True
->>> es_unitaria([[0.6, 0.8], [0.6, 0.8]])
+>>> es_unitaria(np.array([[0.6, 0.8], [0.6, 0.8]]))
 False
 ```
 

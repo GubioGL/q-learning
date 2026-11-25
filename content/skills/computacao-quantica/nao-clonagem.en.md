@@ -66,29 +66,32 @@ answer: no
 
 ## In Python
 
-The **fidelity** between what the CNOT produces and the ideal copy is $F = |\braket{\text{ideal}|\text{obtained}}|^2$. Write it for real amplitudes $\alpha$ and $\beta$.
+The **fidelity** between what the CNOT produces and the ideal copy is $F = |\braket{\text{ideal}|\text{obtained}}|^2$. Write it for a real state `np.array([alpha, beta])`.
 
 ```exercise:python
 id: clonagem-codigo
-input: alpha, beta | float | real amplitudes with alpha² + beta² = 1 | 1, 0
+input: state | np.ndarray | real normalized vector [alpha, beta], shape (2,) | np.array([1, 0])
 output: fidelity | float | the fidelity, between 0 and 1 | 1.0
 ---
-def fidelity(alpha, beta):
-    obtained = [alpha, 0, 0, beta]
-    ideal = [0, 0, 0, 0]  # fix this: the 4 amplitudes of the perfect copy
-    return sum(a * b for a, b in zip(ideal, obtained)) ** 2
+import numpy as np
+
+def fidelity(state):
+    alpha, beta = state
+    obtained = np.array([alpha, 0, 0, beta])
+    ideal = np.zeros(4)  # fix this: the vector of the perfect copy
+    return np.sum(ideal * obtained) ** 2
 ---
->>> fidelity(1, 0)
+>>> fidelity(np.array([1, 0]))
 1
 ---
->>> fidelity(2**-0.5, 2**-0.5)
+>>> fidelity(np.array([2**-0.5, 2**-0.5]))
 0.5
->>> fidelity(0, 1)
+>>> fidelity(np.array([0, 1]))
 1
 ---
->>> fidelity(0.6, 0.8)
+>>> fidelity(np.array([0.6, 0.8]))
 0.529984
->>> fidelity(0.8, -0.6)
+>>> fidelity(np.array([0.8, -0.6]))
 0.087616
 ```
 

@@ -1,6 +1,6 @@
 import { defineConfig } from "@playwright/test";
 
-// npm run test:e2e  — builds nothing; start the app first (npm run build && npm start) or set BASE_URL.
+// npm run test:e2e  — builds nothing; start the app first (npm run build && npm start) or set BASE_URL (only the origin).
 // CHROME_PATH lets it use an installed Chrome instead of downloading Playwright's browser.
 export default defineConfig({
   testDir: "e2e",

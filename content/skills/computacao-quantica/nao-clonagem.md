@@ -66,29 +66,32 @@ answer: não | nao
 
 ## Em Python
 
-A **fidelidade** entre o que a CNOT produz e a cópia ideal é $F = |\braket{\text{ideal}|\text{obtido}}|^2$. Escreva-a para amplitudes reais $\alpha$ e $\beta$.
+A **fidelidade** entre o que a CNOT produz e a cópia ideal é $F = |\braket{\text{ideal}|\text{obtido}}|^2$. Escreva-a para um estado real `np.array([alfa, beta])`.
 
 ```exercise:python
 id: clonagem-codigo
-input: alfa, beta | float | amplitudes reais com alfa² + beta² = 1 | 1, 0
+input: estado | np.ndarray | vetor real normalizado [alfa, beta], formato (2,) | np.array([1, 0])
 output: fidelidade | float | a fidelidade, entre 0 e 1 | 1.0
 ---
-def fidelidade(alfa, beta):
-    obtido = [alfa, 0, 0, beta]
-    ideal = [0, 0, 0, 0]  # corrija: as 4 amplitudes da cópia perfeita
-    return sum(a * b for a, b in zip(ideal, obtido)) ** 2
+import numpy as np
+
+def fidelidade(estado):
+    alfa, beta = estado
+    obtido = np.array([alfa, 0, 0, beta])
+    ideal = np.zeros(4)  # corrija: o vetor da cópia perfeita
+    return np.sum(ideal * obtido) ** 2
 ---
->>> fidelidade(1, 0)
+>>> fidelidade(np.array([1, 0]))
 1
 ---
->>> fidelidade(2**-0.5, 2**-0.5)
+>>> fidelidade(np.array([2**-0.5, 2**-0.5]))
 0.5
->>> fidelidade(0, 1)
+>>> fidelidade(np.array([0, 1]))
 1
 ---
->>> fidelidade(0.6, 0.8)
+>>> fidelidade(np.array([0.6, 0.8]))
 0.529984
->>> fidelidade(0.8, -0.6)
+>>> fidelidade(np.array([0.8, -0.6]))
 0.087616
 ```
 

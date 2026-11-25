@@ -64,29 +64,33 @@ Compare with superdense coding: there, 1 qubit plus an entangled pair are worth 
 
 ## In Python
 
-Write Bob's correction. `state` is the pair of amplitudes he is left with.
+Write Bob's correction. `state` is the vector with the 2 amplitudes he is left with.
 
 ```exercise:python
 id: teletransporte-codigo
-input: state | tuple | pair (a, b) with Bob's 2 amplitudes | (0.8, 0.6)
+input: state | np.ndarray | vector with Bob's 2 amplitudes, shape (2,) | np.array([0.8, 0.6])
 input: m1, m2 | int | bits sent by Alice, 0 or 1 | 0, 1
-output: correct | tuple | corrected pair of amplitudes | (0.6, 0.8)
+output: correct | np.ndarray | corrected vector, shape (2,) | np.array([0.6, 0.8])
 ---
+import numpy as np
+
+X = np.array([[0, 1], [1, 0]])
+Z = np.array([[1, 0], [0, -1]])
+
 def correct(state, m1, m2):
-    a, b = state
     # X if m2 = 1, then Z if m1 = 1
-    return (a, b)
+    return state
 ---
->>> correct((0.8, 0.6), 0, 1)
-(0.6, 0.8)
+>>> correct(np.array([0.8, 0.6]), 0, 1)
+np.array([0.6, 0.8])
 ---
->>> correct((0.6, 0.8), 0, 0)
-(0.6, 0.8)
->>> correct((0.6, -0.8j), 1, 0)
-(0.6, 0.8j)
+>>> correct(np.array([0.6, 0.8]), 0, 0)
+np.array([0.6, 0.8])
+>>> correct(np.array([0.6, -0.8j]), 1, 0)
+np.array([0.6, 0.8j])
 ---
->>> correct((-0.8j, 0.6), 1, 1)
-(0.6, 0.8j)
+>>> correct(np.array([-0.8j, 0.6]), 1, 1)
+np.array([0.6, 0.8j])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 6.

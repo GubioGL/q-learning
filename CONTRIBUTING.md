@@ -7,7 +7,7 @@ Toda ajuda é bem-vinda: corrigir um texto, melhorar uma tradução, escrever um
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
+npm run dev        # http://localhost:3000/q-learning/pt
 ```
 
 Não é preciso banco de dados, conta nem variável de ambiente: o progresso fica no navegador de quem usa.
@@ -21,7 +21,7 @@ npm run build && npm start
 CHROME_PATH=/usr/bin/google-chrome npm run test:e2e   # em outro terminal, com o site rodando
 ```
 
-Arquivos de `public/` usados no código passam por `asset()` (`lib/asset.ts`), porque no GitHub Pages o site fica em `/q-learning`.
+Arquivos de `public/` usados no código passam por `asset()` (`lib/asset.ts`), porque o site fica em `/q-learning`.
 
 ## O que mexer onde
 

@@ -67,30 +67,32 @@ answer: não | nao
 
 ## Em Python
 
-Escreva uma função que testa se uma matriz $2\times 2$ (lista de linhas) é unitária, com tolerância de $10^{-9}$.
+Escreva uma função que testa se uma matriz $2\times 2$ do NumPy é unitária, com tolerância de $10^{-9}$. Úteis: `U.conj().T` (conjugado transposto), `@` (produto de matrizes) e `np.allclose`.
 
 ```exercise:python
 id: unitarias-codigo
-input: U | list | lista de 2 linhas, cada linha com 2 números | [[0, 1], [1, 0]]
+input: U | np.ndarray | matriz 2x2, formato (2, 2) | np.array([[0, 1], [1, 0]])
 output: eh_unitaria | bool | True se U é unitária, senão False | True
 ---
+import numpy as np
+
 def eh_unitaria(U):
     # verifique se a matriz U†U é a identidade
     return True
 ---
->>> eh_unitaria([[1, 1], [0, 1]])
+>>> eh_unitaria(np.array([[1, 1], [0, 1]]))
 False
 ---
->>> eh_unitaria([[0, -1j], [1j, 0]])
+>>> eh_unitaria(np.array([[0, -1j], [1j, 0]]))
 True
->>> eh_unitaria([[1, 1], [1, -1]])
+>>> eh_unitaria(np.array([[1, 1], [1, -1]]))
 False
 ---
->>> eh_unitaria([[2**-0.5, 2**-0.5], [2**-0.5, -2**-0.5]])
+>>> eh_unitaria(np.array([[1, 1], [1, -1]]) / np.sqrt(2))
 True
->>> eh_unitaria([[1, 0], [0, 1j]])
+>>> eh_unitaria(np.array([[1, 0], [0, 1j]]))
 True
->>> eh_unitaria([[0.6, 0.8], [0.6, 0.8]])
+>>> eh_unitaria(np.array([[0.6, 0.8], [0.6, 0.8]]))
 False
 ```
 

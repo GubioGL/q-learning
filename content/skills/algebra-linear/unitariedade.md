@@ -64,40 +64,37 @@ answer: 3
 
 ## Em Python
 
-Escreva uma função que recebe uma lista de matrizes $2\times 2$ na ordem do desenho e devolve a matriz do circuito inteiro.
+Escreva uma função que recebe uma lista de matrizes $2\times 2$ na ordem do desenho e devolve a matriz do circuito inteiro. O produto de matrizes do NumPy é `@`.
 
 ```exercise:python
 id: unitariedade-circuito
-input: portas | list | lista de matrizes 2x2 na ordem do desenho; pode ser vazia | [H, Z, H]
-output: matriz_do_circuito | list | lista de 2 linhas, cada linha com 2 números | [[0, 1], [1, 0]]
+input: portas | list[np.ndarray] | lista de matrizes (2, 2) na ordem do desenho; pode ser vazia | [H, Z, H]
+output: matriz_do_circuito | np.ndarray | matriz 2x2, formato (2, 2) | np.array([[0, 1], [1, 0]])
 ---
-r = 2**-0.5
-I = [[1, 0], [0, 1]]
-X = [[0, 1], [1, 0]]
-Z = [[1, 0], [0, -1]]
-S = [[1, 0], [0, 1j]]
-H = [[r, r], [r, -r]]
+import numpy as np
 
-def vezes(A, B):
-    return [[sum(A[i][k] * B[k][j] for k in range(2)) for j in range(2)] for i in range(2)]
+X = np.array([[0, 1], [1, 0]])
+Z = np.array([[1, 0], [0, -1]])
+S = np.array([[1, 0], [0, 1j]])
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
 
 def matriz_do_circuito(portas):
-    total = I
+    total = np.eye(2)
     # a porta aplicada depois multiplica pela esquerda
     return total
 ---
 >>> matriz_do_circuito([H, Z, H])
-[[0, 1], [1, 0]]
+np.array([[0, 1], [1, 0]])
 ---
 >>> matriz_do_circuito([])
-[[1, 0], [0, 1]]
+np.array([[1, 0], [0, 1]])
 >>> matriz_do_circuito([S, S])
-[[1, 0], [0, -1]]
+np.array([[1, 0], [0, -1]])
 ---
 >>> matriz_do_circuito([X, S])
-[[0, 1], [1j, 0]]
+np.array([[0, 1], [1j, 0]])
 >>> matriz_do_circuito([S, X])
-[[0, 1j], [1, 0]]
+np.array([[0, 1j], [1, 0]])
 ```
 
 > Para se aprofundar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 3.

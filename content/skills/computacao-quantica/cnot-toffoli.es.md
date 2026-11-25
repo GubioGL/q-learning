@@ -70,35 +70,36 @@ answer: 2
 
 ## En Python
 
-Escribe la CNOT (control a la izquierda) actuando sobre una lista de 4 amplitudes y úsala para construir el par entrelazado a partir de $\ket{00}$.
+Escribe la CNOT (control a la izquierda) actuando sobre un vector de 4 amplitudes y úsala para construir el par entrelazado a partir de $\ket{00}$.
 
 ```exercise:python
 id: cnot-codigo
-input: e | list | lista con las 4 amplitudes, en el orden 00, 01, 10, 11 | [1, 2, 3, 4]
-output: cnot | list | las 4 amplitudes después de la CNOT, en el mismo orden | [1, 2, 4, 3]
-output: par_entrelazado | list | lista con las 4 amplitudes, en el orden 00, 01, 10, 11 | [2**-0.5, 0, 0, 2**-0.5]
+input: estado | np.ndarray | vector con las 4 amplitudes, en el orden 00, 01, 10, 11, forma (4,) | np.array([1, 2, 3, 4])
+output: cnot | np.ndarray | las 4 amplitudes después de la CNOT, forma (4,) | np.array([1, 2, 4, 3])
+output: par_entrelazado | np.ndarray | vector con las 4 amplitudes, en el orden 00, 01, 10, 11, forma (4,) | np.array([2**-0.5, 0, 0, 2**-0.5])
 ---
-r = 2**-0.5
+import numpy as np
 
-def h_en_el_primero(e):
-    return [r * (e[0] + e[2]), r * (e[1] + e[3]), r * (e[0] - e[2]), r * (e[1] - e[3])]
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
+H_EN_EL_PRIMERO = np.kron(H, np.eye(2))  # matriz 4x4
 
-def cnot(e):
-    return list(e)
+def cnot(estado):
+    return estado.copy()
 
 def par_entrelazado():
-    return [1, 0, 0, 0]
+    estado = np.array([1, 0, 0, 0])
+    return estado
 ---
->>> cnot([1, 2, 3, 4])
-[1, 2, 4, 3]
+>>> cnot(np.array([1, 2, 3, 4]))
+np.array([1, 2, 4, 3])
 ---
->>> cnot(cnot([1, 2, 3, 4]))
-[1, 2, 3, 4]
->>> cnot([0, 0, 1, 0])
-[0, 0, 0, 1]
+>>> cnot(cnot(np.array([1, 2, 3, 4])))
+np.array([1, 2, 3, 4])
+>>> cnot(np.array([0, 0, 1, 0]))
+np.array([0, 0, 0, 1])
 ---
 >>> par_entrelazado()
-[2**-0.5, 0, 0, 2**-0.5]
+np.array([2**-0.5, 0, 0, 2**-0.5])
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 4.

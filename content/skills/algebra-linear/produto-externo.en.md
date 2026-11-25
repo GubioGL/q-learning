@@ -73,29 +73,31 @@ tolerance: 0.001
 
 ## In Python
 
-Write the outer product $\ket{\psi}\bra{\phi}$, returning a list of rows.
+Write the outer product $\ket{\psi}\bra{\phi}$ of two vectors, returning a NumPy matrix. Do not forget the conjugate on $\phi$.
 
 ```exercise:python
 id: externo-codigo
-input: psi, phi | list | two lists of real or complex numbers | [1, 2], [3, 4]
-output: outer_product | list | list of rows; element (i, j) = psi[i] · phi[j]* | [[3, 4], [6, 8]]
+input: psi, phi | np.ndarray | two vectors of shape (n,), real or complex | np.array([1, 2]), np.array([3, 4])
+output: outer_product | np.ndarray | matrix (n, n); element (i, j) = psi[i] · phi[j]* | np.array([[3, 4], [6, 8]])
 ---
+import numpy as np
+
 def outer_product(psi, phi):
     # element (i, j) = psi[i] * conjugate of phi[j]
-    return []
+    return np.zeros((len(psi), len(phi)))
 ---
->>> outer_product([1, 2], [3, 4])
-[[3, 4], [6, 8]]
+>>> outer_product(np.array([1, 2]), np.array([3, 4]))
+np.array([[3, 4], [6, 8]])
 ---
->>> outer_product([1, 0], [0, 1])
-[[0, 1], [0, 0]]
->>> outer_product([1, 0], [1j, 0])
-[[-1j, 0], [0, 0]]
+>>> outer_product(np.array([1, 0]), np.array([0, 1]))
+np.array([[0, 1], [0, 0]])
+>>> outer_product(np.array([1, 0]), np.array([1j, 0]))
+np.array([[-1j, 0], [0, 0]])
 ---
->>> outer_product([1, 1j], [1, 1j])
-[[1, -1j], [1j, 1]]
->>> outer_product([1, 2, 3], [1j, 1])
-[[-1j, 1], [-2j, 2], [-3j, 3]]
+>>> outer_product(np.array([1, 1j]), np.array([1, 1j]))
+np.array([[1, -1j], [1j, 1]])
+>>> outer_product(np.array([1, 2, 3]), np.array([1j, 1, 0]))
+np.array([[-1j, 1, 0], [-2j, 2, 0], [-3j, 3, 0]])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 3.

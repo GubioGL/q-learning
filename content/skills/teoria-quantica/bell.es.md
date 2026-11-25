@@ -69,30 +69,34 @@ answer: 1
 
 ## En Python
 
-Escribe una función que reciba los bits `(a, b)` y devuelva las 4 amplitudes del estado de Bell preparado a partir de $\ket{ab}$.
+Escribe una función que reciba los bits `a` y `b` y devuelva el vector con las 4 amplitudes del estado de Bell preparado a partir de $\ket{ab}$.
 
 ```exercise:python
 id: bell-codigo
 input: a, b | int | 0 o 1 | 1, 0
-output: estado_de_bell | list | lista con las 4 amplitudes, en el orden 00, 01, 10, 11 | [2**-0.5, 0, 0, -2**-0.5]
+output: estado_de_bell | np.ndarray | vector con las 4 amplitudes, en el orden 00, 01, 10, 11, forma (4,) | np.array([2**-0.5, 0, 0, -2**-0.5])
 ---
-r = 2**-0.5
+import numpy as np
+
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
+CNOT = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]])
 
 def estado_de_bell(a, b):
-    estado = [0, 0, 0, 0]
-    # H en el primero: (|0> + (-1)^a |1>) / raíz de 2; luego CNOT
+    estado = np.zeros(4)
+    estado[2 * a + b] = 1  # |ab>
+    # aplica H al primer qubit y luego la CNOT
     return estado
 ---
 >>> estado_de_bell(0, 0)
-[2**-0.5, 0, 0, 2**-0.5]
+np.array([2**-0.5, 0, 0, 2**-0.5])
 ---
 >>> estado_de_bell(1, 0)
-[2**-0.5, 0, 0, -2**-0.5]
+np.array([2**-0.5, 0, 0, -2**-0.5])
 ---
 >>> estado_de_bell(0, 1)
-[0, 2**-0.5, 2**-0.5, 0]
+np.array([0, 2**-0.5, 2**-0.5, 0])
 >>> estado_de_bell(1, 1)
-[0, 2**-0.5, -2**-0.5, 0]
+np.array([0, 2**-0.5, -2**-0.5, 0])
 ```
 
 > Para profundizar: T. G. Wong, *Introduction to Classical and Quantum Computing*, cap. 6.

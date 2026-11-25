@@ -52,32 +52,30 @@ If a spy captures only Alice's qubit in transit, they learn nothing: alone, it i
 
 ## In Python
 
-Write Alice's side: given the bits, apply X and/or Z to the **first** qubit of the pair.
+Write Alice's side: given the bits, apply X and/or Z to the **first** qubit of the pair. The $4\times 4$ matrices are ready, built with `np.kron`.
 
 ```exercise:python
 id: superdensa-codigo
 input: b1, b2 | int | 0 or 1 | 1, 0
-output: encode | list | list with the 4 amplitudes, in the order 00, 01, 10, 11 | [2**-0.5, 0, 0, -2**-0.5]
+output: encode | np.ndarray | vector with the 4 amplitudes, in the order 00, 01, 10, 11, shape (4,) | np.array([2**-0.5, 0, 0, -2**-0.5])
 ---
-r = 2**-0.5
-PAIR = [r, 0, 0, r]  # order 00, 01, 10, 11
+import numpy as np
 
-def x_on_first(e):
-    return [e[2], e[3], e[0], e[1]]
-
-def z_on_first(e):
-    return [e[0], e[1], -e[2], -e[3]]
+I = np.eye(2)
+H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
+X_ON_FIRST = np.kron(np.array([[0, 1], [1, 0]]), I)
+Z_ON_FIRST = np.kron(np.array([[1, 0], [0, -1]]), I)
+CNOT = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]])
+PAIR = np.array([1, 0, 0, 1]) / np.sqrt(2)  # order 00, 01, 10, 11
 
 def encode(b1, b2):
-    state = PAIR
+    state = PAIR.copy()
     # b2 = 1 asks for X; b1 = 1 asks for Z (X first)
     return state
 
-def decode(e):
+def decode(state):
     # Bob: CNOT, then H on the first; returns the most likely result
-    e = [e[0], e[1], e[3], e[2]]
-    e = [r * (e[0] + e[2]), r * (e[1] + e[3]), r * (e[0] - e[2]), r * (e[1] - e[3])]
-    i = max(range(4), key=lambda k: abs(e[k]))
+    i = int(np.argmax(np.abs(np.kron(H, I) @ CNOT @ state)))
     return (i // 2, i % 2)
 ---
 >>> decode(encode(1, 0))
@@ -91,7 +89,7 @@ def decode(e):
 >>> decode(encode(1, 1))
 (1, 1)
 >>> encode(0, 1)
-[0, 2**-0.5, 2**-0.5, 0]
+np.array([0, 2**-0.5, 2**-0.5, 0])
 ```
 
 > To go deeper: T. G. Wong, *Introduction to Classical and Quantum Computing*, ch. 6.

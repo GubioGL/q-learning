@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
-// "/q-learning" to test a GitHub Pages build; that host has no redirects and ends URLs with "/".
-const BASE = process.env.BASE_PATH ?? "";
+const BASE = "/q-learning"; // next.config.ts
 const OUT = process.env.OUT ?? "test-results";
 const shot = async (page, name) => { await page.waitForTimeout(400); await page.screenshot({ path: `${OUT}/${name}.png`, fullPage: true }); };
 
@@ -164,7 +163,7 @@ test("courses -> skill -> challenges flow", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test("old links, languages and unknown pages", async ({ browser, baseURL }) => {
+test("languages and unknown pages", async ({ browser, baseURL }) => {
   for (const [locale, path] of [["pt-BR", "/pt"], ["en-US", "/en"], ["es-ES", "/es"], ["fr-FR", "/pt"]]) {
     const context = await browser.newContext({ locale, baseURL });
     const page = await context.newPage();
@@ -173,7 +172,6 @@ test("old links, languages and unknown pages", async ({ browser, baseURL }) => {
     await context.close();
   }
   const { request } = await browser.newContext({ baseURL });
-  if (!BASE) expect(new URL((await request.get("/cursos/basico")).url()).pathname).toBe("/pt/cursos/basico");
   for (const missing of ["/xx/cursos", "/pt/cursos/nada", "/pt/cursos/basico/nada", "/pt/desafios/nada"]) {
     expect((await request.get(BASE + missing)).status(), missing).toBe(404);
   }
@@ -216,4 +214,16 @@ test("a skill page scrolls inside its own area, down to the last button", async 
     await page.mouse.wheel(0, 20_000);
     await expect(page.getByRole("button", { name: "Concluir skill" })).toBeInViewport();
   }
+});
+
+test("states are NumPy arrays: conj() works on the bra exercise", async ({ page }) => {
+  await page.goto(BASE + "/pt/cursos/algebra-linear/vetores");
+  const editor = page.locator("#vetores-bra-codigo");
+  await expect(editor).toHaveValue(/import numpy as np/);
+  await editor.fill("def bra(ket):\n    return ket.conj()\n"); // np is there even without the import line
+  await page.getByRole("button", { name: /Executar e testar/ }).click();
+  await expect(page.getByText("Passou nos testes 1, 2 e 3.")).toBeVisible({ timeout: 90_000 });
+  await editor.fill("def bra(ket):\n    return ket\n");
+  await page.getByRole("button", { name: /Executar e testar/ }).click();
+  await expect(page.getByText(/Reprovou: 1/)).toBeVisible({ timeout: 30_000 });
 });
