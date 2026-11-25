@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { SidebarItem } from "@/components/ui/sidebar-item";
 import { useLocale, useT } from "@/lib/i18n/context";
+import { asset } from "@/lib/asset";
 
 /**
  * Conteúdo do menu lateral: navegação.
@@ -14,7 +15,7 @@ export const SidebarContent = () => {
   return (
     <>
       <div className="text-purple-400 font-extrabold flex items-center pt-4 mb-6">
-        <Image src="/Logoket.png" alt="" width={40} height={40} />
+        <Image src={asset("/Logoket.png")} alt="" width={40} height={40} />
         <span className="font-extrabold tracking-tight pl-4 text-lg leading-tight">Quantum Learning</span>
       </div>
       <nav aria-label={nav.label} className="space-y-2">

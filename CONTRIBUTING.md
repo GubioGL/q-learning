@@ -21,6 +21,8 @@ npm run build && npm start
 CHROME_PATH=/usr/bin/google-chrome npm run test:e2e   # em outro terminal, com o site rodando
 ```
 
+Arquivos de `public/` usados no código passam por `asset()` (`lib/asset.ts`), porque no GitHub Pages o site fica em `/q-learning`.
+
 ## O que mexer onde
 
 | Quero… | Onde |

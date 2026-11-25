@@ -9,7 +9,10 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
 - **Sem conta e sem banco:** o progresso fica no `localStorage` (`lib/use-progress.ts`), com exportar/importar na
   página de Metas. É o mais barato e rápido. Limites: não há ranking confiável, e limpar o navegador apaga o progresso
   (o Safari pode apagar após 7 dias sem visita). O código com Clerk + Neon está no git até `13227cf`.
-- Hospedagem: Vercel (Hobby, grátis, uso não comercial). Deploys antigos são apagados depois de cada deploy conferido.
+- Hospedagem dupla, por enquanto, a partir do mesmo código e a cada push no `main`:
+  - Vercel (Hobby): https://q-learning-quantumggl.vercel.app. Deploys antigos são apagados depois de cada deploy conferido.
+  - GitHub Pages: https://gubiogl.github.io/q-learning (`.github/workflows/pages.yml`, `npm run build:pages`). Sem
+    redirecionamentos: `public/index.html` escolhe o idioma. O progresso é separado em cada endereço (exportar/importar).
 - Duas áreas: **Cursos** (codebook estilo PennyLane: texto, ilustração e exercícios em Python,
   número ou texto, skills em sequência) e **Desafios** (estilo Duolingo: trilha única de níveis,
   do básico ao avançado; errar tudo recomenda a skill do curso).

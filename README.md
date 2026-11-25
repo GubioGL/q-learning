@@ -9,6 +9,8 @@
 
 ## 🎯 Overview
 
+Online at [gubiogl.github.io/q-learning](https://gubiogl.github.io/q-learning/) and [q-learning-quantumggl.vercel.app](https://q-learning-quantumggl.vercel.app).
+
 A gamified, Duolingo-style platform for **introductory quantum computing**, organized in three learning paths:
 
 - Basic linear algebra

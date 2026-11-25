@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getDict } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n/locales";
+import { asset } from "@/lib/asset";
 
 export default async function Home({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -15,7 +16,7 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
           <span className="block">{t.path}</span>
         </h1>
         <p className="mb-4 text-center text-lg text-gray-700">{t.intro}</p>
-        <Image src="/caticonpng.png" alt="" width={250} height={250} className="mb-4" priority />
+        <Image src={asset("/caticonpng.png")} alt="" width={250} height={250} className="mb-4" priority />
         <Button asChild variant="buttonRox" size="lg"><Link href={`/${locale}/cursos`}>{t.start}</Link></Button>
       </div>
 

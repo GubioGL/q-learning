@@ -3,6 +3,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { isExerciseFence, parseExercise } from "@/lib/exercise";
 import { ExerciseBlock } from "./exercise";
+import { asset } from "@/lib/asset";
 
 // Fenced blocks are rendered by `pre`; exercise fences become interactive exercises.
 const components: Components = {
@@ -15,7 +16,7 @@ const components: Components = {
     strong: ({ children }) => <strong className="text-gray-100">{children}</strong>,
     blockquote: ({ children }) => <blockquote className="my-6 border-l-4 border-purple-500 pl-4 text-gray-400">{children}</blockquote>,
     // eslint-disable-next-line @next/next/no-img-element -- content images are small local SVG/PNG
-    img: ({ src, alt }) => <img src={typeof src === "string" ? src : undefined} alt={alt ?? ""} className="mx-auto my-6 max-w-full" />,
+    img: ({ src, alt }) => <img src={typeof src === "string" ? asset(src) : undefined} alt={alt ?? ""} className="mx-auto my-6 max-w-full" />,
     code: ({ children }) => <code className="rounded bg-gray-800 px-1.5 py-0.5 font-mono text-[0.9em] text-purple-200">{children}</code>,
     // Wide equations scroll sideways, so the keyboard must reach them.
     span: ({ className, style, children, ...rest }) => (

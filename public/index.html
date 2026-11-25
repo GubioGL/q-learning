@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Learning</title>
+<script>
+  // Entry page on hosts without redirects (GitHub Pages): first supported language of the browser, else Portuguese.
+  var wanted = (navigator.languages || [navigator.language]).map(function (l) { return String(l).slice(0, 2).toLowerCase(); });
+  location.replace((wanted.find(function (l) { return ["pt", "en", "es"].indexOf(l) >= 0; }) || "pt") + "/");
+</script>
+</head>
+<body>
+<h1>Quantum Learning</h1>
+<p><a href="pt/" lang="pt-BR">Português</a> · <a href="en/" lang="en">English</a> · <a href="es/" lang="es">Español</a></p>
+</body>
+</html>

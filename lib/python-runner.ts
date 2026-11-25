@@ -1,5 +1,6 @@
 // Browser-side client for public/pyodide-worker.js.
 
+import { asset } from "./asset";
 import type { Case } from "./exercise";
 
 export type TestResult = { ok: boolean; got?: string; error?: string };
@@ -17,7 +18,7 @@ let nextId = 0;
 
 function getWorker() {
     if (!worker) {
-        worker = new Worker("/pyodide-worker.js");
+        worker = new Worker(asset("/pyodide-worker.js"));
         worker.addEventListener("message", (e) => { if (e.data.type === "ready") isReady = true; });
     }
     return worker;

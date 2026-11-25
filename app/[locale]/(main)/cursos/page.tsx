@@ -5,6 +5,7 @@ import { getCourses } from "@/content/courses";
 import { getDict } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n/locales";
 import { skillKey } from "@/lib/progress";
+import { asset } from "@/lib/asset";
 
 export default async function CursosPage({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params;
@@ -20,7 +21,7 @@ export default async function CursosPage({ params }: { params: Promise<{ locale:
                     <Link key={course.id} href={`/${locale}/cursos/${course.id}`}
                         className="group flex flex-col gap-4 rounded-2xl border-2 border-gray-700 bg-gray-800/60 p-5 transition-colors hover:border-purple-500">
                         <div className="flex items-center gap-4">
-                            <Image src={course.image} alt="" width={56} height={56} className="rounded-xl" />
+                            <Image src={asset(course.image)} alt="" width={56} height={56} className="rounded-xl" />
                             <div>
                                 <h2 className="text-xl font-bold text-gray-100 group-hover:text-purple-300">{course.title}</h2>
                                 <span className="text-sm text-purple-300">{t.level[course.level]} · {course.skills.length} skills</span>
