@@ -1,65 +1,32 @@
-<img src="cat.png" alt="Cat Icon" width="400" />
+<img src="cat.png" alt="Purple cat, the Quantum Learning mascot" width="300" />
 
+# Quantum Learning
 
-# 🧠 Quantum Learning
+Learn quantum computing from scratch, for free and with no sign-up: **[gubiogl.github.io/q-learning](https://gubiogl.github.io/q-learning/)**
 
-**Quantum Learning** is a personal and open-source project inspired by Duolingo, aiming to develop a **gamified and interactive** web platform for language learning and, in the future, **quantum computing**. The central idea is to make learning more inclusive, fun, and accessible for everyone.
+- **Courses**: short pages with text, math, illustrations and exercises, including Python that runs in the browser.
+- **Challenges**: a single trail of quick levels, from bits to quantum cryptography.
+- Available in Portuguese, English and Spanish. Progress is saved in your browser.
 
----
+There is also a companion book, in LaTeX, in [`livro/`](livro/).
 
-## 🎯 Overview
+## Run it locally
 
-Online at [gubiogl.github.io/q-learning](https://gubiogl.github.io/q-learning/).
+```bash
+npm install
+npm run dev      # http://localhost:3000/q-learning/pt
+npm test
+```
 
-A gamified, Duolingo-style platform for **introductory quantum computing**, organized in three learning paths:
+Built with Next.js, TypeScript, Tailwind CSS, KaTeX and Pyodide.
 
-- Basic linear algebra
-- Fundamentals of classical computing
-- Introduction to quantum computing
+## Contribute
 
-The platform has two parts:
+See [`CONTRIBUTING.md`](CONTRIBUTING.md), the guide to [writing lessons](content/README.md) and the [roadmap](docs/ROADMAP.md).
 
-- **Courses** — a codebook in the style of the PennyLane Codebook: each skill is a page with text, math, illustrations and short exercises answered with Python (run in the browser), a number or text. Skills unlock in order.
-- **Challenges** — the Duolingo-style part: a single trail of levels from basic to advanced, with hearts. Each level unlocks the next; running out of hearts points you to the matching course skill.
+Code under the [MIT License](LICENSE); lessons, illustrations and the book under [CC BY-SA 4.0](LICENSE-CONTENT.md).
 
-The companion book in [`livro/`](livro/) goes deeper into the theory.
-See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the step-by-step plan and [`content/README.md`](content/README.md) to write lessons.
-
----
-
-## 🚀 Goals
-
-- Create an engaging and motivating learning experience based on micro-lessons and rewards.
-- Offer a free, open-source system accessible via web browser.
-- Democratize access to quantum computing knowledge, especially in under-resourced regions.
-
----
-
-## 🧰 Technologies Used
-
-- **Next.js** 15, **React** 19, **TypeScript** (every page is static)
-- **Tailwind CSS**, **Radix UI**, **Lucide React**
-- **KaTeX** for math and **Pyodide** to run Python and NumPy in the browser
-
-> No account and no database: progress is saved in the visitor's browser and can be exported to a file.
-
----
-
-## 🌐 Available Languages
-
-- 🇧🇷 Portuguese (original)
-- 🇬🇧 English
-- 🇪🇸 Spanish
-
----
-
-## ✅ Progress
-
-Done and next steps are tracked in [`docs/ROADMAP.md`](docs/ROADMAP.md).
-
----
-
-## 📚 References & Credits
+## References & Credits
 
 This project stands on the work of others. Lesson text and exercises are original, written with these sources as reference:
 
@@ -80,43 +47,3 @@ This project stands on the work of others. Lesson text and exercises are origina
 **Authorship**
 - Created and maintained by **Gubio Gomes de Lima**, who wrote the first version by hand and ran and reviewed every later change.
 - [Claude](https://claude.com/claude-code) (Anthropic) helped with development as a contributor.
-
----
-
-## 📆 Execution Plan (Summary)
-
-| Month | Activities |
-|-------|------------|
-| 1 | Technical and pedagogical planning; cloning the base version of Duolingo |
-| 2 | Platform development (frontend/backend, authentication) |
-| 3 | Linear Algebra Module – 10 micro-lessons |
-| 4 | Classical Computing Module – 10 micro-lessons |
-| 5 | Quantum Computing Module – 10 micro-lessons |
-| 6 | Final tests, documentation, and beta release |
-
----
-
-## 🔮 Project Future
-
-- Native-speaker review of the English and Spanish translations.
-- Integration with tools like IBM Qiskit, Pennylane, and QuTiP.
-- Mobile version development.
-- Certification system for users who complete the modules.
-
----
-
-## 🧪 How to Run the Project Locally
-
-```bash
-npm install
-npm run dev                  # http://localhost:3000/q-learning/pt
-
-npm test                     # unit and content tests
-npm run test:e2e             # browser flow (app running; CHROME_PATH=/usr/bin/google-chrome to use local Chrome)
-```
-
----
-
-## 🤝 Contributing and License
-
-See [`CONTRIBUTING.md`](CONTRIBUTING.md). Code is under the [MIT License](LICENSE); lessons, illustrations and the book are under [CC BY-SA 4.0](LICENSE-CONTENT.md).

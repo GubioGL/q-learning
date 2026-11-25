@@ -171,6 +171,12 @@ test("languages and unknown pages", async ({ browser, baseURL }) => {
     await expect(page).toHaveURL(new RegExp(`${BASE}${path}/?$`));
     await context.close();
   }
+  const home = await browser.newPage({ baseURL });
+  await home.goto(BASE + "/pt");
+  const icon = await home.locator('link[rel="icon"]').getAttribute("href");
+  expect(icon).toContain("/icon.png");
+  expect((await home.request.get(icon)).status()).toBe(200);
+  expect(await home.locator("body").innerText()).not.toMatch(/@/);
   const { request } = await browser.newContext({ baseURL });
   for (const missing of ["/xx/cursos", "/pt/cursos/nada", "/pt/cursos/basico/nada", "/pt/desafios/nada"]) {
     expect((await request.get(BASE + missing)).status(), missing).toBe(404);

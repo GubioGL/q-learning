@@ -1,7 +1,7 @@
 "use client";
 
 import { useT } from "@/lib/i18n/context";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 /**
  * Rodapé da área de marketing, com links sociais e copyright.
@@ -17,10 +17,6 @@ export const Footer = () => {
                 <span>|</span>
                 <a href="https://linkedin.com/in/gubio-gomes-de-lima-a99973106" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 underline mx-1" aria-label="LinkedIn: GubioGL">
                     <Linkedin size={16} /> LinkedIn
-                </a>
-                <span>|</span>
-                <a href="mailto:gubio@estudante.ufscar.br" className="flex items-center gap-1 underline mx-1">
-                    <Mail size={16} /> gubio@estudante.ufscar.br
                 </a>
             </div>
             <div className="text-sm">
