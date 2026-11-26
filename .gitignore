@@ -57,6 +57,8 @@ livro/*.pdf
 .claude/*
 !.claude/agents/
 !.claude/commands/
+!.claude/skills/
+!.claude/settings.json
 skills-lock.json
 
 # playwright

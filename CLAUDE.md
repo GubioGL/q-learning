@@ -18,6 +18,10 @@ A sessão principal é o **maestro**: entende o pedido, escolhe a fase, aciona s
 | Memória | `escriba` (sempre ao fim) |
 | Lançamento | `divulgador` (+ `estrategista-de-negocio`) |
 
+## Ferramentas
+
+MCP do projeto em `.mcp.json` (context7, playwright, parallel-search), skills em `.claude/skills/`, plugins em `.claude/settings.json`. Mapa completo por agente e itens opcionais: [`docs/agentes/FERRAMENTAS.md`](docs/agentes/FERRAMENTAS.md).
+
 ## Roteamento
 
 - **PDF/texto/código vira aula**: conversor → (fisico-revisor ∥ pedagogo) → corrigir → ilustrador → tradutor → qa → escriba.
