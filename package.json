@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
+    "dev:tudo": "NEXT_PUBLIC_UNLOCK_ALL=1 next dev",
     "build": "next build",
     "start": "python3 -m http.server 3000 -d dist",
     "lint": "next lint",

@@ -5,11 +5,15 @@ export type NodeState = "done" | "open" | "locked";
 export const skillKey = (courseId: string, skillId: string) => `skill:${courseId}/${skillId}`;
 export const levelKey = (levelId: string) => `level:${levelId}`;
 
-export function pathStates(keys: string[], done: Set<string>): NodeState[] {
+// Dev mode: `npm run dev:tudo` unlocks everything for the owner; needs the dev server, so production builds never unlock.
+const UNLOCK_ALL = process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_UNLOCK_ALL === "1";
+
+export function pathStates(keys: string[], done: Set<string>, unlockAll = UNLOCK_ALL): NodeState[] {
     let blocked = false;
     return keys.map((key) => {
-        if (blocked) return "locked";
+        // done first: an item added later before finished ones must not lock them
         if (done.has(key)) return "done";
+        if (blocked && !unlockAll) return "locked";
         blocked = true;
         return "open";
     });
