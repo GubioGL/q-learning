@@ -57,7 +57,7 @@ id: complexos-conjugado
 answer: 2+3i | 2 + 3i | 3i+2 | 3i + 2
 ```
 
-<!-- ILUSTRAR: plano complexo (eixo horizontal "real", vertical "imaginário") com o ponto z = 3+4i, o segmento da origem até ele rotulado |z| = 5, e o reflexo z* = 3-4i abaixo do eixo horizontal, em cor diferente -->
+![Plano complexo com o ponto z = 3+4i, o segmento de comprimento |z| = 5 até a origem e o conjugado 3−4i refletido no eixo real](/content/algebra-linear/complexos-plano.svg)
 
 ## Forma polar
 
@@ -132,7 +132,7 @@ id: complexos-unitario
 answer: 1
 ```
 
-<!-- ILUSTRAR: animação no plano complexo: o ponto z = 1 + i sendo multiplicado por e^{iπ/2} e girando 90° no sentido anti-horário para -1 + i, com o círculo de raio √2 tracejado mostrando que o módulo não muda -->
+![O ponto 1+i multiplicado por e^(iπ/2) gira 90° no círculo de raio √2 e vai para −1+i, sem mudar o módulo](/content/algebra-linear/complexos-giro.svg)
 
 ## Em Python
 

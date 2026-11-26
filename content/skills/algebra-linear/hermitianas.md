@@ -104,7 +104,7 @@ $$
 
 Exemplo: $A = \begin{pmatrix}3 & 1-i\\ 1+i & 1\end{pmatrix}$. Na diagonal, $a_0 + a_3 = 3$ e $a_0 - a_3 = 1$, então $a_0 = 2$, $a_3 = 1$. O elemento superior direito é $a_1 - i a_2 = 1 - i$, então $a_1 = 1$ e $a_2 = 1$. Assim $A = 2I + X + Y + Z$.
 
-<!-- ILUSTRAR: diagrama de uma matriz 2x2 hermitiana A = [[3, 1-i],[1+i, 1]] sendo "decomposta" em quatro blocos coloridos somados: 2·I, 1·X, 1·Y, 1·Z, cada um com sua matriz 2x2 desenhada; setas indicando de onde sai cada coeficiente (diagonal e canto superior direito) -->
+![A = [[3, 1−i],[1+i, 1]] escrita como 2I + X + Y + Z, com a origem de cada coeficiente](/content/algebra-linear/hermitiana-pauli.svg)
 
 Na decomposição de $A = \begin{pmatrix}1 & 2\\ 2 & -3\end{pmatrix}$ em $a_0 I + a_1 X + a_2 Y + a_3 Z$, qual é $a_3$?
 

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="400" viewBox="0 0 320 400" role="img" aria-label="Plano complexo: o ponto z = 3+4i a distância 5 da origem e seu conjugado 3−4i, refletido no eixo real"><style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.x{fill:#374151;stroke:#6b7280;stroke-width:2;stroke-dasharray:4 3}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399;font:600 16px sans-serif}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.r{stroke:#f87171;stroke-width:3}</style>
+<line class="l" x1="30" y1="200" x2="260" y2="200"/><line class="l" x1="80" y1="20" x2="80" y2="380"/>
+<text class="s" x="250" y="222">real</text><text class="s" x="116" y="30">imaginário</text>
+<line class="d" x1="200" y1="40" x2="200" y2="200"/><line class="d" x1="200" y1="360" x2="200" y2="200"/>
+<line class="p" x1="80" y1="200" x2="200" y2="40"/><circle class="f" cx="200" cy="40" r="6"/>
+<line class="g" x1="80" y1="200" x2="200" y2="360"/><circle cx="200" cy="360" r="6" fill="#34d399"/>
+<text class="v" x="255" y="44">z = 3+4i</text><text class="gf" x="210" y="382">z* = 3−4i</text>
+<text class="v" x="115" y="115">|z| = 5</text>
+<text class="s" x="200" y="220">3</text>
+</svg>

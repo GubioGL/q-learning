@@ -20,6 +20,7 @@ export const courseTexts: Partial<Record<Locale, Record<string, CourseText>>> = 
             skills: {
                 vetores: "Column and row vectors", "produto-interno": "Inner product and orthonormality", projecoes: "Projections and change of basis",
                 unitarias: "Quantum gates as unitary matrices", "produto-externo": "Outer product and completeness", unitariedade: "Quantum circuits and unitarity",
+                "numeros-complexos": "Complex numbers", "identidades-de-circuito": "Gates in sequence and circuit identities", hermitianas: "Hermitian operators and eigenvalues",
             },
         },
         "computacao-quantica": {
@@ -52,6 +53,7 @@ export const courseTexts: Partial<Record<Locale, Record<string, CourseText>>> = 
             skills: {
                 vetores: "Vectores columna y fila", "produto-interno": "Producto interno y ortonormalidad", projecoes: "Proyecciones y cambio de base",
                 unitarias: "Puertas cuánticas como matrices unitarias", "produto-externo": "Producto externo y completitud", unitariedade: "Circuitos cuánticos y unitariedad",
+                "numeros-complexos": "Números complejos", "identidades-de-circuito": "Puertas en secuencia e identidades de circuito", hermitianas: "Operadores hermíticos y autovalores",
             },
         },
         "computacao-quantica": {

@@ -5,7 +5,7 @@ const hermitianas: Lesson = {
     id: "hermitianas",
     title: "Operadores hermitianos e autovalores",
     intro:
-        "Hermitianas têm autovalores reais e representam observáveis; e^{iH} é uma porta.",
+        "Hermitianas têm autovalores reais e representam observáveis; toda hermitiana 2x2 é combinação das matrizes de Pauli.",
     source: "Baseado em B. Valiron, Introduction to Quantum Algorithms and Quantum Programming (2025), seções 2.3 e 2.9, e T. G. Wong, Introduction to Classical and Quantum Computing (2022), seções 3.3.3 e 3.3.4",
     course: "algebra-linear",
     skill: "hermitianas",

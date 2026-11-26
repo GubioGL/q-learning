@@ -66,7 +66,7 @@ $HYH = -Y$ é igual a $Y$ a menos de fase global: como porta isolada, $-Y$ e $Y$
 
 Também vale $XZX = -Z$ e $ZXZ = -X$, consequências de $XZ = -ZX$ (as portas anticomutam).
 
-<!-- ILUSTRAR: dois circuitos lado a lado, "H X H" e "Z" com um sinal de igual entre eles; abaixo, "H Z H" e "X" também com igual; cada porta como caixa quadrada sobre um fio de 1 qubit -->
+![Dois circuitos: H, X, H equivale a Z; H, Z, H equivale a X](/content/algebra-linear/circuito-hxh-hzh.svg)
 
 O estado $\ket{0}$ passa por um circuito com $H$, depois $Z$, depois $H$. Qual é a probabilidade de medir 1 no final? (Dica: use $HZH = X$.)
 
@@ -89,7 +89,7 @@ id: identidades-simplificar
 answer: X
 ```
 
-<!-- ILUSTRAR: sequência de três linhas mostrando um circuito de 1 qubit com 7 portas "X H H X Z Z H" sendo simplificado passo a passo, com os pares cancelados riscados, até sobrar só "H" -->
+![Circuito X, H, H, X, Z, Z, H simplificado em três linhas: cancelam-se HH e ZZ, depois XX, restando só H](/content/algebra-linear/circuito-simplificar.svg)
 
 ## Em Python
 

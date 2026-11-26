@@ -14,6 +14,9 @@ import projecoes from "./projecoes";
 import unitarias from "./unitarias";
 import produtoExterno from "./produto-externo";
 import unitariedade from "./unitariedade";
+import hermitianas from "./hermitianas";
+import identidadesDeCircuito from "./identidades-de-circuito";
+import numerosComplexos from "./numeros-complexos";
 import produtoTensorial from "./produto-tensorial";
 import medidaMultiplos from "./medida-multiplos";
 import emaranhamento from "./emaranhamento";
@@ -42,6 +45,9 @@ const texts: Record<string, LevelText> = {
     unitarias,
     "produto-externo": produtoExterno,
     unitariedade,
+    "numeros-complexos": numerosComplexos,
+    "identidades-de-circuito": identidadesDeCircuito,
+    hermitianas,
     "produto-tensorial": produtoTensorial,
     "medida-multiplos": medidaMultiplos,
     emaranhamento,
