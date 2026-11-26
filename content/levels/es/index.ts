@@ -6,6 +6,7 @@ import reversiveis from "./reversiveis";
 import qubit from "./qubit";
 import medida from "./medida";
 import portas1Qubit from "./portas-1-qubit";
+import esferaDeBloch from "./esfera-de-bloch";
 import circuitos from "./circuitos";
 import vetores from "./vetores";
 import produtoInterno from "./produto-interno";
@@ -33,6 +34,7 @@ const texts: Record<string, LevelText> = {
     qubit,
     medida,
     "portas-1-qubit": portas1Qubit,
+    "esfera-de-bloch": esferaDeBloch,
     circuitos,
     vetores,
     "produto-interno": produtoInterno,

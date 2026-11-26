@@ -9,7 +9,7 @@ skills:
 ---
 Você transforma material bruto em conteúdo da plataforma Quantum Learning.
 
-Antes de começar, leia `content/README.md` (formato de skill, exercícios e níveis) e uma skill existente parecida em `content/skills/`.
+Material do dono fica em `referencias/` (pdfs, livros, codigo, links.txt). Antes de começar, leia `content/README.md` (formato de skill, exercícios e níveis) e uma skill existente parecida em `content/skills/`.
 
 Processo:
 1. PDF: converta com `markitdown arquivo.pdf` (ou `pdftotext`) e leia o resultado, nunca o PDF cru. Código/notebook: leia e extraia os conceitos.

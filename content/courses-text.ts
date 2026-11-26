@@ -11,7 +11,7 @@ export const courseTexts: Partial<Record<Locale, Record<string, CourseText>>> = 
             skills: {
                 bits: "Bits and binary numbers", "portas-logicas": "Classical logic gates (AND, OR, NOT)", ascii: "Encoding information with ASCII",
                 reversiveis: "Reversible gates", qubit: "The qubit and superposition", medida: "Quantum measurement",
-                "portas-1-qubit": "One-qubit gates (X, Y, Z, H)", circuitos: "Introduction to quantum circuits",
+                "portas-1-qubit": "One-qubit gates (X, Y, Z, H)", "esfera-de-bloch": "The Bloch sphere", circuitos: "Introduction to quantum circuits",
             },
         },
         "algebra-linear": {
@@ -43,7 +43,7 @@ export const courseTexts: Partial<Record<Locale, Record<string, CourseText>>> = 
             skills: {
                 bits: "Bits y números binarios", "portas-logicas": "Puertas lógicas clásicas (AND, OR, NOT)", ascii: "Codificar información con ASCII",
                 reversiveis: "Puertas reversibles", qubit: "El qubit y la superposición", medida: "Medición cuántica",
-                "portas-1-qubit": "Puertas de 1 qubit (X, Y, Z, H)", circuitos: "Introducción a los circuitos cuánticos",
+                "portas-1-qubit": "Puertas de 1 qubit (X, Y, Z, H)", "esfera-de-bloch": "La esfera de Bloch", circuitos: "Introducción a los circuitos cuánticos",
             },
         },
         "algebra-linear": {

@@ -84,6 +84,17 @@ Formato em `content/README.md`. Cada skill tem um nível na trilha de Desafios e
 - [x] Publicação da 1ª versão beta.
 - [ ] Divulgação.
 
+## Etapa 8 — Conteúdo: esfera de Bloch (2026-11-26, não commitado)
+
+- [x] Skill `esfera-de-bloch` (curso básico, entre `portas-1-qubit` e `circuitos`) em pt/en/es, com 6 desafios.
+- [x] 2 figuras novas: `bloch-theta-phi.svg` e `meias-voltas-xzh.svg`.
+- [x] test, lint, build, e2e e axe confirmados pelo qa-testador.
+- [ ] Commit e publicação (a confirmar com o dono).
+- [ ] `medida.md`: seção curta sobre Bloch (unificar com a skill nova; id `medida-bloch` mantido).
+- [ ] Tema claro real no site (hoje não existe).
+- [ ] Figura `meias-voltas-xzh` pequena em 360 px.
+- [ ] Verificar os links de `referencias/links.txt`.
+
 ## Depois do beta
 
 - [ ] Revisão das traduções por falantes nativos.

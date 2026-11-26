@@ -8,6 +8,7 @@ import ascii from "./ascii";
 import reversiveis from "./reversiveis";
 import qubit from "./qubit";
 import medida from "./medida";
+import esferaDeBloch from "./esfera-de-bloch";
 import portas1Qubit from "./portas-1-qubit";
 import circuitos from "./circuitos";
 import vetores from "./vetores";
@@ -37,6 +38,7 @@ export const levels: Lesson[] = [
     qubit,
     medida,
     portas1Qubit,
+    esferaDeBloch,
     circuitos,
     vetores,
     produtoInterno,

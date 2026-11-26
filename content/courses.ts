@@ -29,6 +29,7 @@ export const courses: Course[] = [
             { id: "qubit", title: "O qubit e a superposição" },
             { id: "medida", title: "Medida quântica" },
             { id: "portas-1-qubit", title: "Portas de 1 qubit (X, Y, Z, H)" },
+            { id: "esfera-de-bloch", title: "A esfera de Bloch" },
             { id: "circuitos", title: "Introdução a circuitos quânticos" },
         ],
     },

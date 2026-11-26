@@ -1,0 +1,13 @@
+# Sites de referência — um por linha: URL | descrição | licença (se souber)
+# Linhas com # são comentários.
+
+https://quantum.cloud.ibm.com/learning | IBM Quantum Learning: cursos e tutoriais Qiskit
+https://docs.quantum.ibm.com | Documentação Qiskit
+https://pennylane.ai/codebook | PennyLane Codebook: exercícios interativos | Apache-2.0 (código)
+https://pennylane.ai/qml | PennyLane demos de QML
+https://quantum.country | Quantum Country: ensaio com repetição espaçada
+https://algassert.com/quirk | Quirk: simulador de circuitos no navegador
+http://theory.caltech.edu/~preskill/ph229/ | Notas de aula do Preskill (Caltech Ph219/229)
+https://arxiv.org/list/quant-ph/new | arXiv quant-ph: artigos novos
+https://learn.microsoft.com/azure/quantum/ | Microsoft Azure Quantum / Q# docs
+https://qutip.org/docs/latest/ | QuTiP: simulação de sistemas quânticos

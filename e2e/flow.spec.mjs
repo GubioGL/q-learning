@@ -130,7 +130,7 @@ test("courses -> skill -> challenges flow", async ({ page }) => {
   await shot(page, "6-sem-coracoes");
 
   await page.goto(BASE + "/pt/cursos");
-  await expect(page.getByRole("link", { name: /Fundamentos Básicos/ })).toContainText("13%");
+  await expect(page.getByRole("link", { name: /Fundamentos Básicos/ })).toContainText("11%");
 
   await page.goto(BASE + "/pt/conquistas");
   await expect(page.getByText("1 de 11 conquistas")).toBeVisible();
