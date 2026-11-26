@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200" role="img" aria-label="Somador ripple-carry de 4 bits calculando 1111 + 0001. Quatro caixas em fila: meio-somador (HA) na coluna do bit menos significativo, à direita, e somadores completos (FA) nas outras. Um vai-um 1 (seta verde) escorre da direita para a esquerda por todas as colunas. As somas são 0000 e o último vai-um é o bit 1: resultado 10000."><title>Somador ripple-carry de 4 bits calculando 1111 + 0001. Quatro caixas em fila: meio-somador (HA) na coluna do bit menos significativo, à direita, e somadores completos (FA) nas outras. Um vai-um 1 (seta verde) escorre da direita para a esquerda por todas as colunas. As somas são 0000 e o último vai-um é o bit 1: resultado 10000.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 15.0px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 13.7px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 15.0px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 13.7px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 15.0px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 15.0px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 15.0px sans-serif;text-anchor:middle}</style>
+<text class="k" x="10.0" y="30.0">A</text>
+<text class="k" x="10.0" y="53.0">B</text>
+<text class="k" x="10.0" y="172.0">S</text>
+<text class="t" x="87.0" y="30.0">1</text>
+<text class="t" x="87.0" y="53.0">0</text>
+<line class="l" x1="87.0" y1="58.0" x2="87.0" y2="76.0"/>
+<rect class="bx" x="56.0" y="76.0" width="62.0" height="50.0" rx="6"/>
+<text class="t" x="87.0" y="107.0">FA</text>
+<line class="l" x1="87.0" y1="126.0" x2="87.0" y2="150.0"/>
+<text class="t" x="87.0" y="172.0">0</text>
+<polyline class="g" style="stroke-linejoin:round" points="146.0,101.0 118.0,101.0"/><polyline class="g" style="stroke-linejoin:round" points="127.0,96.5 118.0,101.0 127.0,105.5"/>
+<text class="tg" x="132.0" y="92.0">1</text>
+<text class="t" x="177.0" y="30.0">1</text>
+<text class="t" x="177.0" y="53.0">0</text>
+<line class="l" x1="177.0" y1="58.0" x2="177.0" y2="76.0"/>
+<rect class="bx" x="146.0" y="76.0" width="62.0" height="50.0" rx="6"/>
+<text class="t" x="177.0" y="107.0">FA</text>
+<line class="l" x1="177.0" y1="126.0" x2="177.0" y2="150.0"/>
+<text class="t" x="177.0" y="172.0">0</text>
+<polyline class="g" style="stroke-linejoin:round" points="236.0,101.0 208.0,101.0"/><polyline class="g" style="stroke-linejoin:round" points="217.0,96.5 208.0,101.0 217.0,105.5"/>
+<text class="tg" x="222.0" y="92.0">1</text>
+<text class="t" x="267.0" y="30.0">1</text>
+<text class="t" x="267.0" y="53.0">0</text>
+<line class="l" x1="267.0" y1="58.0" x2="267.0" y2="76.0"/>
+<rect class="bx" x="236.0" y="76.0" width="62.0" height="50.0" rx="6"/>
+<text class="t" x="267.0" y="107.0">FA</text>
+<line class="l" x1="267.0" y1="126.0" x2="267.0" y2="150.0"/>
+<text class="t" x="267.0" y="172.0">0</text>
+<polyline class="g" style="stroke-linejoin:round" points="326.0,101.0 298.0,101.0"/><polyline class="g" style="stroke-linejoin:round" points="307.0,96.5 298.0,101.0 307.0,105.5"/>
+<text class="tg" x="312.0" y="92.0">1</text>
+<text class="t" x="357.0" y="30.0">1</text>
+<text class="t" x="357.0" y="53.0">1</text>
+<line class="l" x1="357.0" y1="58.0" x2="357.0" y2="76.0"/>
+<rect class="bx" x="326.0" y="76.0" width="62.0" height="50.0" rx="6"/>
+<text class="t" x="357.0" y="107.0">HA</text>
+<line class="l" x1="357.0" y1="126.0" x2="357.0" y2="150.0"/>
+<text class="t" x="357.0" y="172.0">0</text>
+<polyline class="g" style="stroke-linejoin:round" points="56.0,101.0 30.0,101.0"/>
+<line class="g" x1="30.0" y1="101.0" x2="30.0" y2="138.0"/>
+<polyline class="g" style="stroke-linejoin:round" points="25.5,133.0 30.0,142.0 34.5,133.0"/>
+<text class="t" x="30.0" y="172.0">1</text>
+</svg>

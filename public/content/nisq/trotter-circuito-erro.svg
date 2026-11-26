@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="330" viewBox="0 0 360 330" role="img" aria-label="Em cima, circuito de 2 qubits: o bloco e^{-iAt/n} seguido do bloco e^{-iBt/n}, repetido n vezes (seta de repetição e rótulo ×n). Embaixo, gráfico log-log do erro ε contra o número de passos n, de 1 a 100: o erro cai em linha reta, proporcional a 1/n, de cerca de 0,8 para 0,007."><title>Em cima, circuito de 2 qubits: o bloco e^{-iAt/n} seguido do bloco e^{-iBt/n}, repetido n vezes (seta de repetição e rótulo ×n). Embaixo, gráfico log-log do erro ε contra o número de passos n, de 1 a 100: o erro cai em linha reta, proporcional a 1/n, de cerca de 0,8 para 0,007.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 13.5px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 12.3px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 13.5px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 12.3px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 13.5px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 13.5px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 13.5px sans-serif;text-anchor:middle}</style>
+<line class="l" x1="20.0" y1="44.0" x2="340.0" y2="44.0"/>
+<line class="l" x1="20.0" y1="104.0" x2="340.0" y2="104.0"/>
+<text class="k" x="10.0" y="49.0">1</text>
+<text class="k" x="10.0" y="109.0">2</text>
+<rect class="bx" x="44.0" y="22.0" width="110.0" height="104.0" rx="6"/>
+<text class="t" x="99.0" y="80.0">e<tspan dy="-6" font-size="85%">−iAt/n</tspan></text>
+<rect class="bx" x="184.0" y="22.0" width="110.0" height="104.0" rx="6"/>
+<text class="t" x="239.0" y="80.0">e<tspan dy="-6" font-size="85%">−iBt/n</tspan></text>
+<rect class="d" x="32.0" y="10.0" width="274.0" height="128.0" rx="10"/>
+<text class="t" x="325.0" y="80.0">×n</text>
+<polyline class="g" style="stroke-linejoin:round" points="290.0,146.0 290.0,160.0 50.0,160.0 50.0,146.0"/>
+<polyline class="g" style="stroke-linejoin:round" points="54.5,155.0 50.0,146.0 45.5,155.0"/>
+<polyline class="l" style="stroke-linejoin:round" points="56.0,305.0 314.0,305.0"/><polyline class="l" style="stroke-linejoin:round" points="305.0,309.5 314.0,305.0 305.0,300.5"/>
+<polyline class="l" style="stroke-linejoin:round" points="56.0,305.0 56.0,197.0"/><polyline class="l" style="stroke-linejoin:round" points="60.5,206.0 56.0,197.0 51.5,206.0"/>
+<line class="l" x1="56.0" y1="305.0" x2="56.0" y2="309.0"/>
+<text class="k" x="56.0" y="325.0">1</text>
+<line class="l" x1="181.0" y1="305.0" x2="181.0" y2="309.0"/>
+<text class="k" x="181.0" y="325.0">10</text>
+<line class="l" x1="306.0" y1="305.0" x2="306.0" y2="309.0"/>
+<text class="k" x="306.0" y="325.0">100</text>
+<text class="s" x="320.0" y="310.0">n</text>
+<text class="s" x="40.0" y="209.0">ε</text>
+<polyline class="g" style="stroke-linejoin:round" points="56.0,205.0 93.6,220.6 115.6,229.0 143.4,239.3 181.0,253.0 218.6,266.7 268.4,284.8 306.0,298.4"/>
+<circle class="gf" cx="56.0" cy="205.0" r="3.5"/>
+<circle class="gf" cx="93.6" cy="220.6" r="3.5"/>
+<circle class="gf" cx="115.6" cy="229.0" r="3.5"/>
+<circle class="gf" cx="143.4" cy="239.3" r="3.5"/>
+<circle class="gf" cx="181.0" cy="253.0" r="3.5"/>
+<circle class="gf" cx="218.6" cy="266.7" r="3.5"/>
+<circle class="gf" cx="268.4" cy="284.8" r="3.5"/>
+<circle class="gf" cx="306.0" cy="298.4" r="3.5"/>
+<text class="t" x="256.0" y="230.0">ε ∝ 1/n</text>
+</svg>

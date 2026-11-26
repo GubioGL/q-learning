@@ -28,35 +28,87 @@ import chsh from "./chsh";
 import superdensa from "./superdensa";
 import teletransporte from "./teletransporte";
 import bb84 from "./bb84";
+import algebraBooleana from "./algebra-booleana";
+import somadores from "./somadores";
+import qubitsFisicos from "./qubits-fisicos";
+import numerosComplexos from "./numeros-complexos";
+import identidadesDeCircuito from "./identidades-de-circuito";
+import hermitianas from "./hermitianas";
+import somadorQuantico from "./somador-quantico";
+import registradores from "./registradores";
+import rotacoes from "./rotacoes";
+import oraculos from "./oraculos";
+import deutschJozsa from "./deutsch-jozsa";
+import bernsteinVazirani from "./bernstein-vazirani";
+import grover from "./grover";
+import qft from "./qft";
+import estimacaoDeFase from "./estimacao-de-fase";
+import shor from "./shor";
+import hhl from "./hhl";
+import modeloCoprocessador from "./modelo-coprocessador";
+import complexidade from "./complexidade";
+import portasNativas from "./portas-nativas";
+import estadosMagicos from "./estados-magicos";
+import mbqc from "./mbqc";
+import opticaLinear from "./optica-linear";
+import trotterizacao from "./trotterizacao";
+import vqe from "./vqe";
+import qaoa from "./qaoa";
 
 // The challenge trail, from the most basic level to the most advanced. Order matters: each level unlocks the next.
 export const levels: Lesson[] = [
     bits,
     portasLogicas,
+    algebraBooleana,
+    somadores,
     ascii,
     reversiveis,
     qubit,
     medida,
     portas1Qubit,
     esferaDeBloch,
+    qubitsFisicos,
     circuitos,
+    numerosComplexos,
     vetores,
     produtoInterno,
     projecoes,
     unitarias,
+    identidadesDeCircuito,
     produtoExterno,
     unitariedade,
+    hermitianas,
     produtoTensorial,
     medidaMultiplos,
     emaranhamento,
     cnotToffoli,
+    somadorQuantico,
+    registradores,
     naoClonagem,
+    rotacoes,
     universalidade,
     bell,
     chsh,
     superdensa,
     teletransporte,
     bb84,
+    oraculos,
+    deutschJozsa,
+    bernsteinVazirani,
+    grover,
+    qft,
+    estimacaoDeFase,
+    shor,
+    hhl,
+    modeloCoprocessador,
+    complexidade,
+    portasNativas,
+    estadosMagicos,
+    mbqc,
+    opticaLinear,
+    trotterizacao,
+    vqe,
+    qaoa,
 ];
 
 const TEXTS: Partial<Record<Locale, Record<string, LevelText>>> = { en, es };

@@ -1,0 +1,980 @@
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newpage
+\section{Algoritmos quânticos}
+\subsection{Oráculos e phase kickback}
+Você tem uma função \(f\) guardada numa ``caixa-preta'': dá para perguntar o valor de \(f(x)\), mas não dá para ler o código por dentro. Quantas perguntas são necessárias para descobrir uma propriedade de \(f\)? Os primeiros algoritmos quânticos respondem a esse tipo de pergunta, e o objeto que torna isso possível é o \textbf{oráculo}.
+
+\subsubsection{Como é um algoritmo quântico}\label{como-uxe9-um-algoritmo-quuxe2ntico}
+
+Quase todo algoritmo quântico segue o mesmo roteiro:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Preparar} um estado inicial simples, em geral \(\ket{0\cdots0}\).
+\item
+  \textbf{Aplicar portas} (um circuito) que espalham a informação em superposição e fazem as amplitudes interferirem.
+\item
+  \textbf{Medir} e ler um resultado clássico.
+\end{enumerate}
+
+O truque é que o passo 2 faz as amplitudes ``erradas'' se cancelarem e as ``certas'' se somarem, de modo que a medida final revela algo útil com alta probabilidade. Quando o algoritmo trabalha com uma função \(f\) dada como caixa-preta, o passo 2 inclui chamadas ao oráculo.
+
+\subsubsection{O oráculo de bit}\label{o-oruxe1culo-de-bit}
+
+Seja \(f:\{0,1\}^n \to \{0,1\}\) uma função que recebe \(n\) bits e devolve um bit. Uma porta quântica precisa ser reversível (unitária), e \(\ket{x}\mapsto\ket{f(x)}\) geralmente não é: se \(f\) vale \(0\) em duas entradas, não dá para voltar atrás. A saída é \textbf{guardar a entrada} e somar o resultado num qubit extra:
+
+\[
+U_f\ket{x,y} = \ket{x,\; y\oplus f(x)},
+\]
+
+onde \(x\) tem \(n\) bits, \(y\) é um bit e \(\oplus\) é a soma módulo 2 (o XOR). Usar \(y=0\) dá \(U_f\ket{x,0}=\ket{x,f(x)}\), o valor de \(f\).
+
+\textbf{Exemplo com \(n=1\).} Seja \(f(0)=0\) e \(f(1)=1\) (ou seja, \(f(x)=x\)). Então \(U_f\ket{0,y}=\ket{0,y}\) e \(U_f\ket{1,y}=\ket{1,1\oplus y}\): o qubit \(y\) só é invertido quando \(x=1\). Isso é exatamente a porta \textbf{CNOT}. Já com \(f(x)=0\) para todo \(x\), \(U_f\) é a identidade, e com \(f(x)=1\) para todo \(x\), \(U_f=I\otimes X\).
+
+Seja \(f(0)=1\) e \(f(1)=0\). Qual é o valor do segundo bit depois de aplicar \(U_f\) a \(\ket{0,1}\)?
+
+\(U_f\) é \textbf{unitária} (é uma permutação dos estados da base) e é sua própria inversa, pois aplicá-la duas vezes soma \(f(x)\) duas vezes e \(f(x)\oplus f(x)=0\).
+
+Monte a matriz de \(U_f\) para uma função dada pela tabela de valores.
+
+\subsubsection{Phase kickback: o resultado vai para a fase}\label{phase-kickback-o-resultado-vai-para-a-fase}
+
+Agora um truque central. Prepare o qubit extra em \(\ket{-}=\tfrac{1}{\sqrt2}(\ket0-\ket1)\) e aplique \(U_f\):
+
+\[
+U_f\ket{x}\ket{-}=\tfrac{1}{\sqrt2}\big(\ket{x,f(x)}-\ket{x,1\oplus f(x)}\big).
+\]
+
+Veja os dois casos:
+
+\begin{itemize}
+\tightlist
+\item
+  Se \(f(x)=0\): sobra \(\tfrac{1}{\sqrt2}(\ket{x,0}-\ket{x,1})=\ket{x}\ket{-}\), nada muda.
+\item
+  Se \(f(x)=1\): sobra \(\tfrac{1}{\sqrt2}(\ket{x,1}-\ket{x,0})=-\ket{x}\ket{-}\), um sinal de menos aparece.
+\end{itemize}
+
+Os dois casos cabem numa fórmula só:
+
+\[
+U_f\ket{x}\ket{-}=(-1)^{f(x)}\ket{x}\ket{-}.
+\]
+
+O qubit extra continua em \(\ket{-}\), intacto, e o valor \(f(x)\) ``voltou'' (\emph{kickback}, em inglês: coice) para o primeiro registrador como uma \textbf{fase} \(\pm1\). Como o qubit \(\ket{-}\) não muda, podemos esquecê-lo e dizer que temos um \textbf{oráculo de fase}:
+
+\[
+O_f\ket{x}=(-1)^{f(x)}\ket{x},
+\]
+
+uma matriz diagonal com \((-1)^{f(x)}\) na diagonal. Por linearidade, numa superposição cada componente \(x\) ganha o seu próprio sinal:
+
+\[
+O_f\sum_x a_x\ket{x}=\sum_x (-1)^{f(x)}a_x\ket{x}.
+\]
+
+Se \(f(x)=1\) para um certo \(x\), qual é o fator que multiplica \(\ket{x}\) no oráculo de fase?
+
+O mesmo vale para qualquer autovetor: se \(U\ket u=e^{i\varphi}\ket u\) e o controle está em superposição, \(\ket u\) passa intacto e a fase \(e^{i\varphi}\) vai para o controle. Essa ideia reaparece na estimação de fase.
+
+A fase global \(-1\) sozinha é invisível, mas aqui ela é \textbf{relativa}: só alguns \(x\) trocam de sinal, e é isso que a interferência vai explorar nos próximos algoritmos.
+
+\subsubsection{Registradores e ordem dos bits (revisão)}\label{registradores-e-ordem-dos-bits-revisuxe3o}
+
+Você já viu que \(n\) qubits guardam um número natural em binário, por exemplo \(5=0101_2\Rightarrow\ket{0101}\), e que \(n\) qubits cobrem \(2^n\) valores. Aqui vale uma \textbf{convenção}: o site escreve o bit mais significativo primeiro (\emph{big-endian}), então em \(\ket{x_1x_2\cdots x_n}\) o qubit \(x_1\) é o de maior peso e o índice na base é \(2^{n-1}x_1+\cdots+x_n\). Por exemplo, em \(\ket{x,y}\) o índice é \(2x+y\). O Qiskit usa a ordem contrária (\emph{little-endian}); cuidado ao comparar com ele.
+
+Quantos qubits são necessários para representar todos os naturais de \(0\) a \(999\)?
+
+\subsubsection{\texorpdfstring{Como se constrói \(U_f\)}{Como se constrói U\_f}}\label{como-se-construxf3i-u_f}
+
+Até aqui \(f\) foi uma caixa-preta. Se tivermos a tabela de \(f\), podemos montar \(U_f\) com uma porta \(X\) multicontrolada no qubit extra para cada entrada \(x\) com \(f(x)=1\) (controles ajustados para casar com \(x\)): funciona, mas o circuito tem tamanho exponencial em \(n\). Se \(f\) tiver uma fórmula, dá para calculá-la com Toffoli e CNOT usando qubits auxiliares, que depois são desfeitos (descomputação) para não deixar lixo; aí o tamanho é linear. Veja a aula de registradores e o somador quântico. Para uma \(f\) com saída de \(m\) bits, aplicamos o mesmo raciocínio bit a bit.
+
+\subsubsection{Complexidade de consultas e de circuito}\label{complexidade-de-consultas-e-de-circuito}
+
+Há duas maneiras de medir o custo de um algoritmo com oráculo:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Complexidade de consultas}: quantas vezes chamamos \(U_f\) (ou \(O_f\)). Cada chamada conta como um passo, não importa o que há dentro.
+\item
+  \textbf{Complexidade de circuito}: quantas portas elementares o circuito usa no total, incluindo o interior do oráculo e as portas entre as chamadas.
+\end{itemize}
+
+Os algoritmos das próximas aulas mostram ganhos na complexidade de \textbf{consultas}: um algoritmo quântico pode precisar de bem menos perguntas à caixa-preta que qualquer algoritmo clássico. Isso é uma prova limpa de vantagem, mas é mais modesto do que parece: se implementarmos \(f\) de verdade, o custo do oráculo entra na conta.
+
+\subsubsection{Resumo}\label{resumo}
+
+\begin{itemize}
+\tightlist
+\item
+  Um oráculo de bit é \(U_f\ket{x,y}=\ket{x,y\oplus f(x)}\), unitário e auto-inverso.
+\item
+  Com o qubit extra em \(\ket{-}\), ele vira um oráculo de fase: \(\ket{x}\mapsto(-1)^{f(x)}\ket{x}\).
+\item
+  Ordem de bits: o mais significativo primeiro (big-endian); \(U_f\) tem tamanho exponencial se feito pela tabela e linear se feito por uma fórmula.
+\item
+  Complexidade de consultas conta chamadas ao oráculo; complexidade de circuito conta portas.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Fonte: texto original, com a estrutura do assunto seguindo B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seções 5.1 a 5.4.
+
+\subsection{Algoritmo de Deutsch-Jozsa}
+Alguém promete que uma função \(f\) de \(n\) bits é de um de dois tipos e você precisa descobrir qual, perguntando o menos possível. Um computador clássico precisa de muitas perguntas no pior caso. Um quântico resolve com uma só.
+
+\subsubsection{O problema}\label{o-problema}
+
+Seja \(f:\{0,1\}^n\to\{0,1\}\) com a \textbf{promessa} de que \(f\) é:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{constante}: \(f(x)\) é o mesmo para todo \(x\) (sempre \(0\) ou sempre \(1\)); ou
+\item
+  \textbf{balanceada}: \(f(x)=0\) para exatamente metade das \(2^n\) entradas e \(f(x)=1\) para a outra metade.
+\end{itemize}
+
+A tarefa é dizer qual dos dois casos vale. Com \(n=2\), a função de tabela \((f(00),f(01),f(10),f(11))=(0,1,1,0)\) é balanceada; \((1,1,1,1)\) é constante; \((0,0,0,1)\) viola a promessa e não nos interessa.
+
+\textbf{Custo clássico.} Cada consulta dá um valor. Se as primeiras \(2^{n-1}\) respostas forem todas iguais, ainda pode ser constante ou balanceada (a metade restante poderia ser diferente), então só com \(2^{n-1}+1\) respostas iguais temos certeza de que é constante. No pior caso, são \(2^{n-1}+1\) consultas para uma resposta sempre correta.
+
+Com \(n=3\), quantas consultas clássicas o pior caso exige?
+
+\subsubsection{\texorpdfstring{Começando pequeno: \(n=1\) (Deutsch)}{Começando pequeno: n=1 (Deutsch)}}\label{comeuxe7ando-pequeno-n1-deutsch}
+
+Aqui \(f\) tem só dois valores, \(f(0)\) e \(f(1)\). Constante significa \(f(0)=f(1)\); balanceada significa \(f(0)\neq f(1)\). Clássico: duas consultas (precisa ver os dois valores). Quântico, com uma:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Comece com \(\ket{0}\ket{1}\) e aplique \(H\otimes H\): \(\ket{+}\ket{-}\).
+\item
+  Aplique \(U_f\). Pelo phase kickback (aula anterior), o primeiro qubit vira \(\tfrac{1}{\sqrt2}\big((-1)^{f(0)}\ket0+(-1)^{f(1)}\ket1\big)\) e o segundo continua em \(\ket{-}\).
+\item
+  Aplique \(H\) no primeiro qubit e meça.
+\end{enumerate}
+
+Veja o resultado em cada caso:
+
+\begin{itemize}
+\tightlist
+\item
+  \(f\) constante: o primeiro qubit é \(\pm\ket{+}\), e \(H\ket{+}=\ket0\). Mede \(0\).
+\item
+  \(f\) balanceada: é \(\pm\ket{-}\), e \(H\ket{-}=\ket1\). Mede \(1\).
+\end{itemize}
+
+A medida \(0\) diz ``constante'' e \(1\) diz ``balanceada'', com certeza, usando \textbf{uma} consulta.
+
+Com \(f(0)=0\) e \(f(1)=1\) (função balanceada), o que o algoritmo conclui? Responda ``constante'' ou ``balanceada''.
+
+\subsubsection{O caso geral}\label{o-caso-geral}
+
+Antes da fórmula, veja o caso \(n=2\) com \(f=(0,1,1,0)\): depois do oráculo o registrador é \(\tfrac12(\ket{00}-\ket{01}-\ket{10}+\ket{11})=\ket-\ket-\), e \(H\otimes H\) leva isso a \(\ket{11}\), nunca a \(\ket{00}\). Agora o caso geral.
+
+O circuito é o mesmo, com \(H\) no registrador inteiro de \(n\) qubits:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prepare \(\ket{0}^{\otimes n}\ket{1}\).
+\item
+  Aplique \(H^{\otimes n}\) nos \(n\) primeiros qubits e \(H\) no último: o registrador fica na superposição uniforme e o último em \(\ket-\).
+\item
+  Aplique \(U_f\) (que age como oráculo de fase no primeiro registrador).
+\item
+  Aplique \(H^{\otimes n}\) no primeiro registrador e \textbf{meça-o}.
+\end{enumerate}
+
+Para acompanhar as contas, precisamos do que \(H^{\otimes n}\) faz num estado da base:
+
+\[
+H^{\otimes n}\ket{x}=\frac{1}{\sqrt{2^n}}\sum_{z\in\{0,1\}^n}(-1)^{x\cdot z}\ket{z},\qquad x\cdot z=x_1z_1\oplus\cdots\oplus x_nz_n,
+\]
+
+onde \(x\cdot z\) é o \textbf{produto escalar módulo 2} (soma dos produtos bit a bit, mod 2). Isso vem de \(H\ket{b}=\tfrac1{\sqrt2}\sum_{c}(-1)^{bc}\ket c\), aplicado em cada qubit.
+
+Depois dos passos 2 e 3, o primeiro registrador está em
+
+\[
+\frac{1}{\sqrt{2^n}}\sum_x(-1)^{f(x)}\ket{x}.
+\]
+
+Depois do passo 4, a amplitude do estado \(\ket{z}\) é
+
+\[
+\frac{1}{2^n}\sum_x(-1)^{f(x)+x\cdot z}.
+\]
+
+Só nos interessa \(z=0\cdots0\), onde \(x\cdot z=0\) para todo \(x\):
+
+\[
+\text{amplitude de }\ket{0\cdots0}=\frac{1}{2^n}\sum_x(-1)^{f(x)}.
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(f\) constante}: todos os termos valem \(+1\) (ou todos \(-1\)), a soma é \(\pm2^n\) e a amplitude é \(\pm1\). Mede \(0\cdots0\) com probabilidade 1.
+\item
+  \textbf{\(f\) balanceada}: metade dos termos é \(+1\) e metade é \(-1\); a soma é \(0\). A probabilidade de medir \(0\cdots0\) é zero, então algum outro resultado aparece.
+\end{itemize}
+
+Portanto: se o resultado for \(0\cdots0\), \(f\) é constante; qualquer outro resultado, balanceada. Uma consulta, sempre correto.
+
+\textbf{Exemplo com \(n=2\).} Seja \(f\) constante e igual a \(1\). A amplitude de \(\ket{00}\) é \(\tfrac14(-1-1-1-1)\). Quanto vale?
+
+Agora a balanceada \(f(x_1x_2)=x_1\oplus x_2\), de tabela \((0,1,1,0)\). A soma \(\sum_x(-1)^{f(x)}=1-1-1+1=0\), então a probabilidade de medir \(00\) é:
+
+\subsubsection{Quanto se ganha?}\label{quanto-se-ganha}
+
+O algoritmo quântico usa \textbf{1} consulta; o clássico determinístico precisa de \(2^{n-1}+1\). Na prática, o clássico \textbf{probabilístico} com \(k\) consultas aleatórias erra com probabilidade de no máximo \(2^{1-k}\), sem depender de \(n\) (com \(k=20\), cerca de \(10^{-6}\)), e o erro é só de um lado. Então a vantagem real do DJ é sobre algoritmos \textbf{exatos}. Ainda assim, ele foi um dos primeiros exemplos de separação entre computação clássica e quântica em consultas.
+
+Simule o algoritmo: dada a tabela de \(f\), calcule a probabilidade de medir \(0\cdots0\).
+
+Nota: \texttt{f{[}x{]}} usa \(x\) como inteiro com \(x_1\) mais significativo, e \texttt{n} é \(\log_2\) de \texttt{len(f)}. O teste com \((0,0,0,1)\) não satisfaz a promessa; só calcule a fórmula.
+
+Dica: monte \(H^{\otimes n}\) com \texttt{np.kron}, aplique o oráculo de fase \texttt{np.diag((-1.0)**np.array(f))} ao estado uniforme, aplique \(H^{\otimes n}\) de novo e pegue \(|\text{amplitude}[0]|^2\).
+
+\subsubsection{Resumo}\label{resumo}
+
+\begin{itemize}
+\tightlist
+\item
+  Promessa: \(f\) constante ou balanceada. Clássico exato: \(2^{n-1}+1\) consultas.
+\item
+  Deutsch-Jozsa: \(H^{\otimes n}\), oráculo (com \(\ket-\) no qubit extra), \(H^{\otimes n}\), medir. Resultado \(0\cdots0\) significa constante.
+\item
+  A chave é que a amplitude de \(\ket{0\cdots0}\) é \(2^{-n}\sum_x(-1)^{f(x)}\).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Fonte: texto original; o assunto segue B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 6.1.
+
+\subsection{Algoritmo de Bernstein-Vazirani}
+Agora a caixa-preta esconde um segredo: uma string de bits \(s\). Cada consulta devolve só \textbf{um bit} de informação sobre \(s\). Quantas consultas para descobrir o segredo inteiro?
+
+\subsubsection{O problema}\label{o-problema}
+
+Seja \(s\in\{0,1\}^n\) uma string secreta e
+
+\[
+f(x)=s\cdot x \bmod 2 = s_1x_1\oplus s_2x_2\oplus\cdots\oplus s_nx_n.
+\]
+
+Ou seja, \(f(x)\) é a \textbf{paridade} dos bits de \(x\) nas posições onde \(s\) vale \(1\). A tarefa é achar \(s\).
+
+\textbf{Exemplo com \(n=3\) e \(s=101\).} Então \(f(x)=x_1\oplus x_3\). Para \(x=111\): \(1\oplus1=0\). Para \(x=100\): \(1\).
+
+Qual é \(f(111)\) quando \(s=101\)?
+
+\textbf{Custo clássico.} Consultar \(x=100\ldots0\) dá \(s_1\), consultar \(x=010\ldots0\) dá \(s_2\), e assim por diante: com \(n\) consultas lemos os \(n\) bits de \(s\). E não dá para fazer melhor, porque cada consulta traz só um bit e \(s\) tem \(n\) bits. Com \(n=8\), quantas consultas clássicas são necessárias?
+
+\subsubsection{O algoritmo quântico: uma consulta}\label{o-algoritmo-quuxe2ntico-uma-consulta}
+
+Surpresa: o circuito é \textbf{idêntico} ao de Deutsch-Jozsa.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prepare \(\ket{0}^{\otimes n}\ket{1}\) e aplique \(H\) em tudo.
+\item
+  Aplique \(U_f\) (com o qubit extra em \(\ket-\) ele age como o oráculo de fase \(\ket{x}\mapsto(-1)^{f(x)}\ket x\)).
+\item
+  Aplique \(H^{\otimes n}\) no primeiro registrador e meça.
+\end{enumerate}
+
+Vamos às contas. Como no DJ, antes do último \(H^{\otimes n}\) o registrador está em \(\tfrac{1}{\sqrt{2^n}}\sum_x(-1)^{s\cdot x}\ket x\). Depois do último, a amplitude de \(\ket z\) é
+
+\[
+\frac{1}{2^n}\sum_x(-1)^{s\cdot x+z\cdot x}=\frac{1}{2^n}\sum_x(-1)^{(s\oplus z)\cdot x}.
+\]
+
+Aqui usamos que \(s\cdot x\oplus z\cdot x=(s\oplus z)\cdot x\) (soma bit a bit). Agora, dois casos:
+
+\begin{itemize}
+\tightlist
+\item
+  Se \(z=s\), então \(s\oplus z=0\cdots0\), todos os termos valem \(+1\) e a soma é \(2^n\): amplitude \(1\).
+\item
+  Se \(z\ne s\), \(s\oplus z\) tem algum bit \(1\), e metade dos \(x\) dá \((s\oplus z)\cdot x=0\) e a outra metade dá \(1\). A soma é zero.
+\end{itemize}
+
+Logo o estado final é exatamente \(\ket{s}\) e a medida devolve \(s\) \textbf{com probabilidade 1}, com uma única consulta.
+
+\textbf{Verificação com \(n=2\) e \(s=10\).} Então \(f(x_1x_2)=x_1\), de tabela \((0,0,1,1)\). O estado antes do último \(H^{\otimes2}\) é \(\tfrac12(\ket{00}+\ket{01}-\ket{10}-\ket{11})=\ket{-}\ket{+}\). Aplicar \(H\otimes H\) dá \(\ket{1}\ket{0}=\ket{10}=\ket s\). Funciona.
+
+Para \(n=3\) e \(f\) de tabela \((0,1,1,0,1,0,0,1)\) (entradas \(x=000,001,\dots,111\)), qual string \(s\) o algoritmo devolve?
+
+\subsubsection{Por que isso é interessante}\label{por-que-isso-uxe9-interessante}
+
+DJ e BV usam o mesmo circuito, mas respondem perguntas diferentes: DJ distingue constante de balanceada (e o resultado \(0\cdots0\) ou não); BV lê \textbf{todas} as \(n\) componentes de \(s\) numa só consulta. A informação que cabe em \(n\) bits sai de uma chamada porque o oráculo age em todos os ramos da superposição e só a interferência do \(H^{\otimes n}\) final concentra a amplitude em \(\ket s\).
+
+Note que isso é uma vantagem de \textbf{consultas} (\(1\) contra \(n\)), polinomial, não exponencial. Foi um passo importante para algoritmos posteriores, que usam a mesma estrutura de transformada de Hadamard para extrair uma propriedade escondida da função.
+
+\subsubsection{Simulação}\label{simulauxe7uxe3o}
+
+Implemente o algoritmo: dada a tabela de \(f(x)=s\cdot x \bmod 2\), devolva a string \(s\) encontrada, como texto de \(n\) bits.
+
+Nota: \texttt{f{[}x{]}} usa \(x\) como inteiro com \(x_1\) mais significativo, e \texttt{n} é \(\log_2\) de \texttt{len(f)}.
+
+Dica: reutilize sua simulação do Deutsch-Jozsa e, no fim, pegue o índice de maior amplitude com \texttt{np.argmax(np.abs(...))}, escrito em binário com \texttt{format(i,\ "0\%db"\ \%\ n)}.
+
+\subsubsection{Resumo}\label{resumo}
+
+\begin{itemize}
+\tightlist
+\item
+  Problema: \(f(x)=s\cdot x\bmod2\), achar \(s\). Clássico: \(n\) consultas.
+\item
+  Quântico: o mesmo circuito do Deutsch-Jozsa; a amplitude de \(\ket z\) é \(2^{-n}\sum_x(-1)^{(s\oplus z)\cdot x}\), que vale \(1\) só para \(z=s\).
+\item
+  Uma consulta, sucesso com probabilidade 1.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Fonte: texto original; o assunto segue B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 6.1.
+
+\subsection{Busca de Grover e amplificação de amplitude}
+Uma lista com \(N\) itens sem nenhuma ordem, e um único item é o que você procura. Sem estrutura, não há atalho clássico: no pior caso é preciso olhar quase todos. O algoritmo de Grover acha o item com cerca de \(\sqrt N\) consultas.
+
+\subsubsection{O problema}\label{o-problema}
+
+Seja \(f:\{0,1\}^n\to\{0,1\}\) com \(N=2^n\) entradas. Sabemos que existe um (ou poucos) \(w\) \textbf{marcado}, com \(f(w)=1\), e \(f(x)=0\) nos outros. A tarefa é encontrar \(w\).
+
+Clássico: em média \(N/2\) consultas, e \(N-1\) no pior caso. Quântico (Grover): da ordem de \(\sqrt N\). Veja a escala: com \(N=10^6\), são cerca de \(10^6\) consultas contra cerca de \(785\).
+
+\subsubsection{Ferramentas: duas reflexões}\label{ferramentas-duas-reflexuxf5es}
+
+O algoritmo é feito de duas \textbf{reflexões}, e a ideia geométrica é: duas reflexões seguidas formam uma rotação.
+
+\textbf{Estado de partida.} Aplicando \(H^{\otimes n}\) em \(\ket{0\cdots0}\) obtemos o estado uniforme
+
+\[
+\ket{\psi}=\frac{1}{\sqrt N}\sum_x\ket x.
+\]
+
+Medi-lo agora acharia \(w\) com probabilidade \(1/N\), o mesmo que chutar.
+
+\textbf{Reflexão 1: o oráculo de fase.} Com o oráculo de fase da primeira aula, \(O_f\ket x=(-1)^{f(x)}\ket x\), só \(\ket w\) troca de sinal:
+
+\[
+O_f=I-2\ket w\bra w.
+\]
+
+Isso é uma reflexão: mantém o que é ortogonal a \(\ket w\) e inverte a componente em \(\ket w\).
+
+\textbf{Reflexão 2: a difusão.} Defina
+
+\[
+D=2\ket\psi\bra\psi-I,
+\]
+
+uma reflexão em torno de \(\ket\psi\) (mantém o que é paralelo a \(\ket\psi\), inverte o resto). Na prática, \(D=H^{\otimes n}(2\ket{0}\bra{0}-I)H^{\otimes n}\), e \(2\ket0\bra0-I\) é ``trocar o sinal de todos os estados exceto \(\ket{0\cdots0}\)'', o que é equivalente, a menos de fase global, a uma porta \(Z\) multicontrolada cercada de portas \(X\) em todos os qubits. Essa fase global \(-1\) passa a importar se \(G\) for usada de forma controlada (por exemplo, em contagem de amplitude).
+
+O efeito de \(D\) em um estado \(\sum a_x\ket x\) com média \(\bar a=\tfrac1N\sum a_x\) é \(a_x\mapsto 2\bar a-a_x\): cada amplitude é \textbf{refletida em torno da média}.
+
+\textbf{Um passo de Grover} é \(G=D\,O_f\).
+
+\subsubsection{\texorpdfstring{Exemplo com \(N=4\) (\(n=2\)), item marcado \(w=11\)}{Exemplo com N=4 (n=2), item marcado w=11}}\label{exemplo-com-n4-n2-item-marcado-w11}
+
+Começamos com \(\ket\psi=\tfrac12(1,1,1,1)\) (amplitudes de \(\ket{00},\ket{01},\ket{10},\ket{11}\)). Pense nas amplitudes como alturas de barras:
+
+\begin{itemize}
+\tightlist
+\item
+  Inicial: quatro barras de altura \(\tfrac12\).
+\item
+  Depois do oráculo: troca o sinal de \(\ket{11}\), e a barra dele vira \(-\tfrac12\) (fica abaixo do zero). Barras: \(\tfrac12,\tfrac12,\tfrac12,-\tfrac12\).
+\item
+  A \textbf{média} das amplitudes caiu para \(\bar a=\tfrac14\).
+\item
+  Difusão: cada barra é refletida em torno da média, \(a\mapsto2\bar a-a\). As três primeiras ficam em \(2\cdot\tfrac14-\tfrac12=0\); a última em \(2\cdot\tfrac14+\tfrac12=1\).
+\end{itemize}
+
+Resultado: \((0,0,0,1)=\ket{11}\). Com \textbf{uma} iteração, achamos \(w\) com probabilidade 1; um clássico precisaria de até 3 consultas.
+
+O efeito geral é o mesmo: a difusão \(D\) reflete cada amplitude em torno da média. Como o oráculo puxa a média para baixo, a barra marcada, que ficou negativa, vira a mais alta depois da reflexão.
+
+\subsubsection{Visão geométrica}\label{visuxe3o-geomuxe9trica}
+
+Todo o jogo acontece num \textbf{plano} de dimensão 2. Defina
+
+\[
+\ket{w^\perp}=\frac{1}{\sqrt{N-1}}\sum_{x\ne w}\ket x,
+\]
+
+o estado uniforme sobre os itens não marcados. Então \(\ket w\) e \(\ket{w^\perp}\) são ortonormais e
+
+\[
+\ket\psi=\sin\theta\,\ket w+\cos\theta\,\ket{w^\perp},\qquad \sin\theta=\frac{1}{\sqrt N}.
+\]
+
+Isto é, \(\ket\psi\) forma o ângulo \(\theta\) com \(\ket{w^\perp}\) (bem perto, quando \(N\) é grande: \(\theta\approx1/\sqrt N\)).
+
+\begin{itemize}
+\tightlist
+\item
+  \(O_f\) reflete em torno do eixo \(\ket{w^\perp}\): o ângulo medido a partir de \(\ket{w^\perp}\) troca de sinal, de \(\theta\) para \(-\theta\).
+\item
+  \(D\) reflete em torno de \(\ket\psi\) (ângulo \(\theta\)): o ângulo \(-\theta\) vira \(2\theta-(-\theta)=3\theta\).
+\end{itemize}
+
+Cada iteração gira o estado de \(2\theta\) em direção a \(\ket w\). Depois de \(k\) iterações:
+
+\[
+G^k\ket\psi=\sin\big((2k+1)\theta\big)\ket w+\cos\big((2k+1)\theta\big)\ket{w^\perp},
+\]
+
+e a probabilidade de medir \(w\) é \(\sin^2\!\big((2k+1)\theta\big)\).
+
+Confira com \(N=4\): \(\sin\theta=\tfrac12\), \(\theta=30^\circ\), e para \(k=1\), \((2k+1)\theta=90^\circ\), \(\sin^2=1\). Exatamente o que vimos.
+
+Para \(N=8\) e \(k=1\) a amplitude do item marcado fica em \(\tfrac{5}{4\sqrt2}\approx0{,}884\): não chega a 1, mas é bem melhor que \(1/\sqrt8\). Pela fórmula, \(\sin\theta=1/\sqrt8\), \(\theta\approx20{,}7^\circ\), \(3\theta\approx62{,}1^\circ\). Qual é a probabilidade de sucesso, \(\sin^2 3\theta\)? (Dica: \(\sin3\theta=3\sin\theta-4\sin^3\theta\).)
+
+Agora à mão: reflita em torno da média as amplitudes \((\tfrac12,\tfrac12,\tfrac12,-\tfrac12)\) (média \(\tfrac14\)). Qual é a nova amplitude do item que estava em \(-\tfrac12\)?
+
+Com \(N=4\), uma iteração dá probabilidade \(1\). E se aplicarmos uma segunda? Calcule \(\sin^2(5\theta)\) com \(\theta=30^\circ\).
+
+\subsubsection{Quantas iterações?}\label{quantas-iterauxe7uxf5es}
+
+Queremos \((2k+1)\theta\approx\pi/2\), isto é,
+
+\[
+k\approx\frac{\pi}{4\theta}-\frac12,\qquad \sin\theta=\sqrt{M/N},
+\]
+
+arredondado para o inteiro mais próximo, onde \(M\) é o número de itens marcados (\(M=1\) no caso básico). Para \(N\) grande, isso é cerca de \(\tfrac\pi4\sqrt{N/M}\): da ordem de \(\sqrt N\). Mais itens marcados, menos iterações.
+
+Com \(N=1024\) e \(M=1\) (\(\theta=\arcsin(1/32)\approx0{,}03126\)), quantas iterações?
+
+\textbf{Atenção: não vale ``mais é melhor''.} A rotação não para sozinha. Se passar de \(\pi/2\), o estado se afasta de \(\ket w\) e a probabilidade cai, oscilando. Por isso é preciso conhecer \(M\); se não o conhecemos, usa-se um número aleatório de iterações (algoritmo BBHT) ou contagem quântica.
+
+Com \(N=64\) e \(M=4\) itens marcados (\(\sin\theta=1/4\), \(\theta\approx0{,}2527\) rad), quantas iterações?
+
+\subsubsection{Simulação}\label{simulauxe7uxe3o}
+
+Simule Grover com NumPy: monte o estado uniforme, aplique \(k\) vezes o oráculo (\(-1\) em \(w\)) e a difusão (refletir em torno da média), e devolva a probabilidade de medir \(w\).
+
+Dica: com \texttt{psi\ =\ np.ones(N)\ /\ np.sqrt(N)}, o oráculo é \texttt{psi{[}marcado{]}\ *=\ -1} e a difusão é \texttt{psi\ =\ 2\ *\ psi.mean()\ -\ psi}.
+
+\subsubsection{Para ir além: amplitude amplification (opcional)}\label{para-ir-aluxe9m-amplitude-amplification-opcional}
+
+Esta seção generaliza o Grover e pode ser pulada numa primeira leitura.
+
+O método não precisa começar no estado uniforme. Suponha um algoritmo quântico \(\mathcal A\) (um circuito unitário) que prepara
+
+\[
+\mathcal A\ket{0\cdots0}=\sin\theta\,\ket{\text{bom}}+\cos\theta\,\ket{\text{ruim}},
+\]
+
+onde ``bom'' e ``ruim'' são estados normalizados e ortogonais, e \(p=\sin^2\theta\) é a probabilidade de medir um resultado bom. Uma tentativa direta acerta com probabilidade \(p\); repetir dá em média \(1/p\) tentativas.
+
+O mesmo truque das duas reflexões funciona:
+
+\begin{itemize}
+\tightlist
+\item
+  reflexão 1: troca o sinal da parte ``boa'' (o oráculo, que reconhece resultados bons);
+\item
+  reflexão 2: reflexão em torno do estado inicial \(\mathcal A\ket{0\cdots0}\), feita por \(\mathcal A\,(2\ket0\bra0-I)\,\mathcal A^{-1}\).
+\end{itemize}
+
+Cada rodada gira de \(2\theta\) e, depois de \(k\) rodadas, a probabilidade de sucesso é \(\sin^2((2k+1)\theta)\). Como \(\theta\approx\sqrt p\), bastam cerca de \(\tfrac\pi4\sqrt{1/p}\) rodadas em vez de \(1/p\): um ganho \textbf{quadrático}. O Grover é o caso em que \(\mathcal A=H^{\otimes n}\) e \(p=1/N\).
+
+Se um algoritmo acerta com probabilidade \(p=1/100\), quantas rodadas de amplificação (mesma fórmula, com \(\sin\theta=\sqrt p\))?
+
+Esse resultado é \textbf{ótimo}: nenhum algoritmo quântico acha um item marcado numa lista não estruturada com bem menos que \(\sqrt N\) consultas (Bennett, Bernstein, Brassard e Vazirani, 1997; Zalka, 1999, mostra que a constante \(\pi/4\) também é a melhor possível). Por isso Grover dá um ganho quadrático, não exponencial.
+
+\subsubsection{Resumo}\label{resumo}
+
+\begin{itemize}
+\tightlist
+\item
+  Problema: achar \(w\) com \(f(w)=1\) entre \(N=2^n\) entradas, sem estrutura.
+\item
+  Passo de Grover: oráculo de fase (reflexão que inverte \(\ket w\)) e difusão (reflexão em torno de \(\ket\psi\)); juntas, uma rotação de \(2\theta\), com \(\sin\theta=1/\sqrt N\).
+\item
+  Depois de \(k\) passos, \(P(w)=\sin^2((2k+1)\theta)\); o melhor \(k\) é o inteiro mais próximo de \(\tfrac{\pi}{4\theta}-\tfrac12\) (cerca de \(\tfrac\pi4\sqrt N\)).
+\item
+  Opcional: a amplitude amplification generaliza, e qualquer algoritmo com sucesso \(p\) vira \(\sim\sqrt{1/p}\) rodadas.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Fonte: texto original; o assunto segue B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 5.4.
+
+\subsection{Transformada de Fourier quântica}
+Quase todo algoritmo quântico que dá ganho exponencial esconde, no fim, a mesma pergunta: ``que \textbf{frequência} tem esse padrão?''. A transformada de Fourier responde isso, e a versão quântica faz a conta com muito poucas portas. Aqui você vai construí-la primeiro com números pequenos, depois em geral.
+
+\subsubsection{A transformada de Fourier discreta (DFT)}\label{a-transformada-de-fourier-discreta-dft}
+
+Um sinal com \(N\) amostras é um vetor \(x = (x_0,\dots,x_{N-1})\). A DFT troca ``valor em cada instante'' por ``quanto de cada frequência''. Ela usa as \textbf{raízes da unidade}
+
+\[
+\omega = e^{2\pi i/N},
+\]
+
+que são \(N\) pontos igualmente espaçados no círculo unitário (\(\omega^N = 1\)). A saída é
+
+\[
+y_k = \frac{1}{\sqrt N}\sum_{j=0}^{N-1} \omega^{jk}\, x_j .
+\]
+
+Exemplo com \(N=4\): aqui \(\omega = e^{2\pi i/4} = i\), e as potências são \(\omega^0=1,\ \omega^1=i,\ \omega^2=-1,\ \omega^3=-i,\ \omega^4=1,\dots\) (o expoente só importa módulo 4). A matriz \(F_{kj}=\omega^{jk}/\sqrt N\) fica
+
+\[
+F_4 = \frac12\begin{pmatrix} 1&1&1&1\\ 1&i&-1&-i\\ 1&-1&1&-1\\ 1&-i&-1&i \end{pmatrix}.
+\]
+
+Para \(N=2\), \(\omega=-1\) e \(F_2\) é a matriz de Hadamard. Calculada direto, a DFT custa cerca de \(N^2\) multiplicações. A \textbf{FFT} (transformada rápida) baixa isso para cerca de \(N\log N\) separando as posições pares e ímpares: uma DFT de tamanho \(N\) vira duas de tamanho \(N/2\), e repete-se. Mesmo assim, cresce com \(N\).
+
+Qual é o ângulo (em graus, entre 0 e 360) de \(\omega^{jk}\) para \(N=8\), \(j=3\) e \(k=5\)? (Dica: \(jk=15\) e só vale \(jk\) módulo 8.)
+
+\subsubsection{A QFT: a mesma conta nas amplitudes}\label{a-qft-a-mesma-conta-nas-amplitudes}
+
+Com \(n\) qubits temos \(N=2^n\) estados da base. A \textbf{transformada de Fourier quântica} (QFT) é a matriz unitária \(F\) acima, aplicada ao vetor de amplitudes:
+
+\[
+\mathrm{QFT}\ket{j} = \frac{1}{\sqrt N}\sum_{k=0}^{N-1} \omega^{jk}\ket{k}.
+\]
+
+Ela é unitária (as colunas são ortonormais), então é uma porta legítima. Para \(n=2\), a primeira coluna de \(F_4\) diz \(\mathrm{QFT}\ket{00} = \tfrac12(\ket{00}+\ket{01}+\ket{10}+\ket{11})\), a superposição uniforme, igual a \(H\otimes H\ket{00}\). Qual é a amplitude de cada estado nesse caso?
+
+Já \(\mathrm{QFT}\ket{01}\) é a segunda coluna: \(\tfrac12(\ket{00}+i\ket{01}-\ket{10}-i\ket{11})\). Todas as amplitudes têm o mesmo módulo, mas as \textbf{fases giram} com uma ``frequência'' que depende de \(j\). Essa é a mensagem central: a QFT leva um número \(j\) guardado na base para uma onda de frequência \(j\) guardada nas fases.
+
+Atenção: a QFT \textbf{não} faz a DFT ``de graça'' sobre dados clássicos. Ela transforma amplitudes, que não podemos ler todas. Seu valor está em usar o resultado dentro de outro algoritmo.
+
+\subsubsection{O circuito para n = 2, passo a passo}\label{o-circuito-para-n-2-passo-a-passo}
+
+Para \(n=2\) escrevemos \(j=2j_1+j_2\) (então \(j_1\) é o bit mais significativo). Precisamos de uma porta de fase \(R_m=\begin{pmatrix}1&0\\0&e^{2\pi i/2^m}\end{pmatrix}\); aqui basta \(R_2=S\) (fase \(e^{2\pi i/4}=i\)). O circuito:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(H\) no qubit 1.
+\item
+  \(S\) no qubit 1, controlada pelo qubit 2.
+\item
+  \(H\) no qubit 2.
+\item
+  SWAP entre os dois qubits.
+\end{enumerate}
+
+Veja o que acontece com a entrada \(j=1\) (isto é, \(j_1=0\), \(j_2=1\), estado \(\ket{01}\)):
+
+\begin{itemize}
+\tightlist
+\item
+  \(H\) no qubit 1: \(\tfrac1{\sqrt2}(\ket0+\ket1)\), pois \(j_1=0\).
+\item
+  \(S\) controlada: o qubit 2 vale 1, então o \(\ket1\) do qubit 1 ganha a fase \(i\): \(\tfrac1{\sqrt2}(\ket0+i\ket1)\).
+\item
+  \(H\) no qubit 2 (que está em \(\ket1\)): \(\tfrac1{\sqrt2}(\ket0-\ket1)\).
+\item
+  Antes do SWAP, o estado é \(\tfrac1{\sqrt2}(\ket0+i\ket1)\otimes\tfrac1{\sqrt2}(\ket0-\ket1)\). Depois do SWAP: \(\tfrac12(\ket0-\ket1)(\ket0+i\ket1)=\tfrac12(\ket{00}+i\ket{01}-\ket{10}-i\ket{11})\), a segunda coluna de \(F_4\).
+\end{itemize}
+
+A saída é um \textbf{produto} de dois qubits (sem emaranhamento), e cada qubit recebeu uma fase que depende de alguns bits de \(j\). Qual é o ângulo (em graus, entre 0 e 360) da amplitude de \(\ket{01}\) no estado \(\mathrm{QFT}\ket{10}\) (que é \(j=2\), a terceira coluna de \(F_4\))?
+
+\subsubsection{Fração binária e o caso geral}\label{frauxe7uxe3o-binuxe1ria-e-o-caso-geral}
+
+Para generalizar usamos a \textbf{fração binária}
+
+\[
+0.j_1j_2\cdots j_m = \frac{j_1}{2}+\frac{j_2}{4}+\cdots+\frac{j_m}{2^m}.
+\]
+
+Exemplo: \(0.101 = \tfrac12+\tfrac18 = 0{,}625\). Para \(n=3\) e \(j=j_1j_2j_3\), o resultado da QFT é, por extenso,
+
+\[
+\mathrm{QFT}\ket{j_1j_2j_3}=\tfrac1{\sqrt8}\big(\ket0+e^{2\pi i\,0.j_3}\ket1\big)\big(\ket0+e^{2\pi i\,0.j_2j_3}\ket1\big)\big(\ket0+e^{2\pi i\,0.j_1j_2j_3}\ket1\big).
+\]
+
+Para \(n=2\) são os dois últimos fatores, que você viu acima (com \(j=1\): \(0.j_2=\tfrac12\) e \(0.j_1j_2=\tfrac14\)). Em geral, o qubit \(l\) da saída leva a fase \(e^{2\pi i\,0.j_{n-l+1}\cdots j_n}\).
+
+Receita do circuito, qubit a qubit (com \(R_m\) de fase \(e^{2\pi i/2^m}\); casos conhecidos: \(R_1=Z\), \(R_2=S\) e \(R_3=T\), com fase de 45°):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  No qubit 1: \(H\), depois \(R_2\) controlada pelo qubit 2, \(R_3\) controlada pelo qubit 3, \ldots, \(R_n\) controlada pelo qubit \(n\).
+\item
+  No qubit 2: \(H\), depois \(R_2\) controlada pelo qubit 3, \ldots, \(R_{n-1}\) controlada pelo qubit \(n\).
+\item
+  Continue até o qubit \(n\), que só recebe \(H\).
+\item
+  No fim, \textbf{inverta a ordem} dos qubits com SWAPs: sem isso, o qubit 1 teria a fase \(0.j_1\cdots j_n\), mas a fórmula manda a fase \(0.j_n\) para ele.
+\end{enumerate}
+
+Quantas portas controladas \(R_m\) o circuito tem para \(n\) qubits? O qubit 1 usa \(n-1\), o 2 usa \(n-2\), e assim por diante: \((n-1)+(n-2)+\cdots+1 = n(n-1)/2\). Quantas para \(n=5\)?
+
+No total são \(n\) portas \(H\), \(n(n-1)/2\) fases controladas e cerca de \(n/2\) SWAPs: da ordem de \(n^2\) portas, contra os \(N\log N = 2^n\,n\) passos da FFT. Esse é o ganho exponencial, com a ressalva de que a saída é um estado quântico.
+
+Se aplicarmos a QFT e depois a QFT inversa a \(\ket j\), que estado obtemos?
+
+\subsubsection{QFT inversa}\label{qft-inversa}
+
+Como \(F\) é unitária, a inversa é a adjunta (conjugada transposta). Como \(F\) é simétrica, basta conjugar: \(F^{-1}_{kj}=\omega^{-jk}/\sqrt N\). No circuito: percorra as portas \textbf{de trás para a frente} e troque cada \(R_m\) por \(R_m^\dagger\) (fase \(e^{-2\pi i/2^m}\)). A QFT inversa transforma ``onda de frequência \(j\)'' de volta em \(\ket{j}\), e é por isso que ela aparece no fim da estimação de fase.
+
+\subsection{Estimação de fase}
+Uma porta quântica \(U\) tem autovetores, e cada autovetor só ganha uma fase quando passa por ela. Descobrir essa fase é como ler a ``velocidade de rotação'' escondida na porta. A \textbf{estimação de fase} faz isso, e é o motor por trás do algoritmo de Shor, do HHL e de simulações químicas.
+
+\subsubsection{O problema}\label{o-problema}
+
+Seja \(U\) unitária e \(\ket{u}\) um autovetor dela:
+
+\[
+U\ket{u} = e^{2\pi i\varphi}\ket{u}, \qquad 0\le\varphi<1.
+\]
+
+Como \(U\) é unitária, o autovalor tem módulo 1 e sempre dá para escrevê-lo assim; \(\varphi\) é a \textbf{fase} (em voltas completas: \(\varphi=\tfrac14\) é um quarto de volta, 90°). Temos acesso ao circuito de \(U\) (e a versões controladas dele) e a uma cópia de \(\ket{u}\). Queremos \(\varphi\) com \(t\) bits de precisão.
+
+Exemplo: \(U=S\) e \(\ket{u}=\ket1\). Como \(S\ket1=i\ket1 = e^{2\pi i\cdot\frac14}\ket1\), a resposta é \(\varphi=\tfrac14=0.01_2\). Qual é \(\varphi\) para \(U=T\) e \(\ket{u}=\ket1\) (use \(T\ket1=e^{i\pi/4}\ket1\))?
+
+\subsubsection{Exemplo com 2 qubits de registro, antes da regra geral}\label{exemplo-com-2-qubits-de-registro-antes-da-regra-geral}
+
+Use \(U=S\), \(\ket{u}=\ket1\) e um registro de \(t=2\) qubits, mais o qubit-alvo que guarda \(\ket u\). O \textbf{registro} é o grupo de \(t\) qubits onde a fase vai aparecer; o \textbf{alvo} é o qubit (ou grupo) que guarda \(\ket u\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ponha o registro em \(H\otimes H\ket{00}=\tfrac12(\ket{00}+\ket{01}+\ket{10}+\ket{11})\).
+\item
+  O qubit menos significativo do registro controla \(U^1=S\); o mais significativo controla \(U^2=S^2=Z\). Cada vez que o controle vale 1, o alvo \(\ket1\) devolve a fase \(i\) (para \(S\)) ou \(-1\) (para \(S^2\)). A fase \textbf{fica no registro} (esse é o efeito de ``kickback'' dos oráculos): o termo \(\ket{x}\) ganha \(i^{x}=e^{2\pi i\,x/4}\), com \(x\) o número escrito no registro.
+\item
+  Resultado: \(\tfrac12(\ket{00}+i\ket{01}-\ket{10}-i\ket{11})\), que é exatamente a segunda coluna de \(F_4\), ou seja, \(\mathrm{QFT}\ket{01}\).
+\item
+  Aplicando a QFT inversa, voltamos a \(\ket{01}\). Medindo, lemos \(y=1\), e \(\varphi = y/2^t = 1/4\). Acertamos.
+\end{enumerate}
+
+\subsubsection{A regra geral}\label{a-regra-geral}
+
+Com \(t\) qubits no registro:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prepare o registro em \(\ket{0}^{\otimes t}\) e o alvo em \(\ket{u}\). Aplique \(H\) em todo o registro: \(\tfrac1{\sqrt{2^t}}\sum_{x}\ket{x}\ket{u}\).
+\item
+  Para cada \(k=0,\dots,t-1\), aplique \(U^{2^k}\) ao alvo, controlada pelo qubit do registro de peso \(2^k\). Como \(U^{2^k}\ket u=e^{2\pi i\varphi 2^k}\ket u\), o termo \(\ket x\), com \(x=\sum_k x_k2^k\), recebe a fase \(e^{2\pi i\varphi x}\):
+  \[
+  \frac{1}{\sqrt{2^t}}\sum_{x=0}^{2^t-1} e^{2\pi i\,\varphi\, x}\ket{x}\ \ket{u}.
+  \]
+\item
+  Aplique a QFT inversa no registro e meça.
+\end{enumerate}
+
+Por que dá certo: compare com \(\mathrm{QFT}\ket y=\tfrac1{\sqrt{2^t}}\sum_x e^{2\pi i\,xy/2^t}\ket x\). Se \(\varphi=y/2^t\) exatamente (um número com \(t\) bits binários), a soma acima é \(\mathrm{QFT}\ket y\), e a QFT inversa entrega \(\ket y\) com certeza.
+
+Repare no custo: se só soubermos repetir \(U\), o qubit de peso \(2^k\) pede \(2^k\) aplicações, e o total é \(1+2+\cdots+2^{t-1}=2^t-1\). Cada qubit extra no registro \textbf{dobra} o custo. (No Shor, calcula-se \(U^{2^k}\) direto, sem repetir.) Se \(t\) sobe de 5 para 6, por qual fator, aproximadamente, o número total de aplicações de \(U\) é multiplicado?
+
+Um segundo exemplo, agora com \(t=4\): se \(\varphi=0.1011_2=\tfrac12+\tfrac18+\tfrac1{16}=\tfrac{11}{16}\), qual inteiro \(y\) o registro mostra?
+
+E se \(U\ket u=-\ket u\) (autovalor \(-1=e^{2\pi i\cdot\frac12}\)), qual é \(\varphi\)?
+
+\subsubsection{\texorpdfstring{E se \(\varphi\) não cabe em \(t\) bits?}{E se \textbackslash varphi não cabe em t bits?}}\label{e-se-varphi-nuxe3o-cabe-em-t-bits}
+
+Exemplo: \(U=T\) e \(\ket u=\ket1\) dão \(\varphi=\tfrac18=0.001_2\), que precisa de 3 bits. Com apenas \(t=2\) qubits, o melhor que o registro pode escrever é \(y/4\), com \(y=0,1,2,3\) (ou seja, \(0,\ 0{,}25,\ 0{,}5,\ 0{,}75\)). Fazendo a conta (a fórmula está logo abaixo), as probabilidades de medir \(y=0,1,2,3\) são
+
+\[
+0{,}427,\quad 0{,}427,\quad 0{,}073,\quad 0{,}073 .
+\]
+
+Os dois valores mais próximos de \(\tfrac18\) (\(0\) e \(\tfrac14\)) são os mais prováveis, mas o resultado é \textbf{aleatório}; com \(t=3\) teríamos certeza. Em geral, a probabilidade de medir \(y\) é
+
+\[
+P(y)=\left|\frac{1}{2^t}\sum_{x=0}^{2^t-1}e^{2\pi i\,x\,(\varphi-y/2^t)}\right|^2 ,
+\]
+
+que vale 1 quando \(\varphi=y/2^t\) exatamente e fica pequena quando \(\varphi\) está longe de \(y/2^t\). Em resumo: mede-se, com boa probabilidade, uma fração de \(t\) bits \textbf{perto} de \(\varphi\), e cada qubit extra dobra a resolução. (Para quem quiser os números exatos: a fração de \(t\) bits mais próxima de \(\varphi\) sai com probabilidade de pelo menos \(4/\pi^2\approx0{,}405\), e para obter \(\varphi\) com erro menor que \(2^{-n}\) com probabilidade pelo menos \(1-\epsilon\) usa-se \(t=n+\lceil\log_2(2+\tfrac1{2\epsilon})\rceil\) qubits; veja a fonte.)
+
+Confira no computador:
+
+Quantos qubits de registro são necessários para representar \(\varphi=\tfrac18\) (da porta \(T\)) sem erro?
+
+\subsubsection{Vários autoestados}\label{vuxe1rios-autoestados}
+
+E se não tivermos um autovetor, mas um estado qualquer? Como os autovetores de \(U\) formam uma base, \(\ket\psi=\sum_j c_j\ket{u_j}\) com \(U\ket{u_j}=e^{2\pi i\varphi_j}\ket{u_j}\). Por linearidade, o circuito leva
+
+\[
+\ket\psi\ket{0}\ \longmapsto\ \sum_j c_j\,\ket{\tilde\varphi_j}\ket{u_j},
+\]
+
+onde \(\ket{\tilde\varphi_j}\) é o registro com a estimativa de \(\varphi_j\). Medindo o registro, obtemos \(\varphi_j\) com probabilidade \(|c_j|^2\), e o alvo \textbf{colapsa} em \(\ket{u_j}\). Isto é útil: no Shor, não sabemos construir os autoestados, mas sabemos construir uma soma deles.
+
+Exemplo: \(U=T\) e \(\ket\psi=\tfrac{\sqrt3}{2}\ket0+\tfrac12\ket1\). \(T\ket0=\ket0\) (\(\varphi=0\)) e \(T\ket1\) tem \(\varphi=\tfrac18\). Qual é a probabilidade de medir \(\varphi=\tfrac18\) (com \(t\ge3\))?
+
+Qual bloco do circuito, aplicado ao registro antes da medida, converte a fase codificada em um número binário legível?
+
+\begin{quote}
+Para se aprofundar: B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 5.6. As probabilidades de acerto citadas são o resultado padrão de M. Nielsen e I. Chuang, \emph{Quantum Computation and Quantum Information}, cap. 5.
+\end{quote}
+
+\subsection{Algoritmo de Shor}
+Dado um número composto \(N\), como achar um divisor? Não se conhece método clássico rápido (os melhores levam tempo sub-exponencial no número de dígitos, isto é, bem pior que polinomial), e o \textbf{RSA}, sistema de criptografia usado na internet, depende dessa dificuldade. O algoritmo de Shor fatora em tempo polinomial num computador quântico. A ideia central é que \textbf{fatorar se reduz a achar um período}, e achar períodos é exatamente o que a estimação de fase faz bem.
+
+\subsubsection{Aritmética modular em um minuto}\label{aritmuxe9tica-modular-em-um-minuto}
+
+Escrevemos \(a \bmod N\) para o resto da divisão de \(a\) por \(N\). Exemplo: \(49 \bmod 15 = 4\), pois \(49=3\cdot15+4\). Dizemos que \(a\equiv b \pmod N\) se têm o mesmo resto. O \textbf{mdc} (máximo divisor comum) de dois números é o maior inteiro que divide ambos: \(\gcd(12,18)=6\). O algoritmo de Euclides o calcula rápido: \(\gcd(a,b)=\gcd(b,\ a \bmod b)\), parando quando o resto é 0.
+
+\subsubsection{\texorpdfstring{Do período aos fatores (parte clássica), com \(N=15\)}{Do período aos fatores (parte clássica), com N=15}}\label{do-peruxedodo-aos-fatores-parte-cluxe1ssica-com-n15}
+
+Escolha um número \(a\) sem fator comum com \(N\), digamos \(a=7\). Calcule as potências de \(7\) módulo 15:
+
+\begin{center}\begin{tabular}{llllllllll}
+\hline
+\(x\) & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+\hline
+
+\hline
+
+\(7^x \bmod 15\) & 1 & 7 & 4 & 13 & 1 & 7 & 4 & 13 & 1 \\
+\end{tabular}\end{center}
+
+A sequência é \textbf{periódica}. O menor \(r>0\) com \(a^r\equiv1 \pmod N\) é a \textbf{ordem} (ou período) de \(a\) módulo \(N\). Aqui \(r=4\).
+
+Qual é o período de \(2\) módulo \(15\)? (Calcule \(2,4,8,\dots\) até voltar a 1.)
+
+Como \(r=4\) é par, podemos olhar o ``meio do ciclo'': \(7^{r/2}=7^2=49\equiv4 \pmod{15}\). Então \(7^4-1 = (7^2-1)(7^2+1)=48\cdot50\), e \(48\cdot 50 = 2400 = 160\cdot15\) é múltiplo de 15. Os fatores \(48\) e \(50\) não são múltiplos de 15 (cada um carrega só uma parte: \(48\) é múltiplo de \(3\) e \(50\) é múltiplo de \(5\)). Os mdc's separam as partes:
+
+\[
+\gcd(7^2-1,\,15)=\gcd(48,15)=3,\qquad \gcd(7^2+1,\,15)=\gcd(50,15)=5,
+\]
+
+e \(3\cdot5=15\). O mesmo vale em geral. Se \(r\) é par, então \(a^r-1=(a^{r/2}-1)(a^{r/2}+1)\) é múltiplo de \(N\). Se além disso \(a^{r/2}\not\equiv-1\pmod N\) (o caso \(a^{r/2}\equiv1\) é impossível, pois \(r\) é o menor expoente), nenhum fator sozinho é múltiplo de \(N\) e os dois mdc's dão divisores de verdade:
+
+\[
+p=\gcd\!\big(a^{r/2}-1,\ N\big),\qquad q=\gcd\!\big(a^{r/2}+1,\ N\big).
+\]
+
+Quanto vale \(\gcd(a^{r/2}+1,15)\) com \(a=2\) e \(r=4\) (então \(a^{r/2}=4\))?
+
+Quando falha? Se \(r\) for ímpar, ou se \(a^{r/2}\equiv-1 \pmod N\) (por exemplo \(a=14\), \(N=15\): \(r=2\) e \(14\equiv-1\)). Basta sortear outro \(a\); para \(N\) ímpar e não potência de primo, cada sorteio funciona com probabilidade de pelo menos \(1/2\). Se o sorteio já der \(\gcd(a,N)>1\), achamos um divisor sem fazer nada.
+
+Em resumo, a parte clássica é rápida. O difícil é achar \(r\): para \(N\) de \(n\) bits, o \textbf{valor} de \(r\) pode chegar perto de \(N\) (exponencial em \(n\)), e calcular a tabela acima seria impraticável.
+
+Implemente a parte clássica:
+
+\subsubsection{\texorpdfstring{A parte quântica, 1: a porta \(U_a\)}{A parte quântica, 1: a porta U\_a}}\label{a-parte-quuxe2ntica-1-a-porta-u_a}
+
+Seja \(n\) o número de bits de \(N\) (\(n=4\) para \(N=15\)). Defina a unitária \(U_a\) nos estados \(\ket y\) com \(y<N\):
+\[
+U_a\ket{y} = \ket{a\,y \bmod N}.
+\]
+Para \(N=15\) e \(a=7\): \(U_7\ket1=\ket7\), \(U_7\ket7=\ket{49\bmod15}=\ket4\), \(U_7\ket4=\ket{28\bmod15}=\ket{13}\) e \(U_7\ket{13}=\ket{91\bmod15}=\ket1\). A porta apenas \textbf{roda o ciclo} \(1\to7\to4\to13\to1\). É uma permutação (porque \(\gcd(a,N)=1\)), logo unitária. Ela faz a exponenciação modular: \(U_a^{x}\ket1=\ket{a^x\bmod N}\). Em circuito, calcula-se \(U_a^{2^k}\) diretamente como multiplicação por \(a^{2^k}\bmod N\) (obtido por quadrados sucessivos, fácil classicamente), então cada potência custa só um circuito de multiplicação modular de tamanho polinomial em \(n\).
+
+\subsubsection{A parte quântica, 2: os autoestados}\label{a-parte-quuxe2ntica-2-os-autoestados}
+
+Um ciclo tem ``ondas'' como autovetores. Para \(N=15\), \(a=7\), os quatro estados (escreva os coeficientes na ordem \(\ket1,\ket7,\ket4,\ket{13}\)):
+
+\[
+\ket{u_0}=\tfrac12(1,\,1,\,1,\,1),\quad
+\ket{u_1}=\tfrac12(1,\,-i,\,-1,\,i),\quad
+\ket{u_2}=\tfrac12(1,\,-1,\,1,\,-1),\quad
+\ket{u_3}=\tfrac12(1,\,i,\,-1,\,-i).
+\]
+
+Confira \(\ket{u_1}\): \(U_7\) move cada coeficiente uma casa (\(\ket1\to\ket7\) etc.), dando \(\tfrac12(i,\,1,\,-i,\,-1)=i\cdot\tfrac12(1,\,-i,\,-1,\,i)\). Logo \(U_7\ket{u_1}=i\ket{u_1}=e^{2\pi i\cdot\frac14}\ket{u_1}\): fase \(\tfrac14\). Do mesmo jeito, \(\ket{u_s}\) tem fase \(s/4\). No caso geral, com período \(r\):
+\[
+\ket{u_s}=\frac1{\sqrt r}\sum_{k=0}^{r-1}e^{-2\pi i\,sk/r}\ket{a^k \bmod N},\qquad U_a\ket{u_s}=e^{2\pi i\,s/r}\ket{u_s},\quad s=0,\dots,r-1.
+\]
+\textbf{A fase de \(U_a\) é \(s/r\), e o período está escondido no denominador.}
+
+\textbf{O truque.} Não sabemos fabricar \(\ket{u_s}\) (isso exigiria conhecer \(r\)), mas somando os quatro:
+\[
+\ket{u_0}+\ket{u_1}+\ket{u_2}+\ket{u_3}=\tfrac12\,(4,\,0,\,0,\,0)=2\ket{1},\qquad\text{ou seja}\qquad \frac1{\sqrt r}\sum_{s=0}^{r-1}\ket{u_s}=\ket{1},
+\]
+porque as fases se cancelam em todos os termos, exceto em \(k=0\). E \(\ket1\) é fácil de preparar. Pela seção ``vários autoestados'' da estimação de fase, rodar o algoritmo com \(\ket1\) no alvo sorteia um \(s\) ao acaso (cada um com probabilidade \(1/r\)) e entrega a estimativa de \(s/r\).
+
+Para \(N=15\) e \(a=7\), sai \(s/4\) com \(s\in\{0,1,2,3\}\). Qual é a probabilidade de a medida cair em \(s=1\) ou \(s=3\), que dão \(r=4\) diretamente? (Para \(s=0\) não se aprende nada; para \(s=2\) a fração reduzida é \(\tfrac12\).)
+
+O circuito é a estimação de fase da seção anterior, com \(t=2n\) qubits no registro (basta \(2^t\ge N^2\), para ter precisão suficiente na etapa de frações contínuas; para \(N=21\), \(n=5\), \(t=9\) já serve), controlando \(U_a^{2^k}\) e finalizando com a QFT inversa.
+
+Para \(N=15\) (\(n=4\) bits), com \(t=2n\), quantos qubits tem o registro de fase?
+
+\subsubsection{Das frações contínuas ao período}\label{das-frauxe7uxf5es-contuxednuas-ao-peruxedodo}
+
+Medimos \(y\), com \(y/2^t\approx s/r\). Precisamos recuperar \(r\) a partir de um decimal aproximado. O método é o das \textbf{frações contínuas}: escreve-se o número como \(a_0+\cfrac{1}{a_1+\cfrac1{a_2+\cdots}}\), onde os \(a_i\) são os quocientes do algoritmo de Euclides. Cortar a expansão depois de cada termo dá uma lista de frações cada vez melhores, os \textbf{convergentes}.
+
+Exemplo com \(N=21\), \(a=2\) e \(t=9\) (os restos de \(2^x \bmod 21\) são \(1,2,4,8,16,11,1,\dots\), então \(r=6\)). Uma medida típica é \(y=85\), com \(85/512\approx0{,}1660\). Aplicando Euclides a \(85/512\):
+
+\begin{center}\begin{tabular}{llll}
+\hline
+passo & divisão & quociente & resto \\
+\hline
+
+\hline
+
+1 & \(512 \div 85\) & 6 & 2 \\
+2 & \(85 \div 2\) & 42 & 1 \\
+3 & \(2 \div 1\) & 2 & 0 \\
+\end{tabular}\end{center}
+
+Quocientes: \(0;\,6,\,42,\,2\) (o primeiro, \(0\), é a parte inteira de \(85/512\)). Os convergentes:
+
+\begin{itemize}
+\tightlist
+\item
+  só \(0\): \(\tfrac01\);
+\item
+  até o \(6\): \(0+\tfrac16=\tfrac16\);
+\item
+  até o \(42\): \(\cfrac{1}{6+\frac1{42}}=\tfrac{42}{253}\);
+\item
+  completo: \(\tfrac{85}{512}\).
+\end{itemize}
+
+Regra: escolha o \textbf{último convergente com denominador menor que \(N\)}. Aqui é \(\tfrac16\) (o próximo, \(253\), passa de \(21\)), então \(r=6\) é o candidato. Verificamos classicamente: \(2^6=64=3\cdot21+1\equiv1\). Confirmado, e \(r\) é par: \(2^3=8\) dá \(\gcd(7,21)=7\) e \(\gcd(9,21)=3\).
+
+Isso funciona quando \(y\) é o inteiro mais próximo de \(2^t s/r\): então \(|y/2^t-s/r|<\tfrac1{2r^2}\) (pois \(r<N\) e \(2^t\ge N^2\)), e \(s/r\) aparece entre os convergentes. Esse \(y\) sai com probabilidade de pelo menos \(4/\pi^2\) (por \(s\)), então às vezes a medida é ruim ou dá um \(s\) com \(\gcd(s,r)>1\) (a fração reduzida tem denominador menor que \(r\)). Nesses casos o teste \(a^r\equiv1\) falha e \textbf{repete-se}. Em \(N=15\), \(a=7\), o caso \(s=2\) é assim: \(\tfrac24=\tfrac12\), e \(7^2=49\equiv4\ne1\).
+
+Qual é o candidato a \(r\) se \(N=15\), \(t=8\) e a medida foi \(y=192\)?
+
+Implemente a recuperação de \(r\):
+
+\subsubsection{O custo total e o que não é o Shor}\label{o-custo-total-e-o-que-nuxe3o-uxe9-o-shor}
+
+Cada multiplicação modular custa da ordem de \(n^2\) portas e há \(t=2n\) delas, o que dá cerca de \(n^3\) no total (a QFT, com \(O(n^2)\) portas, é mais barata). Só a \textbf{estimação de fase} e a \textbf{QFT} são quânticas; escolha de \(a\), mdc, frações contínuas e teste final ficam no computador clássico. Fatorar números grandes (RSA de 2048 bits) exige milhares de qubits com correção de erros, muito além dos aparelhos atuais.
+
+Qual parte do Shor usa a transformada de Fourier quântica?
+
+\begin{quote}
+Para se aprofundar: B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 6.2. Algoritmo original: P. Shor, ``Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer'' (1997).
+\end{quote}
+
+\subsection{Algoritmo HHL}
+Resolver sistemas lineares \(A\vec x=\vec b\) é o cavalo de batalha da ciência computacional, e o tamanho do sistema cresce rápido. O algoritmo HHL (de Harrow, Hassidim e Lloyd) usa a estimação de fase para ``inverter'' a matriz \(A\) \textbf{dentro de um estado quântico}, com custo que cresce só com \(\log N\) no tamanho. Vale entender o que ele promete, e também o que \textbf{não} promete.
+
+\subsubsection{O problema e o que a saída é}\label{o-problema-e-o-que-a-sauxedda-uxe9}
+
+Seja \(A\) uma matriz \(N\times N\) \textbf{hermitiana} (igual à sua adjunta; todos os autovalores são reais) com \(N=2^n\), e \(\vec b\) um vetor. Queremos \(\vec x=A^{-1}\vec b\). Em vez de entregar os números \(x_j\), o HHL entrega um estado de \(n\) qubits com essas amplitudes:
+
+\[
+\ket{b}=\frac{1}{\|\vec b\|}\sum_j b_j\ket j,\qquad \ket{x}=\frac{1}{\|\vec x\|}\sum_j x_j\ket j .
+\]
+
+Estados quânticos já são normalizados, então perde-se o comprimento de \(\vec x\) (só a direção resta).
+
+\subsubsection{\texorpdfstring{Exemplo \(2\times2\) resolvido à mão}{Exemplo 2\textbackslash times2 resolvido à mão}}\label{exemplo-2times2-resolvido-uxe0-muxe3o}
+
+\[
+A=\begin{pmatrix}2&1\\1&2\end{pmatrix},\qquad \vec b=\begin{pmatrix}1\\0\end{pmatrix}\ (\ket b=\ket0).
+\]
+
+\(A\) tem autovetores \(\ket+=\tfrac1{\sqrt2}(1,1)\) com autovalor \(\lambda_1=3\), e \(\ket-=\tfrac1{\sqrt2}(1,-1)\) com \(\lambda_2=1\) (confira: \(A\ket+=(3,3)/\sqrt2\)). Escreva \(\ket b\) na base de autovetores:
+
+\[
+\ket0=\tfrac1{\sqrt2}\ket+ + \tfrac1{\sqrt2}\ket-.
+\]
+
+Inverter \(A\) é dividir cada componente pelo seu autovalor:
+
+\[
+A^{-1}\ket0=\tfrac1{\sqrt2}\left(\tfrac13\ket+ + \tfrac11\ket-\right)\ \propto\ \tfrac13\ket++\ket-\ \propto\ (2,-1)^T.
+\]
+
+(porque \(\tfrac13(1,1)+(1,-1)=(\tfrac43,-\tfrac23)\).) Normalizando, \(\ket x=\tfrac1{\sqrt5}(2\ket0-\ket1)\). Confira multiplicando \(A\) por \((2,-1)\): dá \((3,0)\), proporcional a \(\vec b\).
+
+A ideia do HHL é fazer exatamente isso com \(N\) gigante: decompor \(\ket b\) em autovetores de \(A\) (sem conhecê-los), dividir cada componente pelo autovalor, recompor.
+
+\subsubsection{Quatro palavras novas}\label{quatro-palavras-novas}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Registro de relógio}: grupo de \(t\) qubits extra, onde a estimação de fase escreve o autovalor (é o ``registro'' da estimação de fase).
+\item
+  \textbf{Ancila}: um qubit auxiliar, que começa em \(\ket0\) e serve de ``marcador'' do ramo certo.
+\item
+  \textbf{Descomputar}: aplicar ao contrário uma etapa para apagar o que ela escreveu, e assim desemaranhar o registro de volta a \(\ket0\).
+\item
+  \textbf{Pós-seleção}: medir a ancila e \textbf{guardar só os resultados} em que deu 1, repetindo o algoritmo quando deu 0.
+\end{itemize}
+
+\subsubsection{Os passos, com o exemplo}\label{os-passos-com-o-exemplo}
+
+Para não confundir com o \(t\) da estimação de fase (número de qubits), chamamos de \(\tau\) o \textbf{tempo} em \(e^{iA\tau}\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Carregar \(\ket b\).} Prepara-se o registro de dados em \(\ket b=\sum_j\beta_j\ket{u_j}\), onde \(\ket{u_j}\) são os autovetores de \(A\) (desconhecidos) e \(\beta_j=\langle u_j\rangle{b}\). No exemplo, \(\beta_1=\beta_2=\tfrac1{\sqrt2}\).
+\item
+  \textbf{Estimação de fase de \(e^{iA\tau}\).} A matriz \(e^{iA\tau}\) é unitária (porque \(A\) é hermitiana) e tem os mesmos autovetores de \(A\), com autovalores \(e^{i\lambda_j\tau}=e^{2\pi i\varphi_j}\), onde \(\varphi_j=\lambda_j\tau/2\pi\) é proporcional a \(\lambda_j\). A estimação de fase escreve \(\varphi_j\) (e portanto \(\lambda_j\)) no relógio:
+  \[
+  \sum_j\beta_j\ket{u_j}\ket{\tilde\lambda_j}.
+  \]
+  Aqui supomos \(A\) com autovalores positivos e \(\tau\) tal que \(\lambda_{\max}\tau<2\pi\) (assim \(\varphi_j\in(0,1)\); autovalores negativos dariam \(\varphi\) perto de 1 e exigiriam uma leitura com sinal). \textbf{No exemplo}, escolha \(\tau=\pi/2\): então \(\varphi=\lambda/4\), e os autovalores \(3\) e \(1\) viram \(\varphi=\tfrac34\) e \(\tfrac14\), exatos com 2 qubits de relógio (\(\ket{11}\) e \(\ket{01}\)). O estado fica \(\tfrac1{\sqrt2}\big(\ket+\ket{11}+\ket-\ket{01}\big)\).
+\item
+  \textbf{Rotação controlada pelo relógio.} Para cada valor \(\lambda\) lido no relógio, gira-se a ancila:
+  \[
+  \ket0\ \longmapsto\ \sqrt{1-\frac{C^2}{\lambda^2}}\,\ket0+\frac{C}{\lambda}\,\ket1 .
+  \]
+  A constante \(C\) precisa de \(C\le\lambda_{\min}\) para que \(C/\lambda\le1\) seja uma amplitude válida. \textbf{No exemplo}, com \(C=1\): o ramo de \(\ket+\) (\(\lambda=3\)) fica com \(\sqrt{8/9}\ket0+\tfrac13\ket1\), e o de \(\ket-\) (\(\lambda=1\)) fica com \(\ket1\) (sem \(\ket 0\)).
+\item
+  \textbf{Descomputar.} Aplica-se a estimação de fase \textbf{ao contrário}, o que zera o relógio de volta para \(\ket{00}\) e o desemaranha (apaga-se o ``lixo'' para que ele não atrapalhe a interferência). \textbf{No exemplo}, resta \(\tfrac1{\sqrt2}\big[\ket+(\sqrt{8/9}\ket0+\tfrac13\ket1)+\ket-\ket1\big]\ket{00}\).
+\item
+  \textbf{Medir a ancila.} Se der \(1\), o registro de dados fica
+  \[
+  \ket{x}\ \propto\ \sum_j \frac{\beta_j}{\lambda_j}\ket{u_j}=A^{-1}\ket b ,
+  \]
+  que no exemplo é \(\propto\tfrac13\ket++\ket-\propto(2,-1)\), como na conta à mão. Se der \(0\), tenta-se de novo.
+\end{enumerate}
+
+O efeito da rotação foi pôr \(1/\lambda_j\) na amplitude, e a medida da ancila isolou esse ramo.
+
+\subsubsection{Probabilidade de sucesso}\label{probabilidade-de-sucesso}
+
+A probabilidade de a ancila dar 1 é
+\[
+P_1=\sum_j|\beta_j|^2\frac{C^2}{\lambda_j^2}.
+\]
+No exemplo com \(C=1\): \(P_1=\tfrac12\cdot\tfrac19+\tfrac12\cdot1=\tfrac59\). Se usássemos \(C=0{,}5\) (ainda \(\le\lambda_{\min}=1\)), qual seria \(P_1\) (4 casas decimais)?
+
+Autovalores muito diferentes pioram isso. O \textbf{número de condição} é \(\kappa=\lambda_{\max}/\lambda_{\min}\) (no exemplo, \(3/1=3\)). Se \(A\) for reescalada para \(\lambda_{\max}=1\), então \(\lambda_{\min}=1/\kappa\) e \(C\approx1/\kappa\), o que pode deixar \(P_1\) da ordem de \(1/\kappa^2\) (reduzida com amplificação de amplitude, a um custo de ordem \(\kappa\) repetições). Quanto vale \(P_1\) para \(A=\mathrm{diag}(1,100)\) (\(\kappa=100\)), \(C=1\) e \(\ket b=\ket1\) (só no autovetor de autovalor 100)?
+
+\subsubsection{Conferindo no computador}\label{conferindo-no-computador}
+
+A parte ``quântica'' do HHL, com \(A\) pequena, pode ser simulada classicamente: decompõe-se \(\ket b\) nos autovetores, divide-se por \(\lambda_j\) e normaliza. Implemente isso. (Use \texttt{np.linalg.eigh}, que devolve autovalores e autovetores de uma matriz hermitiana: \texttt{lamb,\ U\ =\ np.linalg.eigh(A)}, e as colunas de \texttt{U} são os \(\ket{u_j}\). A decomposição de \(\ket b\) é \texttt{beta\ =\ U.T\ @\ b}; a solução é \texttt{U\ @\ (beta\ /\ lamb)}, depois normalizada.)
+
+Agora a probabilidade de sucesso da ancila:
+
+\subsubsection{\texorpdfstring{Limitações: o que o HHL \textbf{não} resolve}{Limitações: o que o HHL não resolve}}\label{limitauxe7uxf5es-o-que-o-hhl-nuxe3o-resolve}
+
+O custo cresce com \(\log N\) nos qubits, mas as letras miúdas pesam:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Leitura.} A saída é o estado \(\ket x\), não a lista \(x_1,\dots,x_N\). Medir só dá uma amostra por execução, e reconstruir os \(N\) números custa pelo menos da ordem de \(N\) execuções, o que anula o ganho. O HHL serve quando queremos uma \textbf{grandeza global} de \(\ket x\) (como \(\bra x M\ket x\), para um observável \(M\), ou comparar com outro estado), não a solução inteira.
+\item
+  \textbf{Entrada.} Preparar \(\ket b\) também precisa ser barato; carregar um vetor arbitrário de \(N\) números custa da ordem de \(N\) operações, a não ser que \(\vec b\) tenha estrutura (ou venha de um passo quântico anterior).
+\item
+  \textbf{Esparsidade.} Implementar \(e^{iAt}\) de forma eficiente exige que \(A\) seja \textbf{esparsa} (poucos elementos não nulos por linha, digamos \(s\)) e que se saiba calcular onde estão e quanto valem. O custo cresce com \(s\).
+\item
+  \textbf{Condicionamento.} O custo cresce com \(\kappa\) (na versão original, com \(\kappa^2\); versões posteriores melhoraram para quase linear em \(\kappa\)), e se \(A\) for quase singular (\(\lambda_{\min}\) perto de 0) o HHL fica caro. Também é preciso um relógio com resolução suficiente para separar \(\lambda_{\min}\) de 0.
+\end{itemize}
+
+Quando a matriz é esparsa e bem condicionada e só se quer uma propriedade da solução, o ganho pode ser exponencial. Para matrizes de \textbf{posto baixo} com acesso por amostragem, porém, algoritmos clássicos ``dequantizados'' eliminam a vantagem exponencial; para esparsas e bem condicionadas não se espera isso. Por isso se diz que o HHL é uma \textbf{sub-rotina} promissora, e não uma solução geral para sistemas lineares.
+
+O que torna a leitura de todas as componentes de \(\ket x\) cara no HHL?
+
+\begin{quote}
+Para se aprofundar: B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 6.3. Artigo original: A. Harrow, A. Hassidim, S. Lloyd, ``Quantum algorithm for linear systems of equations'' (2009).
+\end{quote}
+

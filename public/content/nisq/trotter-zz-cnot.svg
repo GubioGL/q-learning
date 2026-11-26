@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="175" viewBox="0 0 360 175" role="img" aria-label="Circuito de 2 qubits para e^{-iθ Z⊗Z}: uma CNOT com controle em q1 e alvo em q2, depois Rz(2θ) em q2, depois a mesma CNOT. Entre as duas CNOTs, o qubit q2 guarda a paridade q1 XOR q2."><title>Circuito de 2 qubits para e^{-iθ Z⊗Z}: uma CNOT com controle em q1 e alvo em q2, depois Rz(2θ) em q2, depois a mesma CNOT. Entre as duas CNOTs, o qubit q2 guarda a paridade q1 XOR q2.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 13.5px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 12.3px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 13.5px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 12.3px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 13.5px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 13.5px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 13.5px sans-serif;text-anchor:middle}</style>
+<line class="l" x1="40.0" y1="45.0" x2="340.0" y2="45.0"/>
+<line class="l" x1="40.0" y1="105.0" x2="340.0" y2="105.0"/>
+<text class="t" x="22.0" y="51.0">q₁</text>
+<text class="t" x="22.0" y="111.0">q₂</text>
+<line class="l" x1="80.0" y1="45.0" x2="80.0" y2="115.0"/>
+<circle class="f" cx="80.0" cy="45.0" r="5"/>
+<circle class="bx" cx="80.0" cy="105.0" r="10"/>
+<line class="l" x1="70.0" y1="105.0" x2="90.0" y2="105.0"/>
+<line class="l" x1="80.0" y1="95.0" x2="80.0" y2="115.0"/>
+<line class="l" x1="260.0" y1="45.0" x2="260.0" y2="115.0"/>
+<circle class="f" cx="260.0" cy="45.0" r="5"/>
+<circle class="bx" cx="260.0" cy="105.0" r="10"/>
+<line class="l" x1="250.0" y1="105.0" x2="270.0" y2="105.0"/>
+<line class="l" x1="260.0" y1="95.0" x2="260.0" y2="115.0"/>
+<rect class="bx" x="135.0" y="87.0" width="90.0" height="36.0" rx="5"/>
+<text class="t" x="180.0" y="111.0">R<tspan dy="4" font-size="75%">z</tspan><tspan dy="-4">(2θ)</tspan></text>
+<polyline class="g" style="stroke-linejoin:round" points="100.0,131.0 100.0,137.0 240.0,137.0 240.0,131.0"/>
+<text class="tg" x="170.0" y="157.0">q₁⊕q₂</text>
+<text class="k" x="330.0" y="157.0"></text>
+</svg>

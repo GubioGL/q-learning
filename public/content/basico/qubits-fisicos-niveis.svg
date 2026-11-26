@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="190" viewBox="0 0 400 190" role="img" aria-label="Quatro tipos de qubit físico: supercondutor, íon aprisionado, átomo neutro e fóton. Nos três primeiros, |0⟩ é o nível de energia baixo (ponto azul embaixo) e |1⟩ o nível alto (ponto laranja em cima). No fóton, |0⟩ é a polarização vertical e |1⟩ a horizontal."><title>Quatro tipos de qubit físico: supercondutor, íon aprisionado, átomo neutro e fóton. Nos três primeiros, |0⟩ é o nível de energia baixo (ponto azul embaixo) e |1⟩ o nível alto (ponto laranja em cima). No fóton, |0⟩ é a polarização vertical e |1⟩ a horizontal.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 15.0px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 13.7px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 15.0px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 13.7px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 15.0px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 15.0px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 15.0px sans-serif;text-anchor:middle}</style>
+<rect class="bx" x="4.0" y="6.0" width="92.0" height="178.0" rx="10"/>
+<rect class="bx" x="104.0" y="6.0" width="92.0" height="178.0" rx="10"/>
+<rect class="bx" x="204.0" y="6.0" width="92.0" height="178.0" rx="10"/>
+<rect class="bx" x="304.0" y="6.0" width="92.0" height="178.0" rx="10"/>
+<rect class="p" x="32.0" y="28.0" width="36.0" height="30.0" rx="4"/>
+<line class="l" x1="32.0" y1="28.0" x2="68.0" y2="58.0"/>
+<line class="l" x1="32.0" y1="58.0" x2="68.0" y2="28.0"/>
+<circle class="f" cx="150.0" cy="43.0" r="13"/>
+<text class="w" x="150.0" y="49.0">+</text>
+<line class="l" x1="122.0" y1="70.0" x2="178.0" y2="70.0"/>
+<line class="l" x1="122.0" y1="70.0" x2="122.0" y2="64.0"/>
+<line class="l" x1="178.0" y1="70.0" x2="178.0" y2="64.0"/>
+<circle class="p" cx="250.0" cy="43.0" r="13"/>
+<polyline class="l" style="stroke-linejoin:round" points="225.9,35.7 236.0,36.0 230.2,27.8"/>
+<line class="l" x1="210.0" y1="22.0" x2="236.0" y2="36.0"/>
+<polyline class="l" style="stroke-linejoin:round" points="269.8,27.8 264.0,36.0 274.1,35.7"/>
+<line class="l" x1="290.0" y1="22.0" x2="264.0" y2="36.0"/>
+<polyline class="g" style="stroke-linejoin:round" points="322.0,43.0 324.0,38.7 326.0,35.2 328.0,33.3 330.0,33.3 332.0,35.2 334.0,38.7 336.0,43.0 338.0,47.3 340.0,50.8 342.0,52.7 344.0,52.7 346.0,50.8 348.0,47.3 350.0,43.0 352.0,38.7 354.0,35.2 356.0,33.3 358.0,33.3 360.0,35.2 362.0,38.7 364.0,43.0 366.0,47.3 368.0,50.8 370.0,52.7 372.0,52.7 374.0,50.8 376.0,47.3 378.0,43.0 380.0,38.7 382.0,35.2 384.0,33.3 386.0,33.3 388.0,35.2 390.0,38.7 392.0,43.0 394.0,47.3 396.0,50.8 398.0,52.7 400.0,52.7 402.0,50.8 404.0,47.3 406.0,43.0 408.0,38.7 410.0,35.2 412.0,33.3 414.0,33.3 416.0,35.2 418.0,38.7 420.0,43.0 422.0,47.3 424.0,50.8 426.0,52.7 428.0,52.7 430.0,50.8 432.0,47.3 434.0,43.0"/>
+<polyline class="g" style="stroke-linejoin:round" points="376.0,47.0 384.0,43.0 376.0,39.0"/>
+<line class="l" x1="12.0" y1="95.0" x2="40.0" y2="95.0"/>
+<line class="l" x1="12.0" y1="125.0" x2="40.0" y2="125.0"/>
+<circle class="n0" cx="26.0" cy="125.0" r="6"/>
+<line class="l" x1="60.0" y1="95.0" x2="88.0" y2="95.0"/>
+<line class="l" x1="60.0" y1="125.0" x2="88.0" y2="125.0"/>
+<circle class="n1" cx="74.0" cy="95.0" r="6"/>
+<text class="tb" x="26.0" y="146.0">|0⟩</text>
+<text class="to" x="74.0" y="146.0">|1⟩</text>
+<line class="l" x1="112.0" y1="95.0" x2="140.0" y2="95.0"/>
+<line class="l" x1="112.0" y1="125.0" x2="140.0" y2="125.0"/>
+<circle class="n0" cx="126.0" cy="125.0" r="6"/>
+<line class="l" x1="160.0" y1="95.0" x2="188.0" y2="95.0"/>
+<line class="l" x1="160.0" y1="125.0" x2="188.0" y2="125.0"/>
+<circle class="n1" cx="174.0" cy="95.0" r="6"/>
+<text class="tb" x="126.0" y="146.0">|0⟩</text>
+<text class="to" x="174.0" y="146.0">|1⟩</text>
+<line class="l" x1="212.0" y1="95.0" x2="240.0" y2="95.0"/>
+<line class="l" x1="212.0" y1="125.0" x2="240.0" y2="125.0"/>
+<circle class="n0" cx="226.0" cy="125.0" r="6"/>
+<line class="l" x1="260.0" y1="95.0" x2="288.0" y2="95.0"/>
+<line class="l" x1="260.0" y1="125.0" x2="288.0" y2="125.0"/>
+<circle class="n1" cx="274.0" cy="95.0" r="6"/>
+<text class="tb" x="226.0" y="146.0">|0⟩</text>
+<text class="to" x="274.0" y="146.0">|1⟩</text>
+<line class="e0" x1="326.0" y1="92.0" x2="326.0" y2="128.0"/>
+<text class="tb" x="326.0" y="146.0">|0⟩</text>
+<line class="e1" x1="356.0" y1="110.0" x2="392.0" y2="110.0"/>
+<text class="to" x="374.0" y="146.0">|1⟩</text>
+</svg>

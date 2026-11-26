@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="472" height="214" viewBox="0 0 472 214" role="img" aria-label="Circuito QAOA com p=1 para o triângulo de 3 vértices. Cada qubit começa em |0⟩ e recebe H. A camada de custo tem três blocos, um por aresta (0,1), (1,2) e (0,2); cada bloco é CNOT, Rz(−γ) no qubit alvo, CNOT. A camada mixer aplica Rx(2β) em cada qubit. No fim, os três qubits são medidos."><title>Circuito QAOA com p=1 para o triângulo de 3 vértices. Cada qubit começa em |0⟩ e recebe H. A camada de custo tem três blocos, um por aresta (0,1), (1,2) e (0,2); cada bloco é CNOT, Rz(−γ) no qubit alvo, CNOT. A camada mixer aplica Rx(2β) em cada qubit. No fim, os três qubits são medidos.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 17.7px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 16.1px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 17.7px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 16.1px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 17.7px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 17.7px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 17.7px sans-serif;text-anchor:middle}</style>
+<line class="l" x1="44.0" y1="60.0" x2="490.0" y2="60.0"/>
+<line class="l" x1="44.0" y1="110.0" x2="490.0" y2="110.0"/>
+<line class="l" x1="44.0" y1="160.0" x2="490.0" y2="160.0"/>
+<text class="k" x="24.0" y="66.0">|0⟩</text>
+<text class="k" x="24.0" y="116.0">|0⟩</text>
+<text class="k" x="24.0" y="166.0">|0⟩</text>
+<rect class="bx" x="48.0" y="43.0" width="44.0" height="34.0" rx="5"/>
+<text class="t" x="70.0" y="66.0">H</text>
+<rect class="bx" x="48.0" y="93.0" width="44.0" height="34.0" rx="5"/>
+<text class="t" x="70.0" y="116.0">H</text>
+<rect class="bx" x="48.0" y="143.0" width="44.0" height="34.0" rx="5"/>
+<text class="t" x="70.0" y="166.0">H</text>
+<line class="l" x1="114.0" y1="60.0" x2="114.0" y2="110.0"/>
+<circle class="f" cx="114.0" cy="60.0" r="5"/>
+<circle class="bx" cx="114.0" cy="110.0" r="10"/>
+<line class="l" x1="104.0" y1="110.0" x2="124.0" y2="110.0"/>
+<line class="l" x1="114.0" y1="100.0" x2="114.0" y2="120.0"/>
+<rect class="bx" x="126.0" y="93.0" width="44.0" height="34.0" rx="5"/>
+<text class="k" x="148.0" y="107.0">Rz</text>
+<text class="k" x="148.0" y="122.0">(−γ)</text>
+<line class="l" x1="182.0" y1="60.0" x2="182.0" y2="110.0"/>
+<circle class="f" cx="182.0" cy="60.0" r="5"/>
+<circle class="bx" cx="182.0" cy="110.0" r="10"/>
+<line class="l" x1="172.0" y1="110.0" x2="192.0" y2="110.0"/>
+<line class="l" x1="182.0" y1="100.0" x2="182.0" y2="120.0"/>
+<line class="l" x1="206.0" y1="110.0" x2="206.0" y2="160.0"/>
+<circle class="f" cx="206.0" cy="110.0" r="5"/>
+<circle class="bx" cx="206.0" cy="160.0" r="10"/>
+<line class="l" x1="196.0" y1="160.0" x2="216.0" y2="160.0"/>
+<line class="l" x1="206.0" y1="150.0" x2="206.0" y2="170.0"/>
+<rect class="bx" x="218.0" y="143.0" width="44.0" height="34.0" rx="5"/>
+<text class="k" x="240.0" y="157.0">Rz</text>
+<text class="k" x="240.0" y="172.0">(−γ)</text>
+<line class="l" x1="274.0" y1="110.0" x2="274.0" y2="160.0"/>
+<circle class="f" cx="274.0" cy="110.0" r="5"/>
+<circle class="bx" cx="274.0" cy="160.0" r="10"/>
+<line class="l" x1="264.0" y1="160.0" x2="284.0" y2="160.0"/>
+<line class="l" x1="274.0" y1="150.0" x2="274.0" y2="170.0"/>
+<line class="l" x1="298.0" y1="60.0" x2="298.0" y2="160.0"/>
+<circle class="f" cx="298.0" cy="60.0" r="5"/>
+<circle class="bx" cx="298.0" cy="160.0" r="10"/>
+<line class="l" x1="288.0" y1="160.0" x2="308.0" y2="160.0"/>
+<line class="l" x1="298.0" y1="150.0" x2="298.0" y2="170.0"/>
+<rect class="bx" x="310.0" y="143.0" width="44.0" height="34.0" rx="5"/>
+<text class="k" x="332.0" y="157.0">Rz</text>
+<text class="k" x="332.0" y="172.0">(−γ)</text>
+<line class="l" x1="366.0" y1="60.0" x2="366.0" y2="160.0"/>
+<circle class="f" cx="366.0" cy="60.0" r="5"/>
+<circle class="bx" cx="366.0" cy="160.0" r="10"/>
+<line class="l" x1="356.0" y1="160.0" x2="376.0" y2="160.0"/>
+<line class="l" x1="366.0" y1="150.0" x2="366.0" y2="170.0"/>
+<rect class="bx" x="382.0" y="43.0" width="44.0" height="34.0" rx="5"/>
+<text class="k" x="404.0" y="57.0">Rx</text>
+<text class="k" x="404.0" y="72.0">(2β)</text>
+<rect class="bx" x="382.0" y="93.0" width="44.0" height="34.0" rx="5"/>
+<text class="k" x="404.0" y="107.0">Rx</text>
+<text class="k" x="404.0" y="122.0">(2β)</text>
+<rect class="bx" x="382.0" y="143.0" width="44.0" height="34.0" rx="5"/>
+<text class="k" x="404.0" y="157.0">Rx</text>
+<text class="k" x="404.0" y="172.0">(2β)</text>
+<rect class="bx" x="434.0" y="45.0" width="28.0" height="30.0" rx="4"/>
+<polyline class="l" style="stroke-linejoin:round" points="439.0,68.0 448.0,54.0 457.0,68.0"/>
+<line class="l" x1="448.0" y1="66.0" x2="455.0" y2="52.0"/>
+<rect class="bx" x="434.0" y="95.0" width="28.0" height="30.0" rx="4"/>
+<polyline class="l" style="stroke-linejoin:round" points="439.0,118.0 448.0,104.0 457.0,118.0"/>
+<line class="l" x1="448.0" y1="116.0" x2="455.0" y2="102.0"/>
+<rect class="bx" x="434.0" y="145.0" width="28.0" height="30.0" rx="4"/>
+<polyline class="l" style="stroke-linejoin:round" points="439.0,168.0 448.0,154.0 457.0,168.0"/>
+<line class="l" x1="448.0" y1="166.0" x2="455.0" y2="152.0"/>
+<rect class="d" x="102.0" y="30.0" width="276.0" height="160.0" rx="8"/>
+<text class="k" x="240.0" y="18.0">U<tspan dy="4" font-size="75%">C</tspan><tspan dy="-4">(γ)</tspan></text>
+<rect class="d" x="378.0" y="30.0" width="52.0" height="160.0" rx="8"/>
+<text class="k" x="404.0" y="18.0">U<tspan dy="4" font-size="75%">B</tspan><tspan dy="-4">(β)</tspan></text>
+<text class="k" x="148.0" y="210.0">0–1</text>
+<text class="k" x="240.0" y="210.0">1–2</text>
+<text class="k" x="332.0" y="210.0">0–2</text>
+</svg>

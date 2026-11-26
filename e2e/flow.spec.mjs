@@ -130,10 +130,10 @@ test("courses -> skill -> challenges flow", async ({ page }) => {
   await shot(page, "6-sem-coracoes");
 
   await page.goto(BASE + "/pt/cursos");
-  await expect(page.getByRole("link", { name: /Fundamentos Básicos/ })).toContainText("11%");
+  await expect(page.getByRole("link", { name: /Fundamentos Básicos/ })).toContainText("8%");
 
   await page.goto(BASE + "/pt/conquistas");
-  await expect(page.getByText("1 de 11 conquistas")).toBeVisible();
+  await expect(page.getByText("1 de 14 conquistas")).toBeVisible();
 
   // export, start over in an empty browser, import
   await page.goto(BASE + "/pt/metas");
@@ -223,6 +223,8 @@ test("a skill page scrolls inside its own area, down to the last button", async 
 });
 
 test("states are NumPy arrays: conj() works on the bra exercise", async ({ page }) => {
+  // vetores comes after numeros-complexos, so mark that one done to unlock it
+  await page.addInitScript(() => localStorage.setItem("ql_progress", JSON.stringify({ done: { "skill:algebra-linear/numeros-complexos": new Date().toISOString() }, goal: 3 })));
   await page.goto(BASE + "/pt/cursos/algebra-linear/vetores");
   const editor = page.locator("#vetores-bra-codigo");
   await expect(editor).toHaveValue(/import numpy as np/);

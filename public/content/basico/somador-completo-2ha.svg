@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="452" height="215" viewBox="0 0 452 215" role="img" aria-label="Somador completo feito de dois meio-somadores (HA) e uma porta OR. O primeiro HA (roxo) soma A e B; o segundo HA (amarelo) soma esse resultado com Cin. Dentro de cada HA, XOR (símbolo de soma) dá o bit de soma e AND (símbolo &amp;) dá o vai-um. Os dois vai-um entram no OR, que produz Cout; a soma S sai do segundo HA."><title>Somador completo feito de dois meio-somadores (HA) e uma porta OR. O primeiro HA (roxo) soma A e B; o segundo HA (amarelo) soma esse resultado com Cin. Dentro de cada HA, XOR (símbolo de soma) dá o bit de soma e AND (símbolo &amp;) dá o vai-um. Os dois vai-um entram no OR, que produz Cout; a soma S sai do segundo HA.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 17.0px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 15.4px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 17.0px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 15.4px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 17.0px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 17.0px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 17.0px sans-serif;text-anchor:middle}</style>
+<rect class="bx" style="stroke:#a78bfa;fill:#a78bfa22" x="62.0" y="15.0" width="100.0" height="70.0" rx="6"/>
+<text class="t" style="fill:#a78bfa" x="92.0" y="56.0">HA</text>
+<text class="t" style="fill:#a78bfa" x="142.0" y="50.0">⊕</text>
+<text class="t" style="fill:#a78bfa" x="142.0" y="78.0">&amp;</text>
+<rect class="bx" style="stroke:#fbbf24;fill:#fbbf2422" x="208.0" y="15.0" width="100.0" height="70.0" rx="6"/>
+<text class="t" style="fill:#fbbf24" x="238.0" y="56.0">HA</text>
+<text class="t" style="fill:#fbbf24" x="288.0" y="50.0">⊕</text>
+<text class="t" style="fill:#fbbf24" x="288.0" y="78.0">&amp;</text>
+<text class="t" x="12.0" y="51.0">A</text>
+<text class="t" x="12.0" y="79.0">B</text>
+<line class="l" x1="26.0" y1="45.0" x2="62.0" y2="45.0"/>
+<line class="l" x1="26.0" y1="73.0" x2="62.0" y2="73.0"/>
+<line class="l" x1="162.0" y1="45.0" x2="208.0" y2="45.0"/>
+<text class="t" x="14.0" y="191.0">Cin</text>
+<line class="l" x1="36.0" y1="186.0" x2="190.0" y2="186.0"/>
+<line class="l" x1="190.0" y1="186.0" x2="190.0" y2="73.0"/>
+<line class="l" x1="190.0" y1="73.0" x2="208.0" y2="73.0"/>
+<rect class="bx" x="336.0" y="112.0" width="44.0" height="56.0" rx="6"/>
+<text class="t" x="358.0" y="146.0">≥1</text>
+<polyline class="l" style="stroke-linejoin:round" points="162.0,73.0 176.0,73.0 176.0,126.0 336.0,126.0"/>
+<polyline class="l" style="stroke-linejoin:round" points="308.0,73.0 318.0,73.0 318.0,154.0 336.0,154.0"/>
+<line class="l" x1="308.0" y1="45.0" x2="396.0" y2="45.0"/>
+<text class="t" x="410.0" y="51.0">S</text>
+<line class="l" x1="380.0" y1="140.0" x2="396.0" y2="140.0"/>
+<text class="t" x="410.0" y="146.0">Cout</text>
+</svg>

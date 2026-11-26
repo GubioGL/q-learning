@@ -1,0 +1,755 @@
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newpage
+\section{Plataformas e hardware}
+\subsection{Qubits físicos}
+Até agora tratamos o qubit como um vetor \(\alpha\ket{0}+\beta\ket{1}\), pura matemática. Mas alguém precisa \textbf{construir} isso: um objeto real, que guarde \(\ket{0}\), \(\ket{1}\) e superposições, e que a gente consiga controlar e medir. O que serve de qubit? E por que é tão difícil mantê-lo funcionando?
+
+\subsubsection{Qualquer sistema com dois estados}\label{qualquer-sistema-com-dois-estados}
+
+Qualquer sistema físico quântico com dois estados bem distintos pode ser um qubit. Compare com o bit clássico: pode ser uma tensão alta ou baixa num fio, um ímã para cima ou para baixo. Cada tecnologia tem vantagens e desvantagens. No mundo quântico acontece o mesmo:
+
+\begin{center}\begin{tabular}{lll}
+\hline
+
+Qubit
+ & 
+Os dois estados são\ldots{}
+ & 
+Como é controlado
+ \\
+\hline
+
+\hline
+
+\textbf{Supercondutor} & dois níveis de energia de um circuito elétrico resfriado quase ao zero absoluto & pulsos de micro-ondas \\
+\textbf{Íon aprisionado} & dois níveis de energia de um átomo com carga, preso no vácuo por campos elétricos & lasers (ou micro-ondas) \\
+\textbf{Átomo neutro} & dois níveis de energia de um átomo sem carga, segurado por feixes de luz & lasers \\
+\textbf{Fóton} & duas polarizações da luz, por exemplo vertical e horizontal & lâminas de onda e divisores de feixe \\
+\end{tabular}\end{center}
+
+Há também qubits de \textbf{spin} (uma propriedade magnética de elétrons e núcleos, ``para cima'' ou ``para baixo''), controlados por pulsos de micro-ondas ou de radiofrequência.
+
+Do ponto de vista da informação, todos guardam o mesmo: dois estados, \(\ket{0}\) e \(\ket{1}\). Tudo o que vimos sobre a esfera de Bloch vale para qualquer um deles. O que muda é a engenharia.
+
+Num qubit de íon aprisionado, \(\ket{0}\) e \(\ket{1}\) são dois \_\_\_ do átomo: níveis de energia ou polarizações?
+
+\subsubsection{O que um bom qubit precisa ter}\label{o-que-um-bom-qubit-precisa-ter}
+
+O físico David DiVincenzo listou, em 2000 (\emph{Fortschritte der Physik} 48, 771), requisitos para um computador quântico. Cinco são para \textbf{computar}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Qubits bem definidos e escaláveis}: dois estados distintos e a possibilidade de juntar muitos qubits.
+\item
+  \textbf{Inicialização}: colocar todos em \(\ket{0}\) antes de começar, como zerar um contador.
+\item
+  \textbf{Coerência longa}: o estado precisa durar muito mais do que uma porta leva para operar (explicamos abaixo).
+\item
+  \textbf{Portas universais}: um conjunto de operações que, combinadas, produz qualquer cálculo.
+\item
+  \textbf{Medida}: ler cada qubit individualmente no fim.
+\end{enumerate}
+
+Mais dois são para \textbf{comunicação}, usados em redes quânticas: converter qubits parados em qubits ``voadores'' (fótons) e transmiti-los com fidelidade. Se uma tecnologia não consegue ser reinicializada em \(\ket{0}\), qual requisito da lista falha?
+
+\subsubsection{Decoerência: o inimigo}\label{decoeruxeancia-o-inimigo}
+
+Um qubit não vive isolado. Calor, vibrações, campos eletromagnéticos perdidos, tudo interage com ele e bagunça o estado de modo incontrolável. Esse efeito se chama \textbf{decoerência}. Para quem programa, é \textbf{ruído}: o qubit que devia estar em \(\ket{+}\) vai se desfazendo, e a conta sai errada.
+
+A informação não some de uma vez: ela \textbf{decai} aos poucos. O \textbf{tempo de coerência} é a escala desse decaimento. Cada porta leva um tempo curto. A razão dá uma \textbf{ordem de grandeza} do teto de portas que cabem antes de a informação se degradar:
+
+\[
+\text{portas possíveis} \lesssim \frac{\text{tempo de coerência}}{\text{duração de uma porta}}.
+\]
+
+Exemplo: coerência de \(100\ \mu\text{s}\) e portas de \(50\ \text{ns}\). Como \(100\ \mu\text{s} = 100\,000\ \text{ns}\), o teto é \(100\,000/50\) portas. Quantas?
+
+\subsubsection{Erros se acumulam}\label{erros-se-acumulam}
+
+Mesmo dentro do tempo de coerência, cada porta erra de vez em quando. Suponha que cada porta erra com a mesma probabilidade \(p\), de modo independente das outras. Com \(n\) portas, a chance de \textbf{nenhuma} errar é
+
+\[
+P(\text{sucesso}) = (1-p)^n.
+\]
+
+Exemplo: \(p=0{,}1\) e \(n=2\): \(0{,}9\times 0{,}9 = 0{,}81\). Agora de cabeça: \(p=0{,}5\) e \(n=3\). Qual é a chance de sucesso?
+
+Para \(p\) pequeno vale \((1-p)^n \approx e^{-pn}\). Com \(p=0{,}001\) e \(n=1000\), \(pn=1\) e \(e^{-1}\approx 0{,}37\): só 37\% de chance de nenhuma porta errar, mesmo com erro de uma em mil! Por isso se trabalha em qubits melhores e em \textbf{correção de erros}, que junta muitos qubits físicos para formar um qubit lógico mais estável.
+
+Qual é a chance de sucesso com \(p=0{,}001\) e \(n=1000\)? (Valor entre 0 e 1.)
+
+\subsubsection{Escala hoje}\label{escala-hoje}
+
+Os maiores processadores atuais têm de centenas a alguns milhares de qubits físicos, todos ruidosos; o número de qubits sozinho não mede o desempenho (importam também os erros e as conexões). O termo \textbf{NISQ} (\emph{Noisy Intermediate-Scale Quantum}), cunhado por John Preskill em 2018, descreve máquinas de dezenas a centenas de qubits ruidosos, ainda sem correção de erros em grande escala. O objetivo é chegar a muitos qubits lógicos estáveis.
+
+Outra limitação é a conectividade. Em chips supercondutores, as portas entre dois qubits costumam funcionar só entre vizinhos, ligados por um mapa de conexões. Em íons aprisionados, em geral todos conversam com todos, e átomos neutros podem ser movidos de lugar. Quando o circuito pede uma porta entre qubits não vizinhos, ele é reescrito com operações de troca (SWAP) que levam os qubits para perto.
+
+\subsection{O computador quântico como coprocessador}
+Quando você roda um programa em Python, ele não acontece dentro do computador quântico. Seu notebook (a CPU clássica) escreve a lista de instruções, manda para um chip quântico e depois recebe de volta uma sequência de zeros e uns. Esta skill mostra esse arranjo, chamado \textbf{modelo de coprocessador}, e o que ele permite e proíbe.
+
+\subsubsection{Coprocessador: um ajudante com memória própria}\label{coprocessador-um-ajudante-com-memuxf3ria-pruxf3pria}
+
+Um \textbf{coprocessador} é um circuito especializado que obedece ao processador principal para uma tarefa específica. Uma placa de vídeo (GPU), por exemplo, faz contas com matrizes muito rápido. Três características se repetem:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ele tem \textbf{memória própria}, separada da memória do computador.
+\item
+  As operações que ele sabe fazer atuam nessa memória local.
+\item
+  O uso típico tem três passos: \textbf{reservar e inicializar} a memória, \textbf{agir} sobre ela, \textbf{ler} o resultado e liberar a memória.
+\end{enumerate}
+
+Um computador quântico segue o mesmo molde. A \textbf{QPU} (do inglês \emph{quantum processing unit}, a unidade de processamento quântico) é o coprocessador, e sua memória é feita de qubits.
+
+\subsubsection{O fluxo de uma execução}\label{o-fluxo-de-uma-execuuxe7uxe3o}
+
+Pense num programa que sorteia um bit usando um qubit.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Preparar}: a CPU pede um qubit e ele começa em \(\ket{0}\).
+\item
+  \textbf{Aplicar portas}: a CPU manda a instrução ``Hadamard''. O qubit passa a \(\tfrac{1}{\sqrt2}(\ket{0}+\ket{1})\).
+\item
+  \textbf{Medir}: a CPU manda medir. O qubit vira \(\ket{0}\) ou \(\ket{1}\), com 50\% de chance cada.
+\item
+  \textbf{Ler}: o resultado volta à CPU como um \textbf{bit clássico}, e a CPU decide o que fazer em seguida.
+\end{enumerate}
+
+Com \(n\) qubits, o passo 2 é uma sequência de portas, e o passo 3 devolve \(n\) bits. Quem controla tudo, inclusive o ``se isso, faça aquilo'', é a CPU.
+
+Em quantos dos quatro passos acima um dado viaja da QPU para a CPU?
+
+\subsubsection{O que se pode e o que não se pode fazer com a memória quântica}\label{o-que-se-pode-e-o-que-nuxe3o-se-pode-fazer-com-a-memuxf3ria-quuxe2ntica}
+
+Aqui está a diferença para uma memória comum. Numa RAM você pode olhar qualquer posição, copiar e escrever por cima. Na memória quântica:
+
+\begin{center}\begin{tabular}{lll}
+\hline
+
+Operação
+ & 
+Pode?
+ & 
+Motivo
+ \\
+\hline
+
+\hline
+
+Inicializar num estado de base (\(\ket{0}\)) & sim & é o passo 1 do fluxo \\
+Aplicar portas (operações unitárias) & sim & é o que o hardware oferece \\
+Medir e receber bits & sim & única saída para o mundo clássico \\
+Ler as amplitudes \(\alpha,\beta\) diretamente & \textbf{não} & a medida só entrega um bit; as amplitudes ficam escondidas \\
+Copiar um estado desconhecido & \textbf{não} & teorema da não-clonagem \\
+Medir um estado desconhecido sem, em geral, alterá-lo & \textbf{não} & a medida colapsa a superposição (só um estado já de base, como \(\ket{0}\), passa ileso) \\
+Aplicar qualquer unitária arbitrária numa instrução & \textbf{não} & só um conjunto pequeno de portas é nativo (veja \texttt{portas-nativas}) \\
+\end{tabular}\end{center}
+
+Por isso um circuito quântico não ``imprime'' seu estado: ele é rodado muitas vezes (cada rodada se chama \textbf{shot}) e a CPU junta as estatísticas dos bits obtidos.
+
+Você recebe um qubit que está em \(\ket{0}\) ou em \(\ket{+}\) e pode medi-lo \textbf{uma única vez} na base padrão. Essa medida distingue os dois casos com certeza? Responda \texttt{sim} ou \texttt{nao}. (Dica: \(\ket{0}\) dá sempre 0; \(\ket{+}\) dá 0 com chance 50\%.)
+
+Você roda 3 shots do circuito que mede \(\ket{+}\). Qual é a probabilidade de os três resultados serem 0?
+
+\subsubsection{Um circuito é um programa}\label{um-circuito-uxe9-um-programa}
+
+Até aqui, ``circuito'' parecia um desenho. No modelo de coprocessador, ele é literalmente um \textbf{programa}: uma lista de instruções, uma por porta, na ordem em que a CPU as envia. O circuito
+
+\[
+\ket{0} \xrightarrow{H} \xrightarrow{Z} \xrightarrow{H} \;\to\; \text{medir}
+\]
+
+é o programa ``inicialize, aplique H, aplique Z, aplique H, meça''. Como em qualquer programa, você pode nomear pedaços (sub-circuitos), repeti-los e gerar um circuito por meio de código. O programa clássico em volta pode, por exemplo, escolher qual circuito enviar com base em um bit medido antes.
+
+Como \(HZH = X\), medir esse circuito dá sempre 1. Qual é o nome da primeira porta que a CPU envia à QPU depois da inicialização?
+
+\subsubsection{Na prática: simulando a chamada}\label{na-pruxe1tica-simulando-a-chamada}
+
+A QPU entrega probabilidades de medida, que vêm das amplitudes pela regra de Born. Escreva uma função que simula o fluxo ``inicializar em \(\ket{0}\), aplicar uma porta \(U\) de 1 qubit, medir'' e devolve a chance de obter 1.
+
+\subsubsection{Resumo}\label{resumo}
+
+\begin{itemize}
+\tightlist
+\item
+  A CPU clássica controla; a QPU guarda qubits e executa portas e medidas.
+\item
+  O fluxo é: preparar, aplicar portas, medir, ler bits.
+\item
+  Só o resultado das medidas sai da QPU; não se leem amplitudes nem se copiam estados.
+\item
+  Um circuito é um programa: uma lista de instruções gerada e enviada pela CPU.
+\end{itemize}
+
+Fonte: ideias do modelo de coprocessador seguem B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 3.1. Texto e exemplos originais.
+
+\subsection{Um pouco de complexidade}
+Dois circuitos resolvem o mesmo problema, um com 100 portas e outro com 100 bilhões. Qual rodar? Para responder, precisamos de uma forma de \textbf{contar} o custo e de dizer como ele cresce quando o problema aumenta. É disso que trata a complexidade.
+
+\subsubsection{Contar portas e camadas}\label{contar-portas-e-camadas}
+
+Um circuito tem duas medidas simples:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tamanho}: o número total de portas.
+\item
+  \textbf{Profundidade}: o número de camadas, em que portas que mexem em qubits diferentes podem rodar ao mesmo tempo.
+\end{itemize}
+
+Exemplo: quatro qubits, com uma Hadamard em cada um, e depois CNOTs entre os pares (0,1) e (2,3). Tamanho: \(4+2 = 6\) portas. Profundidade: \(2\), porque as quatro Hadamards ocorrem juntas e os dois CNOTs também.
+
+Quanto vale a profundidade de um circuito com 5 portas \(H\) aplicadas uma depois da outra no \textbf{mesmo} qubit?
+
+Tempo de execução e erros acumulam com o tamanho, e a profundidade importa porque o qubit físico perde o estado com o tempo. Por isso se busca circuitos pequenos e rasos.
+
+\subsubsection{\texorpdfstring{Como o custo cresce: a notação \(O(\cdot)\)}{Como o custo cresce: a notação O(\textbackslash cdot)}}\label{como-o-custo-cresce-a-notauxe7uxe3o-ocdot}
+
+O que importa é a \textbf{forma de crescimento} quando o tamanho da entrada \(x\) aumenta. Dizemos que \(f(x)=O(g(x))\) se, a partir de algum \(x_0\), \(f(x)\) fica abaixo de uma constante vezes \(g(x)\):
+
+\[
+f(x) \le M\, g(x) \quad \text{para todo } x \ge x_0 .
+\]
+
+Isso ignora constantes e termos menores: \(5x+100 = O(x)\) e \(x + \log x = O(x)\). Também é permitido superestimar: \(x = O(x^2)\).
+
+O \textbf{tamanho da entrada} é medido em bits. Um número \(N\) escrito em binário ocupa cerca de \(\log_2 N\) bits, então ``entrada de tamanho \(n\)'' significa um número até \(2^n\) aproximadamente.
+
+Quantos bits (no mínimo) são necessários para escrever \(N = 1000\) em binário?
+
+\subsubsection{Por que ``polinomial'' importa}\label{por-que-polinomial-importa}
+
+Compare dois algoritmos para uma entrada de tamanho \(n\): um faz \(n^3\) operações, outro faz \(2^n\).
+
+\begin{center}\begin{tabular}{lll}
+\hline
+\(n\) & \(n^3\) & \(2^n\) \\
+\hline
+
+\hline
+
+10 & 1 000 & 1 024 \\
+30 & 27 000 & cerca de 1 bilhão \\
+100 & 1 milhão & cerca de \(10^{30}\) \\
+\end{tabular}\end{center}
+
+Dobrar \(n\) num algoritmo polinomial multiplica o custo por uma constante fixa (\(8\) para \(n^3\)). Num exponencial, dobrar \(n\) \textbf{eleva ao quadrado} o custo. Por isso a linha divisória usada em computação é: custo polinomial em \(n\) é ``razoável'', exponencial não.
+
+Se um algoritmo gasta \(n^3\) operações, por quanto fica multiplicado o custo ao dobrar \(n\)?
+
+\subsubsection{Classes: P, BPP e BQP em ideia}\label{classes-p-bpp-e-bqp-em-ideia}
+
+Uma \textbf{classe de complexidade} agrupa problemas pelo recurso necessário para resolvê-los. Falando de problemas de decisão (resposta sim/não):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P}: problemas que um computador clássico determinístico resolve em tempo polinomial.
+\item
+  \textbf{BPP}: problemas que um computador clássico com sorteios resolve em tempo polinomial, acertando com probabilidade de pelo menos \(2/3\).
+\item
+  \textbf{BQP}: o mesmo, mas num computador \textbf{quântico}. É a classe do que um circuito quântico de tamanho polinomial resolve, acertando com probabilidade de pelo menos \(2/3\).
+\end{itemize}
+
+Sabe-se que P está contida em BPP, e BPP em BQP. Não se sabe se BQP é estritamente maior: ela pode ser igual a BPP. Os resultados mais famosos (como fatorar números) são exemplos de algoritmos quânticos mais rápidos que o melhor clássico conhecido, o que não é o mesmo que uma prova de que BQP é maior.
+
+Em BQP exige-se também que os circuitos de cada tamanho de entrada sejam gerados por um algoritmo clássico polinomial (uma família ``uniforme''), para que o circuito em si não esconda a resposta.
+
+Por que \(2/3\)? Porque é arbitrário: \textbf{repetir} o algoritmo eleva a confiança. Em problemas de decisão, em geral você não consegue verificar a resposta. O truque é repetir \(k\) vezes e ficar com a resposta que apareceu mais vezes (\textbf{voto da maioria}). Enquanto cada rodada acerta com probabilidade maior que \(1/2\), a chance de a maioria errar cai exponencialmente com \(k\). É por isso que o \(2/3\) pode ser trocado por qualquer valor acima de \(1/2\) sem mudar a classe, e multiplicar o tempo por uma constante não muda o \(O(\cdot)\).
+
+Quando a resposta \textbf{pode} ser verificada (por exemplo, conferir um fator de um número), basta uma rodada certa: depois de \(k\) rodadas, a chance de ao menos uma acertar é
+
+\[
+1-(1-p)^k .
+\]
+
+Com \(p = 2/3\) e \(k=2\) isso dá \(1-(1/3)^2 = 8/9\).
+
+Com resposta verificável, qual é a probabilidade de acertar em pelo menos uma de 3 rodadas, com \(p=2/3\) cada? Dê o valor em fração decimal.
+
+Escreva uma função que devolva o menor número de rodadas necessário para alcançar uma confiança alvo.
+
+\subsubsection{Cuidado: a constante escondida e a compilação}\label{cuidado-a-constante-escondida-e-a-compilauxe7uxe3o}
+
+O \(O(\cdot)\) esconde constantes. Um algoritmo com \(10^{40}+\log x\) operações é \(O(\log x)\), porém inútil na prática. Em computação quântica, constantes enormes são comuns, então se faz \textbf{estimativa de recursos}: contar de fato o número de portas, qubits e o tempo.
+
+Além disso, o custo que importa é o do circuito \textbf{depois da compilação} para o hardware. Decompor portas em um conjunto nativo, corrigir erros e encaixar os qubits lógicos na conectividade do chip podem inflar o custo muito acima do circuito ``ideal''. É o assunto da próxima skill.
+
+Um circuito ideal tem 1000 portas; a compilação multiplica o número por 12. Quantas portas há no circuito compilado?
+
+\subsubsection{Resumo}\label{resumo}
+
+\begin{itemize}
+\tightlist
+\item
+  Tamanho é o número de portas; profundidade, o número de camadas.
+\item
+  \(O(\cdot)\) descreve crescimento, ignorando constantes; polinomial é razoável, exponencial não.
+\item
+  P, BPP e BQP agrupam problemas por recurso: clássico, clássico com sorteio, quântico.
+\item
+  A confiança pode ser aumentada repetindo; constantes escondidas e a compilação exigem contagem concreta.
+\end{itemize}
+
+Fonte: B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 4.1. Texto e exemplos originais.
+
+\subsection{Portas nativas e compilação}
+Você escreve um circuito com uma porta Toffoli e a envia para um chip de verdade. A resposta do chip: ``não conheço essa porta''. Cada hardware só executa um repertório pequeno de portas, as \textbf{portas nativas}, e o \textbf{compilador} é quem traduz o seu circuito para esse repertório. Esta skill mostra quais repertórios existem e o que a tradução custa.
+
+\subsubsection{Conjuntos de portas de baixo nível}\label{conjuntos-de-portas-de-baixo-nuxedvel}
+
+Um conjunto de portas é \textbf{universal} se qualquer unitária de \(n\) qubits puder ser construída com ele. É \textbf{aproximadamente universal} se for possível chegar tão perto quanto se queira (erro \(\varepsilon\) tão pequeno quanto se desejar), com circuitos cada vez mais longos.
+
+Exemplos de repertórios reais:
+
+\begin{center}\begin{tabular}{ll}
+\hline
+
+Hardware
+ & 
+Portas nativas típicas
+ \\
+\hline
+
+\hline
+
+Supercondutores & CNOT (ou CZ) e rotações de 1 qubit \\
+Óptica linear & rotações de 1 qubit; CNOT/CZ só de forma probabilística (veja \texttt{optica-linear}) \\
+Íons aprisionados & porta de Mølmer-Sørensen \(XX(\theta)\) e rotações \(R_x,R_z\) \\
+Computação com correção de erros & Clifford + \(T\) \\
+\end{tabular}\end{center}
+
+As portas \textbf{Clifford} são as geradas por \(H\), \(S\) e CNOT. Elas são essenciais, mas \textbf{sozinhas não são universais}: um computador clássico consegue simulá-las com eficiência. Para chegar à universalidade, junta-se pelo menos uma porta que não seja Clifford, como \(T\) ou uma rotação de ângulo qualquer.
+
+Qual porta, dentre \(H\), \(S\), CNOT e \(T\), \textbf{não} é Clifford?
+
+\subsubsection{Um primeiro exemplo de tradução: CZ a partir de CNOT}\label{um-primeiro-exemplo-de-traduuxe7uxe3o-cz-a-partir-de-cnot}
+
+Suponha que o chip só tenha CNOT, mas seu circuito pede um CZ (aplica \(Z\) no alvo quando o controle vale 1). Como \(HXH = Z\), basta cercar o alvo de Hadamards:
+
+\[
+\text{CZ} = (I\otimes H)\;\text{CNOT}\;(I\otimes H).
+\]
+
+Quando o controle é \(\ket{0}\), os dois \(H\) se cancelam. Quando é \(\ket{1}\), o alvo sofre \(HXH=Z\). Um CZ virou 1 CNOT e 2 Hadamards: compilar é isso, trocar uma porta por uma pequena sequência de portas nativas.
+
+Quantas Hadamards entram nessa tradução do CZ?
+
+\subsubsection{CNOT + rotações de 1 qubit: universal}\label{cnot-rotauxe7uxf5es-de-1-qubit-universal}
+
+A ideia central: qualquer operação em \(n\) qubits se reduz a CNOTs e rotações de 1 qubit. A prova tem etapas, e aqui está o roteiro.
+
+\textbf{Uma unitária de 1 qubit são três rotações.} Toda \(U\) de 1 qubit pode ser escrita (a menos de fase global) como
+
+\[
+U = R_z(\beta)\,R_y(\gamma)\,R_z(\delta).
+\]
+
+\textbf{Uma \(U\) controlada vira dois CNOTs.} Existem \(A_1,A_2,A_3\) de 1 qubit com \(A_1A_2A_3 = I\) e \(U = e^{i\alpha}A_1XA_2XA_3\). Então a versão controlada de \(U\) usa dois CNOTs, as portas \(A_1,A_2,A_3\) no alvo e uma fase \(\alpha\) no controle. Quando o controle é \(\ket{0}\), os \(X\) não agem e \(A_1A_2A_3=I\) cancela tudo. Quando é \(\ket{1}\), os \(X\) agem e sobra \(U\).
+
+\textbf{Mais controles, mais camadas.} Escolhendo \(V\) com \(V^2=U\), a porta duplamente controlada se faz com portas simplesmente controladas:
+
+Chame os controles de \(a\) e \(b\) e o alvo de \(t\). Em ordem de aplicação:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(C_b\text{-}V\) (\(b\) controla \(V\) em \(t\));
+\item
+  CNOT(\(a\to b\));
+\item
+  \(C_b\text{-}V^{\dagger}\);
+\item
+  CNOT(\(a\to b\));
+\item
+  \(C_a\text{-}V\).
+\end{enumerate}
+
+Verifique pelos quatro casos \((a,b)\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(00\): nenhuma porta age.
+\item
+  \(01\): age \(V\) (passo 1), os CNOTs não mexem em \(b\) (\(a=0\)), age \(V^\dagger\) (passo 3) e o passo 5 não age. Sobra \(V^\dagger V = I\).
+\item
+  \(10\): o passo 1 não age; o CNOT leva \(b\) a 1, então o passo 3 aplica \(V^\dagger\); o segundo CNOT devolve \(b\) a 0; o passo 5 aplica \(V\). Sobra \(I\).
+\item
+  \(11\): o passo 1 aplica \(V\); o CNOT leva \(b\) a 0, então o passo 3 não age; o segundo CNOT devolve \(b\) a 1; o passo 5 aplica \(V\) de novo. Sobra \(V^2=U\).
+\end{itemize}
+
+Essa construção funciona para qualquer \(n\), mas o resultado geral (sem usar estrutura nenhuma da unitária) tem tamanho \textbf{exponencial}. Isso não é falha da prova: uma unitária geral de \(n\) qubits tem cerca de \(4^n\) números livres, e cada um precisa entrar em algum ângulo de rotação.
+
+\subsubsection{Do conjunto universal ao Clifford + T}\label{do-conjunto-universal-ao-clifford-t}
+
+Combinando as peças, qualquer unitária pode ser aproximada com CNOT, \(H\) e \(T\). É por isso que o conjunto \textbf{Clifford + \(T\)} é o padrão de computação tolerante a falhas: as portas Clifford são baratas de proteger contra erro, e a porta \(T\) é a cara, então se \textbf{conta quantas \(T\)} um circuito usa.
+
+\subsubsection{Exemplo: decompor a Toffoli em CNOT + T}\label{exemplo-decompor-a-toffoli-em-cnot-t}
+
+A Toffoli (CCX) tem três qubits, dois controles \(a,b\) e um alvo \(t\). Uma decomposição conhecida usa só \(H\), CNOT, \(T\) e \(T^\dagger\) (o inverso de \(T\)). Em ordem de aplicação:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(H\) em \(t\).
+\item
+  CNOT(\(b\to t\)), depois \(T^\dagger\) em \(t\).
+\item
+  CNOT(\(a\to t\)), depois \(T\) em \(t\).
+\item
+  CNOT(\(b\to t\)), depois \(T^\dagger\) em \(t\).
+\item
+  CNOT(\(a\to t\)), depois \(T\) em \(b\) e \(T\) em \(t\), depois \(H\) em \(t\).
+\item
+  CNOT(\(a\to b\)), depois \(T\) em \(a\) e \(T^\dagger\) em \(b\).
+\item
+  CNOT(\(a\to b\)).
+\end{enumerate}
+
+Contagem: 6 CNOTs, 7 portas do tipo \(T\) (contando \(T^\dagger\)) e 2 Hadamards. Confira você mesmo: conte os \(T\) e \(T^\dagger\) nos passos 2 a 6 (um no passo 2, um no 3, um no 4, dois no 5 e dois no 6).
+
+Quantas portas do tipo \(T\) (incluindo \(T^\dagger\)) tem essa decomposição?
+
+\subsubsection{Conectividade e SWAP}\label{conectividade-e-swap}
+
+Em chips reais, só alguns pares de qubits físicos se conectam. Imagine três qubits em linha, \(0 - 1 - 2\), e um CNOT entre 0 e 2, que não são vizinhos. O compilador resolve com \textbf{SWAPs}:
+
+\begin{itemize}
+\tightlist
+\item
+  troca os estados de 0 e 1 (um SWAP),
+\item
+  faz o CNOT entre 1 e 2, agora vizinhos,
+\item
+  troca de volta (outro SWAP).
+\end{itemize}
+
+Um SWAP custa \textbf{3 CNOTs}:
+
+\[
+\text{SWAP}(a,b) = \text{CNOT}(a\to b)\;\text{CNOT}(b\to a)\;\text{CNOT}(a\to b).
+\]
+
+Quantos CNOTs, no total, tem o CNOT remoto com o esquema acima (dois SWAPs e um CNOT)?
+
+Um circuito ``ideal'' com um CNOT virou 7. Foi o hardware, não o algoritmo, quem multiplicou o custo, e isso se repete em circuitos grandes.
+
+\subsubsection{Estudo de caso: profundidade × portas × ancillas}\label{estudo-de-caso-profundidade-portas-ancillas}
+
+Queremos a porta \(C^n\text{-}R_\theta\): aplicar \(R_\theta=\mathrm{diag}(1,e^{i\theta})\) ao qubit alvo quando os \(n\) qubits de controle valem 1 (a fase \(e^{i\theta}\) só aparece no termo com controles e alvo todos em 1). Há duas estratégias.
+
+\textbf{Sem ancillas (circuito exponencial).} Aplicando a regra do \(C\text{-}C\text{-}U\) repetidamente, cada nível triplica as portas. Com \(n\) controles saem
+
+\[
+N^{\text{CNOT}}_n = 3^n - 1, \qquad N^{R}_n = 3^n ,
+\]
+
+portas de rotação com ângulos \(\pm\theta/2^n\). Para \(n=1\): 2 CNOTs e 3 rotações; para \(n=2\): 8 CNOTs e 9 rotações. O circuito cresce exponencialmente com o número de controles e não dá para paralelizar, porque todas as rotações caem no mesmo qubit alvo.
+
+\textbf{Com ancillas (circuito polinomial).} Uma \textbf{ancilla} é um qubit auxiliar, que começa em \(\ket{0}\) e volta a \(\ket{0}\) ao final. A ideia: calcular o produto \(x_1x_2\cdots x_n\) dos controles numa ancilla com uma escada de Toffolis, aplicar \textbf{um} \(C\text{-}R_\theta\) controlado pela ancilla, e desfazer a escada. Para \(n\) controles, o esquema simples usa \(n-1\) ancillas e \(2(n-1)\) Toffolis. O custo agora cresce de modo linear.
+
+O que se paga? Qubits extras. A troca típica é esta: \textbf{menos portas e menos profundidade custam mais qubits}.
+
+Para escolher entre as duas estratégias, o compilador compara custos. Contando só CNOTs, e supondo cada Toffoli decomposta em 6 CNOTs e o \(C\text{-}R_\theta\) final em 2 CNOTs, o esquema com ancillas gasta \(12(n-1)+2\) CNOTs e precisa de \(n-1\) ancillas; o esquema sem ancillas gasta \(3^n-1\). Escreva a função que devolve o menor custo em CNOTs disponível dado o número de ancillas livres.
+
+A partir de quantos controles \(n\) o esquema com ancillas gasta estritamente menos CNOTs que o sem ancillas? (Compare \(12(n-1)+2\) com \(3^n-1\).)
+
+\subsubsection{Resumo}\label{resumo}
+
+\begin{itemize}
+\tightlist
+\item
+  Cada hardware executa um conjunto pequeno de portas nativas; o compilador traduz o resto.
+\item
+  Clifford não é universal; Clifford + \(T\) é, aproximadamente, e conta-se quantas \(T\) se gasta.
+\item
+  Toffoli = 6 CNOT + 7 \(T\)/\(T^\dagger\) + 2 \(H\); SWAP = 3 CNOT.
+\item
+  Conectividade e ancillas trocam portas por qubits extras: custo ideal e custo compilado podem diferir muito.
+\end{itemize}
+
+Fonte: B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seções 4.2 a 4.4. Texto e exemplos originais; a decomposição da Toffoli é um resultado clássico (veja também Nielsen e Chuang, \emph{Quantum Computation and Quantum Information}).
+
+\subsection{Computação com estados mágicos}
+Em um computador quântico com correção de erros, nem todas as portas custam o mesmo. Algumas saem quase de graça; outras precisam de uma fábrica inteira por trás. Esta aula mostra qual é a porta cara, por que ela é cara e como se compra uma porta T usando um recurso especial: o \textbf{estado mágico}.
+
+\subsubsection{Por que Clifford não basta}\label{por-que-clifford-nuxe3o-basta}
+
+Chamamos de \textbf{portas de Clifford} o grupo gerado por \(H\), \(S\) e CNOT (e, portanto, \(X\), \(Y\), \(Z\) e \(C\text{-}Z\)). Elas têm uma propriedade bonita: levam \(X\), \(Y\), \(Z\) em \(X\), \(Y\), \(Z\) (a menos de sinal), e por isso um computador clássico consegue simulá-las com eficiência. Logo, um circuito feito \textbf{só} de Clifford não dá vantagem quântica.
+
+Para ter computação universal falta uma porta de fora do grupo. A mais usada é a porta \(T\):
+
+\[
+T = \begin{pmatrix} 1 & 0 \\ 0 & e^{i\pi/4} \end{pmatrix}.
+\]
+
+Ela é uma rotação de fase no \(\ket{1}\). Dois \(T\) seguidos dão a porta \(S\), que dá \(90^\circ\) de fase. Quantos graus de fase relativa o \(T\) dá ao \(\ket{1}\)?
+
+Um \textbf{código corretor de erros} guarda 1 qubit \textbf{lógico} em muitos qubits físicos, para que erros pequenos possam ser detectados e desfeitos; só algumas portas são fáceis de aplicar sem estragar essa proteção (isso se chama ser \emph{tolerante a falhas}). Em muitos códigos de correção de erros, como o código de superfície, as portas de Clifford têm implementações tolerantes a falhas relativamente baratas. O \(T\) \textbf{não}: no nível lógico ele não é nativo. Em vez de aplicá-lo, vamos \emph{fabricar} o efeito dele.
+
+\subsubsection{O estado mágico}\label{o-estado-muxe1gico}
+
+Em vez de uma porta, preparamos um estado já ``carregado'' com a fase que a rotação daria:
+
+\[
+\ket{A_\theta} = \tfrac{1}{\sqrt2}\big(\ket{0} + e^{i\theta}\ket{1}\big).
+\]
+
+Para \(\theta = \pi/4\) esse é o estado mágico do \(T\): é o que se obtém aplicando \(T\) em \(\ket{+}\). Preparar esses estados é a parte cara, feita à parte com protocolos de purificação (a ``fábrica''). Uma vez que se tem uma cópia, ela é consumida para realizar a rotação em qualquer qubit de dados.
+
+\subsubsection{Injetando a porta: o circuito, passo a passo}\label{injetando-a-porta-o-circuito-passo-a-passo}
+
+Seja \(\ket{\phi} = \alpha\ket{0} + \beta\ket{1}\) o qubit de dados e \(\ket{A_\theta}\) o estado mágico. Começamos com os dois juntos:
+
+\[
+\ket{\phi}\otimes\ket{A_\theta} = \tfrac{1}{\sqrt2}\big(\alpha\ket{00} + \alpha e^{i\theta}\ket{01} + \beta\ket{10} + \beta e^{i\theta}\ket{11}\big).
+\]
+
+\textbf{Passo 1.} Aplicamos um CNOT com controle no qubit de dados e alvo no mágico. Quando o dado vale \(1\), o mágico é invertido:
+
+\[
+\tfrac{1}{\sqrt2}\big(\alpha\ket{0}(\ket{0} + e^{i\theta}\ket{1}) + \beta\ket{1}(\ket{1} + e^{i\theta}\ket{0})\big).
+\]
+
+\textbf{Passo 2.} Medimos o qubit mágico na base padrão. Agrupe os termos por resultado:
+
+\begin{itemize}
+\tightlist
+\item
+  resultado \(0\): sobra \(\alpha\ket{0} + \beta e^{i\theta}\ket{1}\), que é exatamente \(R_\theta\ket{\phi}\), a rotação desejada;
+\item
+  resultado \(1\): sobra \(\alpha e^{i\theta}\ket{0} + \beta\ket{1}\), que, a menos de fase global, é \(\alpha\ket{0} + \beta e^{-i\theta}\ket{1}\): a rotação \textbf{ao contrário}.
+\end{itemize}
+
+Pense nos pesos dos dois grupos de termos. Qual a probabilidade de medir \(0\) no qubit mágico (a mesma para qualquer \(\ket{\phi}\))?
+
+Os dois grupos têm o mesmo peso, \(\tfrac12\) cada.
+
+\textbf{Passo 3: correção.} No caso \(1\) temos \(R_{-\theta}\) e queremos \(R_{\theta}\): falta aplicar \(R_{2\theta}\). Para o estado mágico do \(T\), \(\theta = 45^\circ\), então a correção é uma rotação de ângulo \(2\theta\), que é a porta \(S\), de Clifford e portanto barata! Esse é o truque: a parte cara foi empurrada para a preparação do estado, e o que acontece no circuito é só Clifford, uma medida e uma correção condicionada ao resultado clássico.
+
+Qual rotação \(R_{2\theta}\) (em graus) corrige o resultado \(1\) quando \(\theta = 45^\circ\)?
+
+Essa rotação de \(90^\circ\) é a porta \(S\).
+
+\subsubsection{Voltando ao código}\label{voltando-ao-cuxf3digo}
+
+Vamos implementar a etapa de correção para o \(T\). A função recebe o estado do dado logo após a medida e o resultado \(m\). Se \(m=0\) não há nada a fazer. Se \(m=1\), aplique \(S\) e depois multiplique o estado por \(e^{-i\pi/4}\) (um ajuste de fase global, que não muda nada fisicamente, apenas faz o resultado coincidir exatamente com \(T\ket{\phi}\) nos testes).
+
+\subsubsection{Resultado probabilístico e repetição}\label{resultado-probabiluxedstico-e-repetiuxe7uxe3o}
+
+No gadget acima, o resultado \(1\) para \(\theta=\pi/4\) pode ser corrigido com \(S\), então o \(T\) sai determinístico. Para um ângulo geral, a correção \(R_{2\theta}\) pode não ser Clifford. Aí o esquema vira \emph{repetir até dar certo}. Se cada nova tentativa usa um estado \(\ket{A_\theta}\) igual, o ângulo acumulado no \(\ket{1}\) é \((n_0-n_1)\theta\), onde \(n_0\) e \(n_1\) contam os resultados \(0\) e \(1\): um passeio aleatório. Para quando \(n_0=n_1+1\) (o ângulo é exatamente \(\theta\)). Esse passeio termina com probabilidade \(1\), mas o número médio de rodadas é infinito. Uma alternativa usual: após uma falha, injetar \(\ket{A_{2\theta}}\) (o ângulo que corrige o erro), depois \(\ket{A_{4\theta}}\) se falhar de novo, e assim por diante, o que dá em média 2 rodadas.
+
+Esse padrão exige que o coprocessador tenha algum controle clássico próprio (repetir um trecho de circuito, fazer contas simples): enviar cada resultado ao computador clássico demoraria demais.
+
+\subsubsection{Por que isso ajuda na correção de erros}\label{por-que-isso-ajuda-na-correuxe7uxe3o-de-erros}
+
+Em um código corretor, o que é barato é o que age ``pouco'' sobre os qubits protegidos: as portas de Clifford podem ser feitas de modo que um erro físico não se espalhe de forma perigosa. Uma porta \(T\) lógica diretamente aplicada não tem essa proteção. Com estados mágicos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  as portas de Clifford e as medidas são feitas no código, baratas e protegidas;
+\item
+  a única coisa não-Clifford é o \textbf{recurso} \(\ket{A_\theta}\), preparado à parte e \textbf{verificado e purificado} antes de ser usado (se um estado sair ruim, é descartado, sem tocar nos dados);
+\item
+  o custo de um algoritmo se mede em quantos estados mágicos (portas \(T\)) ele consome. É por isso que o ``T-count'' é a métrica central do hardware tolerante a falhas.
+\end{enumerate}
+
+Um circuito só de Clifford pode ser simulado com eficiência por qual tipo de computador (uma palavra)?
+
+\begin{quote}
+Fonte: B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seção 4.5. Exposição e exemplos reescritos.
+\end{quote}
+
+\subsection{Computação baseada em medidas}
+Um computador quântico normal funciona assim: prepara os qubits, aplica portas, mede no fim. A \textbf{computação baseada em medidas} (MBQC, do inglês \emph{measurement-based quantum computation}) inverte o papel: os qubits já começam todos emaranhados num grande estado fixo, e a computação consiste \textbf{apenas em medir}, um qubit por vez, escolhendo como medir. Esta aula mostra como isso é possível.
+
+\subsubsection{Estados de grafo}\label{estados-de-grafo}
+
+Um \textbf{grafo} é um conjunto de nós ligados por arestas. Um \textbf{estado de grafo} (ou de \emph{cluster}) associa a cada nó um qubit e é construído assim:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  todo qubit começa em \(\ket{+} = \tfrac{1}{\sqrt2}(\ket{0}+\ket{1})\);
+\item
+  para cada aresta entre dois nós, aplica-se uma porta \(C\text{-}Z\) aos dois qubits correspondentes.
+\end{enumerate}
+
+Lembre que \(C\text{-}Z\) troca o sinal só do termo \(\ket{11}\). A ordem das \(C\text{-}Z\) não importa, pois todas são diagonais. Para um grafo em cadeia com 4 nós (1--2, 2--3, 3--4), quantas portas \(C\text{-}Z\) são aplicadas?
+
+\subsubsection{Um exemplo mínimo: dois qubits}\label{um-exemplo-muxednimo-dois-qubits}
+
+Vamos computar com o menor grafo possível: dois nós ligados. O primeiro qubit guarda o dado \(\ket{\psi} = \alpha\ket{0}+\beta\ket{1}\); o segundo é um \(\ket{+}\) novo.
+
+Estado inicial e depois da \(C\text{-}Z\):
+
+\[
+\ket{\psi}\otimes\ket{+} = \tfrac{1}{\sqrt2}\big(\alpha\ket{00}+\alpha\ket{01}+\beta\ket{10}+\beta\ket{11}\big)
+\;\xrightarrow{C\text{-}Z}\;
+\tfrac{1}{\sqrt2}\big(\alpha\ket{00}+\alpha\ket{01}+\beta\ket{10}-\beta\ket{11}\big).
+\]
+
+Agora medimos \textbf{só o primeiro qubit}, mas não na base padrão. Usamos uma \textbf{base rotacionada} com ângulo \(\theta\):
+
+\[
+\ket{+_\theta} = \tfrac{1}{\sqrt2}(\ket{0}+e^{i\theta}\ket{1}), \qquad
+\ket{-_\theta} = \tfrac{1}{\sqrt2}(\ket{0}-e^{i\theta}\ket{1}).
+\]
+
+(Com \(\theta=0\) é a base \(\ket{\pm}\) usual.) Projetar o primeiro qubit em \(\ket{+_\theta}\) significa multiplicar pelo bra \(\bra{+_\theta} = \tfrac{1}{\sqrt2}(\bra{0}+e^{-i\theta}\bra{1})\). Os termos com primeiro qubit \(0\) ficam como estão, e os com \(1\) ganham o fator \(e^{-i\theta}\). O segundo qubit fica com:
+
+\[
+\ket{\text{saída}} \propto (\alpha + \beta e^{-i\theta})\ket{0} + (\alpha - \beta e^{-i\theta})\ket{1}.
+\]
+
+Isto é, normalizando, \(\tfrac{1}{\sqrt2}\begin{pmatrix}\alpha+\beta e^{-i\theta}\\ \alpha-\beta e^{-i\theta}\end{pmatrix} = H\,R_{-\theta}\ket{\psi}\) com \(R_{-\theta}=\mathrm{diag}(1,e^{-i\theta})\). Chamamos essa porta de \(J(-\theta)\), onde \(J(\alpha)=\tfrac{1}{\sqrt2}\begin{pmatrix}1&e^{i\alpha}\\1&-e^{i\alpha}\end{pmatrix}=H\,R_{\alpha}\). Ou seja: \textbf{uma medida} em um ângulo escolhido por nós aplicou uma porta de 1 qubit ao dado e o \textbf{transportou} do qubit 1 para o qubit 2.
+
+Se o resultado for \(\ket{-_\theta}\) (resultado \(b=1\)), o sinal dos termos muda: o segundo qubit fica com \((\alpha-\beta e^{-i\theta})\ket{0}+(\alpha+\beta e^{-i\theta})\ket{1}\), que é o anterior com \(\ket{0}\) e \(\ket{1}\) trocados, isto é, passado por \(X\).
+
+\subsubsection{Correções clássicas}\label{correuxe7uxf5es-cluxe1ssicas}
+
+O resultado \(b\) da medida é aleatório (cada um com probabilidade \(\tfrac12\)). Para que a computação seja determinística, aplicamos \(X^b\) no qubit de saída: se \(b=1\) aplicamos \(X\), se \(b=0\) nada. É a mesma ideia do teletransporte: o resultado clássico diz qual Pauli aplicar para desfazer o desvio.
+
+Quando o resultado é \(b=1\), qual porta de Pauli corrige?
+
+Com \(\theta = 0\) o padrão calcula \(H\). Quantos qubits (nós) usa o padrão que implementa a sequência \(H\) no alvo, \(C\text{-}Z\), \(H\) no alvo (que equivale a um CNOT) sobre 2 qubits de entrada, se cada \(H\) gasta um nó novo de saída?
+
+\subsubsection{Qual porta cada padrão faz?}\label{qual-porta-cada-padruxe3o-faz}
+
+Mais geralmente, em MBQC um \textbf{padrão} tem entradas, saídas e uma lista de instruções: criar arestas (\(C\text{-}Z\)), medir um nó em um ângulo, e aplicar \(X\) ou \(Z\) condicionados a resultados anteriores (chamados \emph{sinais}). As regras de validade são simples: um qubit medido não pode ser usado depois, e um sinal só pode ser usado depois de emitido. As ordens e ângulos de medida podem depender de resultados anteriores: o ângulo de uma medida pode ser trocado de \(\theta\) para \(-\theta\) conforme um sinal, por exemplo. Exemplo: se um resultado anterior foi \(1\), um \(X\) pendente antes desta medida inverte o sinal da fase, e então medimos em \(-\theta\) em vez de \(\theta\), o que dispensa aplicar o \(X\).
+
+A porta de 1 qubit calculada pelo padrão acima, \(J(-\theta)=H R_{-\theta}\), junto com \(C\text{-}Z\), forma um conjunto \textbf{universal}. Logo, toda a computação quântica pode ser feita assim: um estado de grafo suficientemente grande, medidas em ângulos bem escolhidos e correções clássicas.
+
+Implemente o passo de um nó: dado o dado \(\ket\psi\) (vetor de 2 amplitudes), o ângulo \(\theta\) em radianos e o resultado \(b\), construa o estado de 2 qubits \(\ket\psi\otimes\ket{+}\), aplique \(C\text{-}Z\), projete o primeiro qubit em \(\ket{+_\theta}\) (se \(b=0\)) ou \(\ket{-_\theta}\) (se \(b=1\)), normalize o qubit restante e aplique \(X^b\). O resultado deve ser o mesmo para \(b=0\) e \(b=1\).
+
+\subsubsection{Computação clássica dentro do coprocessador: reversibilidade}\label{computauxe7uxe3o-cluxe1ssica-dentro-do-coprocessador-reversibilidade}
+
+Tanto aqui quanto nos estados mágicos, a máquina precisa de um pouco de controle clássico \textbf{dentro} do coprocessador (decidir uma correção, repetir um trecho). Mas atenção ao que isso pode ou não ser. Para o resultado de uma \textbf{medida} já guardado em um registrador clássico, qualquer conta é permitida. Já uma computação clássica feita \textbf{sobre qubits} (por exemplo, somar dois números em superposição) tem de ser \textbf{reversível}, pois toda operação sobre qubits é unitária. É por isso que circuitos clássicos viram portas como Toffoli e CNOT, com \emph{ancillas} para guardar o que seria apagado.
+
+Dentro do coprocessador, a computação clássica aplicada diretamente sobre qubits deve ser\ldots{}
+
+\begin{quote}
+Fonte: B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seções 4.6 e 4.7. Exposição e exemplos reescritos.
+\end{quote}
+
+\subsection{Computação quântica com óptica linear}
+Fótons viajam rápido, quase não interagem com o ambiente e já são, na prática, transportados em fibras ópticas. Isso os torna candidatos naturais a qubits. Esta aula mostra como codificar informação quântica em luz, quais componentes fazem portas e por que as portas de 2 qubits são o problema.
+
+\subsubsection{Onde guardar um qubit num fóton}\label{onde-guardar-um-qubit-num-fuxf3ton}
+
+Um qubit precisa de dois estados ortogonais. Um fóton oferece duas propriedades fáceis de controlar e medir:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Polarização}: a direção em que o campo elétrico da luz oscila. Duas opções ortogonais: horizontal, \(\ket{H}\), e vertical, \(\ket{V}\).
+\item
+  \textbf{Modo}: o caminho por onde o fóton viaja (uma fibra, um trajeto no espaço). Com dois caminhos, \(A\) e \(B\), temos \(\ket{A}\) e \(\ket{B}\).
+\end{itemize}
+
+Podemos usar \(\ket{0}=\ket{H}\) e \(\ket{1}=\ket{V}\) (qubit de polarização) ou \(\ket{0}=\ket{A}\) e \(\ket{1}=\ket{B}\) (qubit de modo). Os dois ao mesmo tempo dão \textbf{dois qubits em um fóton}: \(\ket{H_A}\) é ``polarizado horizontalmente, no caminho \(A\)'', e assim por diante, com 4 estados de base.
+
+Se o primeiro qubit é a polarização (\(H\!\to\!0\), \(V\!\to\!1\)) e o segundo é o modo (\(A\!\to\!0\), \(B\!\to\!1\)), qual estado de base de 2 qubits é \(\ket{V_A}\)?
+
+\subsubsection{Componentes e o que eles fazem}\label{componentes-e-o-que-eles-fazem}
+
+Cada componente linear realiza uma operação \textbf{unitária} sobre o estado do fóton.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Divisor de feixe} (\emph{beamsplitter}), parametrizado por um ângulo \(\theta\): atua nos dois modos, sem tocar na polarização. É uma rotação no espaço \(\{\ket{A},\ket{B}\}\). Uma versão comum é
+  \[
+  \begin{pmatrix}\cos\frac\theta2 & -\sin\frac\theta2\\ \sin\frac\theta2 & \cos\frac\theta2\end{pmatrix}.
+  \]
+  Com \(\theta=\pi/2\) e um fóton que entra em \(A\), sai em superposição igual de \(A\) e \(B\): é um divisor \textbf{50:50} (não é exatamente a porta \(H\), que tem outro sinal).
+\item
+  \textbf{Defasador} (\emph{phase shifter}): multiplica por \(e^{i\theta}\) a amplitude de \textbf{um} dos modos. Atua como uma porta de fase de 1 qubit.
+\item
+  \textbf{Placa de onda} (\emph{wave plate}): atua só na polarização, e realiza, por exemplo, a troca \(\ket{H}\leftrightarrow\ket{V}\) (como \(X\)) ou um Hadamard de polarização.
+\item
+  \textbf{Divisor de feixe polarizador} (PBS): \(\ket{H}\) segue no mesmo modo e \(\ket{V}\) troca de modo. É a ponte entre os dois codificadores: converte polarização em caminho.
+\item
+  \textbf{Fonte} e \textbf{detector}: a fonte idealmente emite um número fixo de fótons (fontes reais são probabilísticas); o detector indica se (e quantos) fótons chegaram.
+\end{itemize}
+
+Fótons são medidos com facilidade: o detector diz se há fóton em certo caminho; para polarização, basta um filtro polarizador antes do detector.
+
+Qual componente converte polarização em caminho?
+
+\paragraph{Exemplo: gerar um estado de Bell com um fóton}\label{exemplo-gerar-um-estado-de-bell-com-um-fuxf3ton}
+
+Comece com um fóton horizontalmente polarizado no caminho \(A\): \(\ket{H_A}\). Uma placa de onda tipo Hadamard o leva a \(\tfrac{1}{\sqrt2}(\ket{H_A}+\ket{V_A})\). Um PBS troca de caminho apenas o \(V\):
+
+\[
+\tfrac{1}{\sqrt2}(\ket{H_A}+\ket{V_B}) = \tfrac{1}{\sqrt2}(\ket{00}+\ket{11}).
+\]
+
+É um estado de Bell, com um único fóton e dois componentes. O emaranhamento é entre \textbf{duas propriedades} do mesmo fóton, não entre dois fótons.
+
+\subsubsection{Portas de 1 qubit são fáceis}\label{portas-de-1-qubit-suxe3o-fuxe1ceis}
+
+Com um qubit codificado em dois modos, os divisores de feixe e defasadores produzem \textbf{qualquer} unitária 2×2: o divisor controla o ``quanto de cada modo'' e o defasador controla a fase relativa. Para um fóton que entra em \(A\) e passa por um divisor com \(\theta = \pi\), a probabilidade de sair em \(B\) é\ldots{}
+
+Implemente um divisor de feixe sobre as amplitudes \((a_A, a_B)\) de um fóton nos modos \(A\) e \(B\), com a matriz de rotação acima.
+
+\subsubsection{Escalar com um fóton: modos demais}\label{escalar-com-um-fuxf3ton-modos-demais}
+
+Um fóton em \(n\) modos tem \(n\) amplitudes, e uma rede de divisores e defasadores realiza qualquer unitária \(n\times n\). Daí dá para simular \(k\) qubits com \(2^k\) modos, um por estado de base: o fóton no modo \(w_j\) representa o \(j\)-ésimo estado de base. Uma CNOT, nesse esquema, é apenas uma \textbf{permutação de modos} (troca dois fios); o custo está nos \(2^k\) modos. Já com \textbf{um fóton por qubit} (o caso escalável), a CNOT é difícil, como veremos.
+
+Quantos modos são necessários para 3 qubits nessa codificação ``um modo por estado de base''?
+
+O custo cresce exponencialmente, então o esquema não escala. A saída é usar \textbf{vários fótons}, contendo em cada modo quantos fótons houver. Os fótons são indistinguíveis, então o estado se descreve por contagens, como \(\ket{1,1}\) (um em cada modo) ou \(\ket{2,0}\) (dois no primeiro).
+
+\subsubsection{Por que 2 qubits são difíceis}\label{por-que-2-qubits-suxe3o-difuxedceis}
+
+Fótons não se enxergam: duas ondas de luz se atravessam sem se alterar. Um componente linear sozinho não faz um fóton ``condicionar'' o outro, que é o que uma porta de 2 qubits precisa. O que existe é \textbf{interferência} entre fótons indistinguíveis. Um exemplo: se um fóton entra em cada porta de um divisor 50:50, o estado \(\ket{1,1}\) vai para (a menos de sinal global, que depende da convenção do divisor)
+
+\[
+\tfrac{1}{\sqrt2}\big(\ket{2,0}-\ket{0,2}\big),
+\]
+
+e o termo \(\ket{1,1}\) \textbf{some}. Conta dos 4 caminhos, com o divisor \(\begin{pmatrix}c&-s\\s&c\end{pmatrix}\) e \(c=s=\tfrac{1}{\sqrt2}\) (entrada 1 vai à saída 1 com \(c\) e à saída 2 com \(s\); entrada 2 vai à saída 1 com \(-s\) e à saída 2 com \(c\)): (a) os dois fótons vão à saída 1; (b) os dois vão à saída 2; (c) o fóton 1 fica na saída 1 e o 2 na saída 2, amplitude \(c\cdot c=\tfrac12\); (d) os dois trocam, amplitude \(s\cdot(-s)=-\tfrac12\). Como os fótons são indistinguíveis, (c) e (d) levam ao \textbf{mesmo} estado \(\ket{1,1}\) e as amplitudes se somam: \(\tfrac12-\tfrac12=0\). Os dois fótons saem juntos, pelo mesmo lado. Vale para qualquer divisor 50:50. É interferência, mas ainda não é uma porta controlada completa.
+
+Com dois fótons incidindo um em cada porta de um divisor 50:50, qual a probabilidade de saírem separados, um em cada modo?
+
+E qual a probabilidade de os dois fótons saírem juntos, ambos na saída 1?
+
+\subsubsection{Medição como recurso e fusão}\label{mediuxe7uxe3o-como-recurso-e-fusuxe3o}
+
+Como as portas de 2 qubits não saem só de componentes lineares, usamos \textbf{medições} como parte do cálculo, ideia próxima da aula de MBQC:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  prepara-se (de modo probabilístico) pequenos estados de grafo ou de Bell;
+\item
+  combinam-se pedaços com uma operação de \textbf{fusão} (Browne \& Rudolph, 2005): dois fótons, um de cada pedaço, passam por um divisor/PBS e são detectados. Se a detecção dá certo (probabilidade \(\tfrac12\) no esquema básico), os dois pedaços viram \textbf{um único estado de grafo maior} e os fótons medidos saem do grafo. Por exemplo, na fusão ``tipo I'' os dois nós fundidos viram um só: cadeias de \(n\) e \(m\) nós dão uma de \(n+m-1\). Se falha, perde-se um pedaço, mas o resto se aproveita ou se repete;
+\item
+  com estados de grafo grandes, a computação segue por medidas e correções clássicas.
+\end{enumerate}
+
+A fusão é probabilística, mas pode ser repetida e é ``cara'' em número de fótons. Mesmo assim, é um caminho para fazer porta de 2 qubits sem interação direta entre fótons.
+
+Na fusão tipo I, uma cadeia de 3 nós e uma de 4 nós são fundidas. Quantos nós tem a cadeia resultante?
+
+\begin{quote}
+Fonte: B. Valiron, \emph{Introduction to Quantum Algorithms and Quantum Programming} (notas de curso, 2025), seções 4.6 e 4.9; fusão: D. Browne e T. Rudolph, \emph{Resource-efficient linear optical quantum computation}, Phys. Rev.~Lett. 95, 010501 (2005). Exposição e exemplos reescritos.
+\end{quote}
+

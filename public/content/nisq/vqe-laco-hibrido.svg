@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="330" viewBox="0 0 360 330" role="img" aria-label="O laço do VQE. Um bloco clássico (otimizador) envia os parâmetros θ para um bloco quântico (estado |ψ(θ)⟩ e medida de H), que devolve a energia E(θ). Embaixo, a energia E cai a cada iteração k e se aproxima da linha tracejada E0, o menor autovalor."><title>O laço do VQE. Um bloco clássico (otimizador) envia os parâmetros θ para um bloco quântico (estado |ψ(θ)⟩ e medida de H), que devolve a energia E(θ). Embaixo, a energia E cai a cada iteração k e se aproxima da linha tracejada E0, o menor autovalor.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 13.5px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 12.3px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 13.5px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 12.3px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 13.5px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 13.5px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 13.5px sans-serif;text-anchor:middle}</style>
+<rect class="bx" x="14.0" y="16.0" width="140.0" height="76.0" rx="8"/>
+<text class="t" x="84.0" y="48.0">min E(θ)</text>
+<text class="k" x="84.0" y="74.0">θ ← θ − η∇E</text>
+<rect class="bx" x="206.0" y="16.0" width="140.0" height="76.0" rx="8"/>
+<text class="t" x="276.0" y="48.0">|ψ(θ)⟩</text>
+<text class="k" x="276.0" y="74.0">⟨H⟩</text>
+<polyline class="g" style="stroke-linejoin:round" points="156.0,36.0 204.0,36.0"/><polyline class="g" style="stroke-linejoin:round" points="195.0,40.5 204.0,36.0 195.0,31.5"/>
+<text class="tg" x="180.0" y="28.0">θ</text>
+<polyline class="g" style="stroke-linejoin:round" points="204.0,72.0 156.0,72.0"/><polyline class="g" style="stroke-linejoin:round" points="165.0,67.5 156.0,72.0 165.0,76.5"/>
+<text class="tg" x="180.0" y="94.0">E(θ)</text>
+<polyline class="l" style="stroke-linejoin:round" points="50.0,290.0 348.0,290.0"/><polyline class="l" style="stroke-linejoin:round" points="339.0,294.5 348.0,290.0 339.0,285.5"/>
+<polyline class="l" style="stroke-linejoin:round" points="50.0,290.0 50.0,122.0"/><polyline class="l" style="stroke-linejoin:round" points="54.5,131.0 50.0,122.0 45.5,131.0"/>
+<text class="s" x="336.0" y="312.0">k</text>
+<text class="s" x="36.0" y="134.0">E</text>
+<line class="d" x1="50.0" y1="281.0" x2="340.0" y2="281.0"/>
+<text class="t" x="334.0" y="273.0">E₀</text>
+<polyline class="g" style="stroke-linejoin:round" points="50.0,136.8 74.2,146.1 98.3,164.3 122.5,194.5 146.7,231.8 170.8,261.2 195.0,275.0 219.2,279.4 243.3,280.6 267.5,280.9 291.7,281.0 315.8,281.0 340.0,281.0"/>
+<circle class="gf" cx="50.0" cy="136.8" r="3.5"/>
+<circle class="gf" cx="74.2" cy="146.1" r="3.5"/>
+<circle class="gf" cx="98.3" cy="164.3" r="3.5"/>
+<circle class="gf" cx="122.5" cy="194.5" r="3.5"/>
+<circle class="gf" cx="146.7" cy="231.8" r="3.5"/>
+<circle class="gf" cx="170.8" cy="261.2" r="3.5"/>
+<circle class="gf" cx="195.0" cy="275.0" r="3.5"/>
+<circle class="gf" cx="219.2" cy="279.4" r="3.5"/>
+<circle class="gf" cx="243.3" cy="280.6" r="3.5"/>
+<circle class="gf" cx="267.5" cy="280.9" r="3.5"/>
+<circle class="gf" cx="291.7" cy="281.0" r="3.5"/>
+<circle class="gf" cx="315.8" cy="281.0" r="3.5"/>
+<circle class="gf" cx="340.0" cy="281.0" r="3.5"/>
+</svg>

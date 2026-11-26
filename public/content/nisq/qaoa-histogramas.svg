@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="330" viewBox="0 0 360 330" role="img" aria-label="Dois histogramas das 8 divisões do triângulo, de 000 a 111. Em cima, o estado uniforme: todas as barras iguais a 1/8. Embaixo, depois de uma camada de QAOA com bons parâmetros: as seis divisões de corte 2 (verdes) ficam com probabilidade 1/6 cada, e 000 e 111, de corte 0 (cinza), ficam com probabilidade zero."><title>Dois histogramas das 8 divisões do triângulo, de 000 a 111. Em cima, o estado uniforme: todas as barras iguais a 1/8. Embaixo, depois de uma camada de QAOA com bons parâmetros: as seis divisões de corte 2 (verdes) ficam com probabilidade 1/6 cada, e 000 e 111, de corte 0 (cinza), ficam com probabilidade zero.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 13.5px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 12.3px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 13.5px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 12.3px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 13.5px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 13.5px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 13.5px sans-serif;text-anchor:middle}</style>
+<line class="l" x1="48.0" y1="134.0" x2="348.0" y2="134.0"/>
+<polyline class="l" style="stroke-linejoin:round" points="48.0,134.0 48.0,18.0"/><polyline class="l" style="stroke-linejoin:round" points="52.5,27.0 48.0,18.0 43.5,27.0"/>
+<text class="t" x="318.0" y="38.0">|+⟩⊗³</text>
+<line class="d" x1="48.0" y1="65.2" x2="348.0" y2="65.2"/>
+<text class="k" x="34.0" y="70.2">1/8</text>
+<text class="k" x="34.0" y="139.0">0</text>
+<rect class="bx" style="stroke:#9ca3af;fill:#9ca3af88" x="56.0" y="65.2" width="28.0" height="68.8" rx="2"/>
+<text class="k" x="70.0" y="154.0">000</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="92.5" y="65.2" width="28.0" height="68.8" rx="2"/>
+<text class="k" x="106.5" y="154.0">001</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="129.0" y="65.2" width="28.0" height="68.8" rx="2"/>
+<text class="k" x="143.0" y="154.0">010</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="165.5" y="65.2" width="28.0" height="68.8" rx="2"/>
+<text class="k" x="179.5" y="154.0">011</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="202.0" y="65.2" width="28.0" height="68.8" rx="2"/>
+<text class="k" x="216.0" y="154.0">100</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="238.5" y="65.2" width="28.0" height="68.8" rx="2"/>
+<text class="k" x="252.5" y="154.0">101</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="275.0" y="65.2" width="28.0" height="68.8" rx="2"/>
+<text class="k" x="289.0" y="154.0">110</text>
+<rect class="bx" style="stroke:#9ca3af;fill:#9ca3af88" x="311.5" y="65.2" width="28.0" height="68.8" rx="2"/>
+<text class="k" x="325.5" y="154.0">111</text>
+<line class="l" x1="48.0" y1="300.0" x2="348.0" y2="300.0"/>
+<polyline class="l" style="stroke-linejoin:round" points="48.0,300.0 48.0,184.0"/><polyline class="l" style="stroke-linejoin:round" points="52.5,193.0 48.0,184.0 43.5,193.0"/>
+<text class="t" x="318.0" y="204.0">p=1</text>
+<line class="d" x1="48.0" y1="231.2" x2="348.0" y2="231.2"/>
+<text class="k" x="34.0" y="236.2">1/8</text>
+<text class="k" x="34.0" y="305.0">0</text>
+<rect class="bx" style="stroke:#9ca3af;fill:#9ca3af88" x="56.0" y="299.9" width="28.0" height="0.1" rx="2"/>
+<text class="k" x="70.0" y="320.0">000</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="92.5" y="208.4" width="28.0" height="91.6" rx="2"/>
+<text class="k" x="106.5" y="320.0">001</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="129.0" y="208.4" width="28.0" height="91.6" rx="2"/>
+<text class="k" x="143.0" y="320.0">010</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="165.5" y="208.4" width="28.0" height="91.6" rx="2"/>
+<text class="k" x="179.5" y="320.0">011</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="202.0" y="208.4" width="28.0" height="91.6" rx="2"/>
+<text class="k" x="216.0" y="320.0">100</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="238.5" y="208.4" width="28.0" height="91.6" rx="2"/>
+<text class="k" x="252.5" y="320.0">101</text>
+<rect class="bx" style="stroke:#34d399;fill:#34d39988" x="275.0" y="208.4" width="28.0" height="91.6" rx="2"/>
+<text class="k" x="289.0" y="320.0">110</text>
+<rect class="bx" style="stroke:#9ca3af;fill:#9ca3af88" x="311.5" y="299.9" width="28.0" height="0.1" rx="2"/>
+<text class="k" x="325.5" y="320.0">111</text>
+</svg>

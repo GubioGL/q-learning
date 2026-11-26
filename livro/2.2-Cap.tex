@@ -1,2 +1,20 @@
 \newpage
 \section{Hand on: construindo seu computação quantica }
+
+Neste capítulo montamos, em poucas linhas de Python com NumPy, um simulador de computador quântico. Ele usa só o que vimos até aqui: um estado de $n$ qubits é um vetor de $2^n$ amplitudes complexas, uma porta é uma matriz unitária e medir é sortear um resultado com a regra de Born. A convenção é a do resto do livro: o qubit 0 é o mais à esquerda.
+
+O programa tem oito partes:
+\begin{enumerate}
+\item \textbf{Estados:} \texttt{ket("01")} devolve o vetor de $\ket{01}$.
+\item \textbf{Portas de 1 qubit:} $X$, $Y$, $Z$, $H$, $S$, $T$ e as rotações $R_x$, $R_y$, $R_z$, com $R_\sigma(\theta)=e^{-i\theta\sigma/2}=\cos\frac{\theta}{2}\,I-i\sin\frac{\theta}{2}\,\sigma$.
+\item \textbf{Registradores:} \texttt{aplicar} monta $I\otimes\cdots\otimes U\otimes\cdots\otimes I$ com \texttt{np.kron}; \texttt{cnot} troca o bit alvo onde o controle vale 1.
+\item \textbf{Medida:} \texttt{probabilidades} aplica $P(x)=|\alpha_x|^2$ e \texttt{medir} sorteia resultados como um aparelho real.
+\item \textbf{Estado de Bell:} $H$ seguido de CNOT leva $\ket{00}$ a $(\ket{00}+\ket{11})/\sqrt2$; as medidas dão só \texttt{00} e \texttt{11}.
+\item \textbf{Deutsch-Jozsa:} Hadamards, oráculo de fase $\ket{x}\mapsto(-1)^{f(x)}\ket{x}$ e Hadamards de novo; medir $0\cdots0$ indica função constante.
+\item \textbf{Grover:} o oráculo inverte o sinal do item marcado e a difusão reflete as amplitudes em torno da média; com $n=3$, duas iterações levam a probabilidade do item a $0{,}945$.
+\item \textbf{QFT:} a matriz $F_{jk}=\omega^{jk}/\sqrt{N}$, com $\omega=e^{2\pi i/N}$.
+\end{enumerate}
+
+No fim, o bloco \texttt{if \_\_name\_\_ == "\_\_main\_\_"} roda os exemplos e confere cada resultado com \texttt{assert}. Para experimentar, salve o código como \texttt{simulador.py} e rode \texttt{python3 simulador.py}.
+
+{\footnotesize\renewcommand{\baselinestretch}{1}\setlength{\parskip}{0pt}\selectfont\verbatiminput{codigo/simulador.py}}

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="200" viewBox="0 0 360 200" role="img" aria-label="Dois grafos de MaxCut com a divisão z = 010. Cada vértice é colorido pelo seu bit: azul para 0 e laranja para 1, com o número do vértice ao lado. À esquerda, o caminho 0-1-2; à direita, o triângulo. As arestas cortadas, entre cores diferentes, são verdes e contínuas; a aresta (0,2) do triângulo não é cortada e é tracejada. Em ambos o valor do corte é C=2."><title>Dois grafos de MaxCut com a divisão z = 010. Cada vértice é colorido pelo seu bit: azul para 0 e laranja para 1, com o número do vértice ao lado. À esquerda, o caminho 0-1-2; à direita, o triângulo. As arestas cortadas, entre cores diferentes, são verdes e contínuas; a aresta (0,2) do triângulo não é cortada e é tracejada. Em ambos o valor do corte é C=2.</title><style>.p{stroke:#a78bfa;stroke-width:2.5;fill:none}.l{stroke:#9ca3af;stroke-width:2;fill:none}.bx{stroke:#a78bfa;stroke-width:2;fill:rgba(167,139,250,.14)}.t{fill:#a78bfa;font:600 13.5px sans-serif;text-anchor:middle}.k{fill:#9ca3af;font:600 12.3px sans-serif;text-anchor:middle}.s{fill:#a78bfa;font:italic 13.5px sans-serif;text-anchor:middle}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.g{stroke:#34d399;stroke-width:3;fill:none}.gf{fill:#34d399}.f{fill:#a78bfa}.tg{fill:#34d399;font:600 12.3px sans-serif;text-anchor:middle}.n0{fill:#3b82f6}.n1{fill:#f97316}.e0{stroke:#3b82f6;stroke-width:2.5;fill:none}.e1{stroke:#f97316;stroke-width:2.5;fill:none}.tb{fill:#3b82f6;font:600 13.5px sans-serif;text-anchor:middle}.to{fill:#f97316;font:600 13.5px sans-serif;text-anchor:middle}.w{fill:#fff;font:700 13.5px sans-serif;text-anchor:middle}</style>
+<line class="g" x1="40.0" y1="130.0" x2="95.0" y2="55.0"/>
+<line class="g" x1="95.0" y1="55.0" x2="150.0" y2="130.0"/>
+<circle class="n0" cx="40.0" cy="130.0" r="19"/>
+<text class="w" x="40.0" y="136.0">0</text>
+
+<circle class="n1" cx="95.0" cy="55.0" r="19"/>
+<text class="w" x="95.0" y="61.0">1</text>
+
+<circle class="n0" cx="150.0" cy="130.0" r="19"/>
+<text class="w" x="150.0" y="136.0">0</text>
+
+
+<text class="t" x="95.0" y="190.0">C=2</text>
+<text class="k" x="40.0" y="168.0">0</text>
+<text class="k" x="125.0" y="53.0">1</text>
+<text class="k" x="150.0" y="168.0">2</text>
+<line class="g" x1="210.0" y1="130.0" x2="265.0" y2="55.0"/>
+<line class="g" x1="265.0" y1="55.0" x2="320.0" y2="130.0"/>
+<line class="d" x1="210.0" y1="130.0" x2="320.0" y2="130.0"/>
+<circle class="n0" cx="210.0" cy="130.0" r="19"/>
+<text class="w" x="210.0" y="136.0">0</text>
+
+<circle class="n1" cx="265.0" cy="55.0" r="19"/>
+<text class="w" x="265.0" y="61.0">1</text>
+
+<circle class="n0" cx="320.0" cy="130.0" r="19"/>
+<text class="w" x="320.0" y="136.0">0</text>
+
+
+<text class="t" x="265.0" y="190.0">C=2</text>
+<text class="k" x="210.0" y="168.0">0</text>
+<text class="k" x="295.0" y="53.0">1</text>
+<text class="k" x="320.0" y="168.0">2</text>
+</svg>

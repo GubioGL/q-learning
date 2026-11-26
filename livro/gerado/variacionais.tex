@@ -1,0 +1,253 @@
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newpage
+\section{Algoritmos variacionais}
+\subsection{Simulação hamiltoniana e trotterização}
+Um computador quântico é, antes de tudo, bom em imitar outros sistemas quânticos: uma molécula, um ímã, um material. Imitar é deixar o sistema evoluir no tempo, e isso é calcular \(e^{-iHt}\) para um operador \(H\) (o hamiltoniano). Como transformar essa exponencial em portas de 1 e 2 qubits?
+
+\subsubsection{Evolução no tempo}\label{evoluuxe7uxe3o-no-tempo}
+
+O \textbf{hamiltoniano} \(H\) é o operador hermitiano que representa a energia do sistema. Se o estado inicial é \(\ket{\psi(0)}\), depois de um tempo \(t\) ele vira
+
+\[
+\ket{\psi(t)} = e^{-iHt}\ket{\psi(0)}.
+\]
+
+A exponencial de uma matriz \(A\) é definida pela mesma série da exponencial comum: \(e^{A} = I + A + A^2/2! + \dots\). Quando \(H\) é hermitiano, \(e^{-iHt}\) é unitária, isto é, é uma porta quântica válida.
+
+Um caso fácil: \(H = Z\). Como \(Z^2 = I\), a série se reorganiza em cosseno e seno:
+
+\[
+e^{-i\theta Z} = \cos\theta\, I - i\sin\theta\, Z = \begin{pmatrix} e^{-i\theta} & 0 \\ 0 & e^{i\theta}\end{pmatrix}.
+\]
+
+Isso é a rotação \(R_z(2\theta)\) que você já viu, pois \(R_z(\varphi) = e^{-i\varphi Z/2}\). O mesmo vale para \(X\) e \(Y\) (qualquer Pauli \(P\) tem \(P^2=I\)): \(e^{-i\theta P} = \cos\theta\,I - i\sin\theta\,P\).
+
+Qual é o ângulo \(\varphi\) do \(R_z(\varphi)\) equivalente a \(e^{-i\theta Z}\) com \(\theta = 0{,}3\)?
+
+\subsubsection{H como soma de termos de Pauli}\label{h-como-soma-de-termos-de-pauli}
+
+Sistemas reais têm hamiltonianos com vários pedaços. Todo hamiltoniano de \(n\) qubits pode ser escrito como soma de produtos de Paulis (strings de Pauli), cada uma com um coeficiente real:
+
+\[
+H = \sum_k c_k\, P_k, \qquad \text{por exemplo } H = 0{,}5\,Z_1 Z_2 + 0{,}3\,X_1 + 0{,}3\,X_2.
+\]
+
+Aqui \(Z_1Z_2\) quer dizer \(Z\otimes Z\), \(X_1\) quer dizer \(X\otimes I\), e assim por diante. Cada termo, sozinho, é fácil de exponenciar. O problema: \(e^{-i(A+B)t}\) \textbf{não} é, em geral, \(e^{-iAt}e^{-iBt}\). Isso só vale se \(A\) e \(B\) \textbf{comutam} (\(AB = BA\)).
+
+\(Z_1\) e \(Z_2\) comutam? E \(Z_1\) e \(X_1\)? Responda ``sim'' ou ``não'' para o primeiro par: vale \(e^{-i(Z_1+Z_2)t} = e^{-iZ_1t}e^{-iZ_2t}\)?
+
+\(Z_1\) e \(X_1\) (ambos no qubit 1) não comutam, e é aí que mora o erro.
+
+\subsubsection{Por que o produto simples falha}\label{por-que-o-produto-simples-falha}
+
+Teste com números: \(H = X + Z\), \(t = 1\), estado inicial \(\ket{0}\). A evolução exata dá probabilidade \(P(0) \approx 0{,}512\) de medir 0. Se trocamos \(e^{-i(X+Z)}\) por \(e^{-iX}e^{-iZ}\) (um único ``passo''), obtemos \(P(0) \approx 0{,}292\). A diferença é grande, e vem de \(X\) e \(Z\) não comutarem.
+
+\subsubsection{A fórmula de Trotter}\label{a-fuxf3rmula-de-trotter}
+
+A ideia: dividir o tempo \(t\) em \(n\) passos curtos e, em cada um, aplicar os termos um de cada vez, como se comutassem. Para \(H = A + B\):
+
+\[
+e^{-i(A+B)t} \;\approx\; \left( e^{-iAt/n}\, e^{-iBt/n} \right)^{n}.
+\]
+
+Essa é a fórmula de Trotter (e Suzuki generalizou o método a ordens maiores). Chama-se de \textbf{1ª ordem} porque o erro de cada passo é de segunda ordem no tamanho do passo, \((t/n)^2\), e é o esquema mais simples. Quanto menor o passo, menos importa a ordem dos termos, e no limite \(n\to\infty\) a fórmula é exata.
+
+Cada letra pode ser um grupo de termos que comutam entre si (assim o grupo se exponencia exatamente). Em \(H = 0{,}5\,Z_1Z_2 + 0{,}3\,X_1 + 0{,}3\,X_2\), agrupe \(A = 0{,}5\,Z_1Z_2\) e \(B = 0{,}3(X_1 + X_2)\): \(X_1\) e \(X_2\) comutam (estão em qubits diferentes), então \(e^{-iBt/n}\) é simplesmente uma rotação \(R_x\) em cada qubit.
+
+Com \(n = 100\) passos, o caso \(H = X+Z\), \(t=1\) acima dá \(P(0)\approx 0{,}5121\), quase o valor exato \(0{,}5122\).
+
+\paragraph{Tamanho do erro}\label{tamanho-do-erro}
+
+Cada passo erra por algo proporcional a \((t/n)^2\) vezes o comutador \([A,B] = AB - BA\). Somando \(n\) passos, um limite típico é
+
+\[
+\text{erro} \lesssim \frac{\lVert [A,B]\rVert\, t^2}{2n},
+\]
+
+onde \(\lVert\cdot\rVert\) é o tamanho (norma) da matriz. Não é uma lei exata, é um limite que vale quando esse número é pequeno. O que importa é a escala, \(\text{erro} \sim t^2/n\).
+
+Exemplo: com \(t = 1\) e \(n = 10\) o erro é da ordem de \(0{,}1\); dobrando para \(n=20\), cai para \(0{,}05\). Dobrar o tempo simulado quadruplica o erro, a menos que se multiplique \(n\) por 4.
+
+Se o tempo \(t\) passa de 1 para 3, por qual fator é preciso multiplicar \(n\) para manter o mesmo erro?
+
+Se com \(n = 10\) passos o erro é \(0{,}04\), quantos passos são necessários para chegar a \(0{,}01\) (mesmo \(t\))?
+
+O custo é claro: mais precisão pede circuitos mais fundos, e em hardware ruidoso (veja o curso de hardware) profundidade é cara. Fórmulas de ordem maior reduzem o erro por passo, mas exigem mais portas por passo.
+
+\subsubsection{\texorpdfstring{O circuito de \(e^{-i\theta Z\otimes Z}\)}{O circuito de e\^{}\{-i\textbackslash theta Z\textbackslash otimes Z\}}}\label{o-circuito-de-e-itheta-zotimes-z}
+
+Falta implementar cada termo. Para um termo de um qubit, é uma rotação (\(R_x\), \(R_y\) ou \(R_z\)). Para \(Z_1Z_2\), a exponencial \(e^{-i\theta Z\otimes Z}\) multiplica os estados da base por uma fase que depende da \textbf{paridade} (se os dois bits são iguais ou diferentes):
+
+\begin{itemize}
+\tightlist
+\item
+  \(\ket{00}\) e \(\ket{11}\) (paridade par, \(ZZ=+1\)): fase \(e^{-i\theta}\);
+\item
+  \(\ket{01}\) e \(\ket{10}\) (paridade ímpar, \(ZZ=-1\)): fase \(e^{+i\theta}\).
+\end{itemize}
+
+O truque é calcular a paridade no qubit 2 com uma CNOT, aplicar a fase com uma rotação \(R_z\) nele, e desfazer a CNOT:
+
+\[
+e^{-i\theta Z\otimes Z} = \text{CNOT}\,\big(I\otimes R_z(2\theta)\big)\,\text{CNOT}.
+\]
+
+Confira com \(\ket{01}\): a CNOT leva a \(\ket{01}\) (controle 0, nada muda), o qubit 2 está em \(\ket{1}\), onde \(R_z(2\theta)\) dá \(e^{+i\theta}\), e a segunda CNOT desfaz. Resultado: \(e^{i\theta}\ket{01}\), como previsto. Em \(\ket{11}\) a CNOT vira \(\ket{10}\), o alvo em \(\ket{0}\) ganha \(e^{-i\theta}\), e a segunda CNOT volta para \(\ket{11}\).
+
+No circuito, a fase \(e^{-i\theta ZZ}\) de um estado com paridade ímpar é \(e^{+i\theta}\). Para \(\theta = 0{,}2\), qual é a fase (em radianos, com sinal) que o estado \(\ket{10}\) recebe em \(e^{-i\theta Z\otimes Z}\)?
+
+Para termos como \(X_1X_2\) ou \(Y_1Y_2\), basta antes e depois girar a base (com \(H\) para \(X\); com \(S^\dagger\) e depois \(H\) para \(Y\)) e usar o mesmo circuito.
+
+\subsection{Algoritmos variacionais e VQE}
+Hoje os computadores quânticos têm dezenas a poucas centenas de qubits ruidosos e não corrigem erros. Dá para fazer algo útil com eles mesmo assim? A aposta dos algoritmos variacionais é: usar o chip quântico só para o que ele faz bem, deixar o resto para um computador comum, e tolerar circuitos curtos.
+
+\subsubsection{A era NISQ}\label{a-era-nisq}
+
+\textbf{NISQ} (do inglês \emph{noisy intermediate-scale quantum}) é o nome da fase atual: escala intermediária (algumas dezenas a centenas de qubits) e com ruído. Circuitos profundos, como o de estimação de fase com \(e^{-iHt}\) longos, acumulam erros demais. A saída é usar circuitos \textbf{rasos}, controlados por poucos números ajustáveis, e deixar um otimizador clássico procurar bons valores.
+
+\subsubsection{Circuito parametrizado (ansatz)}\label{circuito-parametrizado-ansatz}
+
+Um \textbf{ansatz} é uma família de circuitos com parâmetros reais \(\vec\theta = (\theta_1,\dots,\theta_m)\), que prepara o estado \(\ket{\psi(\vec\theta)}\). Exemplo de 1 qubit:
+
+\[
+\ket{\psi(\theta)} = R_y(\theta)\ket{0} = \cos\tfrac{\theta}{2}\ket{0} + \sin\tfrac{\theta}{2}\ket{1}.
+\]
+
+Variar \(\theta\) de \(0\) a \(2\pi\) percorre o círculo inteiro da esfera de Bloch no plano \(xz\): \(\ket{0}\) (\(\theta=0\)), \(\ket{+}\) (\(\pi/2\)), \(\ket{1}\) (\(\pi\)), \(\ket{-}\) (\(3\pi/2\)) e de volta. Neste texto os ângulos estão em radianos, salvo quando indicado. Para vários qubits, o ansatz típico alterna camadas de rotações com portas de emaranhamento (CNOT). Quanto mais \textbf{expressivo} o ansatz (isto é, quanto mais estados ele consegue produzir), mais perto do estado fundamental ele chega, mas mais fundo e mais difícil de otimizar ele fica.
+
+\subsubsection{O princípio variacional}\label{o-princuxedpio-variacional}
+
+Muitos problemas (química, materiais, otimização) pedem o \textbf{estado fundamental}: o estado de menor energia \(E_0\) de um hamiltoniano \(H\) (o menor autovalor). Para qualquer estado \(\ket{\psi}\) a \textbf{energia esperada} é
+
+\[
+E = \bra{\psi}H\ket{\psi}.
+\]
+
+O fato central: \textbf{nenhum estado tem energia esperada abaixo de \(E_0\)}. A razão: escreva \(\ket{\psi} = \sum_j c_j\ket{E_j}\) em autovetores de \(H\), com \(\sum|c_j|^2=1\). Então \(E = \sum_j |c_j|^2 E_j\) é uma média ponderada dos autovalores, e uma média nunca fica abaixo do menor valor. Logo, para o ansatz,
+
+\[
+E(\vec\theta) = \bra{\psi(\vec\theta)}H\ket{\psi(\vec\theta)} \;\ge\; E_0.
+\]
+
+Minimizar \(E(\vec\theta)\) dá uma \textbf{cota superior} de \(E_0\) que é exata se o ansatz contém o estado fundamental.
+
+Exemplo: \(H = Z\) tem autovalores \(+1\) e \(-1\). O estado \(\ket{1}\) dá \(E=-1=E_0\). O estado \(\ket{+}\) dá \(E = 0\) (média de \(+1\) e \(-1\) com pesos iguais), acima de \(E_0\), como previsto.
+
+Qual é o menor valor possível de \(\bra{\psi}H\ket{\psi}\) para \(H = Z + X\) (o menor autovalor)? Dica: \((Z+X)^2 = 2I\), então os autovalores são \(\pm\sqrt2\).
+
+\subsubsection{\texorpdfstring{Medir \(\langle H\rangle\) por termos de Pauli}{Medir \textbackslash langle H\textbackslash rangle por termos de Pauli}}\label{medir-langle-hrangle-por-termos-de-pauli}
+
+O chip só entrega bits de medida, não \(\bra\psi H\ket\psi\) diretamente. Mas \(H = \sum_k c_k P_k\) (veja a aula de trotterização), e pela linearidade
+
+\[
+\bra{\psi}H\ket{\psi} = \sum_k c_k \bra{\psi}P_k\ket{\psi}.
+\]
+
+Cada \(\langle P_k\rangle\) se estima repetindo o circuito muitas vezes (\emph{shots}) e medindo na base de \(P_k\): o resultado é \(+1\) ou \(-1\) e o valor esperado é a média. Para \(Z\), mede-se direto. Para \(X\), aplica-se antes uma porta \(H\) (Hadamard) para trocar de base e então mede-se em \(Z\). Para \(Y\), usa-se \(S^\dagger\) e depois \(H\).
+
+Exemplo: se \(\langle Z\rangle = 0{,}6\) e \(\langle X\rangle = 0{,}8\), então para \(H = 0{,}5Z + 0{,}3X\) temos \(E = 0{,}5\cdot0{,}6 + 0{,}3\cdot0{,}8\).
+
+Calcule esse valor.
+
+Qual porta se aplica antes de medir em \(Z\) para estimar \(\langle X\rangle\)?
+
+Como cada termo estimado vem de um número finito de shots, \(E(\vec\theta)\) tem ruído estatístico, que cai com \(1/\sqrt{\text{shots}}\). Reduzir o ruído por um fator 10 exige quantas vezes mais shots?
+
+\subsubsection{O laço híbrido}\label{o-lauxe7o-huxedbrido}
+
+O VQE (\emph{variational quantum eigensolver}) junta as peças em um laço:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  O computador \textbf{clássico} escolhe \(\vec\theta\).
+\item
+  O \textbf{chip quântico} prepara \(\ket{\psi(\vec\theta)}\) e mede os termos de \(H\).
+\item
+  O clássico soma tudo, obtém \(E(\vec\theta)\), e um \textbf{otimizador} (por exemplo descida de gradiente; COBYLA e Nelder-Mead são só nomes de otimizadores clássicos que não usam derivadas) propõe novos \(\vec\theta\).
+\item
+  Repete até a energia parar de cair.
+\end{enumerate}
+
+O quântico entrega só uma função \(E(\vec\theta)\); a otimização é clássica. Limitações reais: o ruído pode esconder o mínimo, a \textbf{paisagem} de \(E(\vec\theta)\) (o gráfico da energia em função dos parâmetros, com seus vales e planícies) pode ter muitos mínimos locais e regiões planas, e nada garante que o ansatz alcance o estado fundamental.
+
+\subsubsection{Exemplo completo de 1 qubit}\label{exemplo-completo-de-1-qubit}
+
+Tome \(H = Z + 0{,}5X\) e o ansatz \(R_y(\theta)\ket{0}\). Para esse estado, \(\langle Z\rangle = \cos\theta\) e \(\langle X\rangle = \sin\theta\), então
+
+\[
+E(\theta) = \cos\theta + 0{,}5\sin\theta.
+\]
+
+Em \(\theta=0\) (\(\ket{0}\)): \(E=1\). Em \(\theta = \pi/2\) (\(\ket{+}\)): \(E = 0{,}5\). O mínimo está em \(\theta = \pi + \arctan(0{,}5) \approx 3{,}60\) rad (\(206{,}6^\circ\)), fora do intervalo \([0,\pi]\), e vale \(-\sqrt{1+0{,}25} \approx -1{,}118\). Em geral, o mínimo de \(a\cos\theta + b\sin\theta\) é \(-\sqrt{a^2+b^2}\). Esse valor é exatamente o menor autovalor de \(H\): o ansatz de 1 qubit já cobre o estado fundamental.
+
+Antes de otimizar: quanto vale \(E(\theta) = \cos\theta + \sin\theta\) em \(\theta = \pi/2\)?
+
+Para \(H = Z + X\), em qual \(\theta\) (em graus, entre 0° e 360°) \(E(\theta) = \cos\theta + \sin\theta\) é mínima? (Dica: ache o ângulo em radianos e converta.)
+
+\subsection{QAOA}
+Três amigos querem formar dois times para um jogo, mas cada par de amigos que se desentende só atrapalha se ficar no mesmo time. Como separar o máximo de pares de desafetos? É um problema de otimização combinatória, e o QAOA ataca esse tipo de problema com um circuito parametrizado, no mesmo espírito do VQE.
+
+\subsubsection{Otimização combinatória e MaxCut}\label{otimizauxe7uxe3o-combinatuxf3ria-e-maxcut}
+
+Um problema \textbf{combinatório} pede a melhor entre muitas escolhas discretas (aqui, \(2^n\) divisões possíveis). \textbf{MaxCut}: dado um grafo (vértices ligados por arestas), divida os vértices em dois grupos para maximizar o número de arestas que ligam vértices de \textbf{grupos diferentes}. Essas arestas são as ``cortadas''.
+
+Representamos a divisão por uma string de bits \(z = z_1 z_2\dots z_n\): o bit diz o grupo de cada vértice. O \textbf{valor do corte} \(C(z)\) é simplesmente o número de arestas cujos extremos têm bits diferentes.
+
+Exemplo: um caminho \(0 - 1 - 2\) (arestas \((0,1)\) e \((1,2)\)) com \(z = 010\) separa o vértice 1 dos outros dois: as duas arestas são cortadas, \(C = 2\). Com \(z=000\), \(C=0\).
+
+Qual é o valor máximo do corte de um triângulo (3 vértices, as 3 arestas)? Dica: com 2 grupos, dois vértices sempre ficam juntos.
+
+\subsubsection{Do corte ao hamiltoniano}\label{do-corte-ao-hamiltoniano}
+
+Para escrever \(C(z)\) como operador, use o sinal \(s_i = (-1)^{z_i}\) (\(+1\) para bit 0, \(-1\) para bit 1). Cada aresta contribui \(\frac{1 - s_is_j}{2}\): vale \(1\) se os sinais diferem e \(0\) se são iguais. Trocando \(s_i\) por \(Z_i\), o \textbf{hamiltoniano de custo} é
+
+\[
+H_C = \sum_{(i,j)} \frac{1 - Z_iZ_j}{2}.
+\]
+
+Ele é diagonal na base computacional: \(H_C\ket{z} = C(z)\ket{z}\). Checagem de uma aresta: em \(\ket{01}\) temos \(Z_0Z_1\ket{01} = (+1)(-1)\ket{01} = -\ket{01}\), logo \(\frac{1-(-1)}{2} = 1\): aresta cortada. Em \(\ket{00}\), \(Z_0Z_1=+1\) e o valor é \(0\).
+
+Quanto vale \(\frac{1 - Z_0Z_1}{2}\) aplicado a \(\ket{01}\) (o autovalor)?
+
+Maximizar o corte é achar o autoestado de \textbf{maior} autovalor de \(H_C\) (ou o de menor de \(-H_C\), tal como no VQE). Note que \(H_C\) é uma soma de termos \(ZZ\), exatamente os que a aula de trotterização implementa com CNOT-Rz-CNOT.
+
+\subsubsection{O circuito do QAOA}\label{o-circuito-do-qaoa}
+
+O \textbf{QAOA} (\emph{quantum approximate optimization algorithm}) é construído em três passos.
+
+\textbf{Passo 1, estado inicial.} Uma Hadamard em cada qubit dá \(\ket{+}^{\otimes n}\), a superposição uniforme de todas as divisões, cada uma com probabilidade \(2^{-n}\).
+
+\textbf{Passo 2, operador de custo.} Aplique \(e^{-i\gamma H_C}\), que multiplica cada \(\ket z\) pela fase \(e^{-i\gamma C(z)}\). Para cada aresta, é um \(e^{-i\theta ZZ}\) com \(\theta = -\gamma/2\) (o \(\tfrac12\) constante é fase global), feito com CNOT-Rz-CNOT. Divisões com cortes diferentes ganham fases diferentes, mas fases não mudam probabilidades.
+
+Teste: depois de um operador de custo qualquer, partindo de \(\ket{++}\) (2 qubits), qual é a probabilidade de medir \(00\)?
+
+\textbf{Passo 3, mixer.} Para converter as fases em probabilidades, aplique o \textbf{mixer} \(e^{-i\beta H_B}\), com \(H_B = \sum_i X_i\). Ele é um \(R_x(2\beta)\) em cada qubit e mistura as amplitudes: sem ele, o custo seria invisível na medida.
+
+\textbf{Repetir.} Os passos 2 e 3 formam uma camada, com seus próprios \((\gamma_k,\beta_k)\). Com \(p\) camadas:
+
+\[
+\ket{\gamma,\beta} = \underbrace{e^{-i\beta_p H_B}\, e^{-i\gamma_p H_C}}_{\text{camada } p}\cdots \underbrace{e^{-i\beta_1 H_B}\, e^{-i\gamma_1 H_C}}_{\text{camada } 1}\ket{+}^{\otimes n}.
+\]
+
+São \(2p\) parâmetros no total.
+
+Quantos parâmetros reais livres tem um QAOA com \(p = 3\) camadas?
+
+Com \(\beta = \pi/8\), qual é o ângulo (em radianos) da porta \(R_x(2\beta)\) aplicada em cada qubit?
+
+\subsubsection{O laço, de novo híbrido}\label{o-lauxe7o-de-novo-huxedbrido}
+
+Como no VQE, o QAOA é um laço híbrido: o otimizador clássico escolhe \((\vec\gamma,\vec\beta)\); o chip prepara \(\ket{\gamma,\beta}\) e mede muitas vezes, estimando \(\langle H_C\rangle = \bra{\gamma,\beta}H_C\ket{\gamma,\beta}\), o corte médio. O otimizador procura parâmetros que maximizem esse valor. No fim, mede-se o estado e, entre as strings que saem, fica-se com a de maior corte (que é calculada de forma clássica).
+
+Ponto de partida: no estado uniforme, cada aresta é cortada com probabilidade \(\tfrac12\) (os dois bits são independentes e diferentes em metade dos casos). Então \(\langle H_C\rangle = \tfrac12\cdot(\text{número de arestas})\).
+
+Qual é o corte médio do estado uniforme no triângulo?
+
+Como o máximo é 2, o QAOA já parte de \(1{,}5/2 = 75\%\) do ótimo; cada camada tenta aumentar esse número. Com os melhores parâmetros, aumentar \(p\) nunca piora o resultado e, no limite \(p\to\infty\), tende ao ótimo (na prática, achar esses parâmetros fica mais difícil).
+
+\subsubsection{Ligação com evolução adiabática e trotterização (leitura opcional)}\label{ligauxe7uxe3o-com-evoluuxe7uxe3o-adiabuxe1tica-e-trotterizauxe7uxe3o-leitura-opcional}
+
+Imagine um hamiltoniano que muda devagar de \(-H_B\) (estado fundamental \(\ket{+}^{\otimes n}\), o inicial) para \(-H_C\) (estado fundamental igual ao melhor corte). O \textbf{teorema adiabático} (um sistema que muda devagar o bastante fica no estado de menor energia) diz que, se a mudança é lenta o bastante, o sistema permanece no estado fundamental instantâneo e termina na resposta. Simular essa evolução com a fórmula de Trotter alterna passos de \(e^{-i\gamma H_C}\) e \(e^{-i\beta H_B}\), com \(\gamma\) e \(\beta\) pequenos: \textbf{é exatamente a estrutura do QAOA}. A diferença é que, no QAOA, os ângulos \(\gamma_k,\beta_k\) não são impostos pelo cronograma adiabático, e sim ajustados livremente pelo otimizador, o que permite obter bons resultados com poucas camadas.
+
