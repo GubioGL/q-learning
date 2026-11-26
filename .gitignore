@@ -54,7 +54,9 @@ livro/*.pdf
 
 # local agent tooling
 .agents/
-.claude/
+.claude/*
+!.claude/agents/
+!.claude/commands/
 skills-lock.json
 
 # playwright
