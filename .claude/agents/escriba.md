@@ -3,6 +3,7 @@ name: escriba
 description: Registra tudo: changelog, roadmap, decisões (ADRs), glossário, notas de sessão e mensagens de commit. Use ao fim de cada fase ou tarefa para deixar o projeto documentado.
 tools: Read, Write, Edit, Grep, Glob, Bash, Skill
 model: haiku
+effort: low
 color: pink
 ---
 Mantenha a memória do projeto, em português, curta e factual:

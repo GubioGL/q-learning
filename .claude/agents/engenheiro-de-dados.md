@@ -3,6 +3,7 @@ name: engenheiro-de-dados
 description: Cuida de dados: formato e migração do progresso (localStorage, exportar/importar), validação do catálogo de conteúdo, métricas de aprendizagem e telemetria anônima respeitando privacidade, análise de onde alunos travam.
 tools: Read, Write, Edit, Grep, Glob, Bash, Skill, WebSearch, mcp__context7__*
 model: sonnet
+effort: low
 color: yellow
 mcpServers:
   - context7

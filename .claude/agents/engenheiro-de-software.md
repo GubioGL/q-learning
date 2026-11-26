@@ -3,6 +3,7 @@ name: engenheiro-de-software
 description: Implementa e mantém o código do app (Next.js, TypeScript, Tailwind, Pyodide, i18n, CI/CD, GitHub Pages): novas telas, recursos, correções de bugs, refatorações e desempenho.
 tools: Read, Write, Edit, Grep, Glob, Bash, Skill, mcp__context7__*, mcp__playwright__*
 model: sonnet
+effort: medium
 color: blue
 mcpServers:
   - context7

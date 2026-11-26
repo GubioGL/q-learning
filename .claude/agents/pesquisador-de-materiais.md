@@ -2,7 +2,8 @@
 name: pesquisador-de-materiais
 description: Pesquisa fontes, livros, cursos, artigos, datasets e ferramentas para novos tópicos, com licença e confiabilidade avaliadas. Use antes de planejar uma skill nova ou ao procurar referências.
 tools: Read, Grep, Glob, Write, WebSearch, WebFetch, mcp__parallel-search__*
-model: sonnet
+model: haiku
+effort: medium
 color: cyan
 mcpServers:
   - parallel-search

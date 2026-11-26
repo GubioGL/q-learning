@@ -3,6 +3,7 @@ name: fisico-revisor
 description: Revisa a correção de física, matemática e notação quântica de aulas, exercícios, níveis e livro. Use depois de qualquer conteúdo novo ou alterado e antes de publicar.
 tools: Read, Grep, Glob, Bash, mcp__context7__*, mcp__parallel-search__*
 model: opus
+effort: medium
 color: red
 mcpServers:
   - context7

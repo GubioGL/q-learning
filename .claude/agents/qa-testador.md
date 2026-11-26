@@ -3,6 +3,7 @@ name: qa-testador
 description: Testa tudo: testes unitários, lint, build, e2e no navegador, acessibilidade e exercícios Python. Use após qualquer mudança e antes de publicar; reporta falhas com causa provável.
 tools: Read, Grep, Glob, Bash, Skill, mcp__playwright__*
 model: sonnet
+effort: low
 color: orange
 mcpServers:
   - playwright

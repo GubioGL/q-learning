@@ -3,6 +3,7 @@ name: conversor-de-material
 description: Recebe PDF, texto, notebook ou código do usuário, analisa e converte em skill, exercícios e nível de desafio no formato da plataforma. Use sempre que o usuário trouxer material bruto para virar aula.
 tools: Read, Write, Edit, Grep, Glob, Bash, Skill
 model: sonnet
+effort: medium
 color: blue
 skills:
   - escrever-skill-de-aula

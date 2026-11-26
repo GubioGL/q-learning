@@ -18,6 +18,17 @@ A sessão principal é o **maestro**: entende o pedido, escolhe a fase, aciona s
 | Memória | `escriba` (sempre ao fim) |
 | Lançamento | `divulgador` (+ `estrategista-de-negocio`) |
 
+## Modelos (economia de tokens)
+
+- Maestro (sessão principal): Sonnet, esforço médio (`.claude/settings.json`). Para física difícil/arquitetura: `/model opus` (esforço alto já configurado).
+- Subagentes (`model`/`effort` no frontmatter de cada `.claude/agents/*.md`):
+  - Haiku: `escriba` (low), `tradutor-i18n`, `divulgador`, `pesquisador-de-materiais` (medium).
+  - Sonnet low: `qa-testador`, `pedagogo`, `analista-de-concorrencia`, `engenheiro-de-dados`.
+  - Sonnet medium: `conversor-de-material`, `ilustrador-manim`, `engenheiro-de-software`, `estrategista-de-negocio`.
+  - Opus medium: `fisico-revisor` (física errada custa caro).
+- Exceção: se a tarefa for de complexidade alta (física nova difícil, bug que resiste, arquitetura, migração de dados), o maestro passa `model: "opus"` na chamada do Agent só naquela vez.
+- Para gastar menos: `/clear` entre tarefas sem relação, `/compact` em conversas longas, tarefa pequena sem `/maestro`; lotes pequenos, relatórios curtos (máx. ~12 itens) e revisores salvando o relatório em arquivo em vez de repetir texto.
+
 ## Ferramentas
 
 MCP do projeto em `.mcp.json` (context7, playwright, parallel-search), skills em `.claude/skills/`, plugins em `.claude/settings.json`. Mapa completo por agente e itens opcionais: [`docs/agentes/FERRAMENTAS.md`](docs/agentes/FERRAMENTAS.md).

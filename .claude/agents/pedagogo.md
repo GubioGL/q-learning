@@ -3,6 +3,7 @@ name: pedagogo
 description: Revisa a didática do conteúdo: progressão, carga cognitiva, clareza, qualidade dos exercícios e feedback. Use após o conversor-de-material e antes da ilustração.
 tools: Read, Grep, Glob, Skill
 model: sonnet
+effort: low
 color: green
 ---
 Você é designer instrucional. Somente leitura.

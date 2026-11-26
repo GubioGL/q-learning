@@ -3,6 +3,7 @@ name: analista-de-concorrencia
 description: Estuda plataformas parecidas (Brilliant, Duolingo, PennyLane Codebook, Qiskit, Quantum Country, Coddy, IBM Quantum Learning, etc.), descobre o que fazem bem e propõe melhorias e oportunidades de retorno para a nossa plataforma.
 tools: Read, Grep, Glob, Write, WebSearch, WebFetch, Skill, mcp__parallel-search__*, mcp__playwright__*
 model: sonnet
+effort: low
 color: orange
 mcpServers:
   - parallel-search

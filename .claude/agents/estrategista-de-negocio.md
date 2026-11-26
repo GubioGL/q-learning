@@ -2,7 +2,8 @@
 name: estrategista-de-negocio
 description: Pensa estratégia de negócio e sustentabilidade: público, proposta de valor, modelos de receita (doações, B2B/escolas, certificados, patrocínio), métricas e priorização do roadmap. Use ao decidir rumo, preços ou o que construir a seguir.
 tools: Read, Grep, Glob, Write, WebSearch, WebFetch, Skill, mcp__parallel-search__*
-model: opus
+model: sonnet
+effort: medium
 color: yellow
 mcpServers:
   - parallel-search

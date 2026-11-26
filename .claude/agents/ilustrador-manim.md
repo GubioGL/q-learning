@@ -3,6 +3,7 @@ name: ilustrador-manim
 description: Cria ilustrações e animações didáticas e bonitas (Manim, matemática visual, SVG) para representar conceitos e exercícios. Use quando uma skill precisa de figura, animação, analogia visual ou quando houver marcador ILUSTRAR.
 tools: Read, Write, Edit, Grep, Glob, Bash, mcp__context7__*, mcp__playwright__*
 model: sonnet
+effort: medium
 color: purple
 mcpServers:
   - context7

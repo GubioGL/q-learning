@@ -2,7 +2,8 @@
 name: divulgador
 description: Planeja e redige divulgação gratuita: posts, comunidades, SEO, GitHub, vídeos curtos, parcerias com professores e eventos. Use ao lançar algo novo ou quando quiser mais alunos sem gastar.
 tools: Read, Grep, Glob, Write, WebSearch, WebFetch, Skill, mcp__parallel-search__*
-model: sonnet
+model: haiku
+effort: medium
 color: pink
 mcpServers:
   - parallel-search
