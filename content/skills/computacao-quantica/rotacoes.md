@@ -30,6 +30,13 @@ id: rot-st-mais
 answer: 135
 ```
 
+Quantas portas $T$ seguidas, aplicadas a um qubit, equivalem exatamente à porta $Z$? (Use $T = P(\pi/4)$ e $Z = P(\pi)$.)
+
+```exercise:number
+id: rot-t-para-z
+answer: 4
+```
+
 ## Rx, Ry e Rz
 
 Antes da fórmula, um caso: $X$ vira a esfera meia-volta em torno de $x$, e o giro de $180^\circ$ em torno de $x$ leva $\ket{0}$ a $-i\ket{1}$. O fator $-i$ é fase global, então o ponto é o mesmo de $X\ket{0} = \ket{1}$. Para outros ângulos, o giro de ângulo $\theta$ em torno do eixo de uma matriz de Pauli $\sigma$ ($\sigma = X$, $Y$ ou $Z$) é
@@ -48,7 +55,7 @@ R_y(\theta) = \begin{pmatrix} c & -s \\ s & c \end{pmatrix}, \quad
 R_z(\theta) = \begin{pmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{pmatrix}.
 $$
 
-<!-- ILUSTRAR: esfera de Bloch com os três eixos e três setas circulares, uma em torno de cada eixo, rotuladas Rx(θ), Ry(θ), Rz(θ). Mostrar também o ponto |0⟩ no polo norte sendo levado por Ry(θ) a um ponto a ângulo polar θ do polo (arco destacado). -->
+![Esfera de Bloch com setas circulares em torno de cada eixo (Rx, Ry, Rz) e o ponto |0⟩ levado por Ry(θ) a ângulo polar θ.](/content/computacao-quantica/bloch-rotacoes.svg)
 
 **Por que $\theta/2$?** Na esfera de Bloch, $\ket{0}$ e $\ket{1}$ ficam em polos opostos ($180^\circ$), embora sejam ortogonais, o que no espaço de estados é um "ângulo reto". O ângulo da esfera é o dobro do ângulo que aparece nas amplitudes, daí o $\theta/2$ dentro de cosseno e seno.
 
@@ -122,7 +129,14 @@ Na próxima skill veremos que um conjunto **finito** de portas só consegue **ap
 
 O preço é o conjunto ser infinito (um $\theta$ real para cada giro). Com portas finitas, como a T (que é $R_z(\pi/4)$ a menos de fase global), um ângulo genérico só pode ser **aproximado**, e a precisão custa mais portas.
 
-<!-- ILUSTRAR: diagrama de blocos mostrando "qualquer unitária de n qubits" = camadas de blocos [Rz Ry Rz] em cada fio entremeadas por CNOTs; ao lado, a seta "aproximar Rz(θ) com H e T" apontando para uma sequência de H e T. -->
+![Camadas de giros Rz Ry Rz e CNOTs formam qualquer unitária, e Rz(θ) é aproximada por uma sequência de H e T.](/content/computacao-quantica/universalidade-rotacoes.svg)
+
+Quantas portas $T$ seguidas implementam $R_z(3\pi/4)$, a menos de fase global? (Lembre que $T$ é $R_z(\pi/4)$ a menos de fase global.)
+
+```exercise:number
+id: rot-t-tres
+answer: 3
+```
 
 ## Em Python
 

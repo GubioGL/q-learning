@@ -30,7 +30,15 @@ $$
 
 Para $\theta = \pi/4$ esse é o estado mágico do $T$: é o que se obtém aplicando $T$ em $\ket{+}$. Preparar esses estados é a parte cara, feita à parte com protocolos de purificação (a "fábrica"). Uma vez que se tem uma cópia, ela é consumida para realizar a rotação em qualquer qubit de dados.
 
-<!-- ILUSTRAR: esfera de Bloch com o estado mágico |A_pi/4⟩ no equador, a 45 graus de |+⟩ em direção a |+i⟩, e uma seta curva mostrando que T leva |+⟩ até ele -->
+![Esfera de Bloch com o estado mágico |A_π/4⟩ no equador, 45 graus depois de |+⟩ em direção a |+i⟩; a porta T leva |+⟩ até ele.](/content/hardware/bloch-estado-magico.svg)
+
+Qual a probabilidade de medir $1$ no estado mágico $\ket{A_\theta}$, qualquer que seja $\theta$? Responda com decimal.
+
+```exercise:number
+id: magicos-prob-estado-magico
+answer: 0.5
+tolerance: 0.001
+```
 
 ## Injetando a porta: o circuito, passo a passo
 
@@ -61,6 +69,8 @@ tolerance: 0.001
 
 Os dois grupos têm o mesmo peso, $\tfrac12$ cada.
 
+## A correção condicional
+
 **Passo 3: correção.** No caso $1$ temos $R_{-\theta}$ e queremos $R_{\theta}$: falta aplicar $R_{2\theta}$. Para o estado mágico do $T$, $\theta = 45^\circ$, então a correção é uma rotação de ângulo $2\theta$, que é a porta $S$, de Clifford e portanto barata! Esse é o truque: a parte cara foi empurrada para a preparação do estado, e o que acontece no circuito é só Clifford, uma medida e uma correção condicionada ao resultado clássico.
 
 Qual rotação $R_{2\theta}$ (em graus) corrige o resultado $1$ quando $\theta = 45^\circ$?
@@ -73,7 +83,7 @@ tolerance: 0.001
 
 Essa rotação de $90^\circ$ é a porta $S$.
 
-<!-- ILUSTRAR: circuito do gadget de injeção: linha do dado |φ⟩ e linha do |A_theta⟩; CNOT do dado para o mágico; medida do mágico; fio clássico levando o resultado a uma porta S condicional na linha do dado; saída T|φ⟩ -->
+![Gadget de injeção: CNOT do dado para o estado mágico, medida do mágico e porta S condicionada ao resultado produzem T|φ⟩.](/content/hardware/injecao-estado-magico.svg)
 
 ## Voltando ao código
 
@@ -105,6 +115,14 @@ np.array([0.6, 0.8*np.exp(1j*np.pi/4)])
 No gadget acima, o resultado $1$ para $\theta=\pi/4$ pode ser corrigido com $S$, então o $T$ sai determinístico. Para um ângulo geral, a correção $R_{2\theta}$ pode não ser Clifford. Aí o esquema vira *repetir até dar certo*. Se cada nova tentativa usa um estado $\ket{A_\theta}$ igual, o ângulo acumulado no $\ket{1}$ é $(n_0-n_1)\theta$, onde $n_0$ e $n_1$ contam os resultados $0$ e $1$: um passeio aleatório. Para quando $n_0=n_1+1$ (o ângulo é exatamente $\theta$). Esse passeio termina com probabilidade $1$, mas o número médio de rodadas é infinito. Uma alternativa usual: após uma falha, injetar $\ket{A_{2\theta}}$ (o ângulo que corrige o erro), depois $\ket{A_{4\theta}}$ se falhar de novo, e assim por diante, o que dá em média 2 rodadas.
 
 Esse padrão exige que o coprocessador tenha algum controle clássico próprio (repetir um trecho de circuito, fazer contas simples): enviar cada resultado ao computador clássico demoraria demais.
+
+Na estratégia "injetar $\ket{A_{2\theta}}$ após uma falha, depois $\ket{A_{4\theta}}$", suponha $\theta = 10^\circ$. A 1ª tentativa usa $\ket{A_\theta}$, a 2ª (após uma falha) usa $\ket{A_{2\theta}}$ e a 3ª (após outra falha) usa $\ket{A_{4\theta}}$. Qual o ângulo, em graus, do estado mágico da 3ª tentativa?
+
+```exercise:number
+id: magicos-tentativas-angulo
+answer: 40
+tolerance: 0.001
+```
 
 ## Por que isso ajuda na correção de erros
 

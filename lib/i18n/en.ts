@@ -41,8 +41,15 @@ export const en: Dict = {
         finish: "Complete skill",
         saveError: "The browser did not allow saving your progress.",
     },
+    steps: {
+        label: (i: number, n: number) => `Mini-lesson ${i} of ${n}`,
+        nav: "Mini-lessons in this skill",
+        next: "Continue", prev: "Back",
+        solveFirst: "Solve this mini-lesson's mini-challenge to continue.",
+        solved: "solved",
+    },
     exercise: {
-        title: "Exercise", answer: "Your answer", numberHint: "Type a number", textHint: "Type your answer",
+        title: "Mini-challenge", answer: "Your answer", numberHint: "Type a number", textHint: "Type your answer",
         check: "Check", correct: "Correct!", wrong: "Not yet. Try again.",
         code: "Your Python code", run: "Run and test", running: "Running…", reset: "Reset",
         firstRun: "The first time, Python is downloaded to your browser (a few seconds).",

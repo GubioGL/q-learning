@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="500" viewBox="0 0 360 500" role="img" aria-label="Relógio de 15 posições com o ciclo 1, 7, 4, 13 de multiplicar por 7 módulo 15, e barras de 7 elevado a x módulo 15 repetindo 1, 7, 4, 13 com período 4">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.ts{fill:#d1d5db;font:15px sans-serif;text-anchor:start}.o{fill:#fb923c;font:600 16px sans-serif;text-anchor:middle}.k{fill:#38bdf8;font:600 16px sans-serif;text-anchor:middle}.gt{fill:#34d399;font:600 16px sans-serif;text-anchor:middle}</style>
+  <defs><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a78bfa"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#34d399"/></marker><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fb923c"/></marker><marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d1d5db"/></marker></defs>
+<circle class="d" cx="180" cy="150" r="100"/>
+<circle class="l" cx="180.0" cy="50.0" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="180.0" y="35.0">0</text>
+<circle class="f" cx="220.7" cy="58.6" r="7" style=""/>
+<text class="v" x="228.8" y="45.4">1</text>
+<circle class="l" cx="254.3" cy="83.1" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="269.2" y="74.7">2</text>
+<circle class="l" cx="275.1" cy="119.1" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="294.1" y="117.9">3</text>
+<circle class="f" cx="279.5" cy="160.5" r="7" style=""/>
+<text class="v" x="299.3" y="167.5">4</text>
+<circle class="l" cx="266.6" cy="200.0" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="283.9" y="215.0">5</text>
+<circle class="l" cx="238.8" cy="230.9" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="250.5" y="252.1">6</text>
+<circle class="f" cx="200.8" cy="247.8" r="7" style=""/>
+<text class="v" x="204.9" y="272.4">7</text>
+<circle class="l" cx="159.2" cy="247.8" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="155.1" y="272.4">8</text>
+<circle class="l" cx="121.2" cy="230.9" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="109.5" y="252.1">9</text>
+<circle class="l" cx="93.4" cy="200.0" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="76.1" y="215.0">10</text>
+<circle class="l" cx="80.5" cy="160.5" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="60.7" y="167.5">11</text>
+<circle class="l" cx="84.9" cy="119.1" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="65.9" y="117.9">12</text>
+<circle class="f" cx="105.7" cy="83.1" r="7" style=""/>
+<text class="v" x="90.8" y="74.7">13</text>
+<circle class="l" cx="139.3" cy="58.6" r="3" style="fill:#6b7280;stroke:none"/>
+<text class="s" x="131.2" y="45.4">14</text>
+<path class="p" d="M230.0 63.4 A100 100 0 0 1 210.9 245.1" marker-end="url(#ap)" style="stroke-width:2.5"/>
+<path class="p" d="M190.5 249.5 A100 100 0 1 1 280.0 150.0" marker-end="url(#ap)" style="stroke-width:2.5"/>
+<path class="p" d="M277.8 170.8 A100 100 0 1 1 99.1 91.2" marker-end="url(#ap)" style="stroke-width:2.5"/>
+<path class="p" d="M113.1 75.7 A100 100 0 0 1 210.9 54.9" marker-end="url(#ap)" style="stroke-width:2.5"/>
+<text class="t" x="180" y="146">×7 mod 15</text><text class="s" x="180" y="170">ciclo de tamanho 4</text>
+<text class="t" x="180" y="300">7ˣ mod 15, para x = 0, 1, …, 11</text>
+<line class="l" x1="20" y1="470" x2="345" y2="470"/>
+<rect class="f" x="33" y="462" width="20" height="8" rx="3"/>
+<text class="s" x="43" y="456">1</text><text class="s" x="43" y="490">0</text>
+<rect class="f" x="59" y="414" width="20" height="56" rx="3"/>
+<text class="s" x="69" y="408">7</text><text class="s" x="69" y="490">1</text>
+<rect class="f" x="85" y="438" width="20" height="32" rx="3"/>
+<text class="s" x="95" y="432">4</text><text class="s" x="95" y="490">2</text>
+<rect class="f" x="111" y="366" width="20" height="104" rx="3"/>
+<text class="s" x="121" y="360">13</text><text class="s" x="121" y="490">3</text>
+<rect class="f" x="137" y="462" width="20" height="8" rx="3"/>
+<text class="s" x="147" y="456">1</text><text class="s" x="147" y="490">4</text>
+<rect class="f" x="163" y="414" width="20" height="56" rx="3"/>
+<text class="s" x="173" y="408">7</text><text class="s" x="173" y="490">5</text>
+<rect class="f" x="189" y="438" width="20" height="32" rx="3"/>
+<text class="s" x="199" y="432">4</text><text class="s" x="199" y="490">6</text>
+<rect class="f" x="215" y="366" width="20" height="104" rx="3"/>
+<text class="s" x="225" y="360">13</text><text class="s" x="225" y="490">7</text>
+<rect class="f" x="241" y="462" width="20" height="8" rx="3"/>
+<text class="s" x="251" y="456">1</text><text class="s" x="251" y="490">8</text>
+<rect class="f" x="267" y="414" width="20" height="56" rx="3"/>
+<text class="s" x="277" y="408">7</text><text class="s" x="277" y="490">9</text>
+<rect class="f" x="293" y="438" width="20" height="32" rx="3"/>
+<text class="s" x="303" y="432">4</text><text class="s" x="303" y="490">10</text>
+<rect class="f" x="319" y="366" width="20" height="104" rx="3"/>
+<text class="s" x="329" y="360">13</text><text class="s" x="329" y="490">11</text>
+<path class="l" d="M31 350 V342 H133 V350" style="stroke:#fb923c"/><text class="o" x="83.0" y="333">período r = 4</text>
+</svg>

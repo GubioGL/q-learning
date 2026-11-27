@@ -14,7 +14,7 @@ id: mbqc-arestas
 answer: 3
 ```
 
-<!-- ILUSTRAR: grafo em cadeia de 4 nós ao lado do circuito equivalente: quatro linhas |+⟩ com C-Z entre as linhas 1-2, 2-3 e 3-4 -->
+![Grafo em cadeia de 4 nós e o circuito equivalente: quatro qubits em |+⟩ com C-Z entre os pares 1-2, 2-3 e 3-4.](/content/hardware/mbqc-grafo-circuito.svg)
 
 ## Um exemplo mínimo: dois qubits
 
@@ -45,6 +45,14 @@ Isto é, normalizando, $\tfrac{1}{\sqrt2}\begin{pmatrix}\alpha+\beta e^{-i\theta
 
 Se o resultado for $\ket{-_\theta}$ (resultado $b=1$), o sinal dos termos muda: o segundo qubit fica com $(\alpha-\beta e^{-i\theta})\ket{0}+(\alpha+\beta e^{-i\theta})\ket{1}$, que é o anterior com $\ket{0}$ e $\ket{1}$ trocados, isto é, passado por $X$.
 
+Tome o dado $\ket{\psi}=\ket{+}$ ($\alpha=\beta=1/\sqrt2$) e $\theta=0$. Dado que o resultado foi $b=0$, qual a probabilidade de medir $1$ no qubit de saída? Responda com decimal.
+
+```exercise:number
+id: mbqc-saida-plus
+answer: 0
+tolerance: 0.001
+```
+
 ## Correções clássicas
 
 O resultado $b$ da medida é aleatório (cada um com probabilidade $\tfrac12$). Para que a computação seja determinística, aplicamos $X^b$ no qubit de saída: se $b=1$ aplicamos $X$, se $b=0$ nada. É a mesma ideia do teletransporte: o resultado clássico diz qual Pauli aplicar para desfazer o desvio.
@@ -64,7 +72,7 @@ answer: 4
 ```
 
 
-<!-- ILUSTRAR: cadeia 1-2 no estado de grafo; o nó 1 recebe a seta "medir em base |±θ⟩"; um fio clássico leva b até uma caixa X^b no nó 2, e o dado "caminha" do nó 1 para o nó 2 -->
+![Medir o nó 1 em uma base rotacionada transporta o dado para o nó 2; o resultado clássico b decide a correção X elevado a b.](/content/hardware/mbqc-passo.svg)
 
 ## Qual porta cada padrão faz?
 

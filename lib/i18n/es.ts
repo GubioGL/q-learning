@@ -41,8 +41,15 @@ export const es: Dict = {
         finish: "Completar skill",
         saveError: "El navegador no permitió guardar el progreso.",
     },
+    steps: {
+        label: (i: number, n: number) => `Minilección ${i} de ${n}`,
+        nav: "Minilecciones de esta skill",
+        next: "Continuar", prev: "Volver",
+        solveFirst: "Resuelve el minidesafío de esta minilección para continuar.",
+        solved: "resuelta",
+    },
     exercise: {
-        title: "Ejercicio", answer: "Tu respuesta", numberHint: "Escribe un número", textHint: "Escribe tu respuesta",
+        title: "Minidesafío", answer: "Tu respuesta", numberHint: "Escribe un número", textHint: "Escribe tu respuesta",
         check: "Comprobar", correct: "¡Correcto!", wrong: "Todavía no. Inténtalo de nuevo.",
         code: "Tu código Python", run: "Ejecutar y probar", running: "Ejecutando…", reset: "Reiniciar",
         firstRun: "La primera vez, Python se descarga en el navegador (unos segundos).",

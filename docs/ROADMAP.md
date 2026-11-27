@@ -95,6 +95,16 @@ Formato em `content/README.md`. Cada skill tem um nível na trilha de Desafios e
 - [ ] Figura `meias-voltas-xzh` pequena em 360 px.
 - [ ] Verificar os links de `referencias/links.txt`.
 
+## Etapa 9 — Mini-lições e ilustrações (2026-11-27, não commitado)
+
+- [x] Cada `##` da skill vira uma mini-lição (`lib/mini-lessons.ts`, `components/skill/lesson-stepper.tsx`); "Continuar" só abre após o mini-desafio.
+- [x] Mini-desafios resolvidos ficam no navegador (`ql_solved`) e a página retoma de onde parou.
+- [x] Todos os marcadores ILUSTRAR viraram SVG (38 figuras: hardware, algoritmos, computacao-quantica).
+- [x] As 23 skills só em pt: toda mini-lição tem mini-desafio (53 desafios novos; seções longas divididas).
+- [ ] As 30 skills traduzidas: mini-desafios nas seções sem exercício (exige en/es por causa do teste de paridade).
+- [x] Revisão de física (fisico-revisor ×3) e pedagógica; correções aplicadas; qa-testador verde.
+- [ ] Exportar/importar em /metas não leva `ql_solved`.
+
 ## Depois do beta
 
 - [ ] Revisão das traduções por falantes nativos.

@@ -6,6 +6,13 @@ Seja $f:\{0,1\}^n\to\{0,1\}$ com $N=2^n$ entradas. Sabemos que existe um (ou pou
 
 Clássico: em média $N/2$ consultas, e $N-1$ no pior caso. Quântico (Grover): da ordem de $\sqrt N$. Veja a escala: com $N=10^6$, são cerca de $10^6$ consultas contra cerca de $785$.
 
+Com $N=1024$ itens e um único marcado, quantas consultas clássicas o pior caso exige?
+
+```exercise:number
+id: grover-consultas-classicas
+answer: 1023
+```
+
 ## Ferramentas: duas reflexões
 
 O algoritmo é feito de duas **reflexões**, e a ideia geométrica é: duas reflexões seguidas formam uma rotação.
@@ -26,6 +33,16 @@ $$
 
 Isso é uma reflexão: mantém o que é ortogonal a $\ket w$ e inverte a componente em $\ket w$.
 
+Com $N=16$, partindo do estado uniforme, qual é a amplitude de $\ket w$ logo depois do oráculo? Responda com 2 casas decimais (pode ser negativo).
+
+```exercise:number
+id: grover-oraculo-n16
+answer: -0.25
+tolerance: 0.001
+```
+
+## A difusão
+
 **Reflexão 2: a difusão.** Defina
 
 $$
@@ -38,6 +55,14 @@ O efeito de $D$ em um estado $\sum a_x\ket x$ com média $\bar a=\tfrac1N\sum a_
 
 **Um passo de Grover** é $G=D\,O_f$.
 
+Aplique a regra $a\mapsto2\bar a-a$ ao vetor $(0{,}1;\,0{,}2;\,0{,}3;\,0{,}4)$ (não precisa estar normalizado). Qual é a nova amplitude da entrada que valia $0{,}4$? Responda com 1 casa decimal.
+
+```exercise:number
+id: grover-difusao-regra
+answer: 0.1
+tolerance: 0.001
+```
+
 ## Exemplo com $N=4$ ($n=2$), item marcado $w=11$
 
 Começamos com $\ket\psi=\tfrac12(1,1,1,1)$ (amplitudes de $\ket{00},\ket{01},\ket{10},\ket{11}$). Pense nas amplitudes como alturas de barras:
@@ -47,11 +72,19 @@ Começamos com $\ket\psi=\tfrac12(1,1,1,1)$ (amplitudes de $\ket{00},\ket{01},\k
 - A **média** das amplitudes caiu para $\bar a=\tfrac14$.
 - Difusão: cada barra é refletida em torno da média, $a\mapsto2\bar a-a$. As três primeiras ficam em $2\cdot\tfrac14-\tfrac12=0$; a última em $2\cdot\tfrac14+\tfrac12=1$.
 
-<!-- ILUSTRAR: três gráficos de barras lado a lado para N=4 (amplitudes de 00,01,10,11): (1) todas 1/2; (2) após o oráculo, a barra de 11 em -1/2, com uma linha tracejada na média 1/4; (3) após a difusão, barras 0,0,0 e 1 (a de 11). Setas mostrando a reflexão em torno da linha da média -->
+![Amplitudes para N=4: uniformes, depois do oráculo a de |11⟩ vira −½ com média ¼, e depois da difusão ficam 0, 0, 0 e 1.](/content/algoritmos/grover-barras.svg)
 
 Resultado: $(0,0,0,1)=\ket{11}$. Com **uma** iteração, achamos $w$ com probabilidade 1; um clássico precisaria de até 3 consultas.
 
 O efeito geral é o mesmo: a difusão $D$ reflete cada amplitude em torno da média. Como o oráculo puxa a média para baixo, a barra marcada, que ficou negativa, vira a mais alta depois da reflexão.
+
+Repita com o item marcado $w=01$: depois do oráculo as amplitudes são $(\tfrac12,-\tfrac12,\tfrac12,\tfrac12)$. Qual é a média? Responda com 2 casas decimais.
+
+```exercise:number
+id: grover-media-w01
+answer: 0.25
+tolerance: 0.001
+```
 
 ## Visão geométrica
 
@@ -69,7 +102,18 @@ $$
 
 Isto é, $\ket\psi$ forma o ângulo $\theta$ com $\ket{w^\perp}$ (bem perto, quando $N$ é grande: $\theta\approx1/\sqrt N$).
 
-<!-- ILUSTRAR: plano 2D com eixo horizontal |w⊥⟩ e vertical |w⟩. Desenhar |s⟩ a um ângulo θ pequeno acima do eixo horizontal. Passo 1: reflexão do oráculo, levando |s⟩ ao simétrico abaixo do eixo horizontal (ângulo −θ). Passo 2: reflexão em torno de |s⟩ original, levando o vetor para o ângulo 3θ. Mostrar as duas flechas curvas e os ângulos θ, −θ, 3θ; depois a sequência 5θ, 7θ... aproximando-se do eixo |w⟩ -->
+Com $N=2$ (um único qubit), $\sin\theta=1/\sqrt2$. Quanto vale $\theta$ em graus?
+
+```exercise:number
+id: grover-theta-n16
+answer: 45
+tolerance: 0.01
+```
+
+
+## Rotação a cada iteração
+
+![Plano com eixos |w⊥⟩ e |w⟩: o oráculo leva |ψ⟩ de θ a −θ, a difusão leva a 3θ, e as iterações seguintes 5θ, 7θ se aproximam de |w⟩.](/content/algoritmos/grover-rotacao.svg)
 
 - $O_f$ reflete em torno do eixo $\ket{w^\perp}$: o ângulo medido a partir de $\ket{w^\perp}$ troca de sinal, de $\theta$ para $-\theta$.
 - $D$ reflete em torno de $\ket\psi$ (ângulo $\theta$): o ângulo $-\theta$ vira $2\theta-(-\theta)=3\theta$.
@@ -99,14 +143,6 @@ id: grover-reflexao-media
 answer: 1
 ```
 
-Com $N=4$, uma iteração dá probabilidade $1$. E se aplicarmos uma segunda? Calcule $\sin^2(5\theta)$ com $\theta=30^\circ$.
-
-```exercise:number
-id: grover-overshoot
-answer: 0.25
-tolerance: 0.0001
-```
-
 ## Quantas iterações?
 
 Queremos $(2k+1)\theta\approx\pi/2$, isto é,
@@ -125,6 +161,14 @@ answer: 25
 ```
 
 **Atenção: não vale "mais é melhor".** A rotação não para sozinha. Se passar de $\pi/2$, o estado se afasta de $\ket w$ e a probabilidade cai, oscilando. Por isso é preciso conhecer $M$; se não o conhecemos, usa-se um número aleatório de iterações (algoritmo BBHT) ou contagem quântica.
+
+Com $N=4$, uma iteração dá probabilidade $1$. E se aplicarmos uma segunda? Calcule $\sin^2(5\theta)$ com $\theta=30^\circ$.
+
+```exercise:number
+id: grover-overshoot
+answer: 0.25
+tolerance: 0.0001
+```
 
 Com $N=64$ e $M=4$ itens marcados ($\sin\theta=1/4$, $\theta\approx0{,}2527$ rad), quantas iterações?
 
@@ -195,7 +239,7 @@ answer: 7
 
 Esse resultado é **ótimo**: nenhum algoritmo quântico acha um item marcado numa lista não estruturada com bem menos que $\sqrt N$ consultas (Bennett, Bernstein, Brassard e Vazirani, 1997; Zalka, 1999, mostra que a constante $\pi/4$ também é a melhor possível). Por isso Grover dá um ganho quadrático, não exponencial.
 
-## Resumo
+### Resumo
 
 - Problema: achar $w$ com $f(w)=1$ entre $N=2^n$ entradas, sem estrutura.
 - Passo de Grover: oráculo de fase (reflexão que inverte $\ket w$) e difusão (reflexão em torno de $\ket\psi$); juntas, uma rotação de $2\theta$, com $\sin\theta=1/\sqrt N$.

@@ -22,7 +22,7 @@ $$
 
 Para $N=2$, $\omega=-1$ e $F_2$ é a matriz de Hadamard. Calculada direto, a DFT custa cerca de $N^2$ multiplicações. A **FFT** (transformada rápida) baixa isso para cerca de $N\log N$ separando as posições pares e ímpares: uma DFT de tamanho $N$ vira duas de tamanho $N/2$, e repete-se. Mesmo assim, cresce com $N$.
 
-<!-- ILUSTRAR: círculo unitário com as 8 raízes oitavas da unidade (ω^0..ω^7) numeradas, destacando ω = e^{2πi/8} a 45° e mostrando que ω^8 volta ao 1 -->
+![Círculo unitário com as oito raízes oitavas da unidade, de ω⁰ a ω⁷, separadas por 45°](/content/algoritmos/qft-raizes-oitavas.svg)
 
 Qual é o ângulo (em graus, entre 0 e 360) de $\omega^{jk}$ para $N=8$, $j=3$ e $k=5$? (Dica: $jk=15$ e só vale $jk$ módulo 8.)
 
@@ -84,7 +84,15 @@ $$
 0.j_1j_2\cdots j_m = \frac{j_1}{2}+\frac{j_2}{4}+\cdots+\frac{j_m}{2^m}.
 $$
 
-Exemplo: $0.101 = \tfrac12+\tfrac18 = 0{,}625$. Para $n=3$ e $j=j_1j_2j_3$, o resultado da QFT é, por extenso,
+Exemplo: $0.101 = \tfrac12+\tfrac18 = 0{,}625$. Quanto vale $0.011$ (responda em decimal)?
+
+```exercise:number
+id: qft-fracao-011
+answer: 0.375
+tolerance: 0.0001
+```
+
+Para $n=3$ e $j=j_1j_2j_3$, o resultado da QFT é, por extenso,
 
 $$
 \mathrm{QFT}\ket{j_1j_2j_3}=\tfrac1{\sqrt8}\big(\ket0+e^{2\pi i\,0.j_3}\ket1\big)\big(\ket0+e^{2\pi i\,0.j_2j_3}\ket1\big)\big(\ket0+e^{2\pi i\,0.j_1j_2j_3}\ket1\big).
@@ -99,9 +107,9 @@ Receita do circuito, qubit a qubit (com $R_m$ de fase $e^{2\pi i/2^m}$; casos co
 3. Continue até o qubit $n$, que só recebe $H$.
 4. No fim, **inverta a ordem** dos qubits com SWAPs: sem isso, o qubit 1 teria a fase $0.j_1\cdots j_n$, mas a fórmula manda a fase $0.j_n$ para ele.
 
-<!-- ILUSTRAR: circuito da QFT para n=3 com três fios; H no q1 seguido de R2 (controle q2) e R3 (controle q3); H no q2 seguido de R2 (controle q3); H no q3; SWAP entre q1 e q3 no final; cada porta controlada com bolinha e caixa de fase -->
+![Circuito da QFT para três qubits, com H, fases controladas R₂ e R₃ e um SWAP final entre q₁ e q₃](/content/algoritmos/qft-circuito-n3.svg)
 
-<!-- ILUSTRAR: as quatro colunas de F_4 como quatro "ondas": para cada j=0..3, os 4 pontos ω^{jk} (k=0..3) no círculo unitário, mostrando que a frequência de rotação das fases cresce com j -->
+![Quatro círculos unitários mostrando que os pontos ω^(jk) giram 0°, 90°, 180° e 270° por passo para j de 0 a 3](/content/algoritmos/qft-colunas-f4.svg)
 
 Quantas portas controladas $R_m$ o circuito tem para $n$ qubits? O qubit 1 usa $n-1$, o 2 usa $n-2$, e assim por diante: $(n-1)+(n-2)+\cdots+1 = n(n-1)/2$. Quantas para $n=5$?
 
@@ -123,6 +131,14 @@ answer: o mesmo | o mesmo estado | j | ele mesmo | identidade | o mesmo j
 ## QFT inversa
 
 Como $F$ é unitária, a inversa é a adjunta (conjugada transposta). Como $F$ é simétrica, basta conjugar: $F^{-1}_{kj}=\omega^{-jk}/\sqrt N$. No circuito: percorra as portas **de trás para a frente** e troque cada $R_m$ por $R_m^\dagger$ (fase $e^{-2\pi i/2^m}$). A QFT inversa transforma "onda de frequência $j$" de volta em $\ket{j}$, e é por isso que ela aparece no fim da estimação de fase.
+
+Qual é o ângulo (em graus, entre 0 e 360) da fase de $R_2^\dagger$, isto é, de $e^{-2\pi i/4}$?
+
+```exercise:number
+id: qft-inversa-r2
+answer: 270
+tolerance: 0.001
+```
 
 ## Em Python
 

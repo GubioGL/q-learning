@@ -40,7 +40,7 @@ id: dj-deutsch-conclusao
 answer: balanceada | balanceado | balanced
 ```
 
-<!-- ILUSTRAR: circuito do algoritmo de Deutsch: dois fios, |0⟩ e |1⟩; H em ambos; caixa U_f nos dois fios; H no fio superior; medidor no fio superior. Marcar com setas os estados intermediários |+⟩|−⟩ e (±)|+⟩ ou |−⟩ após o oráculo -->
+![Circuito de Deutsch: H nos dois qubits, oráculo U_f, H no qubit de cima e medida, com os estados intermediários indicados.](/content/algoritmos/deutsch-jozsa-deutsch.svg)
 
 ## O caso geral
 
@@ -60,6 +60,16 @@ H^{\otimes n}\ket{x}=\frac{1}{\sqrt{2^n}}\sum_{z\in\{0,1\}^n}(-1)^{x\cdot z}\ket
 $$
 
 onde $x\cdot z$ é o **produto escalar módulo 2** (soma dos produtos bit a bit, mod 2). Isso vem de $H\ket{b}=\tfrac1{\sqrt2}\sum_{c}(-1)^{bc}\ket c$, aplicado em cada qubit.
+
+Aplique $H^{\otimes2}$ a $\ket{11}$. Pela fórmula, qual é a amplitude de $\ket{10}$? Responda com 1 casa decimal (por exemplo, $0{,}3$).
+
+```exercise:number
+id: dj-hadamard-n2
+answer: -0.5
+tolerance: 0.001
+```
+
+## A amplitude de $\ket{0\cdots0}$
 
 Depois dos passos 2 e 3, o primeiro registrador está em
 
@@ -84,7 +94,7 @@ $$
 
 Portanto: se o resultado for $0\cdots0$, $f$ é constante; qualquer outro resultado, balanceada. Uma consulta, sempre correto.
 
-<!-- ILUSTRAR: circuito do Deutsch-Jozsa geral: registrador de n fios |0⟩ com H^{⊗n}, um fio extra |1⟩ com H, caixa U_f ocupando todos os fios, H^{⊗n} nos n primeiros fios, medidor nos n primeiros. Ao lado, duas barras de histograma: constante (toda a probabilidade em 0...0) e balanceada (nada em 0...0) -->
+![Circuito de Deutsch-Jozsa geral e histogramas: constante dá 0…0 com probabilidade 1, balanceada nunca dá 0…0.](/content/algoritmos/deutsch-jozsa-geral.svg)
 
 **Exemplo com $n=2$.** Seja $f$ constante e igual a $1$. A amplitude de $\ket{00}$ é $\tfrac14(-1-1-1-1)$. Quanto vale?
 
@@ -137,7 +147,7 @@ Nota: `f[x]` usa $x$ como inteiro com $x_1$ mais significativo, e `n` é $\log_2
 
 Dica: monte $H^{\otimes n}$ com `np.kron`, aplique o oráculo de fase `np.diag((-1.0)**np.array(f))` ao estado uniforme, aplique $H^{\otimes n}$ de novo e pegue $|\text{amplitude}[0]|^2$.
 
-## Resumo
+### Resumo
 
 - Promessa: $f$ constante ou balanceada. Clássico exato: $2^{n-1}+1$ consultas.
 - Deutsch-Jozsa: $H^{\otimes n}$, oráculo (com $\ket-$ no qubit extra), $H^{\otimes n}$, medir. Resultado $0\cdots0$ significa constante.

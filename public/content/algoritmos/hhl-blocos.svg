@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="375" viewBox="0 0 500 375" role="img" aria-label="Diagrama do HHL com ancila, registro de relógio e registro de dados: carregar b, estimação de fase, rotação controlada da ancila, estimação de fase inversa e medida da ancila">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.ts{fill:#d1d5db;font:15px sans-serif;text-anchor:start}.o{fill:#fb923c;font:600 16px sans-serif;text-anchor:middle}.k{fill:#38bdf8;font:600 16px sans-serif;text-anchor:middle}.gt{fill:#34d399;font:600 16px sans-serif;text-anchor:middle}</style>
+  <defs></defs>
+<line class="l" x1="110" y1="50" x2="490" y2="50"/><line class="l" x1="110" y1="110" x2="490" y2="110"/><line class="l" x1="110" y1="170" x2="490" y2="170"/>
+<text class="ts" x="8" y="55">ancila |0⟩</text><text class="ts" x="8" y="115">relógio |0⟩</text><text class="ts" x="8" y="175">dados</text>
+<text class="o" x="150" y="18">①</text>
+<text class="o" x="225" y="18">②</text>
+<text class="o" x="300" y="18">③</text>
+<text class="o" x="375" y="18">④</text>
+<text class="o" x="450" y="18">⑤</text>
+<rect class="b" x="122.0" y="150" width="56" height="40" rx="7"/><text class="t" x="150" y="176.0">|b⟩</text>
+<rect class="b" x="197.0" y="90" width="56" height="100" rx="7"/><text class="t" x="225" y="146.0">PE</text>
+<rect class="b" x="272.0" y="30" width="56" height="100" rx="7"/><text class="t" x="300" y="86.0">Rot</text>
+<rect class="b" x="347.0" y="90" width="56" height="100" rx="7"/><text class="t" x="375" y="146.0">PE⁻¹</text>
+<rect class="b" x="430" y="32" width="40" height="36" rx="7"/><path class="l" d="M438 58 A12 12 0 0 1 462 58"/><line class="l" x1="450" y1="58" x2="458" y2="42"/>
+<text class="ts" x="20" y="235">1  carregar |b⟩ = Σ βⱼ |uⱼ⟩</text>
+<text class="ts" x="20" y="261">2  PE de e<tspan baseline-shift='super' font-size='75%'>iAτ</tspan>: Σ βⱼ |uⱼ⟩ |λⱼ⟩</text>
+<text class="ts" x="20" y="287">3  rotação: ancila → √(1−C²/λⱼ²)|0⟩ + (C/λⱼ)|1⟩</text>
+<text class="ts" x="20" y="313">4  PE⁻¹: o relógio volta a |0⟩</text>
+<text class="ts" x="20" y="339">5  medir a ancila = 1: |x⟩ ∝ Σ (βⱼ/λⱼ) |uⱼ⟩</text>
+</svg>

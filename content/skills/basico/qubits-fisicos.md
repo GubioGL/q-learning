@@ -92,6 +92,13 @@ Os maiores processadores atuais têm de centenas a alguns milhares de qubits fí
 
 Outra limitação é a conectividade. Em chips supercondutores, as portas entre dois qubits costumam funcionar só entre vizinhos, ligados por um mapa de conexões. Em íons aprisionados, em geral todos conversam com todos, e átomos neutros podem ser movidos de lugar. Quando o circuito pede uma porta entre qubits não vizinhos, ele é reescrito com operações de troca (SWAP) que levam os qubits para perto.
 
+Num chip com qubits em linha, ligados só aos vizinhos (0-1-2), quantas operações SWAP, no mínimo, são necessárias antes de aplicar uma CNOT entre os qubits 0 e 2?
+
+```exercise:number
+id: qf-conectividade
+answer: 1
+```
+
 ## Em Python
 
 Escreva uma função que calcula a probabilidade de sucesso. Use exatamente `(1 - p_erro) ** n` (sem arredondar).

@@ -10,7 +10,15 @@ Quase todo algoritmo quântico segue o mesmo roteiro:
 
 O truque é que o passo 2 faz as amplitudes "erradas" se cancelarem e as "certas" se somarem, de modo que a medida final revela algo útil com alta probabilidade. Quando o algoritmo trabalha com uma função $f$ dada como caixa-preta, o passo 2 inclui chamadas ao oráculo.
 
-<!-- ILUSTRAR: esquema em três blocos horizontais: "preparar |0...0⟩" -> "circuito com portas H e chamadas ao oráculo U_f (caixa cinza)" -> "medir (relógio/medidor)", mostrando o roteiro geral de um algoritmo quântico -->
+![Roteiro de um algoritmo quântico em três blocos: preparar |0…0⟩, circuito com portas H e chamadas ao oráculo, e medir.](/content/algoritmos/oraculos-roteiro.svg)
+
+Imagine um "algoritmo" que prepara $\ket{0\cdots0}$ e mede logo em seguida, sem nenhuma porta no meio. Qual é a probabilidade de obter $0\cdots0$?
+
+```exercise:number
+id: oraculos-roteiro-etapa
+answer: 1
+```
+
 
 ## O oráculo de bit
 
@@ -73,6 +81,16 @@ Veja os dois casos:
 - Se $f(x)=0$: sobra $\tfrac{1}{\sqrt2}(\ket{x,0}-\ket{x,1})=\ket{x}\ket{-}$, nada muda.
 - Se $f(x)=1$: sobra $\tfrac{1}{\sqrt2}(\ket{x,1}-\ket{x,0})=-\ket{x}\ket{-}$, um sinal de menos aparece.
 
+
+Troque o qubit extra de $\ket-$ para $\ket+=\tfrac1{\sqrt2}(\ket0+\ket1)$. Qual é o fator que $U_f$ aplica a $\ket{x}\ket{+}$ quando $f(x)=1$? (Dica: $\ket+$ é autovetor de $X$.)
+
+```exercise:number
+id: oraculos-kickback-mais
+answer: 1
+```
+
+## Do kickback ao oráculo de fase
+
 Os dois casos cabem numa fórmula só:
 
 $$
@@ -91,7 +109,7 @@ $$
 O_f\sum_x a_x\ket{x}=\sum_x (-1)^{f(x)}a_x\ket{x}.
 $$
 
-<!-- ILUSTRAR: circuito do phase kickback: fio superior "|x⟩" e fio inferior "|−⟩" entram na caixa U_f; na saída aparece "(−1)^{f(x)} |x⟩" no fio superior e "|−⟩" inalterado no inferior, com uma seta curva do fio de baixo para o de cima indicando que a informação "voltou" como fase -->
+![Phase kickback: U_f aplicada a |x⟩|−⟩ deixa |−⟩ intacto e multiplica |x⟩ por (−1)^f(x), com uma seta curva do fio de baixo para o de cima.](/content/algoritmos/oraculos-kickback.svg)
 
 Se $f(x)=1$ para um certo $x$, qual é o fator que multiplica $\ket{x}$ no oráculo de fase?
 
@@ -119,6 +137,13 @@ answer: 10
 
 Até aqui $f$ foi uma caixa-preta. Se tivermos a tabela de $f$, podemos montar $U_f$ com uma porta $X$ multicontrolada no qubit extra para cada entrada $x$ com $f(x)=1$ (controles ajustados para casar com $x$): funciona, mas o circuito tem tamanho exponencial em $n$. Se $f$ tiver uma fórmula, dá para calculá-la com Toffoli e CNOT usando qubits auxiliares, que depois são desfeitos (descomputação) para não deixar lixo; aí o tamanho é linear. Veja a aula de registradores e o somador quântico. Para uma $f$ com saída de $m$ bits, aplicamos o mesmo raciocínio bit a bit.
 
+Uma $f$ de $n=3$ bits tem $f(x)=1$ em exatamente 5 entradas. Construindo $U_f$ pela tabela, quantas portas $X$ multicontroladas são usadas (uma por entrada com $f(x)=1$)?
+
+```exercise:number
+id: oraculos-construcao-portas
+answer: 5
+```
+
 ## Complexidade de consultas e de circuito
 
 Há duas maneiras de medir o custo de um algoritmo com oráculo:
@@ -128,7 +153,14 @@ Há duas maneiras de medir o custo de um algoritmo com oráculo:
 
 Os algoritmos das próximas aulas mostram ganhos na complexidade de **consultas**: um algoritmo quântico pode precisar de bem menos perguntas à caixa-preta que qualquer algoritmo clássico. Isso é uma prova limpa de vantagem, mas é mais modesto do que parece: se implementarmos $f$ de verdade, o custo do oráculo entra na conta.
 
-## Resumo
+Um algoritmo chama o oráculo 3 vezes e usa 40 portas elementares fora das chamadas; cada oráculo custa 100 portas. Qual é a complexidade de **circuito** (total de portas elementares)?
+
+```exercise:number
+id: oraculos-consultas-contagem
+answer: 340
+```
+
+### Resumo
 
 - Um oráculo de bit é $U_f\ket{x,y}=\ket{x,y\oplus f(x)}$, unitário e auto-inverso.
 - Com o qubit extra em $\ket{-}$, ele vira um oráculo de fase: $\ket{x}\mapsto(-1)^{f(x)}\ket{x}$.

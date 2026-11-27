@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="275" viewBox="0 0 450 275" role="img" aria-label="Estimação de fase com t=2: H nos dois qubits do registro, S controlada pelo qubit menos significativo, Z controlada pelo mais significativo, QFT inversa e medida; o alvo |1⟩ não muda e a fase vai para o registro">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.ts{fill:#d1d5db;font:15px sans-serif;text-anchor:start}.o{fill:#fb923c;font:600 16px sans-serif;text-anchor:middle}.k{fill:#38bdf8;font:600 16px sans-serif;text-anchor:middle}.gt{fill:#34d399;font:600 16px sans-serif;text-anchor:middle}</style>
+  <defs></defs>
+<line class="l" x1="70" y1="50" x2="420" y2="50"/><line class="l" x1="70" y1="110" x2="420" y2="110"/><line class="l" x1="70" y1="190" x2="420" y2="190"/>
+<text class="ts" x="10" y="55">|0⟩</text><text class="ts" x="10" y="115">|0⟩</text><text class="ts" x="10" y="195">|u⟩ = |1⟩</text>
+<rect class="b" x="78.0" y="30.0" width="44" height="40" rx="7"/><text class="t" x="100" y="56">H</text><rect class="b" x="78.0" y="90.0" width="44" height="40" rx="7"/><text class="t" x="100" y="116">H</text>
+<line class="p" x1="160" y1="110" x2="160" y2="190" style="stroke-width:2"/><circle class="f" cx="160" cy="110" r="6"/><rect class="b" x="138.0" y="170.0" width="44" height="40" rx="7"/><text class="t" x="160" y="196">S</text>
+<line class="p" x1="220" y1="50" x2="220" y2="190" style="stroke-width:2"/><circle class="f" cx="220" cy="50" r="6"/><rect class="b" x="198.0" y="170.0" width="44" height="40" rx="7"/><text class="t" x="220" y="196">Z</text>
+<rect class="b" x="265.0" y="25" width="70" height="110" rx="7"/><text class="t" x="300" y="86.0">QFT⁻¹</text>
+<rect class="b" x="360" y="32" width="40" height="36" rx="7"/><path class="l" d="M368 58 A12 12 0 0 1 392 58"/><line class="l" x1="380" y1="58" x2="388" y2="42"/><rect class="b" x="360" y="92" width="40" height="36" rx="7"/><path class="l" d="M368 118 A12 12 0 0 1 392 118"/><line class="l" x1="380" y1="118" x2="388" y2="102"/>
+<text class="ts" x="430" y="55">0</text><text class="ts" x="430" y="115">1</text>
+<text class="s" x="160" y="152">S = U</text>
+<text class="s" x="220" y="232">Z = U²</text>
+<text class="o" x="225" y="258">↑ a fase sobe para o registro ↑</text>
+</svg>

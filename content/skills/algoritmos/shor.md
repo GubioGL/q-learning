@@ -2,9 +2,23 @@ Dado um número composto $N$, como achar um divisor? Não se conhece método cl�
 
 ## Aritmética modular em um minuto
 
-Escrevemos $a \bmod N$ para o resto da divisão de $a$ por $N$. Exemplo: $49 \bmod 15 = 4$, pois $49=3\cdot15+4$. Dizemos que $a\equiv b \pmod N$ se têm o mesmo resto. O **mdc** (máximo divisor comum) de dois números é o maior inteiro que divide ambos: $\gcd(12,18)=6$. O algoritmo de Euclides o calcula rápido: $\gcd(a,b)=\gcd(b,\ a \bmod b)$, parando quando o resto é 0.
+Escrevemos $a \bmod N$ para o resto da divisão de $a$ por $N$. Exemplo: $49 \bmod 15 = 4$, pois $49=3\cdot15+4$. Dizemos que $a\equiv b \pmod N$ se têm o mesmo resto. O **mdc** (máximo divisor comum) de dois números é o maior inteiro que divide ambos: $\gcd(12,18)=6$. O algoritmo de Euclides o calcula rápido: $\gcd(a,b)=\gcd(b,\ a \bmod b)$, parando quando o resto é 0. Quanto vale $\gcd(84,36)$?
 
-## Do período aos fatores (parte clássica), com $N=15$
+```exercise:number
+id: shor-mdc-84-36
+answer: 12
+tolerance: 0.001
+```
+
+Qual é o resto de $2^5$ dividido por $15$ (isto é, $2^5\bmod15$)?
+
+```exercise:number
+id: shor-resto-2-5
+answer: 2
+tolerance: 0.001
+```
+
+## O período (parte clássica), com $N=15$
 
 Escolha um número $a$ sem fator comum com $N$, digamos $a=7$. Calcule as potências de $7$ módulo 15:
 
@@ -14,7 +28,7 @@ Escolha um número $a$ sem fator comum com $N$, digamos $a=7$. Calcule as potên
 
 A sequência é **periódica**. O menor $r>0$ com $a^r\equiv1 \pmod N$ é a **ordem** (ou período) de $a$ módulo $N$. Aqui $r=4$.
 
-<!-- ILUSTRAR: relógio de 15 posições (resíduos mod 15) com setas 1 → 7 → 4 → 13 → 1 formando um ciclo de comprimento 4, mais o gráfico de barras de 7^x mod 15 para x=0..11 mostrando a repetição de período 4 -->
+![Relógio de 15 posições com o ciclo 1, 7, 4, 13 de multiplicar por 7 módulo 15 e barras de 7 elevado a x módulo 15 repetindo com período 4](/content/algoritmos/shor-ciclo-mod15.svg)
 
 Qual é o período de $2$ módulo $15$? (Calcule $2,4,8,\dots$ até voltar a 1.)
 
@@ -23,6 +37,8 @@ id: shor-periodo-2-mod-15
 answer: 4
 tolerance: 0.001
 ```
+
+## Do período aos fatores
 
 Como $r=4$ é par, podemos olhar o "meio do ciclo": $7^{r/2}=7^2=49\equiv4 \pmod{15}$. Então $7^4-1 = (7^2-1)(7^2+1)=48\cdot50$, e $48\cdot 50 = 2400 = 160\cdot15$ é múltiplo de 15. Os fatores $48$ e $50$ não são múltiplos de 15 (cada um carrega só uma parte: $48$ é múltiplo de $3$ e $50$ é múltiplo de $5$). Os mdc's separam as partes:
 
@@ -43,6 +59,8 @@ id: shor-mdc-a2
 answer: 5
 tolerance: 0.001
 ```
+
+## Quando falha, e a parte clássica em Python
 
 Quando falha? Se $r$ for ímpar, ou se $a^{r/2}\equiv-1 \pmod N$ (por exemplo $a=14$, $N=15$: $r=2$ e $14\equiv-1$). Basta sortear outro $a$; para $N$ ímpar e não potência de primo, cada sorteio funciona com probabilidade de pelo menos $1/2$. Se o sorteio já der $\gcd(a,N)>1$, achamos um divisor sem fazer nada.
 
@@ -101,6 +119,14 @@ U_a\ket{y} = \ket{a\,y \bmod N}.
 $$
 Para $N=15$ e $a=7$: $U_7\ket1=\ket7$, $U_7\ket7=\ket{49\bmod15}=\ket4$, $U_7\ket4=\ket{28\bmod15}=\ket{13}$ e $U_7\ket{13}=\ket{91\bmod15}=\ket1$. A porta apenas **roda o ciclo** $1\to7\to4\to13\to1$. É uma permutação (porque $\gcd(a,N)=1$), logo unitária. Ela faz a exponenciação modular: $U_a^{x}\ket1=\ket{a^x\bmod N}$. Em circuito, calcula-se $U_a^{2^k}$ diretamente como multiplicação por $a^{2^k}\bmod N$ (obtido por quadrados sucessivos, fácil classicamente), então cada potência custa só um circuito de multiplicação modular de tamanho polinomial em $n$.
 
+Para $N=15$ e $a=7$, qual estado $U_7\ket{2}$ produz? Responda só com o número dentro do ket (calcule $7\cdot2\bmod15$).
+
+```exercise:number
+id: shor-ua-aplicada
+answer: 14
+tolerance: 0.001
+```
+
 ## A parte quântica, 2: os autoestados
 
 Um ciclo tem "ondas" como autovetores. Para $N=15$, $a=7$, os quatro estados (escreva os coeficientes na ordem $\ket1,\ket7,\ket4,\ket{13}$):
@@ -118,9 +144,19 @@ $$
 $$
 **A fase de $U_a$ é $s/r$, e o período está escondido no denominador.**
 
-<!-- ILUSTRAR: o ciclo 1 → 7 → 4 → 13 desenhado como 4 pontos num círculo; ao lado, as quatro ondas |u_0>..|u_3> como os 4 coeficientes de cada uma desenhados como setas no plano complexo (girando 0, 90°, 180°, 270° por passo) -->
+![O ciclo 1, 7, 4, 13 em quatro pontos num círculo e os autoestados u₀ a u₃, cujos coeficientes giram 0°, 90°, 180° ou 270° por passo](/content/algoritmos/shor-autoestados.svg)
 
-**O truque.** Não sabemos fabricar $\ket{u_s}$ (isso exigiria conhecer $r$), mas somando os quatro:
+Qual é a fase (em voltas, em decimal) de $U_7$ no autoestado $\ket{u_3}$ (fase $s/r$ com $s=3$ e $r=4$)?
+
+```exercise:number
+id: shor-fase-u3
+answer: 0.75
+tolerance: 0.0001
+```
+
+## O truque: somar os autoestados
+
+Não sabemos fabricar $\ket{u_s}$ (isso exigiria conhecer $r$), mas somando os quatro:
 $$
 \ket{u_0}+\ket{u_1}+\ket{u_2}+\ket{u_3}=\tfrac12\,(4,\,0,\,0,\,0)=2\ket{1},\qquad\text{ou seja}\qquad \frac1{\sqrt r}\sum_{s=0}^{r-1}\ket{u_s}=\ket{1},
 $$
@@ -134,9 +170,11 @@ answer: 0.5
 tolerance: 0.001
 ```
 
+## O circuito completo
+
 O circuito é a estimação de fase da seção anterior, com $t=2n$ qubits no registro (basta $2^t\ge N^2$, para ter precisão suficiente na etapa de frações contínuas; para $N=21$, $n=5$, $t=9$ já serve), controlando $U_a^{2^k}$ e finalizando com a QFT inversa.
 
-<!-- ILUSTRAR: circuito completo do Shor: registro superior de t qubits com H, bloco "U_a^(2^k) controlado" sobre o registro inferior de n qubits inicializado em |1>, QFT^-1 no registro superior e medição; uma caixa lateral mostrando "y / 2^t ≈ s/r" -->
+![Circuito do Shor: H no registro de t qubits, U_a^(2^k) controlada sobre o registro de n qubits em |1⟩, QFT inversa e medida, que dá y/2^t ≈ s/r](/content/algoritmos/shor-circuito.svg)
 
 Para $N=15$ ($n=4$ bits), com $t=2n$, quantos qubits tem o registro de fase?
 
@@ -167,7 +205,17 @@ Quocientes: $0;\,6,\,42,\,2$ (o primeiro, $0$, é a parte inteira de $85/512$). 
 
 Regra: escolha o **último convergente com denominador menor que $N$**. Aqui é $\tfrac16$ (o próximo, $253$, passa de $21$), então $r=6$ é o candidato. Verificamos classicamente: $2^6=64=3\cdot21+1\equiv1$. Confirmado, e $r$ é par: $2^3=8$ dá $\gcd(7,21)=7$ e $\gcd(9,21)=3$.
 
-<!-- ILUSTRAR: tabela animada de convergentes de 85/512 (0/1, 1/6, 42/253, 85/512) sobre uma reta numérica mostrando como se aproximam do valor 0,1660 e destacando 1/6 como o último com denominador < 21 -->
+![Convergentes de 85/512 (0/1, 1/6, 42/253, 85/512) numa tabela e numa reta ampliada, com 1/6 destacado como o último com denominador menor que 21](/content/algoritmos/shor-convergentes.svg)
+
+Para escrever $\tfrac3{16}$ como fração contínua, aplique Euclides a $16$ e $3$. Qual é o primeiro quociente (o de $16\div3$)?
+
+```exercise:number
+id: shor-euclides-3-16
+answer: 5
+tolerance: 0.001
+```
+
+## Quando a medida é boa o bastante
 
 Isso funciona quando $y$ é o inteiro mais próximo de $2^t s/r$: então $|y/2^t-s/r|<\tfrac1{2r^2}$ (pois $r<N$ e $2^t\ge N^2$), e $s/r$ aparece entre os convergentes. Esse $y$ sai com probabilidade de pelo menos $4/\pi^2$ (por $s$), então às vezes a medida é ruim ou dá um $s$ com $\gcd(s,r)>1$ (a fração reduzida tem denominador menor que $r$). Nesses casos o teste $a^r\equiv1$ falha e **repete-se**. Em $N=15$, $a=7$, o caso $s=2$ é assim: $\tfrac24=\tfrac12$, e $7^2=49\equiv4\ne1$.
 

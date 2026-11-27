@@ -27,7 +27,15 @@ Use $U=S$, $\ket{u}=\ket1$ e um registro de $t=2$ qubits, mais o qubit-alvo que 
 3. Resultado: $\tfrac12(\ket{00}+i\ket{01}-\ket{10}-i\ket{11})$, que é exatamente a segunda coluna de $F_4$, ou seja, $\mathrm{QFT}\ket{01}$.
 4. Aplicando a QFT inversa, voltamos a $\ket{01}$. Medindo, lemos $y=1$, e $\varphi = y/2^t = 1/4$. Acertamos.
 
-<!-- ILUSTRAR: circuito da estimação de fase com t=2: dois fios de registro com H, U (S) controlada pelo qubit menos significativo, U^2 (Z) controlada pelo mais significativo, bloco QFT^-1 e medidores; fio inferior com |u> passando pelas portas controladas; setas mostrando a fase subindo para o registro -->
+![Circuito da estimação de fase com dois qubits de registro: H, S e Z controladas, QFT inversa e medida, com a fase subindo do alvo para o registro](/content/algoritmos/estimacao-de-fase-circuito.svg)
+
+Se trocarmos $S$ por $Z$ (com $\ket u=\ket1$ e $t=2$), qual inteiro $y$ o registro mostra? ($Z\ket1=-\ket1$, então $\varphi=\tfrac12$ e $y=\varphi\cdot 2^t$.)
+
+```exercise:number
+id: fase-y-z-t2
+answer: 2
+tolerance: 0.001
+```
 
 ## A regra geral
 
@@ -41,6 +49,16 @@ $$
 3. Aplique a QFT inversa no registro e meça.
 
 Por que dá certo: compare com $\mathrm{QFT}\ket y=\tfrac1{\sqrt{2^t}}\sum_x e^{2\pi i\,xy/2^t}\ket x$. Se $\varphi=y/2^t$ exatamente (um número com $t$ bits binários), a soma acima é $\mathrm{QFT}\ket y$, e a QFT inversa entrega $\ket y$ com certeza.
+
+Com $t=3$ e $\varphi=0.101_2=\tfrac58$, qual inteiro $y$ o registro mostra?
+
+```exercise:number
+id: fase-y-101
+answer: 5
+tolerance: 0.001
+```
+
+## O custo e mais exemplos
 
 Repare no custo: se só soubermos repetir $U$, o qubit de peso $2^k$ pede $2^k$ aplicações, e o total é $1+2+\cdots+2^{t-1}=2^t-1$. Cada qubit extra no registro **dobra** o custo. (No Shor, calcula-se $U^{2^k}$ direto, sem repetir.) Se $t$ sobe de 5 para 6, por qual fator, aproximadamente, o número total de aplicações de $U$ é multiplicado?
 
@@ -82,7 +100,7 @@ $$
 
 que vale 1 quando $\varphi=y/2^t$ exatamente e fica pequena quando $\varphi$ está longe de $y/2^t$. Em resumo: mede-se, com boa probabilidade, uma fração de $t$ bits **perto** de $\varphi$, e cada qubit extra dobra a resolução. (Para quem quiser os números exatos: a fração de $t$ bits mais próxima de $\varphi$ sai com probabilidade de pelo menos $4/\pi^2\approx0{,}405$, e para obter $\varphi$ com erro menor que $2^{-n}$ com probabilidade pelo menos $1-\epsilon$ usa-se $t=n+\lceil\log_2(2+\tfrac1{2\epsilon})\rceil$ qubits; veja a fonte.)
 
-<!-- ILUSTRAR: histograma de barras de P(y) para φ=1/8 com t=2 (0,427; 0,427; 0,073; 0,073) ao lado do histograma com t=3 (barra única em y=1), com a reta dos valores y/2^t e φ marcado -->
+![Histogramas de P(y) para φ = 1/8: com t=2 há quatro barras (0,427; 0,427; 0,073; 0,073) e com t=3 uma única barra em y=1](/content/algoritmos/estimacao-de-fase-histogramas.svg)
 
 Confira no computador:
 

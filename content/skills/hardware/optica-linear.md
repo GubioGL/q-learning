@@ -16,7 +16,7 @@ id: optica-codificacao
 answer: 10|1 0
 ```
 
-<!-- ILUSTRAR: dois caminhos A e B (linhas horizontais) com um fóton; ao lado, a polarização H (seta horizontal) e V (seta vertical) desenhadas sobre o fóton; tabela dos 4 estados |H_A⟩,|V_A⟩,|H_B⟩,|V_B⟩ -->
+![Um fóton em dois caminhos A e B, com polarização H ou V, dá quatro estados de base de dois qubits.](/content/hardware/optica-codificacao.svg)
 
 ## Componentes e o que eles fazem
 
@@ -41,7 +41,7 @@ id: optica-pbs
 answer: PBS|divisor de feixe polarizador|polarizing beamsplitter|beamsplitter polarizador
 ```
 
-### Exemplo: gerar um estado de Bell com um fóton
+## Exemplo: um estado de Bell com um fóton
 
 Comece com um fóton horizontalmente polarizado no caminho $A$: $\ket{H_A}$. Uma placa de onda tipo Hadamard o leva a $\tfrac{1}{\sqrt2}(\ket{H_A}+\ket{V_A})$. Um PBS troca de caminho apenas o $V$:
 
@@ -51,7 +51,14 @@ $$
 
 É um estado de Bell, com um único fóton e dois componentes. O emaranhamento é entre **duas propriedades** do mesmo fóton, não entre dois fótons.
 
-<!-- ILUSTRAR: circuito óptico: fonte → placa de onda (Hadamard) → PBS → saída em A e B, com os termos H_A e V_B sendo separados pelo PBS -->
+![Um fóton H passa por uma placa de onda tipo Hadamard e por um PBS, que separa os termos H_A e V_B e gera um estado de Bell.](/content/hardware/optica-bell-um-foton.svg)
+
+No estado $\tfrac{1}{\sqrt2}(\ket{H_A}+\ket{V_B})$, o fóton é detectado no caminho $B$. Qual é a sua polarização? Responda `H` ou `V`.
+
+```exercise:text
+id: optica-bell-polarizacao
+answer: V
+```
 
 ## Portas de 1 qubit são fáceis
 
@@ -125,19 +132,19 @@ answer: 0.5
 tolerance: 0.001
 ```
 
-<!-- ILUSTRAR: divisor 50:50 com dois fótons entrando; os dois caminhos que levam a |1,1⟩ desenhados com amplitudes +1/2 e −1/2 e um sinal de cancelamento; ao lado, os dois resultados possíveis |2,0⟩ e |0,2⟩, cada um com probabilidade 1/2 -->
+![Dois fótons num divisor 50:50: os dois caminhos até |1,1⟩ têm amplitudes +1/2 e −1/2 e se cancelam, restando |2,0⟩ e |0,2⟩ com probabilidade 1/2 cada.](/content/hardware/optica-hom.svg)
 
 ## Medição como recurso e fusão
 
 Como as portas de 2 qubits não saem só de componentes lineares, usamos **medições** como parte do cálculo, ideia próxima da aula de MBQC:
 
 1. prepara-se (de modo probabilístico) pequenos estados de grafo ou de Bell;
-2. combinam-se pedaços com uma operação de **fusão** (Browne & Rudolph, 2005): dois fótons, um de cada pedaço, passam por um divisor/PBS e são detectados. Se a detecção dá certo (probabilidade $\tfrac12$ no esquema básico), os dois pedaços viram **um único estado de grafo maior** e os fótons medidos saem do grafo. Por exemplo, na fusão "tipo I" os dois nós fundidos viram um só: cadeias de $n$ e $m$ nós dão uma de $n+m-1$. Se falha, perde-se um pedaço, mas o resto se aproveita ou se repete;
+2. combinam-se pedaços com uma operação de **fusão** (Browne & Rudolph, 2005): dois fótons, um de cada pedaço, passam por um PBS e **um deles** é detectado. Se a detecção dá certo (probabilidade $\tfrac12$ no esquema básico), os dois pedaços viram **um único estado de grafo maior**: o fóton não detectado passa a ser o nó fundido. Por exemplo, na fusão "tipo I" cadeias de $n$ e $m$ nós dão uma de $n+m-1$. Se falha, as duas cadeias perdem o nó da ponta, mas o resto se aproveita ou se repete;
 3. com estados de grafo grandes, a computação segue por medidas e correções clássicas.
 
 A fusão é probabilística, mas pode ser repetida e é "cara" em número de fótons. Mesmo assim, é um caminho para fazer porta de 2 qubits sem interação direta entre fótons.
 
-<!-- ILUSTRAR: duas cadeias pequenas (2 nós cada), um nó de cada uma entrando num quadro de "fusão" (divisor + dois detectores); depois, a cadeia fundida com 3 nós (n+m−1), marcando que o nó fundido sai do grafo, com um sinal de "sucesso" e outro de "falha" -->
+![Fusão tipo I: duas cadeias de 2 nós passam por um divisor com detectores; com sucesso viram uma cadeia de 3 nós, com falha perde-se um pedaço.](/content/hardware/optica-fusao.svg)
 
 Na fusão tipo I, uma cadeia de 3 nós e uma de 4 nós são fundidas. Quantos nós tem a cadeia resultante?
 

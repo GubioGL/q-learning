@@ -45,7 +45,7 @@ $$
 
 Como só usamos CNOT e Toffoli, que são reversíveis, o bloco todo é uma permutação dos 16 estados da base e portanto uma porta quântica válida.
 
-<!-- ILUSTRAR: circuito de 4 fios (c_in, a, b, c_out) com as 4 portas na ordem acima (Toffoli, CNOT, Toffoli, CNOT), com rótulos sobre os fios mostrando o conteúdo depois de cada porta (ab, a⊕b, ..., s). -->
+![Circuito de 4 fios com Toffoli, CNOT, Toffoli e CNOT, mostrando ab, a⊕b e por fim s no fio b e o vai-um no fio c_out.](/content/computacao-quantica/somador-4-portas.svg)
 
 Acompanhe a entrada $c_\text{in}=1, a=1, b=0$ pelas portas. Qual é o valor do qubit $b$ no fim?
 
@@ -60,7 +60,7 @@ Para somar dois números de $n$ bits, usamos $n$ blocos em fila. O vai-um de sa�
 
 Omitindo os vai-um intermediários da resposta (eles são lixo), a saída é a soma em $b$ mais o último vai-um. Contando os qubits: $n$ qubits de $a$, $n$ de $b$, e $n+1$ de vai-um (o primeiro começa em $0$). São $3n + 1$ qubits e, com 2 Toffoli e 2 CNOT por coluna, $4n$ portas.
 
-<!-- ILUSTRAR: circuito ripple-carry quântico para n = 3: três blocos somadores em fila, cada um nos fios (c_i, a_i, b_i, c_{i+1}), com o vai-um c_{i+1} de um bloco entrando como c_i do próximo; marcar b_i virando s_i e o último vai-um como bit mais alto. -->
+![Três blocos somadores em fila, com o vai-um de cada coluna entrando na seguinte, b_i virando s_i e o último vai-um como bit mais alto.](/content/computacao-quantica/ripple-carry.svg)
 
 Quantos qubits usa a soma de dois números de 3 bits?
 

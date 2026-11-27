@@ -29,6 +29,13 @@ AND e OR se comportam de modo parecido com $\times$ e $+$ nos números:
 
 Confira a segunda com $A=1$, $B=0$, $C=0$: o lado esquerdo é $1 + 0 = 1$ e o direito é $(1)(1)=1$. Com $A=0$, $B=1$, $C=1$: esquerdo $0+1=1$, direito $(1)(1)=1$. Em ambos os casos iguais, como deveria.
 
+Use a segunda distributividade: quanto vale $(A+B)(A+C)$ para $A=0$, $B=1$, $C=0$?
+
+```exercise:number
+id: bool-distrib2
+answer: 0
+```
+
 ## Identidades com 0 e 1
 
 Estas valem para qualquer bit $A$, e dá para verificar testando $A=0$ e $A=1$:
@@ -45,6 +52,13 @@ Estas valem para qualquer bit $A$, e dá para verificar testando $A=0$ e $A=1$:
 | $\overline{\overline{A}} = A$ | dois NOTs se cancelam |
 
 As duas linhas de $A\overline{A}$ e $A+\overline{A}$ são as que mais ajudam a simplificar.
+
+Simplifique $(A+\overline{A})\,B$ usando as identidades. Responda com a letra.
+
+```exercise:text
+id: bool-identidade
+answer: B
+```
 
 ## Leis de De Morgan
 

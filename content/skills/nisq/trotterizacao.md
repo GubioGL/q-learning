@@ -45,8 +45,6 @@ answer: sim
 
 $Z_1$ e $X_1$ (ambos no qubit 1) não comutam, e é aí que mora o erro.
 
-## Por que o produto simples falha
-
 Teste com números: $H = X + Z$, $t = 1$, estado inicial $\ket{0}$. A evolução exata dá probabilidade $P(0) \approx 0{,}512$ de medir 0. Se trocamos $e^{-i(X+Z)}$ por $e^{-iX}e^{-iZ}$ (um único "passo"), obtemos $P(0) \approx 0{,}292$. A diferença é grande, e vem de $X$ e $Z$ não comutarem.
 
 ## A fórmula de Trotter
@@ -65,7 +63,23 @@ Com $n = 100$ passos, o caso $H = X+Z$, $t=1$ acima dá $P(0)\approx 0{,}5121$, 
 
 ![Em cima, circuito de 2 qubits: o bloco e^{-iAt/n} seguido do bloco e^{-iBt/n}, repetido n vezes (seta de repetição e rótulo ×n). Embaixo, gráfico log-log do erro ε contra o número de passos n, de 1 a 100: o erro cai em linha reta, proporcional a 1/n, de cerca de 0,8 para 0,007.](/content/nisq/trotter-circuito-erro.svg)
 
-### Tamanho do erro
+Com $t=2$ e $n=8$ passos, qual é o tamanho $t/n$ de cada passo? Responda com 2 casas decimais.
+
+```exercise:number
+id: trot-tamanho-passo
+answer: 0.25
+tolerance: 0.001
+```
+
+Em $H = 0{,}5\,Z_1Z_2 + 0{,}3\,X_1 + 0{,}3\,X_2$, quantas rotações $R_x$ o bloco $e^{-iBt/n}$ usa por passo?
+
+```exercise:number
+id: trot-rx-por-passo
+answer: 2
+tolerance: 0.001
+```
+
+## Tamanho do erro
 
 Cada passo erra por algo proporcional a $(t/n)^2$ vezes o comutador $[A,B] = AB - BA$. Somando $n$ passos, um limite típico é
 

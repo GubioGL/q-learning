@@ -40,13 +40,19 @@ test("courses -> skill -> challenges flow", async ({ page }) => {
   await page.goto(BASE + "/pt/cursos/basico/bits");
   await expect(page.locator(".katex").first()).toBeVisible();
   const concluir = page.getByRole("button", { name: "Concluir skill" });
-  await expect(concluir).toBeDisabled();
+  const continuar = page.getByRole("button", { name: "Continuar" });
+  await expect(page.getByText("Mini-lição 1 de 3").first()).toBeVisible();
+  await expect(continuar).toBeDisabled(); // the mini-challenge comes first
   await page.locator("#bits-combinacoes").fill("8");
   await page.locator("#bits-combinacoes").press("Enter");
   await expect(page.getByText("Ainda não. Tente de novo.")).toBeVisible();
   await page.locator("#bits-combinacoes").fill("16"); await page.locator("#bits-combinacoes").press("Enter");
+  await continuar.click();
   await page.locator("#bits-1101").fill("13"); await page.locator("#bits-1101").press("Enter");
   await page.locator("#bits-nove").fill("1001"); await page.locator("#bits-nove").press("Enter");
+  await page.reload(); // solved mini-challenges are remembered: the page resumes at the next mini-lesson
+  await expect(page.getByText("Mini-lição 3 de 3").first()).toBeVisible();
+  await expect(concluir).toBeDisabled();
   const run = page.getByRole("button", { name: /Executar e testar/ });
   await run.click();
   const tests = page.getByRole("region", { name: "Testes" }).getByRole("listitem");
@@ -77,7 +83,7 @@ test("courses -> skill -> challenges flow", async ({ page }) => {
   await expect(panel.getByLabel("10 XP no total")).toBeVisible(); // without a page reload
   await expect(panel.getByLabel("Sequência de 1 dia(s)")).toBeVisible();
   await page.goto(BASE + "/pt/cursos/basico/portas-logicas");
-  await expect(page.getByRole("heading", { name: "Universalidade" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Universalidade/ })).toBeVisible();
   await expect(page.locator(".katex-error")).toHaveCount(0);
 
   await page.goto(BASE + "/pt/desafios");
@@ -218,13 +224,17 @@ test("a skill page scrolls inside its own area, down to the last button", async 
     expect(await page.evaluate(() => document.documentElement.scrollHeight - innerHeight)).toBeLessThanOrEqual(0);
     await page.mouse.move(viewport.width / 2, 400);
     await page.mouse.wheel(0, 20_000);
-    await expect(page.getByRole("button", { name: "Concluir skill" })).toBeInViewport();
+    await expect(page.getByRole("button", { name: "Continuar" })).toBeInViewport();
   }
 });
 
 test("states are NumPy arrays: conj() works on the bra exercise", async ({ page }) => {
   // vetores comes after numeros-complexos, so mark that one done to unlock it
-  await page.addInitScript(() => localStorage.setItem("ql_progress", JSON.stringify({ done: { "skill:algebra-linear/numeros-complexos": new Date().toISOString() }, goal: 3 })));
+  await page.addInitScript(() => {
+    localStorage.setItem("ql_progress", JSON.stringify({ done: { "skill:algebra-linear/numeros-complexos": new Date().toISOString() }, goal: 3 }));
+    // the code exercise is in the last mini-lesson: the earlier ones are already solved
+    localStorage.setItem("ql_solved", JSON.stringify({ "skill:algebra-linear/vetores": ["vetores-soma", "vetores-conjugado", "vetores-bra"] }));
+  });
   await page.goto(BASE + "/pt/cursos/algebra-linear/vetores");
   const editor = page.locator("#vetores-bra-codigo");
   await expect(editor).toHaveValue(/import numpy as np/);

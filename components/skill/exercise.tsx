@@ -8,11 +8,13 @@ import { PythonExercise } from "./python-exercise";
 import { useSkillProgress } from "./skill-progress";
 
 export function ExerciseBlock({ exercise }: { exercise: Exercise }) {
-    const { exercise: t } = useT();
+    const { exercise: t, steps } = useT();
+    const solved = useSkillProgress()?.solved.has(exercise.id);
     return (
-        <div className="my-6 rounded-xl border-2 border-purple-700 bg-purple-950/30 p-4">
+        <div className={`my-6 rounded-xl border-2 p-4 ${solved ? "border-green-700 bg-green-950/20" : "border-purple-700 bg-purple-950/30"}`}>
             <p className="mb-3 text-sm font-bold uppercase tracking-wide text-purple-300">
                 <span aria-hidden>{exercise.kind === "python" ? "🐍" : "✏️"}</span> {t.title} {exercise.kind === "python" ? "· Python" : ""}
+                {solved && <span className="ml-2 text-green-400">✓ {steps.solved}</span>}
             </p>
             {exercise.kind === "python" ? <PythonExercise exercise={exercise} /> : <AnswerExercise exercise={exercise} />}
         </div>

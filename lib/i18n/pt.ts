@@ -41,8 +41,15 @@ export const pt = {
         finish: "Concluir skill",
         saveError: "O navegador não deixou salvar o progresso.",
     },
+    steps: {
+        label: (i: number, n: number) => `Mini-lição ${i} de ${n}`,
+        nav: "Mini-lições desta skill",
+        next: "Continuar", prev: "Voltar",
+        solveFirst: "Resolva o mini-desafio desta mini-lição para continuar.",
+        solved: "resolvida",
+    },
     exercise: {
-        title: "Exercício", answer: "Sua resposta", numberHint: "Digite um número", textHint: "Digite sua resposta",
+        title: "Mini-desafio", answer: "Sua resposta", numberHint: "Digite um número", textHint: "Digite sua resposta",
         check: "Verificar", correct: "Correto!", wrong: "Ainda não. Tente de novo.",
         code: "Seu código Python", run: "Executar e testar", running: "Executando…", reset: "Reiniciar",
         firstRun: "Na primeira vez o Python é baixado para o navegador (alguns segundos).",

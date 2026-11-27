@@ -9,7 +9,7 @@ Um circuito tem duas medidas simples:
 
 Exemplo: quatro qubits, com uma Hadamard em cada um, e depois CNOTs entre os pares (0,1) e (2,3). Tamanho: $4+2 = 6$ portas. Profundidade: $2$, porque as quatro Hadamards ocorrem juntas e os dois CNOTs também.
 
-<!-- ILUSTRAR: circuito de 4 qubits com H em cada um (primeira coluna) e CNOT(0,1) e CNOT(2,3) na segunda coluna; chaves marcando "camada 1" e "camada 2" e legenda "tamanho = 6, profundidade = 2" -->
+![Circuito de 4 qubits com quatro Hadamards na camada 1 e dois CNOTs na camada 2: tamanho 6, profundidade 2.](/content/hardware/complexidade-camadas.svg)
 
 Quanto vale a profundidade de um circuito com 5 portas $H$ aplicadas uma depois da outra no **mesmo** qubit?
 
@@ -70,6 +70,15 @@ Sabe-se que P está contida em BPP, e BPP em BQP. Não se sabe se BQP é estrita
 
 Em BQP exige-se também que os circuitos de cada tamanho de entrada sejam gerados por um algoritmo clássico polinomial (uma família "uniforme"), para que o circuito em si não esconda a resposta.
 
+Um problema de decisão está em P. Em quantas das três classes P, BPP e BQP ele está (contando a própria P)?
+
+```exercise:number
+id: compl-classe-quantica
+answer: 3
+```
+
+## Repetir para ganhar confiança
+
 Por que $2/3$? Porque é arbitrário: **repetir** o algoritmo eleva a confiança. Em problemas de decisão, em geral você não consegue verificar a resposta. O truque é repetir $k$ vezes e ficar com a resposta que apareceu mais vezes (**voto da maioria**). Enquanto cada rodada acerta com probabilidade maior que $1/2$, a chance de a maioria errar cai exponencialmente com $k$. É por isso que o $2/3$ pode ser trocado por qualquer valor acima de $1/2$ sem mudar a classe, e multiplicar o tempo por uma constante não muda o $O(\cdot)$.
 
 Quando a resposta **pode** ser verificada (por exemplo, conferir um fator de um número), basta uma rodada certa: depois de $k$ rodadas, a chance de ao menos uma acertar é
@@ -123,11 +132,18 @@ id: compl-compilado
 answer: 12000
 ```
 
-## Resumo
+### Resumo
 
 - Tamanho é o número de portas; profundidade, o número de camadas.
 - $O(\cdot)$ descreve crescimento, ignorando constantes; polinomial é razoável, exponencial não.
 - P, BPP e BQP agrupam problemas por recurso: clássico, clássico com sorteio, quântico.
 - A confiança pode ser aumentada repetindo; constantes escondidas e a compilação exigem contagem concreta.
+
+Um algoritmo gasta $2^n$ operações. Ao passar de $n$ para $n+1$, por qual fator o custo é multiplicado?
+
+```exercise:number
+id: compl-resumo-exponencial
+answer: 2
+```
 
 Fonte: B. Valiron, *Introduction to Quantum Algorithms and Quantum Programming* (notas de curso, 2025), seção 4.1. Texto e exemplos originais.

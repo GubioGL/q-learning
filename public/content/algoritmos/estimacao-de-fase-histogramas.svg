@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="375" viewBox="0 0 380 375" role="img" aria-label="Probabilidade de medir cada y para φ = 1/8: com t=2 as barras são 0,427; 0,427; 0,073 e 0,073, e com t=3 há uma única barra de probabilidade 1 em y=1">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.ts{fill:#d1d5db;font:15px sans-serif;text-anchor:start}.o{fill:#fb923c;font:600 16px sans-serif;text-anchor:middle}.k{fill:#38bdf8;font:600 16px sans-serif;text-anchor:middle}.gt{fill:#34d399;font:600 16px sans-serif;text-anchor:middle}</style>
+  <defs></defs>
+<text class="t" x="190" y="40">t = 2  (y / 4)</text>
+<line class="l" x1="30" y1="150" x2="350" y2="150"/>
+<rect class="f" x="28" y="111.6" width="24" height="38.4" rx="3"/>
+<text class="s" x="40.0" y="105.6">0,427</text>
+<line class="l" x1="40" y1="150" x2="40" y2="156"/><text class="s" x="40.0" y="174">0</text>
+<rect class="f" x="103.0" y="111.6" width="24" height="38.4" rx="3"/>
+<text class="s" x="115.0" y="105.6">0,427</text>
+<line class="l" x1="115.0" y1="150" x2="115.0" y2="156"/><text class="s" x="115.0" y="174">¼</text>
+<rect class="f" x="178.0" y="143.4" width="24" height="6.6" rx="3"/>
+<text class="s" x="190.0" y="137.4">0,073</text>
+<line class="l" x1="190.0" y1="150" x2="190.0" y2="156"/><text class="s" x="190.0" y="174">½</text>
+<rect class="f" x="253.0" y="143.4" width="24" height="6.6" rx="3"/>
+<text class="s" x="265.0" y="137.4">0,073</text>
+<line class="l" x1="265.0" y1="150" x2="265.0" y2="156"/><text class="s" x="265.0" y="174">¾</text>
+<line class="d" x1="77.5" y1="46" x2="77.5" y2="150" style="stroke:#fb923c"/>
+<text class="t" x="190" y="230">t = 3  (y / 8)</text>
+<line class="l" x1="30" y1="340" x2="350" y2="340"/>
+<line class="l" x1="40.0" y1="340" x2="40.0" y2="346"/><text class="s" x="40.0" y="364">0</text>
+<rect class="f" x="65.5" y="250.0" width="24" height="90.0" rx="3"/>
+<text class="s" x="77.5" y="244.0">1</text>
+<line class="l" x1="77.5" y1="340" x2="77.5" y2="346"/><text class="s" x="77.5" y="364">⅛</text>
+<line class="l" x1="115.0" y1="340" x2="115.0" y2="346"/><text class="s" x="115.0" y="364">¼</text>
+<line class="l" x1="152.5" y1="340" x2="152.5" y2="346"/><text class="s" x="152.5" y="364">⅜</text>
+<line class="l" x1="190.0" y1="340" x2="190.0" y2="346"/><text class="s" x="190.0" y="364">½</text>
+<line class="l" x1="227.5" y1="340" x2="227.5" y2="346"/><text class="s" x="227.5" y="364">⅝</text>
+<line class="l" x1="265.0" y1="340" x2="265.0" y2="346"/><text class="s" x="265.0" y="364">¾</text>
+<line class="l" x1="302.5" y1="340" x2="302.5" y2="346"/><text class="s" x="302.5" y="364">⅞</text>
+<line class="d" x1="77.5" y1="236" x2="77.5" y2="340" style="stroke:#fb923c"/>
+<text class="s" x="81.5" y="46"></text>
+<text class="o" x="83.5" y="62" style="text-anchor:start">φ = ⅛</text>
+<text class="o" x="99.5" y="300" style="text-anchor:start">φ = ⅛</text>
+</svg>

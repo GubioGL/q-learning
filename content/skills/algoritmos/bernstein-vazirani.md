@@ -34,6 +34,17 @@ Surpresa: o circuito é **idêntico** ao de Deutsch-Jozsa.
 2. Aplique $U_f$ (com o qubit extra em $\ket-$ ele age como o oráculo de fase $\ket{x}\mapsto(-1)^{f(x)}\ket x$).
 3. Aplique $H^{\otimes n}$ no primeiro registrador e meça.
 
+![Circuito de Bernstein-Vazirani com n=3 e s=101: as três medidas dão 1, 0, 1; ao lado, a tabela de f(x)=x₁⊕x₃.](/content/algoritmos/bernstein-vazirani-circuito.svg)
+
+Com $n=5$, quantas portas Hadamard o passo 1 aplica (nos $n$ qubits do registrador mais o qubit extra)?
+
+```exercise:number
+id: bv-portas-h
+answer: 6
+```
+
+## Por que a medida devolve $s$
+
 Vamos às contas. Como no DJ, antes do último $H^{\otimes n}$ o registrador está em $\tfrac{1}{\sqrt{2^n}}\sum_x(-1)^{s\cdot x}\ket x$. Depois do último, a amplitude de $\ket z$ é
 
 $$
@@ -46,8 +57,6 @@ Aqui usamos que $s\cdot x\oplus z\cdot x=(s\oplus z)\cdot x$ (soma bit a bit). A
 - Se $z\ne s$, $s\oplus z$ tem algum bit $1$, e metade dos $x$ dá $(s\oplus z)\cdot x=0$ e a outra metade dá $1$. A soma é zero.
 
 Logo o estado final é exatamente $\ket{s}$ e a medida devolve $s$ **com probabilidade 1**, com uma única consulta.
-
-<!-- ILUSTRAR: mesmo circuito do Deutsch-Jozsa (n fios com H, fio extra |1⟩ com H, caixa U_f, H^{⊗n}, medidor), mas com a saída rotulada "s" e um exemplo n=3, s=101: fios de saída mostrando 1,0,1; ao lado uma tabela pequena de f(x)=x1⊕x3 -->
 
 **Verificação com $n=2$ e $s=10$.** Então $f(x_1x_2)=x_1$, de tabela $(0,0,1,1)$. O estado antes do último $H^{\otimes2}$ é $\tfrac12(\ket{00}+\ket{01}-\ket{10}-\ket{11})=\ket{-}\ket{+}$. Aplicar $H\otimes H$ dá $\ket{1}\ket{0}=\ket{10}=\ket s$. Funciona.
 
@@ -63,6 +72,13 @@ answer: 111
 DJ e BV usam o mesmo circuito, mas respondem perguntas diferentes: DJ distingue constante de balanceada (e o resultado $0\cdots0$ ou não); BV lê **todas** as $n$ componentes de $s$ numa só consulta. A informação que cabe em $n$ bits sai de uma chamada porque o oráculo age em todos os ramos da superposição e só a interferência do $H^{\otimes n}$ final concentra a amplitude em $\ket s$.
 
 Note que isso é uma vantagem de **consultas** ($1$ contra $n$), polinomial, não exponencial. Foi um passo importante para algoritmos posteriores, que usam a mesma estrutura de transformada de Hadamard para extrair uma propriedade escondida da função.
+
+Com $n=20$, quantas consultas a mais o algoritmo clássico faz que o quântico?
+
+```exercise:number
+id: bv-diferenca-consultas
+answer: 19
+```
 
 ## Simulação
 
@@ -99,7 +115,7 @@ Nota: `f[x]` usa $x$ como inteiro com $x_1$ mais significativo, e `n` é $\log_2
 
 Dica: reutilize sua simulação do Deutsch-Jozsa e, no fim, pegue o índice de maior amplitude com `np.argmax(np.abs(...))`, escrito em binário com `format(i, "0%db" % n)`.
 
-## Resumo
+### Resumo
 
 - Problema: $f(x)=s\cdot x\bmod2$, achar $s$. Clássico: $n$ consultas.
 - Quântico: o mesmo circuito do Deutsch-Jozsa; a amplitude de $\ket z$ é $2^{-n}\sum_x(-1)^{(s\oplus z)\cdot x}$, que vale $1$ só para $z=s$.

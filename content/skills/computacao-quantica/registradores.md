@@ -6,6 +6,13 @@ Uma **ancilla** é um qubit auxiliar que não faz parte da entrada nem da respos
 
 Outros estados iniciais saem de $\ket{0}$ com uma porta: $X$ dá $\ket{1}$ e $H$ dá $\ket{+}$.
 
+Para preparar uma ancilla em $\ket{-}$ a partir de $\ket{0}$, aplicamos duas portas em sequência. Quais são, na ordem de aplicação? (Escreva as duas letras juntas, como `ZX`.)
+
+```exercise:text
+id: reg-ancilla-mais
+answer: XH | X H | X,H | HZ | H Z | H,Z
+```
+
 ## Medir só parte do registrador
 
 Você já sabe medir um qubit de um par: somar as probabilidades dos termos compatíveis e renormalizar o que sobra. O ponto novo é o que isso significa com ancillas. Se um registrador $A$ está **emaranhado** com a ancilla, medir a ancilla escolhe também o estado de $A$.
@@ -31,7 +38,7 @@ Em muitos circuitos, o resultado de uma medida decide uma porta: "meça o qubit 
 
 Teste com $\ket{+}\ket{0}$. De um jeito, medimos o qubit 1 (50% para cada resultado) e, se der $1$, viramos o qubit 2. Do outro, aplicamos a CNOT e medimos os dois no fim. Nos dois, os qubits terminam iguais: $00$ ou $11$, com 50% cada. As estatísticas coincidem.
 
-<!-- ILUSTRAR: dois circuitos lado a lado de 2 fios com a entrada |+>|0>. Esquerda: medida no fio 1, fio clássico duplo saindo do medidor controlando uma porta X no fio 2, e medida no fio 2. Direita: CNOT (controle fio 1, alvo fio 2) e medidas de ambos no final. Legenda "mesmas probabilidades". -->
+![Dois circuitos equivalentes: medir o qubit 1 e aplicar X condicionado ao qubit 2, ou usar uma CNOT e medir no fim, com as mesmas probabilidades.](/content/computacao-quantica/medicao-adiada.svg)
 
 Por isso é comum desenhar circuitos com todas as medidas no final.
 
@@ -72,7 +79,7 @@ $$
 
 Agora o primeiro qubit dá $0$ só com probabilidade $\tfrac12$. A ancilla "sabe" qual dos dois ramos era, e por isso os ramos não interferem mais.
 
-<!-- ILUSTRAR: dois circuitos de 2 fios. Em cima, H sobre |0> prepara |+>, depois H de novo: medida dá 0 com 100%. Embaixo, com CNOT copiando para a ancilla entre os dois H: medida do primeiro fio dá 50/50. Mostrar as barras de probabilidade ao lado. -->
+![Sem ancilla, H seguido de H dá 0 com 100%; com uma CNOT copiando para uma ancilla entre os dois H, dá 0 ou 1 com 50% cada.](/content/computacao-quantica/descartar-qubit.svg)
 
 Com a ancilla-lixo, qual é a probabilidade de o primeiro qubit dar $0$ ao final?
 
@@ -88,7 +95,7 @@ A saída é **desfazer** o que escrevemos no lixo. Calcule o resultado, **copie*
 
 No exemplo anterior, aplicar a CNOT de novo antes do $H$ devolve a ancilla a $\ket{0}$ e o primeiro qubit a $\ket{+}$, e o $H$ final dá $0$ com probabilidade $1$.
 
-<!-- ILUSTRAR: três etapas lado a lado do circuito de um somador de 1 coluna: (1) calcular (4 portas, lixo nos fios), (2) copiar s e c_out para dois fios novos com 2 CNOTs, (3) descomputar (as mesmas 4 portas em ordem inversa), com os fios de lixo voltando a |0⟩ e a cópia intacta. -->
+![Três etapas do somador de uma coluna: calcular, copiar s e c_out com duas CNOTs e descomputar com as portas em ordem inversa.](/content/computacao-quantica/descomputar.svg)
 
 Contagem: num somador de 1 coluna, calcular usa 4 portas, copiar $s$ e $c_\text{out}$ usa 2 CNOTs, e descomputar repete as 4 portas ao contrário. Quantas portas no total?
 

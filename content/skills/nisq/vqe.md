@@ -4,6 +4,14 @@ Hoje os computadores quânticos têm dezenas a poucas centenas de qubits ruidoso
 
 **NISQ** (do inglês *noisy intermediate-scale quantum*) é o nome da fase atual: escala intermediária (algumas dezenas a centenas de qubits) e com ruído. Circuitos profundos, como o de estimação de fase com $e^{-iHt}$ longos, acumulam erros demais. A saída é usar circuitos **rasos**, controlados por poucos números ajustáveis, e deixar um otimizador clássico procurar bons valores.
 
+O ruído limita o circuito a cerca de (tempo de coerência) ÷ (duração de uma porta) portas. Com coerência de $200\ \mu\text{s}$ e portas de $0{,}2\ \mu\text{s}$, quantas portas, no máximo?
+
+```exercise:number
+id: vqe-nisq-raso
+answer: 1000
+tolerance: 0.001
+```
+
 ## Circuito parametrizado (ansatz)
 
 Um **ansatz** é uma família de circuitos com parâmetros reais $\vec\theta = (\theta_1,\dots,\theta_m)$, que prepara o estado $\ket{\psi(\vec\theta)}$. Exemplo de 1 qubit:
@@ -15,6 +23,14 @@ $$
 Variar $\theta$ de $0$ a $2\pi$ percorre o círculo inteiro da esfera de Bloch no plano $xz$: $\ket{0}$ ($\theta=0$), $\ket{+}$ ($\pi/2$), $\ket{1}$ ($\pi$), $\ket{-}$ ($3\pi/2$) e de volta. Neste texto os ângulos estão em radianos, salvo quando indicado. Para vários qubits, o ansatz típico alterna camadas de rotações com portas de emaranhamento (CNOT). Quanto mais **expressivo** o ansatz (isto é, quanto mais estados ele consegue produzir), mais perto do estado fundamental ele chega, mas mais fundo e mais difícil de otimizar ele fica.
 
 ![Esfera de Bloch com o círculo verde de estados Ry(θ)|0⟩ no plano xz. Passando por |0⟩ em cima (θ=0), |+⟩ (θ=π/2), |1⟩ embaixo (θ=π) e |−⟩ atrás (θ=3π/2). Um estado |ψ(θ)⟩ qualquer está marcado com o ângulo θ medido a partir de |0⟩.](/content/nisq/vqe-circulo-bloch.svg)
+
+Para $\ket{\psi(\theta)} = R_y(\theta)\ket{0}$ com $\theta=\pi/3$, qual é a probabilidade de medir $1$? (responda com 2 casas decimais.)
+
+```exercise:number
+id: vqe-prob-ry
+answer: 0.25
+tolerance: 0.001
+```
 
 ## O princípio variacional
 
@@ -89,6 +105,14 @@ O VQE (*variational quantum eigensolver*) junta as peças em um laço:
 ![O laço do VQE. Um bloco clássico (otimizador) envia os parâmetros θ para um bloco quântico (estado |ψ(θ)⟩ e medida de H), que devolve a energia E(θ). Embaixo, a energia E cai a cada iteração k e se aproxima da linha tracejada E0, o menor autovalor.](/content/nisq/vqe-laco-hibrido.svg)
 
 O quântico entrega só uma função $E(\vec\theta)$; a otimização é clássica. Limitações reais: o ruído pode esconder o mínimo, a **paisagem** de $E(\vec\theta)$ (o gráfico da energia em função dos parâmetros, com seus vales e planícies) pode ter muitos mínimos locais e regiões planas, e nada garante que o ansatz alcance o estado fundamental.
+
+Um $H$ tem 3 termos de Pauli que exigem 3 bases de medida diferentes. Quantos circuitos diferentes o chip executa em cada iteração do laço?
+
+```exercise:number
+id: vqe-laco-classico
+answer: 3
+tolerance: 0.001
+```
 
 ## Exemplo completo de 1 qubit
 

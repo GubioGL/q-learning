@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="255" viewBox="0 0 440 255" role="img" aria-label="Circuito do Shor: registro superior de t qubits com H, U_a elevada a 2^k controlada sobre o registro inferior de n qubits em |1⟩, QFT inversa e medida, que dá y/2^t ≈ s/r">
+  <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.ts{fill:#d1d5db;font:15px sans-serif;text-anchor:start}.o{fill:#fb923c;font:600 16px sans-serif;text-anchor:middle}.k{fill:#38bdf8;font:600 16px sans-serif;text-anchor:middle}.gt{fill:#34d399;font:600 16px sans-serif;text-anchor:middle}</style>
+  <defs></defs>
+<line class="l" x1="70" y1="60" x2="420" y2="60"/><line class="l" x1="70" y1="150" x2="420" y2="150"/>
+<text class="ts" x="8" y="65">|0⟩</text><text class="ts" x="8" y="155">|1⟩</text>
+<line class="l" x1="52" y1="69" x2="62" y2="51" style="stroke-width:2"/><text class="s" x="52" y="48">t</text>
+<line class="l" x1="52" y1="159" x2="62" y2="141" style="stroke-width:2"/><text class="s" x="52" y="138">n</text>
+<rect class="b" x="83.0" y="40.0" width="44" height="40" rx="7"/><text class="t" x="105" y="66">H</text>
+<line class="p" x1="210" y1="60" x2="210" y2="130" style="stroke-width:2"/><circle class="f" cx="210" cy="60" r="6"/>
+<rect class="b" x="165" y="130" width="90" height="40" rx="7"/><text class="t" x="210" y="156">U<tspan baseline-shift='sub' font-size='75%'>a</tspan><tspan baseline-shift='super' font-size='75%'>2ᵏ</tspan></text>
+<rect class="b" x="282.0" y="35" width="76" height="50" rx="7"/><text class="t" x="320" y="66.0">QFT⁻¹</text>
+<rect class="b" x="375" y="42" width="40" height="36" rx="7"/><path class="l" d="M383 68 A12 12 0 0 1 407 68"/><line class="l" x1="395" y1="68" x2="403" y2="52"/>
+<text class="s" x="105" y="26">H⊗ᵗ</text><text class="s" x="210" y="26">k = 0 … t−1</text>
+<rect class="b" x="125" y="200" width="200" height="40" rx="7" style="stroke:#34d399"/><text class="gt" x="225" y="226">y / 2ᵗ ≈ s / r</text>
+<line class="d" x1="395" y1="82" x2="395" y2="215"/><line class="d" x1="325" y1="220" x2="395" y2="220"/>
+</svg>

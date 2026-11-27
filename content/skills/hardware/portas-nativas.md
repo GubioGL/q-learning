@@ -51,7 +51,16 @@ $$
 
 **Uma $U$ controlada vira dois CNOTs.** Existem $A_1,A_2,A_3$ de 1 qubit com $A_1A_2A_3 = I$ e $U = e^{i\alpha}A_1XA_2XA_3$. Então a versão controlada de $U$ usa dois CNOTs, as portas $A_1,A_2,A_3$ no alvo e uma fase $\alpha$ no controle. Quando o controle é $\ket{0}$, os $X$ não agem e $A_1A_2A_3=I$ cancela tudo. Quando é $\ket{1}$, os $X$ agem e sobra $U$.
 
-**Mais controles, mais camadas.** Escolhendo $V$ com $V^2=U$, a porta duplamente controlada se faz com portas simplesmente controladas:
+Controle, uma após a outra, 3 portas de 1 qubit $U$ (todas com o mesmo controle), cada uma pela construção $A_1XA_2XA_3$. Quantos CNOTs são usados no total?
+
+```exercise:number
+id: nativas-controlada-cnots
+answer: 6
+```
+
+## Mais controles, mais camadas
+
+Escolhendo $V$ com $V^2=U$, a porta duplamente controlada se faz com portas simplesmente controladas:
 
 Chame os controles de $a$ e $b$ e o alvo de $t$. Em ordem de aplicação:
 
@@ -68,11 +77,25 @@ Verifique pelos quatro casos $(a,b)$:
 - $10$: o passo 1 não age; o CNOT leva $b$ a 1, então o passo 3 aplica $V^\dagger$; o segundo CNOT devolve $b$ a 0; o passo 5 aplica $V$. Sobra $I$.
 - $11$: o passo 1 aplica $V$; o CNOT leva $b$ a 0, então o passo 3 não age; o segundo CNOT devolve $b$ a 1; o passo 5 aplica $V$ de novo. Sobra $V^2=U$.
 
+Quantas portas controladas $V$ ou $V^\dagger$ (sem contar os CNOTs) aparecem nessa construção de 5 passos?
+
+```exercise:number
+id: nativas-cc-controladas
+answer: 3
+```
+
 Essa construção funciona para qualquer $n$, mas o resultado geral (sem usar estrutura nenhuma da unitária) tem tamanho **exponencial**. Isso não é falha da prova: uma unitária geral de $n$ qubits tem cerca de $4^n$ números livres, e cada um precisa entrar em algum ângulo de rotação.
 
 ## Do conjunto universal ao Clifford + T
 
 Combinando as peças, qualquer unitária pode ser aproximada com CNOT, $H$ e $T$. É por isso que o conjunto **Clifford + $T$** é o padrão de computação tolerante a falhas: as portas Clifford são baratas de proteger contra erro, e a porta $T$ é a cara, então se **conta quantas $T$** um circuito usa.
+
+Um circuito tem 12 portas Toffoli, cada uma decomposta com 7 portas $T$/$T^\dagger$, como na próxima seção. Qual o $T$-count total, sem otimizações?
+
+```exercise:number
+id: nativas-tcount-12-toffoli
+answer: 84
+```
 
 ## Exemplo: decompor a Toffoli em CNOT + T
 
@@ -86,7 +109,7 @@ A Toffoli (CCX) tem três qubits, dois controles $a,b$ e um alvo $t$. Uma decomp
 6. CNOT($a\to b$), depois $T$ em $a$ e $T^\dagger$ em $b$.
 7. CNOT($a\to b$).
 
-<!-- ILUSTRAR: circuito de 3 fios (a, b, t) com a decomposição da Toffoli acima, gates coloridos: CNOT em azul, T/T† em laranja, H em cinza; legenda com "6 CNOT, 7 T/T†, 2 H" -->
+![Decomposição da Toffoli em 3 fios com 6 CNOT, 7 portas T ou T† e 2 Hadamards.](/content/hardware/toffoli-cnot-t.svg)
 
 Contagem: 6 CNOTs, 7 portas do tipo $T$ (contando $T^\dagger$) e 2 Hadamards. Confira você mesmo: conte os $T$ e $T^\dagger$ nos passos 2 a 6 (um no passo 2, um no 3, um no 4, dois no 5 e dois no 6).
 
@@ -120,13 +143,13 @@ answer: 7
 
 Um circuito "ideal" com um CNOT virou 7. Foi o hardware, não o algoritmo, quem multiplicou o custo, e isso se repete em circuitos grandes.
 
-<!-- ILUSTRAR: três qubits físicos numa linha 0-1-2 com arestas; sequência de três painéis mostrando SWAP(0,1), CNOT(1,2), SWAP(0,1), destacando o qubit lógico que viaja -->
+![Três qubits físicos em linha: SWAP(0,1) leva o qubit lógico a ao físico 1, CNOT(1,2) age sobre c e outro SWAP devolve a ao físico 0.](/content/hardware/swap-conectividade.svg)
 
 ## Estudo de caso: profundidade × portas × ancillas
 
 Queremos a porta $C^n\text{-}R_\theta$: aplicar $R_\theta=\mathrm{diag}(1,e^{i\theta})$ ao qubit alvo quando os $n$ qubits de controle valem 1 (a fase $e^{i\theta}$ só aparece no termo com controles e alvo todos em 1). Há duas estratégias.
 
-**Sem ancillas (circuito exponencial).** Aplicando a regra do $C\text{-}C\text{-}U$ repetidamente, cada nível triplica as portas. Com $n$ controles saem
+Aplicando a regra do $C\text{-}C\text{-}U$ repetidamente, cada nível triplica as portas. Com $n$ controles saem
 
 $$
 N^{\text{CNOT}}_n = 3^n - 1, \qquad N^{R}_n = 3^n ,
@@ -134,11 +157,29 @@ $$
 
 portas de rotação com ângulos $\pm\theta/2^n$. Para $n=1$: 2 CNOTs e 3 rotações; para $n=2$: 8 CNOTs e 9 rotações. O circuito cresce exponencialmente com o número de controles e não dá para paralelizar, porque todas as rotações caem no mesmo qubit alvo.
 
-**Com ancillas (circuito polinomial).** Uma **ancilla** é um qubit auxiliar, que começa em $\ket{0}$ e volta a $\ket{0}$ ao final. A ideia: calcular o produto $x_1x_2\cdots x_n$ dos controles numa ancilla com uma escada de Toffolis, aplicar **um** $C\text{-}R_\theta$ controlado pela ancilla, e desfazer a escada. Para $n$ controles, o esquema simples usa $n-1$ ancillas e $2(n-1)$ Toffolis. O custo agora cresce de modo linear.
+Com $n=3$ controles e sem ancillas, quantos CNOTs o circuito usa ($3^n-1$)?
+
+```exercise:number
+id: nativas-sem-ancilla-n3
+answer: 26
+```
+
+## Com ancillas
+
+Uma **ancilla** é um qubit auxiliar, que começa em $\ket{0}$ e volta a $\ket{0}$ ao final. A ideia: calcular o produto $x_1x_2\cdots x_n$ dos controles numa ancilla com uma escada de Toffolis, aplicar **um** $C\text{-}R_\theta$ controlado pela ancilla, e desfazer a escada. Para $n$ controles, o esquema simples usa $n-1$ ancillas e $2(n-1)$ Toffolis. O custo agora cresce de modo linear.
 
 O que se paga? Qubits extras. A troca típica é esta: **menos portas e menos profundidade custam mais qubits**.
 
-<!-- ILUSTRAR: circuito de C^3-Rθ com escada de Toffolis em duas ancillas (calcula x1x2, depois (x1x2)x3), um C-Rθ da última ancilla para o alvo, e a escada desfeita; legenda com "2 ancillas, 4 Toffolis" -->
+![Circuito C³-Rθ com duas ancillas: dois Toffolis calculam x₁x₂x₃, um Rθ controlado atua no alvo e dois Toffolis desfazem o cálculo.](/content/hardware/c3-rtheta-ancillas.svg)
+
+Com $n=5$ controles, quantos Toffolis o esquema simples com ancillas usa ($2(n-1)$)?
+
+```exercise:number
+id: nativas-toffolis-n5
+answer: 8
+```
+
+## Escolhendo a estratégia
 
 Para escolher entre as duas estratégias, o compilador compara custos. Contando só CNOTs, e supondo cada Toffoli decomposta em 6 CNOTs e o $C\text{-}R_\theta$ final em 2 CNOTs, o esquema com ancillas gasta $12(n-1)+2$ CNOTs e precisa de $n-1$ ancillas; o esquema sem ancillas gasta $3^n-1$. Escreva a função que devolve o menor custo em CNOTs disponível dado o número de ancillas livres.
 
@@ -168,11 +209,18 @@ id: nativas-ponto-de-virada
 answer: 4
 ```
 
-## Resumo
+### Resumo
 
 - Cada hardware executa um conjunto pequeno de portas nativas; o compilador traduz o resto.
 - Clifford não é universal; Clifford + $T$ é, aproximadamente, e conta-se quantas $T$ se gasta.
 - Toffoli = 6 CNOT + 7 $T$/$T^\dagger$ + 2 $H$; SWAP = 3 CNOT.
 - Conectividade e ancillas trocam portas por qubits extras: custo ideal e custo compilado podem diferir muito.
+
+Um CNOT entre qubits não vizinhos custa 7 CNOTs depois de resolvido com dois SWAPs (como na seção de conectividade). Um circuito ideal tem 10 desses CNOTs remotos. Quantos CNOTs há depois da compilação?
+
+```exercise:number
+id: nativas-resumo-compilado
+answer: 70
+```
 
 Fonte: B. Valiron, *Introduction to Quantum Algorithms and Quantum Programming* (notas de curso, 2025), seções 4.2 a 4.4. Texto e exemplos originais; a decomposição da Toffoli é um resultado clássico (veja também Nielsen e Chuang, *Quantum Computation and Quantum Information*).

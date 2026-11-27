@@ -10,6 +10,14 @@ $$
 
 Estados quânticos já são normalizados, então perde-se o comprimento de $\vec x$ (só a direção resta).
 
+Se $\vec b=(3,4)$, qual é a amplitude de $\ket1$ em $\ket b$? (Divida por $\|\vec b\|=5$; responda em decimal.)
+
+```exercise:number
+id: hhl-amplitude-b
+answer: 0.8
+tolerance: 0.001
+```
+
 ## Exemplo $2\times2$ resolvido à mão
 
 $$
@@ -32,6 +40,14 @@ $$
 
 A ideia do HHL é fazer exatamente isso com $N$ gigante: decompor $\ket b$ em autovetores de $A$ (sem conhecê-los), dividir cada componente pelo autovalor, recompor.
 
+Com a mesma $A$ e $\vec b=(0,3)$, a solução exata é $\vec x=A^{-1}\vec b=\tfrac13\begin{pmatrix}2&-1\\-1&2\end{pmatrix}\vec b$. Qual é a primeira componente de $\vec x$?
+
+```exercise:number
+id: hhl-x-b03
+answer: -1
+tolerance: 0.001
+```
+
 ## Quatro palavras novas
 
 - **Registro de relógio**: grupo de $t$ qubits extra, onde a estimação de fase escreve o autovalor (é o "registro" da estimação de fase).
@@ -39,11 +55,17 @@ A ideia do HHL é fazer exatamente isso com $N$ gigante: decompor $\ket b$ em au
 - **Descomputar**: aplicar ao contrário uma etapa para apagar o que ela escreveu, e assim desemaranhar o registro de volta a $\ket0$.
 - **Pós-seleção**: medir a ancila e **guardar só os resultados** em que deu 1, repetindo o algoritmo quando deu 0.
 
-## Os passos, com o exemplo
+No exemplo, $P_1=\tfrac59$. Como a ancila só dá 1 com essa probabilidade e, quando dá 0, repete-se tudo, em média quantas execuções são necessárias até obter um 1? (Use $1/P_1$; responda com 1 casa decimal.)
 
-<!-- ILUSTRAR: diagrama de blocos do HHL com três registros: ancila (1 qubit), registro de relógio (t qubits) e registro de dados (n qubits); etapas em sequência: preparar |b>, estimação de fase de e^{iAτ}, rotação controlada da ancila, estimação de fase inversa, medida da ancila; cada etapa rotulada e com o estado ao lado -->
+```exercise:number
+id: hhl-execucoes-sucesso
+answer: 1.8
+tolerance: 0.01
+```
 
-<!-- ILUSTRAR: plano 2D com os vetores |+>=(1,1)/√2 e |->=(1,-1)/√2 como eixos tracejados, o vetor b=|0> decomposto neles, e o vetor x ∝ (2,-1) onde a componente de |+> foi dividida por 3 e a de |-> por 1 -->
+## Os passos, 1: carregar e estimar a fase
+
+![Diagrama de blocos do HHL com ancila, relógio e dados: carregar b, estimação de fase, rotação controlada, estimação de fase inversa e medida da ancila](/content/algoritmos/hhl-blocos.svg)
 
 Para não confundir com o $t$ da estimação de fase (número de qubits), chamamos de $\tau$ o **tempo** em $e^{iA\tau}$.
 
@@ -53,6 +75,16 @@ $$
 \sum_j\beta_j\ket{u_j}\ket{\tilde\lambda_j}.
 $$
 Aqui supomos $A$ com autovalores positivos e $\tau$ tal que $\lambda_{\max}\tau<2\pi$ (assim $\varphi_j\in(0,1)$; autovalores negativos dariam $\varphi$ perto de 1 e exigiriam uma leitura com sinal). **No exemplo**, escolha $\tau=\pi/2$: então $\varphi=\lambda/4$, e os autovalores $3$ e $1$ viram $\varphi=\tfrac34$ e $\tfrac14$, exatos com 2 qubits de relógio ($\ket{11}$ e $\ket{01}$). O estado fica $\tfrac1{\sqrt2}\big(\ket+\ket{11}+\ket-\ket{01}\big)$.
+
+Com $\tau=\pi/2$ ($\varphi=\lambda/4$), qual $\varphi$ o relógio guarda para um autovalor $\lambda=2$? (Decimal.)
+
+```exercise:number
+id: hhl-fase-lambda2
+answer: 0.5
+tolerance: 0.0001
+```
+
+## Os passos, 2: girar, descomputar e medir
 3. **Rotação controlada pelo relógio.** Para cada valor $\lambda$ lido no relógio, gira-se a ancila:
 $$
 \ket0\ \longmapsto\ \sqrt{1-\frac{C^2}{\lambda^2}}\,\ket0+\frac{C}{\lambda}\,\ket1 .
@@ -66,6 +98,16 @@ $$
 que no exemplo é $\propto\tfrac13\ket++\ket-\propto(2,-1)$, como na conta à mão. Se der $0$, tenta-se de novo.
 
 O efeito da rotação foi pôr $1/\lambda_j$ na amplitude, e a medida da ancila isolou esse ramo.
+
+![Plano com eixos tracejados |+⟩ e |−⟩: b = |0⟩ tem componentes iguais nos dois e dividir a de |+⟩ por 3 e a de |−⟩ por 1 dá x proporcional a (2, −1)](/content/algoritmos/hhl-plano-vetores.svg)
+
+Com $C=1$ e um ramo de autovalor $\lambda=4$, qual é a amplitude de $\ket1$ na ancila depois da rotação, $C/\lambda$? (Decimal.)
+
+```exercise:number
+id: hhl-rotacao-lambda4
+answer: 0.25
+tolerance: 0.0001
+```
 
 ## Probabilidade de sucesso
 

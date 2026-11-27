@@ -10,7 +10,14 @@ Um **coprocessador** é um circuito especializado que obedece ao processador pri
 
 Um computador quântico segue o mesmo molde. A **QPU** (do inglês *quantum processing unit*, a unidade de processamento quântico) é o coprocessador, e sua memória é feita de qubits.
 
-<!-- ILUSTRAR: diagrama de duas caixas, "CPU clássica (hospedeira)" à esquerda com o código do programa, "QPU" à direita contendo uma fileira de qubits; seta de cima da CPU para a QPU rotulada "instruções: portas e medidas" e seta de baixo da QPU para a CPU rotulada "bits medidos"; destacar que as amplitudes não atravessam a seta de volta -->
+![A CPU clássica envia instruções de portas e medidas à QPU e recebe de volta apenas bits medidos; as amplitudes não voltam.](/content/hardware/coprocessador-cpu-qpu.svg)
+
+Quantas amplitudes de um estado de 3 qubits a CPU consegue ler diretamente da QPU numa rodada? Responda com um número.
+
+```exercise:number
+id: copro-sigla-qpu
+answer: 0
+```
 
 ## O fluxo de uma execução
 
@@ -103,11 +110,18 @@ def prob_um(U):
 0.0
 ```
 
-## Resumo
+### Resumo
 
 - A CPU clássica controla; a QPU guarda qubits e executa portas e medidas.
 - O fluxo é: preparar, aplicar portas, medir, ler bits.
 - Só o resultado das medidas sai da QPU; não se leem amplitudes nem se copiam estados.
 - Um circuito é um programa: uma lista de instruções gerada e enviada pela CPU.
+
+Você roda 10 shots de um circuito de 5 qubits, medindo todos no fim de cada shot. Quantos bits clássicos chegam à CPU no total?
+
+```exercise:number
+id: copro-resumo-bits
+answer: 50
+```
 
 Fonte: ideias do modelo de coprocessador seguem B. Valiron, *Introduction to Quantum Algorithms and Quantum Programming* (notas de curso, 2025), seção 3.1. Texto e exemplos originais.
