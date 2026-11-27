@@ -30,3 +30,23 @@ export function importInto(mine: Progress, raw: unknown): Progress | null {
     }
     return { done, goal: parseDailyGoal((raw as { goal?: unknown }).goal) ?? mine.goal };
 }
+
+// Mini-challenges solved inside skills not yet finished: skill key -> exercise ids. Also untrusted when imported.
+export type Solved = Record<string, string[]>;
+
+const SKILL_KEY = /^skill:[a-z0-9-]+\/[a-z0-9-]+$/;
+const EXERCISE_ID = /^[a-z0-9-]+$/;
+
+export function parseSolved(raw: unknown): Solved {
+    if (typeof raw !== "object" || raw === null || Array.isArray(raw)) return {};
+    const entries = Object.entries(raw)
+        .filter((e): e is [string, unknown[]] => SKILL_KEY.test(e[0]) && Array.isArray(e[1]))
+        .map(([key, ids]) => [key, ids.filter((id): id is string => typeof id === "string" && EXERCISE_ID.test(id))]);
+    return Object.fromEntries(entries);
+}
+
+export function mergeSolved(mine: Solved, other: Solved): Solved {
+    const out = { ...mine };
+    for (const [key, ids] of Object.entries(other)) out[key] = [...new Set([...(out[key] ?? []), ...ids])];
+    return out;
+}

@@ -65,6 +65,8 @@ isto é, um ponto numa esfera com ângulos $\theta$ e $\phi$. O polo norte é $\
 
 Só o ângulo $\theta$ decide as probabilidades de $0$ e $1$. A fase $\phi$ não aparece nessa medida, mas aparece em outras bases.
 
+Isto é só uma prévia: a skill **A esfera de Bloch**, mais adiante neste curso, mostra a esfera em detalhe e como as portas a giram.
+
 Qual é $P(0)$ para um estado com $\theta = 60^\circ$?
 
 ```exercise:number

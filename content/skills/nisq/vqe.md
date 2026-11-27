@@ -4,7 +4,7 @@ Hoje os computadores quânticos têm dezenas a poucas centenas de qubits ruidoso
 
 **NISQ** (do inglês *noisy intermediate-scale quantum*) é o nome da fase atual: escala intermediária (algumas dezenas a centenas de qubits) e com ruído. Circuitos profundos, como o de estimação de fase com $e^{-iHt}$ longos, acumulam erros demais. A saída é usar circuitos **rasos**, controlados por poucos números ajustáveis, e deixar um otimizador clássico procurar bons valores.
 
-O ruído limita o circuito a cerca de (tempo de coerência) ÷ (duração de uma porta) portas. Com coerência de $200\ \mu\text{s}$ e portas de $0{,}2\ \mu\text{s}$, quantas portas, no máximo?
+O ruído limita a **profundidade** do circuito (portas em sequência) a cerca de (tempo de coerência) ÷ (duração de uma porta). Com coerência de $200\ \mu\text{s}$ e portas de $0{,}2\ \mu\text{s}$, quantas camadas de portas, no máximo?
 
 ```exercise:number
 id: vqe-nisq-raso

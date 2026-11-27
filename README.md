@@ -1,12 +1,19 @@
-<img src="cat.png" alt="Purple cat, the Quantum Learning mascot" width="300" />
+<p align="center">
+  <a href="https://gubiogl.github.io/q-learning/"><img src="docs/assets/hero-animado.svg" alt="Quantum Learning: the mascot cat floating inside a Bloch sphere with orbiting qubits" width="100%" /></a>
+</p>
 
 # Quantum Learning
 
-Learn quantum computing from scratch, for free and with no sign-up: **[gubiogl.github.io/q-learning](https://gubiogl.github.io/q-learning/)**
+Learn quantum computing from scratch, **one mini-lesson at a time**, for free and with no sign-up: **[gubiogl.github.io/q-learning](https://gubiogl.github.io/q-learning/)**
 
-- **Courses**: short pages with text, math, illustrations and exercises, including Python that runs in the browser.
-- **Challenges**: a single trail of quick levels, from bits to quantum cryptography.
-- Available in Portuguese, English and Spanish. Progress is saved in your browser.
+- **7 courses, 52 skills, 333 mini-challenges**: from bits and linear algebra to Grover, Shor, hardware and NISQ.
+- **Mini-lessons**: each skill is a sequence of short steps; each step ends with a mini-challenge (a number, a text answer or Python that runs in the browser).
+- **Challenges**: a single trail of quick levels with hearts and XP.
+- Portuguese, English and Spanish; light and dark theme. Progress is saved in your browser (export/import included).
+
+<p align="center"><img src="docs/assets/home.png" alt="The Quantum Learning home page" width="85%" /></p>
+
+**What's new:** see the [updates page](https://gubiogl.github.io/q-learning/en/novidades/). Feedback, partnerships or using it in class? [Talk to me on LinkedIn](https://www.linkedin.com/in/gubio-gomes-de-lima-a99973106).
 
 There is also a companion book, in LaTeX, in [`livro/`](livro/).
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { EMPTY_PROGRESS, complete, importInto, parseProgress, type Progress } from "./progress-data";
+import { EMPTY_PROGRESS, complete, importInto, mergeSolved, parseProgress, parseSolved, type Progress, type Solved } from "./progress-data";
 
 const STORAGE_KEY = "ql_progress";
 
@@ -85,12 +85,35 @@ export function markDone(key: string): { isNew: boolean; saved: boolean } {
 
 export const saveGoal = (goal: number) => save({ ...latest(), goal });
 
-export const exportProgress = () => JSON.stringify(latest());
+// Solved mini-challenges are a convenience: storage errors only lose the partial progress inside a skill.
+const SOLVED_KEY = "ql_solved";
+
+export function readAllSolved(): Solved {
+    try {
+        return parseSolved(JSON.parse(localStorage.getItem(SOLVED_KEY) ?? "{}"));
+    } catch {
+        return {};
+    }
+}
+
+export function saveSolved(skill: string, ids: string[]) {
+    try {
+        localStorage.setItem(SOLVED_KEY, JSON.stringify({ ...readAllSolved(), [skill]: ids }));
+    } catch {
+        // storage blocked: progress inside the page still works
+    }
+}
+
+export const exportProgress = () => JSON.stringify({ ...latest(), solved: readAllSolved() });
 
 export function importProgress(text: string): boolean {
     try {
-        const merged = importInto(latest(), JSON.parse(text));
-        return merged !== null && save(merged);
+        const raw = JSON.parse(text);
+        const merged = importInto(latest(), raw);
+        if (merged === null || !save(merged)) return false;
+        const solved = mergeSolved(readAllSolved(), parseSolved((raw as { solved?: unknown }).solved));
+        try { localStorage.setItem(SOLVED_KEY, JSON.stringify(solved)); } catch { /* the finished skills were saved */ }
+        return true;
     } catch {
         return false; // not JSON
     }

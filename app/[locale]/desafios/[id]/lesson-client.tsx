@@ -56,9 +56,9 @@ export default function LessonClient({ lesson, recommendHref, recommendTitle }: 
     const challenge = lesson.challenges[state.index];
 
     return (
-        <div className="min-h-dvh bg-[#1a1a1a] text-gray-100 flex flex-col">
+        <div className="min-h-dvh bg-(--ql-bg) text-gray-100 flex flex-col">
             <header className="mx-auto w-full max-w-3xl flex items-center gap-4 px-4 pt-6">
-                <Link href={exitHref} aria-label={t.exit} className="text-gray-400 hover:text-white">
+                <Link href={exitHref} aria-label={t.exit} className="text-gray-400 hover:text-gray-50">
                     <X />
                 </Link>
                 <div
@@ -141,7 +141,7 @@ function footerClass(status: string) {
 
 function EndScreen({ title, text, children }: { title: string; text: string; children: React.ReactNode }) {
     return (
-        <main id="main" className="min-h-dvh bg-[#1a1a1a] text-gray-100 flex flex-col items-center justify-center gap-6 px-4 text-center">
+        <main id="main" className="min-h-dvh bg-(--ql-bg) text-gray-100 flex flex-col items-center justify-center gap-6 px-4 text-center">
             <h1 className="text-3xl font-bold">{title}</h1>
             <p className="text-lg text-gray-300">{text}</p>
             {children}

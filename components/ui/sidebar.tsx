@@ -8,7 +8,7 @@ import { SidebarContent } from "@/components/ui/SidebarContent";
 export const Sidebar = () => {
   const { nav } = useT();
   return (
-  <SheetContent side="left" className="w-[280px] bg-[#1a1a1a] text-white">
+  <SheetContent side="left" className="w-[280px] bg-(--ql-bg) text-gray-50">
     <SheetTitle className="sr-only">{nav.menuTitle}</SheetTitle>
     <SidebarContent />
   </SheetContent>

@@ -6,11 +6,11 @@ Uma **ancilla** é um qubit auxiliar que não faz parte da entrada nem da respos
 
 Outros estados iniciais saem de $\ket{0}$ com uma porta: $X$ dá $\ket{1}$ e $H$ dá $\ket{+}$.
 
-Para preparar uma ancilla em $\ket{-}$ a partir de $\ket{0}$, aplicamos duas portas em sequência. Quais são, na ordem de aplicação? (Escreva as duas letras juntas, como `ZX`.)
+Para preparar uma ancilla em $\ket{-}$ a partir de $\ket{0}$, aplicamos duas portas em sequência. Quais são, na ordem de aplicação? (Escreva primeiro a porta aplicada primeiro, com as duas letras juntas, como `ZX` para "Z e depois X".)
 
 ```exercise:text
 id: reg-ancilla-mais
-answer: XH | X H | X,H | HZ | H Z | H,Z
+answer: XH | X H | X,H | X, H | HZ | H Z | H,Z | H, Z | YH | Y H | HY | H Y
 ```
 
 ## Medir só parte do registrador

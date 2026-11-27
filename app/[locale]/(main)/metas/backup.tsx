@@ -25,8 +25,8 @@ export function Backup() {
     };
 
     return (
-        <section aria-labelledby="backup-title" className="rounded-lg border border-[#333] p-6">
-            <h2 id="backup-title" className="mb-3 text-xl font-semibold text-white">{t.backupTitle}</h2>
+        <section aria-labelledby="backup-title" className="rounded-lg border border-(--ql-line) p-6">
+            <h2 id="backup-title" className="mb-3 text-xl font-semibold text-gray-50">{t.backupTitle}</h2>
             <p className="mb-4">{t.backupText}</p>
             <div className="flex flex-wrap gap-3">
                 <Button variant="buttonRox" onClick={download}>{t.exportFile}</Button>

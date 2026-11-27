@@ -18,6 +18,9 @@ type LocaleParams = { params: Promise<{ locale: string }> };
 export const dynamicParams = false;
 export const generateStaticParams = () => LOCALES.map((locale) => ({ locale }));
 
+// Runs before paint: saved choice, else the system preference.
+const THEME_SCRIPT = `try{var t=localStorage.getItem("ql_theme")}catch(e){}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"`;
+
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const { locale } = await params;
   return { title: 'Quantum Learning', description: isLocale(locale) ? getDict(locale).description : undefined };
@@ -28,7 +31,8 @@ export default async function RootLayout({ children, params }: LocaleParams & { 
   if (!isLocale(locale)) notFound();
 
   return (
-    <html lang={HTML_LANG[locale as Locale]}>
+    <html lang={HTML_LANG[locale as Locale]} suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} /></head>
       <body className={`${nunito.className} antialiased`}>
         <LocaleProvider value={locale}>
           <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-[1001] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-purple-800">

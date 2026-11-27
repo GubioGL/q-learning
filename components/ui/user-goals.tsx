@@ -27,9 +27,9 @@ const GoalSection: React.FC<{
   const locale = useLocale();
   const { panel } = useT();
   return (
-  <div className="bg-[#1a1a1a] rounded-lg p-4 border border-[#333]">
+  <div className="bg-(--ql-bg) rounded-lg p-4 border border-(--ql-line)">
     <div className="flex justify-between items-center mb-4">
-      <h2 className="text-white font-semibold text-lg">{title}</h2>
+      <h2 className="text-gray-50 font-semibold text-lg">{title}</h2>
       <Link href={`/${locale}/metas`} aria-label={`${panel.view}: ${title}`} className="text-blue-400 text-sm hover:underline">{panel.view}</Link>
     </div>
     <div className="space-y-4">
@@ -48,8 +48,8 @@ const GoalItem: React.FC<{
 }> = ({ label, current, target, percentage, color }) => (
   <div className="space-y-2">
     <div className="flex justify-between items-center">
-      <span className="text-white text-sm">{label}</span>
-      <span className="text-white text-sm">{current}/{target}</span>
+      <span className="text-gray-50 text-sm">{label}</span>
+      <span className="text-gray-50 text-sm">{current}/{target}</span>
     </div>
     <ProgressBar percentage={percentage} color={color} />
   </div>
@@ -101,12 +101,12 @@ const UserGoals: React.FC<UserGoalsProps> = ({ stats, dailyGoal }) => {
         />
       </GoalSection>
 
-        <div className="bg-[#1a1a1a] rounded-lg p-4 border border-[#333]">
-          <h2 className="text-white font-semibold text-lg mb-4">{panel.overall}</h2>
+        <div className="bg-(--ql-bg) rounded-lg p-4 border border-(--ql-line)">
+          <h2 className="text-gray-50 font-semibold text-lg mb-4">{panel.overall}</h2>
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-white text-sm">{panel.completed}</span>
-              <span className="text-white text-sm">{completed}/{total}</span>
+              <span className="text-gray-50 text-sm">{panel.completed}</span>
+              <span className="text-gray-50 text-sm">{completed}/{total}</span>
             </div>
             <div className="w-full bg-gray-600 rounded-full h-3">
               <div 
@@ -115,7 +115,7 @@ const UserGoals: React.FC<UserGoalsProps> = ({ stats, dailyGoal }) => {
               />
             </div>
             <div className="text-center">
-              <span className="text-[#a78bfa] font-bold text-lg">
+              <span className="text-purple-400 font-bold text-lg">
                 {Math.round(totalPercentage)}%
               </span>
             </div>

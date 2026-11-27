@@ -144,7 +144,7 @@ Como as portas de 2 qubits não saem só de componentes lineares, usamos **medi�
 
 A fusão é probabilística, mas pode ser repetida e é "cara" em número de fótons. Mesmo assim, é um caminho para fazer porta de 2 qubits sem interação direta entre fótons.
 
-![Fusão tipo I: duas cadeias de 2 nós passam por um divisor com detectores; com sucesso viram uma cadeia de 3 nós, com falha perde-se um pedaço.](/content/hardware/optica-fusao.svg)
+![Fusão tipo I: duas cadeias de 2 nós passam por um divisor com detectores; com sucesso viram uma cadeia de 3 nós, com falha, as duas cadeias perdem o nó da ponta.](/content/hardware/optica-fusao.svg)
 
 Na fusão tipo I, uma cadeia de 3 nós e uma de 4 nós são fundidas. Quantos nós tem a cadeia resultante?
 

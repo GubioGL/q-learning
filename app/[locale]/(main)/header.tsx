@@ -23,7 +23,7 @@ export const MainHeader = ({ xpByKey }: { xpByKey: Record<string, number> }) => 
                 <Sheet>
                     <SheetTrigger asChild>
                         <button className="menu-icon" aria-label={nav.openMenu} type="button">
-                            <Menu size={24} color="#ffffff" />
+                            <Menu size={24} />
                         </button>
                     </SheetTrigger>
                     <Sidebar />

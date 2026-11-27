@@ -4,6 +4,7 @@ import Image from "next/image";
 import { SidebarItem } from "@/components/ui/sidebar-item";
 import { useLocale, useT } from "@/lib/i18n/context";
 import { asset } from "@/lib/asset";
+import { LINKEDIN_URL } from "@/lib/links";
 
 /**
  * Conteúdo do menu lateral: navegação.
@@ -23,8 +24,14 @@ export const SidebarContent = () => {
         <SidebarItem label={nav.challenges} iconSrc="/quantum-bit.png" href={`/${locale}/desafios`} />
         <SidebarItem label={nav.goals} iconSrc="/metas.png" href={`/${locale}/metas`} />
         <SidebarItem label={nav.achievements} iconSrc="/classificaçao.png" href={`/${locale}/conquistas`} />
-        {/* Classificação e Loja ficam ocultas por enquanto (ver docs/ROADMAP.md) */}
+        {/* Classificação fica oculta; no lugar da Loja, um convite para contato (ver docs/ROADMAP.md) */}
       </nav>
+      <p className="mt-8 border-t-2 border-gray-700 pt-4 text-sm text-gray-400">
+        {nav.contact}{" "}
+        <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-purple-300 underline">
+          {nav.contactLink}
+        </a>
+      </p>
     </>
   );
 };

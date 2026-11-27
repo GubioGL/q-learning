@@ -11,17 +11,17 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-white text-black border-slate-200 border-2 border-b-4 active:border-b-2 hover:bg-slate-100",
-        buttonBlu: "bg-sky-400 text-primary-foreground hover:bg-sky-400/90 border-sky-600 border-b-4 active:border-b-0",
+        buttonBlu: "bg-[#38bdf8] text-[#082f49] hover:bg-[#38bdf8]/90 border-sky-600 border-b-4 active:border-b-0",
         buttonBluO: "bg-white text-sky-700 hover:bg-slate-100",
-        buttonGre: "bg-green-400 text-green-950 hover:bg-green-400/90 border-green-600 border-b-4 active:border-b-0",
+        buttonGre: "bg-[#4ade80] text-[#052e16] hover:bg-[#4ade80]/90 border-green-600 border-b-4 active:border-b-0",
         buttonGreO: "bg-white text-green-400 hover:bg-slate-100",
         danger:
           "bg-red-700 text-white hover:bg-red-700/90 border-red-900 border-b-4 active:border-b-0",
         dangerOutline: "bg-white text-red-400 hover:bg-slate-100",
-        premium: "bg-yellow-400 text-yellow-900 border-yellow-600 border-b-4 active:border-b-0",
+        premium: "bg-[#facc15] text-[#713f12] border-yellow-600 border-b-4 active:border-b-0",
         buttonRox: "bg-purple-600 text-white border-purple-800 border-b-4 active:border-b-0",
         buttonRoxO: "bg-white text-purple-500 hover:bg-slate-100",
-        buttonOran: "bg-orange-400 text-white border-orange-600 border-b-4 active:border-b-0",
+        buttonOran: "bg-[#c2410c] text-white border-[#9a3412] border-b-4 active:border-b-0",
         buttonOranO: "bg-white text-orange-500 hover:bg-slate-100",
         ghost:
           "bg-transparent text-slate-500 border-0 border-transparent hover:bg-slate-100",

@@ -16,7 +16,7 @@ Marque `[x]` ao concluir. Cada etapa termina com algo rodando e um commit.
   número ou texto, skills em sequência) e **Desafios** (estilo Duolingo: trilha única de níveis,
   do básico ao avançado; errar tudo recomenda a skill do curso).
 - Conteúdo em arquivos no repositório (`content/`, guia em `content/README.md`).
-- Loja oculta até haver um meio de doação; Classificação oculta enquanto não houver contas.
+- Sem Loja: no lugar dela, convite de contato pelo LinkedIn; Classificação oculta enquanto não houver contas.
 - Licenças: MIT (código) e CC BY-SA 4.0 (conteúdo e livro).
 - Referência principal de conteúdo: Thomas G. Wong, *Introduction to Classical and Quantum
   Computing* (caps. 1–3). O livro é "All rights reserved": **escrevemos texto e exercícios
@@ -82,18 +82,18 @@ Formato em `content/README.md`. Cada skill tem um nível na trilha de Desafios e
 - [x] Acessibilidade (axe, WCAG 2.1 AA, sem violações) e celular (360 px, sem rolagem lateral).
 - [x] Licenças e `CONTRIBUTING.md`.
 - [x] Publicação da 1ª versão beta.
-- [ ] Divulgação.
+- [ ] Divulgação: textos prontos em `divulgacao/texto.md`; envio pelo dono.
 
 ## Etapa 8 — Conteúdo: esfera de Bloch (2026-11-26, não commitado)
 
 - [x] Skill `esfera-de-bloch` (curso básico, entre `portas-1-qubit` e `circuitos`) em pt/en/es, com 6 desafios.
 - [x] 2 figuras novas: `bloch-theta-phi.svg` e `meias-voltas-xzh.svg`.
 - [x] test, lint, build, e2e e axe confirmados pelo qa-testador.
-- [ ] Commit e publicação (a confirmar com o dono).
-- [ ] `medida.md`: seção curta sobre Bloch (unificar com a skill nova; id `medida-bloch` mantido).
-- [ ] Tema claro real no site (hoje não existe).
-- [ ] Figura `meias-voltas-xzh` pequena em 360 px.
-- [ ] Verificar os links de `referencias/links.txt`.
+- [x] Commit e publicação.
+- [x] `medida.md`: seção curta sobre Bloch (unificar com a skill nova; id `medida-bloch` mantido).
+- [x] Tema claro real no site (hoje não existe).
+- [x] Figura `meias-voltas-xzh` pequena em 360 px.
+- [x] Verificar os links de `referencias/links.txt`.
 
 ## Etapa 9 — Mini-lições e ilustrações (2026-11-27, não commitado)
 
@@ -103,12 +103,12 @@ Formato em `content/README.md`. Cada skill tem um nível na trilha de Desafios e
 - [x] As 23 skills só em pt: toda mini-lição tem mini-desafio (53 desafios novos; seções longas divididas).
 - [ ] As 30 skills traduzidas: mini-desafios nas seções sem exercício (exige en/es por causa do teste de paridade).
 - [x] Revisão de física (fisico-revisor ×3) e pedagógica; correções aplicadas; qa-testador verde.
-- [ ] Exportar/importar em /metas não leva `ql_solved`.
+- [x] Exportar/importar em /metas leva `ql_solved`.
 
 ## Depois do beta
 
 - [ ] Revisão das traduções por falantes nativos.
-- [ ] Loja (doações), quando houver chave Pix ou link.
+- [x] Sem loja: convite de contato pelo LinkedIn no menu lateral.
 - [ ] Classificação, só se o projeto voltar a ter contas.
 
 ## Ferramentas (economia de tokens)

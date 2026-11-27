@@ -38,6 +38,35 @@
   --font-vt323: 'VT323', monospace;
 }
 
+/* Site theme: dark by default; data-theme="light" (set before paint in the layout) remaps the palette. */
+:root {
+  color-scheme: dark;
+  --ql-bg: #1a1a1a; --ql-bg2: #2a2a2a; --ql-line: #333; --ql-line2: #444;
+  --ql-fg: #fff; --ql-hover: rgba(255, 255, 255, 0.1);
+  --ql-streak: #ffa500; --ql-xp: #00e676;
+}
+body { background: var(--ql-bg); color: var(--ql-fg); }
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --ql-bg: #fff; --ql-bg2: #f3f4f6; --ql-line: #d1d5db; --ql-line2: #9ca3af;
+  --ql-fg: #111827; --ql-hover: rgba(0, 0, 0, 0.08);
+  --ql-streak: #b45309; --ql-xp: #047857;
+  /* grays reversed */
+  --color-gray-50: #030712; --color-gray-100: #111827; --color-gray-200: #1f2937; --color-gray-300: #374151;
+  --color-gray-400: #4b5563; --color-gray-500: #596273; --color-gray-600: #9ca3af; --color-gray-700: #d1d5db;
+  --color-gray-800: #e5e7eb; --color-gray-900: #f3f4f6; --color-gray-950: #eceff3;
+  /* accents: text shades (200-400) darkened, dark tints (900/950) lightened; 500-800 are solid fills and stay */
+  --color-purple-200: #4c1d95; --color-purple-300: #5b21b6; --color-purple-400: #6d28d9; --color-purple-900: #ede9fe; --color-purple-950: #f5f3ff;
+  --color-green-200: #14532d; --color-green-300: #166534; --color-green-400: #15803d; --color-green-900: #dcfce7; --color-green-950: #f0fdf4;
+  --color-red-200: #7f1d1d; --color-red-300: #991b1b; --color-red-400: #b91c1c; --color-red-500: #dc2626; --color-red-900: #fee2e2;
+  --color-yellow-200: #713f12; --color-yellow-300: #854d0e; --color-yellow-400: #a16207; --color-yellow-900: #fef9c3;
+  --color-sky-300: #075985; --color-sky-400: #0369a1; --color-fuchsia-400: #a21caf;
+  --color-blue-400: #1d4ed8; --color-orange-500: #c2410c; --color-slate-500: #475569;
+}
+/* Figures are dark-designed SVGs with light strokes */
+:root[data-theme="light"] .ql-figure { background: #111827; border-radius: 0.75rem; padding: 0.5rem; }
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -86,8 +115,8 @@
 
 .sidebar-left {
   width: 220px;
-  background:#1a1a1a  ;
-  color: #fff;
+  background: var(--ql-bg);
+  color: var(--ql-fg);
   padding: 24px 16px;
   transition: all 0.3s;
   border-right: 3px solid oklch(55.1% 0.027 264.364 / 0.3);
@@ -175,7 +204,7 @@
 }
 
 .menu-icon:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--ql-hover);
 }
 
 /* Estilos específicos para o Sheet */
@@ -189,14 +218,14 @@
 
 /* Garantir que o botão X seja visível */
 [data-slot="sheet-close"] {
-  color: white !important;
-  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--ql-fg) !important;
+  background: var(--ql-hover) !important;
   border-radius: 4px !important;
   padding: 8px !important;
 }
 
 [data-slot="sheet-close"]:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
+  background: var(--ql-line) !important;
 }
 
 html, body {
@@ -215,8 +244,8 @@ html, body {
     position: fixed;
     top: 0;
     left: 0;
-    background: #1a1a1a;
-    color: #fff;
+    background: var(--ql-bg);
+    color: var(--ql-fg);
     padding: 1.5rem;
     border-right: 1px solid oklch(55.1% 0.027 264.364 / 0.3);
     z-index: 20;
@@ -235,8 +264,8 @@ html, body {
     position: fixed;
     top: 0;
     right: 0;
-    background: #1a1a1a;
-    color: #fff;
+    background: var(--ql-bg);
+    color: var(--ql-fg);
     padding: 1.5rem;
     border-left: 1px solid oklch(55.1% 0.027 264.364 / 0.3);
     z-index: 20;
@@ -258,7 +287,16 @@ html, body {
 
 /* Wide equations scroll on their own instead of stretching the page on phones. */
 .katex-display {
-  color: #d1d5db;
+  color: var(--color-gray-300);
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+/* Home hero: orbits and floating mascot, only for visitors who allow motion. */
+@keyframes ql-orbit { to { transform: rotate(360deg); } }
+@keyframes ql-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@media (prefers-reduced-motion: no-preference) {
+  .ql-orbit { animation: ql-orbit 24s linear infinite; }
+  .ql-orbit-rev { animation: ql-orbit 32s linear infinite reverse; }
+  .ql-float { animation: ql-float 5s ease-in-out infinite; }
 }

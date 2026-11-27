@@ -6,49 +6,24 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 import { Button } from "@/components/ui/button";
 import { useLocale, useT } from "@/lib/i18n/context";
 import { skillKey } from "@/lib/progress";
-import { markDone, useDone } from "@/lib/use-progress";
+import { markDone, readAllSolved, saveSolved, useDone } from "@/lib/use-progress";
 
 type Ctx = { solved: Set<string>; loaded: boolean; markSolved: (id: string) => void };
 const SkillCtx = createContext<Ctx | null>(null);
 
 export const useSkillProgress = () => useContext(SkillCtx);
 
-// Solved exercises are remembered per skill so a learner can stop between mini-lessons; a convenience, so storage errors are ignored.
-const SOLVED_KEY = "ql_solved";
-
-function readAllSolved(): Record<string, string[]> {
-    try {
-        const all = JSON.parse(localStorage.getItem(SOLVED_KEY) ?? "{}");
-        return typeof all === "object" && all !== null && !Array.isArray(all) ? all : {};
-    } catch {
-        return {};
-    }
-}
-
-const readSolved = (skill: string) => {
-    const ids: unknown = readAllSolved()[skill];
-    return Array.isArray(ids) ? ids.filter((id): id is string => typeof id === "string") : [];
-};
-
-function writeSolved(skill: string, ids: Set<string>) {
-    try {
-        localStorage.setItem(SOLVED_KEY, JSON.stringify({ ...readAllSolved(), [skill]: [...ids] }));
-    } catch {
-        // storage blocked: progress inside the page still works
-    }
-}
-
 export function SkillProgressProvider({ storageKey, children }: { storageKey: string; children: React.ReactNode }) {
     const [solved, setSolved] = useState<Set<string>>(new Set());
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
-        setSolved((s) => new Set([...readSolved(storageKey), ...s]));
+        setSolved((s) => new Set([...(readAllSolved()[storageKey] ?? []), ...s]));
         setLoaded(true);
     }, [storageKey]);
     const markSolved = useCallback((id: string) => setSolved((s) => {
         if (s.has(id)) return s;
         const next = new Set(s).add(id);
-        writeSolved(storageKey, next);
+        saveSolved(storageKey, [...next]); // remembered so the learner can stop between mini-lessons
         return next;
     }), [storageKey]);
     return <SkillCtx.Provider value={{ solved, loaded, markSolved }}>{children}</SkillCtx.Provider>;

@@ -245,3 +245,33 @@ test("states are NumPy arrays: conj() works on the bra exercise", async ({ page 
   await page.getByRole("button", { name: /Executar e testar/ }).click();
   await expect(page.getByText(/Reprovou: 1/)).toBeVisible({ timeout: 30_000 });
 });
+
+test("no axe violations on mobile, in dark and light theme", async ({ page }) => {
+  test.setTimeout(300_000);
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.addInitScript(() => {
+    localStorage.setItem("ql_progress", JSON.stringify({ done: { "skill:algebra-linear/numeros-complexos": new Date().toISOString() }, goal: 3 }));
+  });
+  const tags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"];
+  for (const theme of ["dark", "light"]) {
+    await page.addInitScript((t) => localStorage.setItem("ql_theme", t), theme);
+    for (const path of ["/pt", "/pt/novidades", "/pt/cursos/algebra-linear", "/pt/cursos/algebra-linear/vetores"]) {
+      await page.goto(BASE + path);
+      await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+      await expect(page.getByRole("button", { name: theme === "dark" ? "Usar tema claro" : "Usar tema escuro" }).first()).toBeVisible();
+      if (path.endsWith("vetores")) await expect(page.locator(".katex").first()).toBeVisible();
+      await page.addScriptTag({ path: "node_modules/axe-core/axe.min.js" });
+      const { violations } = await page.evaluate((runOnly) => window.axe.run(document, { runOnly }), tags);
+      expect(violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).slice(0, 3).join(" | ")}`), `${theme} ${path}`).toEqual([]);
+    }
+  }
+});
+
+test("the light theme survives switching language", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("ql_theme", "light"));
+  await page.goto(BASE + "/pt/desafios");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.getByRole("link", { name: "English" }).first().click();
+  await expect(page).toHaveURL(/\/en\/desafios\/?$/);
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+});

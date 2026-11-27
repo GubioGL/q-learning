@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="360" height="500" viewBox="0 0 360 500" role="img" aria-label="Relógio de 15 posições com o ciclo 1, 7, 4, 13 de multiplicar por 7 módulo 15, e barras de 7 elevado a x módulo 15 repetindo 1, 7, 4, 13 com período 4">
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="530" viewBox="0 0 360 530" role="img" aria-label="Relógio de 15 posições com o ciclo 1, 7, 4, 13 de multiplicar por 7 módulo 15, e barras de 7 elevado a x módulo 15 repetindo 1, 7, 4, 13 com período 4">
   <style>.b{fill:#1f2937;stroke:#a78bfa;stroke-width:2.5}.l{stroke:#9ca3af;stroke-width:2;fill:none}.p{stroke:#a78bfa;stroke-width:3;fill:none}.t{fill:#f3f4f6;font:600 18px sans-serif;text-anchor:middle}.s{fill:#d1d5db;font:15px sans-serif;text-anchor:middle}.v{fill:#a78bfa;font:600 16px sans-serif;text-anchor:middle}.f{fill:#a78bfa}.g{fill:#34d399}.d{stroke:#6b7280;stroke-width:1.5;stroke-dasharray:5 5;fill:none}.ts{fill:#d1d5db;font:15px sans-serif;text-anchor:start}.o{fill:#fb923c;font:600 16px sans-serif;text-anchor:middle}.k{fill:#38bdf8;font:600 16px sans-serif;text-anchor:middle}.gt{fill:#34d399;font:600 16px sans-serif;text-anchor:middle}</style>
   <defs><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a78bfa"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#34d399"/></marker><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fb923c"/></marker><marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d1d5db"/></marker></defs>
 <circle class="d" cx="180" cy="150" r="100"/>
@@ -32,36 +32,36 @@
 <text class="v" x="90.8" y="74.7">13</text>
 <circle class="l" cx="139.3" cy="58.6" r="3" style="fill:#6b7280;stroke:none"/>
 <text class="s" x="131.2" y="45.4">14</text>
-<path class="p" d="M230.0 63.4 A100 100 0 0 1 210.9 245.1" marker-end="url(#ap)" style="stroke-width:2.5"/>
-<path class="p" d="M190.5 249.5 A100 100 0 1 1 280.0 150.0" marker-end="url(#ap)" style="stroke-width:2.5"/>
-<path class="p" d="M277.8 170.8 A100 100 0 1 1 99.1 91.2" marker-end="url(#ap)" style="stroke-width:2.5"/>
-<path class="p" d="M113.1 75.7 A100 100 0 0 1 210.9 54.9" marker-end="url(#ap)" style="stroke-width:2.5"/>
-<text class="t" x="180" y="146">×7 mod 15</text><text class="s" x="180" y="170">ciclo de tamanho 4</text>
-<text class="t" x="180" y="300">7ˣ mod 15, para x = 0, 1, …, 11</text>
-<line class="l" x1="20" y1="470" x2="345" y2="470"/>
-<rect class="f" x="33" y="462" width="20" height="8" rx="3"/>
-<text class="s" x="43" y="456">1</text><text class="s" x="43" y="490">0</text>
-<rect class="f" x="59" y="414" width="20" height="56" rx="3"/>
-<text class="s" x="69" y="408">7</text><text class="s" x="69" y="490">1</text>
-<rect class="f" x="85" y="438" width="20" height="32" rx="3"/>
-<text class="s" x="95" y="432">4</text><text class="s" x="95" y="490">2</text>
-<rect class="f" x="111" y="366" width="20" height="104" rx="3"/>
-<text class="s" x="121" y="360">13</text><text class="s" x="121" y="490">3</text>
-<rect class="f" x="137" y="462" width="20" height="8" rx="3"/>
-<text class="s" x="147" y="456">1</text><text class="s" x="147" y="490">4</text>
-<rect class="f" x="163" y="414" width="20" height="56" rx="3"/>
-<text class="s" x="173" y="408">7</text><text class="s" x="173" y="490">5</text>
-<rect class="f" x="189" y="438" width="20" height="32" rx="3"/>
-<text class="s" x="199" y="432">4</text><text class="s" x="199" y="490">6</text>
-<rect class="f" x="215" y="366" width="20" height="104" rx="3"/>
-<text class="s" x="225" y="360">13</text><text class="s" x="225" y="490">7</text>
-<rect class="f" x="241" y="462" width="20" height="8" rx="3"/>
-<text class="s" x="251" y="456">1</text><text class="s" x="251" y="490">8</text>
-<rect class="f" x="267" y="414" width="20" height="56" rx="3"/>
-<text class="s" x="277" y="408">7</text><text class="s" x="277" y="490">9</text>
-<rect class="f" x="293" y="438" width="20" height="32" rx="3"/>
-<text class="s" x="303" y="432">4</text><text class="s" x="303" y="490">10</text>
-<rect class="f" x="319" y="366" width="20" height="104" rx="3"/>
-<text class="s" x="329" y="360">13</text><text class="s" x="329" y="490">11</text>
-<path class="l" d="M31 350 V342 H133 V350" style="stroke:#fb923c"/><text class="o" x="83.0" y="333">período r = 4</text>
+<line class="p" x1="219.6" y1="68.6" x2="202.0" y2="235.9" marker-end="url(#ap)" style="stroke-width:2.5"/>
+<line class="p" x1="207.5" y1="240.4" x2="271.4" y2="169.4" marker-end="url(#ap)" style="stroke-width:2.5"/>
+<line class="p" x1="270.3" y1="156.4" x2="116.6" y2="88.0" marker-end="url(#ap)" style="stroke-width:2.5"/>
+<line class="p" x1="115.5" y1="81.0" x2="208.9" y2="61.1" marker-end="url(#ap)" style="stroke-width:2.5"/>
+<text class="t" x="180" y="292">×7 mod 15: 1 → 7 → 4 → 13 → 1</text>
+<text class="t" x="180" y="330">7ˣ mod 15, para x = 0, 1, …, 11</text>
+<line class="l" x1="20" y1="500" x2="345" y2="500"/>
+<rect class="f" x="33" y="492" width="20" height="8" rx="3"/>
+<text class="s" x="43" y="486">1</text><text class="s" x="43" y="520">0</text>
+<rect class="f" x="59" y="444" width="20" height="56" rx="3"/>
+<text class="s" x="69" y="438">7</text><text class="s" x="69" y="520">1</text>
+<rect class="f" x="85" y="468" width="20" height="32" rx="3"/>
+<text class="s" x="95" y="462">4</text><text class="s" x="95" y="520">2</text>
+<rect class="f" x="111" y="396" width="20" height="104" rx="3"/>
+<text class="s" x="121" y="390">13</text><text class="s" x="121" y="520">3</text>
+<rect class="f" x="137" y="492" width="20" height="8" rx="3"/>
+<text class="s" x="147" y="486">1</text><text class="s" x="147" y="520">4</text>
+<rect class="f" x="163" y="444" width="20" height="56" rx="3"/>
+<text class="s" x="173" y="438">7</text><text class="s" x="173" y="520">5</text>
+<rect class="f" x="189" y="468" width="20" height="32" rx="3"/>
+<text class="s" x="199" y="462">4</text><text class="s" x="199" y="520">6</text>
+<rect class="f" x="215" y="396" width="20" height="104" rx="3"/>
+<text class="s" x="225" y="390">13</text><text class="s" x="225" y="520">7</text>
+<rect class="f" x="241" y="492" width="20" height="8" rx="3"/>
+<text class="s" x="251" y="486">1</text><text class="s" x="251" y="520">8</text>
+<rect class="f" x="267" y="444" width="20" height="56" rx="3"/>
+<text class="s" x="277" y="438">7</text><text class="s" x="277" y="520">9</text>
+<rect class="f" x="293" y="468" width="20" height="32" rx="3"/>
+<text class="s" x="303" y="462">4</text><text class="s" x="303" y="520">10</text>
+<rect class="f" x="319" y="396" width="20" height="104" rx="3"/>
+<text class="s" x="329" y="390">13</text><text class="s" x="329" y="520">11</text>
+<path class="l" d="M31 380 V372 H133 V380" style="stroke:#fb923c"/><text class="o" x="83.0" y="363">período r = 4</text>
 </svg>

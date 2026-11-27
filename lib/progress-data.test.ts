@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { EMPTY_PROGRESS, complete, importInto, parseProgress } from "./progress-data";
+import { EMPTY_PROGRESS, complete, importInto, mergeSolved, parseProgress, parseSolved } from "./progress-data";
 
 const A = "2026-11-20T10:00:00.000Z";
 const B = "2026-11-25T10:00:00.000Z";
@@ -38,3 +38,12 @@ test("import without a valid goal keeps the current goal", () => {
 });
 
 test("import rejects what is not a progress file", () => assert.equal(importInto(EMPTY_PROGRESS, [1]), null));
+
+test("solved mini-challenges: bad keys and ids are dropped, merging keeps both sides without repeats", () => {
+    const raw = { "skill:basico/bits": ["bits-1101", 7, "<b>"], "level:bits": ["x"], "skill:basico/qubit": "nope" };
+    assert.deepEqual(parseSolved(raw), { "skill:basico/bits": ["bits-1101"] });
+    assert.deepEqual(parseSolved(null), {});
+    assert.deepEqual(parseSolved([]), {});
+    const merged = mergeSolved({ "skill:basico/bits": ["a"] }, { "skill:basico/bits": ["a", "b"], "skill:basico/qubit": ["c"] });
+    assert.deepEqual(merged, { "skill:basico/bits": ["a", "b"], "skill:basico/qubit": ["c"] });
+});

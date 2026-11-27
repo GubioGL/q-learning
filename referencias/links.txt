@@ -7,7 +7,7 @@ https://pennylane.ai/codebook | PennyLane Codebook: exercícios interativos | Ap
 https://pennylane.ai/qml | PennyLane demos de QML
 https://quantum.country | Quantum Country: ensaio com repetição espaçada
 https://algassert.com/quirk | Quirk: simulador de circuitos no navegador
-http://theory.caltech.edu/~preskill/ph229/ | Notas de aula do Preskill (Caltech Ph219/229)
+https://www.preskill.caltech.edu/ph229/ | Notas de aula do Preskill (Caltech Ph219/229)
 https://arxiv.org/list/quant-ph/new | arXiv quant-ph: artigos novos
 https://learn.microsoft.com/azure/quantum/ | Microsoft Azure Quantum / Q# docs
 https://qutip.org/docs/latest/ | QuTiP: simulação de sistemas quânticos

@@ -64,7 +64,7 @@ export function PythonExercise({ exercise }: { exercise: Exercise }) {
                 <Button variant="ghost" className="text-gray-200 hover:text-gray-900" onClick={() => { setCode(exercise.starter); setResult(null); }}><span aria-hidden className="mr-2">↺</span>{t.reset}</Button>
             </div>
             {running && <p className="text-sm text-gray-400"><span aria-hidden>⏳</span> {t.firstRun}</p>}
-            {result?.output && <pre className="overflow-x-auto rounded-lg bg-black/60 p-3 text-sm text-gray-200">{result.output}</pre>}
+            {result?.output && <pre className="overflow-x-auto rounded-lg bg-gray-950 p-3 text-sm text-gray-200">{result.output}</pre>}
 
             <TestList tests={exercise.tests} results={result?.tests} />
 

@@ -55,7 +55,7 @@ tolerance: 0.001
 - **Descomputar**: aplicar ao contrário uma etapa para apagar o que ela escreveu, e assim desemaranhar o registro de volta a $\ket0$.
 - **Pós-seleção**: medir a ancila e **guardar só os resultados** em que deu 1, repetindo o algoritmo quando deu 0.
 
-No exemplo, $P_1=\tfrac59$. Como a ancila só dá 1 com essa probabilidade e, quando dá 0, repete-se tudo, em média quantas execuções são necessárias até obter um 1? (Use $1/P_1$; responda com 1 casa decimal.)
+Veremos adiante que, no exemplo, $P_1=\tfrac59$. Como a ancila só dá 1 com essa probabilidade e, quando dá 0, repete-se tudo, em média quantas execuções são necessárias até obter um 1? (Use $1/P_1$; responda com 1 casa decimal.)
 
 ```exercise:number
 id: hhl-execucoes-sucesso
